@@ -1,0 +1,40 @@
+# a commom workshhet for bertin
+cd ~/projects/rforge/ # bertin ## a directory containing bertin
+cd "/Users/gs/projects/Rlocal/scr"
+cd /Volumes/Untitled/Rlocal/scr
+# ad hoc construction
+tar cvf bertin.tar bertin
+gzip bertin.tar
+
+# R cmds for ad hoc construction
+# setwd("/Users/gs/projects/Rlocal/scr")
+# install.packages("/Users/gs/projects/Rlocal/scr/bertin.tar.gz", repos=NULL)
+
+# install package
+
+
+R CMD CHECK bertin
+R CMD BUILD bertin
+
+# install package
+R CMD INSTALL bertin
+# generate a pdf help file
+R CMD Rd2dvi -o bertin.pdf --pdf --title="Bertin" bertin
+
+##
+setwd("/Volumes/Untitled/bertin1")
+
+source("R/parasp.R")
+source("R/imagem.R")
+source("R/bertin.R")
+source("R/bertinorder.R")
+source("R/colors.R")
+source("R/colramp.R")
+source("R/pageformats.R")
+source("R/parasp.R")
+source("R/parmfrow.R")
+source("R/whatis.R")
+ll <- ls()
+package.skeleton(name="bertin", ll)
+
+R CMD Rd2dvi --pdf --output=bertin.pdf --title="Bertin" /Users/gs/projects/rforge/bertin/pkg/man; open bertin.pdf
