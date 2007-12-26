@@ -51,7 +51,7 @@ image.bertin <- function
 ##    ...) 
 ##
 (z, roworder,colorder,
-	main="",col = gray((0:8 / 8)^0.5)
+	main="",col = gray((255:0 / 255)^0.5)
 )
 {	if (missing(roworder)) {
 	roworder <- attr(z,"roworder")
