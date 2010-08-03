@@ -12,9 +12,9 @@ gzip bertin.tar
 
 # install package
 
-
-R CMD CHECK bertin
-R CMD BUILD bertin
+cd /Users/gs/projects/rforge/bertin
+R CMD CHECK pkg
+R CMD BUILD pkg
 
 # install package
 R CMD INSTALL bertin

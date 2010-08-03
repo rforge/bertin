@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Displays a horizontal or vertical color ramp.}
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+  Displays a horizontal or vertical color ramp.
 }
 \usage{
 colramp(col = heat.colors(256), nr = 256, horizontal = FALSE, main, ...)
@@ -23,7 +23,7 @@ colramp(col = heat.colors(256), nr = 256, horizontal = FALSE, main, ...)
 %\note{ ~~further notes~~ 
 % ~Make other sections like Warning with \section{Warning }{....} ~
 %}
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+%\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
 \examples{
 ##---- Should be DIRECTLY executable !! ----
 ##-- ==>  Define data, use random,

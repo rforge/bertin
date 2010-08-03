@@ -1,5 +1,5 @@
 #01bincode.R
-
+library("bertin")
 bincodedata <- matrix(c(
 	1,0,0,
 	0,1,0,

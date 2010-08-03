@@ -8,7 +8,7 @@ Optional permutations can be applied to rows and/or columns.
 }
 \synopsis{
 	image.bertin(z, roworder,colorder,
-	main="",col = gray((0:8 / 8)^0.5))
+	main="",col = gray((0:8 / 8)^0.5)
 }
 	
 \arguments{
