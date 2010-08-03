@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+  <title>Bertin: Berting plot representation for matrices</title>
+  
+    <link rel="stylesheet" type="text/css" href="https://r-forge.r-project.org/themes/css/gforge.css" />
+    <link rel="stylesheet" type="text/css" href="https://r-forge.r-project.org/themes/rforge/css/theme.css" />
+
+<meta name="keywords" content="bertin matrices, data analysis, computational statistics, statistics, R programming, StatLab Heidelberg">
+<meta "author" content="G. Sawitzki">
+<meta name="city" content="Heidelberg">
+<meta name="country" content="Germany - Deutschland">
+<meta name="DC.publisher" content="StatLab Heidelberg">
+
+<meta name="robots" content="index, follow" >
+<meta name="revisit-after" content="3 days">
+
+
+  </head>
+
+<body leftmargin="0" topmargin="0" link="#0076d5" marginheight="0" marginwidth="0" text="#000000" vlink="#6a76d5">
+    <!--Top fragment-->
+      <div class="header">
+  <table border="0" width="100%" cellspacing="0" cellpadding="0">
+      <tr>
+		  <td class="topLeft"><a href="https://r-forge.r-project.org/"><img src="https://r-forge.r-project.org/themes/rforge/imagesrf/logo.png" border="0" alt="" width="205" height="54" /></a></td>
+        <td class="middleRight">
+        <form action="https://r-forge.r-project.org/search/" method="get">
+        <table border="0" cellpadding="0" cellspacing="0">
+        <tr><td>
+        <div align="center" style="font-size:smaller"><select name="type_of_search"><option value="full">Search the entire project</option>
+<option value="trackers">This project's trackers</option>
+<option value="forums">This project's forums</option>
+<option value="news">This project's news</option>
+<option value="soft">Software/Group</option>
+<option value="people">People</option>
+</select></div></td><td>&nbsp;<input type="hidden" value="99" name="group_id" /></td><td><input type="text" size="12" name="words" value="" /></td><td>&nbsp;</td><td><input type="submit" name="Search" value="Search" /></td>
+                    <td width="10">&nbsp;</td>
+                    <td><a href="https://r-forge.r-project.org/search/advanced_search.php?group_id=99">Advanced search</a></td></tr></table></form></td>
+        <td class="middleRight"><a href="https://r-forge.r-project.org/account/logout.php">Log Out</a> | <a href="https://r-forge.r-project.org/account/">My Account</a>
+		<form name="quicknavform">
+			<select name="quicknav" onChange="location.href=document.quicknavform.quicknav.value">
+				<option value="">Quick Jump To...</option>
+				<option value="https://r-forge.r-project.org/projects/bertin/">Bertin matrices</option>
+				<option value="https://r-forge.r-project.org/project/admin/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>
+				<option value="https://r-forge.r-project.org/tracker/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tracker</option>
+				<option value="https://r-forge.r-project.org/tracker/admin/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>
+				<option value="https://r-forge.r-project.org/pm/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Task Manager</option>
+				<option value="https://r-forge.r-project.org/pm/admin/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>
+				<option value="https://r-forge.r-project.org/frs/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</option>
+				<option value="https://r-forge.r-project.org/frs/admin/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>
+				<option value="https://r-forge.r-project.org/scm/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SCM</option>
+				<option value="https://r-forge.r-project.org/forum/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Forum</option>
+				<option value="https://r-forge.r-project.org/forum/admin/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>
+				<option value="https://r-forge.r-project.org/mail/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists</option>
+				<option value="https://r-forge.r-project.org/mail/admin/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>
+				<option value="https://r-forge.r-project.org/docman/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Docs</option>
+				<option value="https://r-forge.r-project.org/docman/admin/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>
+				<option value="https://r-forge.r-project.org/news/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;News</option>
+				<option value="https://r-forge.r-project.org/news/admin/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>
+				<option value="https://r-forge.r-project.org/survey/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Surveys</option>
+				<option value="https://r-forge.r-project.org/survey/admin/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>
+				<option value="https://r-forge.r-project.org/projects/bertin/">lshorth</option>
+				<option value="https://r-forge.r-project.org/tracker/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tracker</option>
+				<option value="https://r-forge.r-project.org/tracker/admin/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>
+				<option value="https://r-forge.r-project.org/pm/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Task Manager</option>
+				<option value="https://r-forge.r-project.org/pm/admin/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>
+				<option value="https://r-forge.r-project.org/frs/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</option>
+				<option value="https://r-forge.r-project.org/frs/admin/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>
+				<option value="https://r-forge.r-project.org/scm/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SCM</option>
+				<option value="https://r-forge.r-project.org/forum/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Forum</option>
+				<option value="https://r-forge.r-project.org/forum/admin/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>
+				<option value="https://r-forge.r-project.org/mail/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists</option>
+				<option value="https://r-forge.r-project.org/docman/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Docs</option>
+				<option value="https://r-forge.r-project.org/docman/admin/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>
+				<option value="https://r-forge.r-project.org/news/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;News</option>
+				<option value="https://r-forge.r-project.org/survey/?group_id=99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Surveys</option>
+				<option value="https://r-forge.r-project.org/projects/sintro/">Statistical Computing: Introduction to R</option>
+				<option value="https://r-forge.r-project.org/scm/?group_id=143">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SCM</option>
+				<option value="https://r-forge.r-project.org/mail/?group_id=143">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lists</option>
+			</select>
+		</form></td>
+        <td>&nbsp;&nbsp;</td>
+      </tr>
+  
+  </table>
+</div>
+
+    <!-- end header -->
+    <!-- outer tabs -->
+<table border="0" width="100%" cellspacing="0" cellpadding="0"><!-- begin table 1 -->
+    <tr>
+        <td>
+
+        <!-- start tabs -->
+
+        <table style="height:35px;border-collapse:collapse;border:0px;padding:0px;margin:0px;" border="0" cellpadding="0" cellspacing="0" width="100%"><!-- begin table 2 -->
+        <tr><td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/left.jpg); background-repeat: no-repeat;">
+      			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="35" width="13" alt="" />
+                	</td><td style="text-align:center; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/middle.jpg); background-repeat: repeat-x; padding-bottom:5px;" width="25%">
+            		<a class="topTab" href="https://r-forge.r-project.org/">Home</a>
+    		</td><td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/right.jpg); background-repeat: no-repeat;">
+        			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="35" width="13" alt="" />
+                  	  </td><td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/left.jpg); background-repeat: no-repeat;">
+      			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="35" width="13" alt="" />
+                	</td><td style="text-align:center; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/middle.jpg); background-repeat: repeat-x; padding-bottom:5px;" width="25%">
+            		<a class="topTab" href="https://r-forge.r-project.org/my/">My&nbsp;Page</a>
+    		</td><td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/right.jpg); background-repeat: no-repeat;">
+        			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="35" width="13" alt="" />
+                  	  </td><td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/left.jpg); background-repeat: no-repeat;">
+      			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="35" width="13" alt="" />
+                	</td><td style="text-align:center; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/middle.jpg); background-repeat: repeat-x; padding-bottom:5px;" width="25%">
+            		<a class="topTab" href="https://r-forge.r-project.org/softwaremap/">Project&nbsp;Tree</a>
+    		</td><td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/selected-left.jpg); background-repeat: no-repeat;">
+      			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="35" width="13" alt="" />
+                	</td><td style="text-align:center; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/selected-middle.jpg); background-repeat: repeat-x; padding-bottom:5px;" width="25%">
+            		<a class="topTabSelected" href="https://r-forge.r-project.org/projects/bertin/">Bertin matrices</a>
+    		</td><td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/selected-right.jpg); background-repeat: no-repeat;">
+        			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="35" width="13" alt="" />
+                  	  </td></tr>
+        </table><!-- CLOSE table 2 --> 
+
+        <!-- end tabs -->
+</td>
+    </tr>
+</table><!-- CLOSE table 1 -->
+
+<!-- inner tabs -->
+<table border="0" width="100%" cellspacing="0" cellpadding="0"><!-- begin table 3 -->
+          <tr>
+        <td>
+           
+
+        <!-- start tabs -->
+
+        <table style="height:35px;border-collapse:collapse;border:0px;padding:0px;margin:0px;" border="0" cellpadding="0" cellspacing="0" width="100%"><!-- begin table 2 -->
+        <tr><td valign="top" width="5" background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/selected-middle.jpg">
+      			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="22" width="5" alt="" />
+                	</td><td background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/selected-middle.jpg" width="11%" style="text-align:center">
+            		<a class="bottomTabSelected" href="https://r-forge.r-project.org/projects/bertin/">Summary</a>
+    		</td><td valign="top" width="2" background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/selected-separator.gif">
+          			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="22" width="2" alt="" />
+                    	  </td><td valign="top" width="5" background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/middle.jpg">
+      			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="22" width="5" alt="" />
+                	</td><td background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/middle.jpg" width="11%" style="text-align:center">
+            		<a class="bottomTab" href="https://r-forge.r-project.org/project/admin/?group_id=99">Admin</a>
+    		</td><td valign="top" width="2" background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/separator.gif">
+          			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="22" width="2" alt="" />
+                    	  </td><td valign="top" width="5" background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/middle.jpg">
+      			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="22" width="5" alt="" />
+                	</td><td background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/middle.jpg" width="11%" style="text-align:center">
+            		<a class="bottomTab" href="https://r-forge.r-project.org/activity/?group_id=99">Activity</a>
+    		</td><td valign="top" width="2" background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/separator.gif">
+          			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="22" width="2" alt="" />
+                    	  </td><td valign="top" width="5" background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/middle.jpg">
+      			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="22" width="5" alt="" />
+                	</td><td background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/middle.jpg" width="11%" style="text-align:center">
+            		<a class="bottomTab" href="https://r-forge.r-project.org/forum/?group_id=99">Forums</a>
+    		</td><td valign="top" width="2" background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/separator.gif">
+          			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="22" width="2" alt="" />
+                    	  </td><td valign="top" width="5" background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/middle.jpg">
+      			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="22" width="5" alt="" />
+                	</td><td background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/middle.jpg" width="11%" style="text-align:center">
+            		<a class="bottomTab" href="https://r-forge.r-project.org/tracker/?group_id=99">Tracker</a>
+    		</td><td valign="top" width="2" background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/separator.gif">
+          			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="22" width="2" alt="" />
+                    	  </td><td valign="top" width="5" background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/middle.jpg">
+      			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="22" width="5" alt="" />
+                	</td><td background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/middle.jpg" width="11%" style="text-align:center">
+            		<a class="bottomTab" href="https://r-forge.r-project.org/mail/?group_id=99">Lists</a>
+    		</td><td valign="top" width="2" background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/separator.gif">
+          			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="22" width="2" alt="" />
+                    	  </td><td valign="top" width="5" background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/middle.jpg">
+      			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="22" width="5" alt="" />
+                	</td><td background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/middle.jpg" width="11%" style="text-align:center">
+            		<a class="bottomTab" href="https://r-forge.r-project.org/news/?group_id=99">News</a>
+    		</td><td valign="top" width="2" background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/separator.gif">
+          			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="22" width="2" alt="" />
+                    	  </td><td valign="top" width="5" background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/middle.jpg">
+      			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="22" width="5" alt="" />
+                	</td><td background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/middle.jpg" width="11%" style="text-align:center">
+            		<a class="bottomTab" href="https://r-forge.r-project.org/scm/?group_id=99">SCM</a>
+    		</td><td valign="top" width="2" background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/separator.gif">
+          			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="22" width="2" alt="" />
+                    	  </td><td valign="top" width="5" background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/middle.jpg">
+      			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="22" width="5" alt="" />
+                	</td><td background="https://r-forge.r-project.org/themes/rforge/imagesrf/bottomtab-new/middle.jpg" width="11%" style="text-align:center">
+            		<a class="bottomTab" href="https://r-forge.r-project.org/R/?group_id=99">R Packages</a>
+    		</td></tr>
+        </table><!-- CLOSE table 2 --> 
+
+        <!-- end tabs -->
+        </td>
+      </tr>
+    </table><!-- CLOSE table 3 -->
+
+
+<!-- get project title  -->
+<!-- own website starts here, the following may be changed as you like -->
+
+
+<div style="margin:20px">
+<!--<div style="float: right; top"><img alt="A Shorth Plot" width=320px src="media/TheShorthPlot-Faithful.png"/></div>-->
+
+<h1>Bertin Matrices</h1>
+Bertin matrices are a means to analyze structures in a matrix using two-dimensional display techniques.Basic data structures for Bertin analysis are implemented as class based on matrix, usingadditional attributes.
+</p>
+
+J. Bertin: <i>La graphique et le traitement graphique de l'information</i>. Flammarion: Paris 1977.
+</p>A. de Falguerolles; F. Friedrich & G Sawitzki: <i><a href="http://statlab.uni-heidelberg.de/reports/by.series/beitrag.34.pdf">A Tribute to J. Bertin's Graphical Data Analysis</a></i>.Published in: W. Bandilla, F. Faulbaum (eds.): SoftStat '97. Advances in Statistical Software 6.Lucius &amp; Lucius, Stuttgart 1997.
+
+</p>
+
+<!-- end of project description -->
+<div style="margin-top:40px; margin-bottom:40px; ">
+<strong>To install this package directly within R, type </strong><br>
+&nbsp;&nbsp;&nbsp;<code>install.packages("<i>bertin</i>",repos="http://r-forge.r-project.org")</code></p>
+
+<p><strong>To install the recent package from source directly within R, type </strong><br>
+&nbsp;&nbsp;&nbsp;<code>install.packages("<i>bertin</i>",repos="http://r-forge.r-project.org",type="source")</code></p>
+</div>
+
+<br/>
+<hr style="width: 100%; height: 2px;"/>
+
+<p>For the <strong>project summary page</strong> see <a href="http://r-forge.r-project.org/projects/bertin/"><strong>here</strong></a>.</br>
+Contact information is available on the <a href="http://www.statlab.uni-heidelberg.de/users/gs/index.html#contact">author's home page</a>.
+</p>
+<br/>
+<hr style="width: 100%; height: 2px;"/>
+<div style="text-align: left;"><a href="http://bertin.r-forge.r-project.org/">home</a></div>
+<div style="text-align: right;">Updated 2010-08-0 by gs/html.</div>
+</div>
+</body>
+</html>
