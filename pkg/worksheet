@@ -1,14 +1,10 @@
 # a commom workshhet for bertin
 cd ~/projects/rforge/ # bertin ## a directory containing bertin
-cd "/Users/gs/projects/Rlocal/scr"
-cd /Volumes/Untitled/Rlocal/scr
-# ad hoc construction
-tar cvf bertin.tar bertin
-gzip bertin.tar
+cd "/Users/gs/projects/rforge/bertin/"
 
 # R cmds for ad hoc construction
-# setwd("/Users/gs/projects/Rlocal/scr")
-# install.packages("/Users/gs/projects/Rlocal/scr/bertin.tar.gz", repos=NULL)
+# setwd("/Users/gs/projects/rforge/bertin/")
+# install.packages("/Users/gs/projects/rforge/bertin/bertin_0.1-1.tar.gz", repos=NULL)
 
 # install package
 
