@@ -1,0 +1,62 @@
+%$HeadURL: /u/math/j40/cvsroot/lectures/src/shared/templates/gsarticle.tex,v 1.1 2007/09/17 13:09:52 j40 Exp $
+% svn propset svn:keywords "Date Author Id Revision HeadURL" bertinR.Rnw
+%global flags for conditional builds
+%:flags
+%\def\private{true}% comment out for public version
+\def\solutions{true}% comment out to hide solutions
+\def\usehyperref{true}% comment out to skip hyperref
+
+\ifx\pdfoutput\undefined % We're not running pdftex
+\documentclass[dvips,12pt,a4paper,twoside]{amsart}
+\else
+%\documentclass[pdftex,12pt,a4paper,twoside]{amsbook}
+\documentclass[pdftex,12pt,a4paper,twoside]{amsart}
+\usepackage{thumbpdf}
+\pdfcompresslevel=9
+\fi
+
+\usepackage{graphicx}
+%\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+\usepackage[english]{babel}%hyphenation must be after babel
+\usepackage[applemac]{inputenc}
+
+%%for debugging:
+%\usepackage{showidx}%show index entries per page
+%\usepackage{showkeys}%show label, ref and cite keys. Supersedes showlabels
+
+%%toc upto section level
+%\setcounter{tocdepth}{2}
+%\setcounter{secnumdepth}{4}
+%\usepackage{mathrsfs}	%script font
+%%\usepackage{amsthm}%not needed in ams classes
+%%\usepackage{makeidx}%not needed in ams classes
+%\usepackage[refpage]{nomencl}%Nomenclature, used for notation table
+
+\usepackage{gssda}
+%\usepackage[forceChapter]{gssda}
+\title{Bertin Plots\\ An R Implementation}
+\author{G. Sawitzki}
+%\date{}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+\ifx\private\undefined%
+\else
+\noindent
+{\tiny%
+\verb+$Id: /u/math/j40/cvsroot/lectures/src/shared/templates/gsarticle.tex,v $+\\
+\verb+$Revision: 1.1 $+\\
+\verb+$Date: 2007/09/17 13:09:52 $+\\
+\verb+$Author: j40 $+\\
+\begin{verbatim}
+$Log: gsarticle.tex,v $
+Revision 1.1  2007/09/17 13:09:52  j40
+added templates
+
+\end{verbatim}
+}
+\fi
+
+
+\end{document}  
