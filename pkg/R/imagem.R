@@ -1,11 +1,19 @@
 imagem <- 
 # a variant of image.default keeping matrix orientation
-# gs 011112
-function (z, zlim = range(z[is.finite(z)]), xlim = c(1,ncol(z)), 
-    ylim = c(1,nrow(z)), col = heat.colors(12),
-	add = FALSE, xaxs = "i", yaxs = "i", xlab, ylab,main,
+# gs 110831
+# $Date:$
+function (z, 
+	zlim = range(z[is.finite(z)]), 
+	xlim = c(1,ncol(z)), 
+    ylim = c(1,nrow(z)), 
+    col = heat.colors(12),
+	add = FALSE, xaxs = "i", yaxs = "i", 
+	xlab, ylab,
+	main = deparse(substitute(z)),
+	mar= c(8,2,4,6)+0.1,
 	breaks, oldstyle=FALSE,
-	names=TRUE, coloffs=-1, rowoffs=4,...)
+	names=TRUE, 
+	coloffs=-1, rowoffs=4,...)
 {
 #! adjust calling structure with image()
 #      image.default(x, y, z, zlim, xlim, ylim, col = heat.colors(12),
@@ -30,6 +38,7 @@ function (z, zlim = range(z[is.finite(z)]), xlim = c(1,ncol(z)),
 	zi <- t(z)
 	opin <- par("pin"); on.exit(par(pin=opin))
 	parasp(zi)
+	par(mar=mar)
 	image(
 		1:nrow(zi),1:ncol(zi), zlim=zlim,
 		#xlim=xlim,
