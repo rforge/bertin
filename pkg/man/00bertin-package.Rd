@@ -45,9 +45,10 @@ Lucius & Lucius, Stuttgart 1997
 %~~ Optional links to other man pages, e.g. ~~
 %~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 %}
-%\examples{
-%~~ simple examples of the most important functions ~~
-%}
+\examples{
+data(Hotel)
+image.bertin(bertin.ranks(Hotel, byrow=TRUE), main= "Hotel data")
+}
 
 % rm tmp.pdf;  R CMD Rd2dvi --pdf --output=tmp.pdf "/Users/gs/vy/man/AA002Bertin.Rd" ; open tmp.pdf
 
