@@ -1,8 +1,15 @@
-%$HeadURL: /u/math/j40/cvsroot/lectures/src/shared/templates/gsarticle.tex,v 1.1 2007/09/17 13:09:52 j40 Exp $
+%!TEX root = bertinR.tex
+%$HeadURL$
 % svn propset svn:keywords "Date Author Id Revision HeadURL" bertinR.Rnw
+% setwd("/Users/gs/projects/rforge/bertin/pkg/vignettes")
+% enc <- options(width = 56);  Sweave("bertinR.Rnw",output="bertinR.tex", keep.source=TRUE, debug = TRUE, eps = FALSE); options(enc)
+%%  #enc <- options(encoding = "MacRoman", width = 56)
+% \usepackage{Sweave}
 %global flags for conditional builds
 %:flags
 %\def\private{true}% comment out for public version
+\listfiles
+
 \def\solutions{true}% comment out to hide solutions
 \def\usehyperref{true}% comment out to skip hyperref
 
@@ -15,6 +22,11 @@
 \pdfcompresslevel=9
 \fi
 
+\SweaveOpts{strip.white=true}
+\AtBeginDocument{\setkeys{Gin}{width=0.6\textwidth}}
+
+\def\private{true}% comment out for public version
+
 \usepackage{graphicx}
 %\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 \usepackage[english]{babel}%hyphenation must be after babel
@@ -24,37 +36,219 @@
 %\usepackage{showidx}%show index entries per page
 %\usepackage{showkeys}%show label, ref and cite keys. Supersedes showlabels
 
+\usepackage{gssda}
+\usepackage{bertinR}
+
+\usepackage{amsfonts}
+\usepackage[author-year]{amsrefs}
+\usepackage{color}
+
+
+%:layout parameters
+\setlength{\parskip}{12pt}
+\setlength{\parindent}{0pt}
+%! ?? undefined
+%\setkeys{Gin}{width=0.9\textwidth}
+
+%\author{G\"unther Sawitzki\\StatLab Heidelberg
+%\\\bigskip\bigskip\today
+%\bigskip\bigskip \\  \emph{\textcolor{red}{in preparation}}  %?? red undefined ?
+%\bigskip\bigskip\bigskip\bigskip\bigskip \\  \emph{http://bertin-forge.r-project.org/}
+%}
+
+%:title
+\title[Bertin Matrices]{Bertin Matrices\\\bigskip An\  \Rlogo \  Implementation}
+%
+\author[G\"unther Sawitzki]{G\"unther Sawitzki\\StatLab Heidelberg}
+%	\contrib[...]{...} no2 |
+\address{Address: StatLab Heidelberg}
+%	\curraddr{...} no no
+\email{gs@statlab.uni-heidelberg.de}
+\urladdr{http://www.statlab.uni-heidelberg.de/projects/r/}
+\dedicatory{in preparation}
+\date{Aug. 2010.\\
+%For quotation, please use the general reference \cite{gs94oned}.\\
+Revised: August 2011\\
+Typeset, with minor revisions: \today}  
+\thanks{\emph{URL:} \url{http://bertin-forge.r-project.org/}}
+%	\translator{...} |3 |3
+\keywords{statistical computing, S~programming language, R~programming,
+data analysis, exploratory statistics, residual diagnostics, R language}
+%\date{Aug. 2010, published as technical report \cite{gs92shrth}.\\
+%	\subjclass[2000]{...} yes yes
+%	\begin{abstract}...\end{abstract} yes4 no
+
+%see: http://theoval.cmp.uea.ac.uk/~nlct/latex/pdfdoc/pdfdoc/pdfdoc.html
+\pdfinfo{
+   /Author (G. Sawitzki)
+   /Title  (Bertin Matrices  - An R Implementation)
+   /Subject (Computational Statistics)
+   /Keywords (computational statistics, statistical computing, S~programming language, R~programming,
+data analysis, exploratory statistics, Bertin, R~language)
+}
+
+%%for debugging:
+%\usepackage{showidx}%show index entries per page
+%\usepackage{showkeys}%show label, ref and cite keys. Supersedes showlabels
+%
 %%toc upto section level
 %\setcounter{tocdepth}{2}
 %\setcounter{secnumdepth}{4}
-%\usepackage{mathrsfs}	%script font
-%%\usepackage{amsthm}%not needed in ams classes
-%%\usepackage{makeidx}%not needed in ams classes
-%\usepackage[refpage]{nomencl}%Nomenclature, used for notation table
-
-\usepackage{gssda}
-%\usepackage[forceChapter]{gssda}
-\title{Bertin Plots\\ An R Implementation}
-\author{G. Sawitzki}
-%\date{}                                           % Activate to display a given date or no date
+\makeindex
 
 \begin{document}
 \maketitle
 
+\begingroup
+\setlength{\parskip}{0pt}
+\tableofcontents
+\endgroup
+
+\section{Bertin Plots}
+Among the rich material on graphical presentation of information, in \cite{brtn77gtg} (engl. \cite{seriation:Bertin:1999}) J. Bertin discusses the presentation of data matrices, with a particular view to seriation. \cite{seriation:Falguerolles:1997} gives an appraisal of this aspect of Bertin's work. The methods illustrated in \cite{seriation:Falguerolles:1997} have been first implemented in the Voyager system \cite{Sawitzki1996Extensible-Stat}. They have been partially re-implemented in \R{}, and this paper gives an introduction to the R-implementation.
+
+The \R{}-implentation can be downloaded as a package bertin from \url{http://bertin.r-forge.r-project.org/}.  \cite{seriation:Falguerolles:1997} is included in the documentation section of the package.
+
+In very short terms, Bertin's matrix strategies starts with a data matrix, conventionally seen as variables by cases. Is uses three steps.
+\begin{description}
+\item[derive scores ] {This brings the variables to a comparable scale.}
+\item[seriate ] {This brings the seriable to an infromative order.}
+\item[visualize ] {This allows to percieve and interpret the data.}
+\end{description}
+
+The restriction to a matrix structure is arbitrary and can be omitted. Bertin has been working as a cartographer, and his main work applies to geographi cdata. What we call the Bertin matrices has been introduced in the very beginning of his book and are but a starting point. 
+
+\section{Challenges and test matrices}
+\subsection{random matrices}
+<<>>=
+nrow <- 5
+ncol <- 3
+BMunif <- matrix(runif(nrow*ncol), nrow, ncol)
+colnames(BMunif) <- colnames(BMunif, do.NULL=FALSE)
+rownames(BMunif) <- rownames(BMunif, do.NULL=FALSE)
+
+BMnorm <- matrix(rnorm(nrow*ncol), nrow, ncol)
+colnames(BMnorm) <- colnames(BMnorm, do.NULL=FALSE)
+rownames(BMnorm) <- rownames(BMnorm, do.NULL=FALSE)
+
+@
+\subsection{Pure Vanilla}
+The most simple case: all variables are on a common scale, and the sequence is given (no seriation possible) or irrelevant (no seriation necessary).
+
+If we want to build tet matrices, there are two free parameters to be set, for example
+<<>>= 
+BMExplRows=8
+BMExplCols=6
+@
+Typical cases are :
+<<>>=
+BMExplUnif  <- matrix( runif(BMExplRows*BMExplCols), 
+	nrow= BMExplRows, ncol= BMExplCols)
+BMExplNorm  <- matrix( rnorm(BMExplRows*BMExplCols), 
+	nrow= BMExplRows, ncol= BMExplCols)
+@
+To visualize the full information, we can of course use cheap solutions such as a an image map:
+
+%
+<<fig=TRUE,label=imagedflt>>=
+olpar <- par(mfrow=c(2,1))
+image(BMExplUnif)
+image(BMExplNorm)
+par(oldpar)
+@
+
+%
+The deficits are obvious. The colours used by default appear qualitatively different, but they do not convey qunatitative information. This can be easily overcome by using better colour scales. The minimum to do is to use gray scales, but  of course better soliutions are readily available.
+<<fig=TRUE,label=imagegy>>=
+olpar <- par(mfrow=c(2,1))
+image(BMExplUnif,col=grey(0:256/256))
+image(BMExplNorm,col=grey(0:256/256))
+par(oldpar)
+@
+
+The other obvious problem is that image does not  reflect the orientation of the matrix (image uses image-conventions with origin at the bottom left, wheres matrix numeration uses an origin at to top left). Moreover, the aspect ratio of the image does not correspond to the aspect ratio of the matrix. The only solution is to rewrite image to a variant that is adapted to matrix conventions.
+<<>>=
+
+@
+
+A hidden problem with image represetations is that they provide more information than usually can be procesed. The colours ore grey tones may reflect to many differences.
+The secon cheap solution to presetnt a matrix is an array of  histograms:
+
+%
+<<fig=TRUE, width=20, height=20, label=multhist>>=
+olpar <- par(mfcol=c(3, 2))
+for (row in 1:3) hist(BMExplUnif[row,])
+for (row in 1:3) hist(BMExplNorm[row,])
+par(oldpar)
+@
+
+\subsection{Vanilla}
+
+The next round of test cases are numeric, but not on a common scale. We provide some test vectiors which we can use to construct various test matrices.
+
+<<>>=
+# Test vectors, used to build a matrix
+Bzero <- rep(0, BMExplCols)
+Bone <- rep(1, BMExplCols)
+Bmone <- rep(-1, BMExplCols)
+Binc <- (1:BMExplCols)
+Bdec <- (BMExplCols:1)
+Bstep <- c(Bmone[Binc < BMExplCols/2], Bone[Binc >= BMExplCols/2])
+Bhat <- Bone
+Bhat[(floor(BMExplCols/3)+1):(BMExplCols-floor(BMExplCols/3)) ] <- 0.5
+Bnazero <- rep(c(NA,0),length.out= BMExplCols)
+Bnanzero <- rep(c(NaN,0),length.out= BMExplCols)
+Binf <- rep(c(Inf,0,-Inf),length.out= BMExplCols)
+
+@
+
+<<>>=
+# Basic test matrices
+Brmatrix <- rbind(Bzero, Bone, Bmone, Binc, Bdec, Bstep, Bhat)
+colnames(Brmatrix) <- colnames(Brmatrix,FALSE)
+
+@
+
+<<>>=
+## R may use internal housekeeping to keep matrix columns homogeneous. 
+## Check!
+## Use row matrix and column matrix for tests.
+Bcmatrix <- cbind(Bzero, Bone, Bmone, Binc, Bdec, Bstep, Bhat)
+rownames(Bcmatrix) <- rownames(Bcmatrix,FALSE)
+
+# Basic test matrices with random error
+BrRndmatrix <- Brmatrix+rnorm(nrow(Brmatrix)*ncol(Brmatrix))
+
+@
+<<>>=
+# Test matrices with IEEE specials
+Brmatrixx <- rbind(Bzero, Bone, Bmone, Binc, Bdec, Bstep, Bhat, 
+	Bnazero, Bnanzero, Binf)
+Bcmatrixx <- cbind(Bzero, Bone, Bmone, Binc, Bdec, Bstep, Bhat, 
+	Bnazero, Bnanzero,Binf)
+
+BrRndmatrixx <- Brmatrixx+rnorm(nrow(Brmatrixx)*ncol(Brmatrixx))
+@
+%
+
+\pagebreak
+\bibliographystyle{amsxport}
+%\bibstyle{alpha}
+\bibliographystyle{amsxport}
+
+\bibliography{./bertin.bib}
+\printindex
+
+
 \ifx\private\undefined%
 \else
+\vspace{\stretch{1}}
 \noindent
 {\tiny%
-\verb+$Id: /u/math/j40/cvsroot/lectures/src/shared/templates/gsarticle.tex,v $+\\
-\verb+$Revision: 1.1 $+\\
-\verb+$Date: 2007/09/17 13:09:52 $+\\
-\verb+$Author: j40 $+\\
-\begin{verbatim}
-$Log: gsarticle.tex,v $
-Revision 1.1  2007/09/17 13:09:52  j40
-added templates
-
-\end{verbatim}
+\verb+$Id$+\\
+\verb+$Revision$+\\
+\verb+$Date$+\\
+\verb+$Author$+\\
 }
 \fi
 
