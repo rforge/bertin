@@ -9,6 +9,7 @@ function
 (z, roworder,colorder,
 	main="",col = gray((0:8 / 8)^0.5)
 )
+#! add proper propagation for ...
 {	if (missing(roworder)) {
 	roworder <- attr(z,"roworder")
 	if (is.null(roworder) ) roworder <- 1:nrow(z)

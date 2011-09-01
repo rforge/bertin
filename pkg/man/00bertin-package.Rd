@@ -3,30 +3,42 @@
 \alias{bertin}
 \docType{package}
 \title{Bertin matrices}
-\description{Bertin matrices are a means to analyze structures in a matrix 
-using two-dimensional display techniques.
-Basic data structures for Bertin analysis are implemented as class based on matrix, 
-using additional attributes.
+\description{
+\tabular{ll}{
+Package: \tab bertin\cr
+Type: \tab Package\cr
+Version: \tab 0.1-2xx\cr
+First Release Date: \tab 2007-12-08\cr
+This Release Date: \tab 2011-01-08\cr
+License: \tab LGPL \cr
+}
 
-The details are subject to change. At present, a Bertin matrix has attributes
+Bertin matrices are a means to analyze structures in a matrix 
+using two-dimensional display techniques.
+
+For a start, think of a bertin matrix as a regular display, like in a spreadsheet. Each element of the data matrix is represented in a cell, givin a regular display grid. Instead of a numeric representation, the cell shows a symbolic image - a bar, or a typical token. Now feel fee to change the arrnagement of rows or coumns (i.e  cases and variables, in conventional terms. Usuallay, the sequence of cases and variables is just acccidental, and changes should be free. For the rare other cases, add an indicator to allow for recovery after permutation.
+
+Betin's strategy is to rearrange rows and columns to gain insigtht in the internal data structure,arranging variables and cases by similarity.
+
+This package tries to provide some tools to analyze data using permutation techniques with the help of visualizations.
+
+}
+\details{
+
+The details are subject to change. 
+
+The basic functions try to allow as much of user control as possible.
+
+An abstract data structure,  currently matrices of class \code{bertin}, are added to cache information that is presumably invariant over  variatons od display.
+
+At present, a Bertin matrix is a matrix of class \code(bertin) which has has attributes
 \describe{
-\item{scores}{the matrix values. Usually ranks by row or by column}
+\item{scores}{the matrix values. For example, ranks by row or by column. The original data matrix have to be transformed to comparable scales to allow for permutations. \code{scores} is a shadow matrix in transfored form.}
 \item{rowmeans}{a vector of mean values of scores, by row}
 \item{colwmeans}{a vector of mean values of scores, by columns}
 \item{roworder}{a permutation vector to define the arrangement of rows}
 \item{colorder}{a permutation vector to define the arrangement of columns}
 }
-}
-\details{
-\tabular{ll}{
-Package: \tab bertin\cr
-Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2007-12-08\cr
-License: \tab LGPL \cr
-}
-%~~ An overview of how to use the package, including the most important ~~
-%~~ functions ~~
 }
 \author{G. Sawitzki
 

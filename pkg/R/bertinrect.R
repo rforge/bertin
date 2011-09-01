@@ -46,7 +46,7 @@ if (any(ranges[2,]==0)){
        	r <- par("usr")[2] #right
        	for (row in (1:dim(x)[1])) 
        		text(r, nrow(x)-row+1.4, rownames(x)[row], 
-            pos = 4, xpd = NA, offs = rowoffs, srt = 0, cex=0.6)
+            pos = 4, xpd = NA, offs = 0, srt = 0, cex=0.6)
             
    if (!all(is.finite(x))) {
    	badpos <- !is.finite(x)

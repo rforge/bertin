@@ -13,11 +13,9 @@ bertinrect(x, sepwd = 0.05, mar = c(2, 2, 6, 6) + 0.1, ...)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{a data matrix, or data structure that can be casted to a matrix.}
-}
   \item{sepwd}{
-a margin width. The display of an element should be based at \code(i + sepwd, j + sepwd)}
-  \item{mar}{Margin parameters, see   \code{par}. Row and column names are displayd in the margins. Adjust \code{mar}  or adjust the font size if necessary}
-}
+a margin width. The display of an element should be based at \code{(i + sepwd, j + sepwd)}.}
+  \item{mar}{Margin parameters, see   \code{par}. Row and column names are displayd in the margins. Adjust \code{mar}  or adjust the font size if necessary.}
   \item{\dots}{
 additional parameters, passed to \code{rect}.
 }
@@ -53,11 +51,18 @@ G. Sawitzki
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
- \code{\link{imagebertin}}, for a quick solution which uses display space to a maximum.
+ \code{\link{image.bertin}}, for a quick solution which uses display space to a maximum.
 }
 \examples{
 data(Hotel)
 bertinrect(Hotel)
+
+nrow <- 3; ncol <- 5
+zunif <- matrix(runif(nrow*ncol), nrow, ncol)
+colnames(zunif) <- colnames(zunif, do.NULL=FALSE)
+ rownames(zunif) <- rownames(zunif, do.NULL=FALSE)
+imagem(zunif, yaxt="n")
+
 
 ## The function is currently defined as
 function(x,
