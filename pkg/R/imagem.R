@@ -1,7 +1,7 @@
 imagem <- 
 # a variant of image.default keeping matrix orientation
 # gs 110831
-# $Date:$
+# $Date$
 function (z, 
 	zlim = range(z[is.finite(z)]), 
 	xlim = c(1,ncol(z)), 
