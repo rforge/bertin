@@ -151,7 +151,7 @@ To visualize the full information, we can of course use cheap solutions such as 
 
 %
 <<fig=TRUE,label=imagedflt>>=
-olpar <- par(mfrow=c(2,1))
+oldpar <- par(mfrow=c(2,1))
 image(BMExplUnif)
 image(BMExplNorm)
 par(oldpar)
@@ -160,7 +160,7 @@ par(oldpar)
 %
 The deficits are obvious. The colours used by default appear qualitatively different, but they do not convey qunatitative information. This can be easily overcome by using better colour scales. The minimum to do is to use gray scales, but  of course better soliutions are readily available.
 <<fig=TRUE,label=imagegy>>=
-olpar <- par(mfrow=c(2,1))
+oldpar <- par(mfrow=c(2,1))
 image(BMExplUnif,col=grey(0:256/256))
 image(BMExplNorm,col=grey(0:256/256))
 par(oldpar)
