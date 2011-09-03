@@ -109,14 +109,149 @@ Among the rich material on graphical presentation of information, in \cite{brtn7
 
 The \R{}-implentation can be downloaded as a package bertin from \url{http://bertin.r-forge.r-project.org/}.  \cite{seriation:Falguerolles:1997} is included in the documentation section of the package.
 
-In very short terms, Bertin's matrix strategies starts with a data matrix, conventionally seen as variables by cases. Is uses three steps.
-\begin{description}
-\item[derive scores ] {This brings the variables to a comparable scale.}
-\item[seriate ] {This brings the seriable to an infromative order.}
-\item[visualize ] {This allows to percieve and interpret the data.}
-\end{description}
+Bertin uses a small data set on hotel occupancy data to illustrate his ideas.
 
-The restriction to a matrix structure is arbitrary and can be omitted. Bertin has been working as a cartographer, and his main work applies to geographi cdata. What we call the Bertin matrices has been introduced in the very beginning of his book and are but a starting point. 
+%:Hotel Data
+\begin{table}[htdp]
+\begin{center}
+%\begin{table}
+\tiny{
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline\\
+&Jan&Fev&Mars&Avril&May&Juin&Juil&Aout&Sept&Oct&Nov&Dec\\
+\hline
+ClienteleFeminine&26&21&26&28&20&20&20&20&20&40&15&40\\
+Locale&69&70&77&71&37&36&39&39&55&60&68&72\\
+USA&7&6&3&6&23&14&19&14&9&6&8&8\\
+AmerSud&0&0&0&0&8&6&6&4&2&12&0&0\\
+Europe&20&15&14&15&23&27&22&30&27&19&19&17\\
+MOrientAfrique&1&0&0&8&6&4&6&4&2&1&0&1\\
+Asie&3&10&6&0&3&13&8&9&5&2&5&2\\
+Business&78&80&85&86&85&87&70&76&87&85&87&80\\
+Touristes&22&20&15&14&15&13&30&24&13&15&13&20\\
+ResDirecte&70&70&78&74&69&68&74&75&68&68&64&75\\
+ResAgents&20&18&19&17&27&27&19&19&26&27&21&15\\
+EquipageAeriens&10&12&6&9&4&5&7&6&6&5&15&10\\
+MoinsDe20&2&2&4&2&2&1&1&2&2&4&2&5\\
+De20a55&25&27&37&35&25&25&27&28&24&30&24&30\\
+De35a55&48&49&42&48&54&55&53&51&55&46&55&43\\
+PlusDe55&25&22&17&15&19&19&19&19&19&20&19&22\\
+Prix&163&167&166&174&152&155&145&170&157&174&165&156\\
+Duree&1.65&1.71&1.65&1.91&1.9&2&1.54&1.6&1.73&1.82&1.66&1.44\\
+Occupation&67&82&70&83&74&77&56&62&90&92&78&55\\
+Foires&0&0&0&1&1&1&0&0&1&1&1&1\\
+\hline
+\end{tabular}
+}
+%\caption{Bertin's Hotel data}
+%\end{table}
+\end{center}
+\caption{Bertin's hotel data}
+\label{tab:hotel}
+\end{table}%
+
+\section{Bertin Matrices}To repeat from  \cite{seriation:Falguerolles:1997}: In abstract terms, a Bertin matrix is a matrix of displays. Bertin matrices allow rearrangements totransform an initial matrix to a more homogeneous structure. The rearrangements are row or columnpermutations, and groupings of rows or columns. To fix ideas, think of a data matrix, variable bycase, with real valued variables. For each variable, draw a bar chart of variable value by case. Highlightall bars representing a value above some sample threshold for that variable. See Figure \ref{fig:hotel19}.
+
+<<fig=TRUE, include = FALSE, echo=FALSE, label=hotel19>>=
+# bertinrect(Hotel[19,])
+col=ifelse(Hotel[19,]>mean(as.matrix(Hotel[19,])),"black","white")
+ bertinrect(Hotel[19,], main="", col=col,mar=c(0.5,0.5,2,8))
+@
+
+%
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{"bertinR-hotel19"}
+\caption{Display of one variable. Observations above average are highlighted.}
+\label{fig:hotel19}
+\end{center}
+\end{figure}
+
+Variables are collected in a matrix to display the complete data set.  Figure \ref{fig:hotelorig}. By convetion,Bertin shows variables in rows and cases in columns. To make periodic structures more visible, Bertin repeats the data cyclically.
+
+<<fig=TRUE, include = FALSE, echo=FALSE, label=hotelorig>>=
+
+Hotel2 <- cbind(Hotel,Hotel)
+colmeans <- apply(Hotel2,1,mean)
+col=ifelse(Hotel2[,]>colmeans, "black","white")
+bertinrect(Hotel2, main="", col=col,mar=c(0.5,0.5,2,8))
+@
+
+%
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.9\linewidth]{"bertinR-hotelorig"}
+\caption{Display of a data matrix. Variables are shown as rows.}
+\label{fig:hotelorig}
+\end{center}
+\end{figure}
+
+As Bertin points out, the indexing used is arbitrary. You can rearrage rows and/or columns to reveal the information of interest. If you run a hotel, of course the percentage of hotel occupation and the duration of the visits are most interesting for you. Move these variables to the top of the display, and rearrange the other variables by similarity or dissimilartity to these target variables.
+
+<<fig=TRUE, include = FALSE, echo=FALSE, label=hotelperm>>=
+colmeans <- apply(Hotel2,1,mean)
+rowperm <- c(19,18,20, 8, 11, 4, 12, 13,16,14,1,2, 7, 9, 10, 17, 6, 3, 5,15)
+col=ifelse(Hotel2[,]>colmeans, "black","white")
+bertinrect(Hotel2[rowperm,], main="", col=col[rowperm,],mar=c(0.5,0.5,2,8))
+@
+
+%
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.9\linewidth]{"bertinR-hotelperm"}
+\caption{Display of a data matrix. Variables rearranged by similarity to occupation and duration.}
+\label{fig:hotelperm}
+\end{center}
+\end{figure}
+
+At this early point, let us put Bertin's work in place. Visualizing information is but one aspect. In statistics, as we see it today, visualization may be one part of an analysis. The outcome will be a decision leading to an action, and then there is a loss (or gain) depending on the action taken on the one hand, and the ``true'' state of the world onthe other. Statistics has formulated a few standard problems, and given a suggestion to handle these. In our example, the problem can be seen as a prediction problem: find a prediction model to predict occupation and duration, based on the other variables. This is a control probem, and the statistical contribution is to find a regression model for occupation and duration, based on the other variables. The visualization can be seen as one way to hint at a regression model. There are few classical prolems. Regression is one of them, and prediction is closely related. Classification and clustering is another, closely related pair of problems, and their relation to bertin matices should be obvious.
+
+%:cart and patches
+%We will discuss an implementation of Bertin's ideas. Implemantion his examples as is, is trivial. To catch his ideas demands some thoughts, and has immediate consequences for an \R{} environment.
+%
+
+As Bertin has pointed out,
+\begin{quotation}
+\emph{Ce point est fondamental. C’est la mobilité interne de l’image qui charactérise lagraphique moderne.} [Bertin 1977, p. 5]
+\end{quotation}
+Once we have solved the problem, the way can often be formulated as an optimization probem. But while we are searching for a solution, experimenting is necessary. In our implemenation, we separate to lines of experiment. Finding an adequate display is one branch. This amounts to building up a collection of proven models, and a certain data set can contribute by hinting at specific needs. This is  repeated not so often. Stability of implementation has priority over speed. We will provide a small number of basic model implementations.
+
+The clasic Bertin display shown above is one of the examples. Following the ideas, but deviating in the details, is to use a simple gray scale image for representation. This may be the most economic variantt. But is ist most econic in the use of display space.
+See figure \ref{fig:hotelpermimage}. We will follow the clasic Bertin display  and an image display as main examples.
+<<fig=TRUE, include = FALSE, echo=FALSE, label=hotelpermimage>>=
+Hotel2 <-as.matrix(Hotel2)
+rowmeans <- apply(Hotel2,1,mean)
+rowsd<- apply(Hotel2,1,sd)
+zscores <-as.matrix( (Hotel2-rowmeans)/rowsd)
+rowperm <- c(19,18,20, 8, 11, 4, 12, 13,16,14,1,2, 7, 9, 10, 17, 6, 3, 5,15)
+#col=gray((0:256)/[zscores]
+image.bertin(zscores[rowperm,], main="", col=gray((0:256)/256))
+@
+
+%
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.9\linewidth]{"bertinR-hotelpermimage"}
+\caption{Display of a data matrix as gray scale image. Variables rearranged by similarity to occupation and duration.}
+\label{fig:hotelpermimage}
+\end{center}
+\end{figure}
+
+
+For a chosen display, we have to compare different arragements (seriations, for example, If we alow for interactive work, speed of display has priority. We try to cach the information that is invariant of the permutation.
+
+As a final aspect, display space is limited. The number of variables and cases that can be displayd simultaneously is limited byy the pixel size of the display. We can increase it by one or two magnitudes by using e sries of detail displays. Any display calibration however should be constant for this series We try to allow for this global calibration.
+
+%:strategy
+%In very short terms, Bertin's matrix strategies starts with a data matrix, conventionally seen as variables by cases. Is uses three steps.
+%\begin{description}
+%\item[derive scores ] {This brings the variables to a comparable scale.}
+%\item[seriate ] {This brings the seriable to an infromative order.}
+%\item[visualize ] {This allows to percieve and interpret the data.}
+%\end{description}
+
+
+The restriction to a matrix structure is arbitrary and can be omitted. Bertin has been working as a cartographer, and his main work applies to geographical data. What we call the Bertin matrices has been introduced in the very beginning of his book and are but a starting point. 
 
 \section{Challenges and test matrices}
 \subsection{random matrices}
@@ -245,10 +380,10 @@ BrRndmatrixx <- Brmatrixx+rnorm(nrow(Brmatrixx)*ncol(Brmatrixx))
 \vspace{\stretch{1}}
 \noindent
 {\tiny%
-\verb+$Id$+\\
-\verb+$Revision$+\\
-\verb+$Date$+\\
-\verb+$Author$+\\
+\verb#$Id$#\\
+\verb#$Revision$#\\
+\verb#$Date$#\\
+\verb#$Author$#
 }
 \fi
 

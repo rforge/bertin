@@ -1,12 +1,14 @@
 # $Id$
-bertinrect <- function(x,
+bertinrect <- function(x,main = deparse(substitute(x)),
 	sepwd=0.05,
 	mar= c(2,2,6,6)+0.1,
 	...){
 	# [i,j] bottom left is at user coordinates (i,j)
 	# sepwd is internal margin
-	main <- deparse(substitute(x))
+	
 	oldpar <- par(mar=mar)
+	on.exit(par(oldpar))
+	#parasp(x)
 	plot(c(1, ncol(x)+1), c(1, nrow(x)+1), 
 	main=main,type= "n", xlab="", ylab="", axes=FALSE)
 
