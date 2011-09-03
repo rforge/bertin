@@ -152,16 +152,17 @@ Foires&0&0&0&1&1&1&0&0&1&1&1&1\\
 
 \section{Bertin Matrices}To repeat from  \cite{seriation:Falguerolles:1997}: In abstract terms, a Bertin matrix is a matrix of displays. Bertin matrices allow rearrangements totransform an initial matrix to a more homogeneous structure. The rearrangements are row or columnpermutations, and groupings of rows or columns. To fix ideas, think of a data matrix, variable bycase, with real valued variables. For each variable, draw a bar chart of variable value by case. Highlightall bars representing a value above some sample threshold for that variable. See Figure \ref{fig:hotel19}.
 
-<<fig=TRUE, include = FALSE, echo=FALSE, label=hotel19>>=
+<<fig=TRUE, include = FALSE, echo=FALSE, label=hotel19, width=8, height=1.5, >>=
 # bertinrect(Hotel[19,])
+#dev.new(width=8, height=1.5)
 col=ifelse(Hotel[19,]>mean(as.matrix(Hotel[19,])),"black","white")
- bertinrect(Hotel[19,], main="", col=col,mar=c(0.5,0.5,2,8))
+ bertinrect(Hotel[19,], main="", col=col,mar=c(0.5,0.3,2,8))
 @
 
 %
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{"bertinR-hotel19"}
+\includegraphics[width=0.9\linewidth]{"bertinR-hotel19"}
 \caption{Display of one variable. Observations above average are highlighted.}
 \label{fig:hotel19}
 \end{center}
@@ -285,7 +286,7 @@ BMExplNorm  <- matrix( rnorm(BMExplRows*BMExplCols),
 To visualize the full information, we can of course use cheap solutions such as a an image map:
 
 %
-<<fig=TRUE,label=imagedflt>>=
+<<fig=TRUE,label=imagedflt,width=9, height=9>>=
 oldpar <- par(mfrow=c(2,1))
 image(BMExplUnif)
 image(BMExplNorm)
@@ -310,7 +311,7 @@ A hidden problem with image represetations is that they provide more information
 The secon cheap solution to presetnt a matrix is an array of  histograms:
 
 %
-<<fig=TRUE, width=20, height=20, label=multhist>>=
+<<fig=TRUE, width=16, height=16, label=multhist>>=
 olpar <- par(mfcol=c(3, 2))
 for (row in 1:3) hist(BMExplUnif[row,])
 for (row in 1:3) hist(BMExplNorm[row,])
