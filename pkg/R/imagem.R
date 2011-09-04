@@ -1,7 +1,7 @@
-#$Id$#\\
-#$Revision$#\\
-#$Date$#\\
-#$Author$#
+#$Id$
+#$Revision$
+#$Date$
+#$Author$
 imagem <- 
 # a variant of image.default keeping matrix orientation
 function (z, 
@@ -12,35 +12,22 @@ function (z,
 	add = FALSE, xaxs = "i", yaxs = "i", 
 	xlab, ylab,
 	main = deparse(substitute(z)),
-	mar= c(8,2,4,6)+0.1,
+	mar= c(2,2,6,6)+0.1,
 	breaks, oldstyle=FALSE,
 	names=TRUE, 
-	coloffs=-1, rowoffs=4,...)
+	coloffs=0.5, rowoffs=0.5,...)
 {
 #! adjust calling structure with image()
 #      image.default(x, y, z, zlim, xlim, ylim, col = heat.colors(12),
 #           add = FALSE, xaxs = "i", yaxs = "i", xlab, ylab,
 #           breaks, oldstyle = FALSE, ...)
 
-#! improve placement of names. use either nrow/ncol or par("usr")
-
-	textnames <-
-	function (zi, coloffs=-1, rowoffs=NULL) {
-		# note: image interchanges rows/colums
-		for (x in (1:dim(zi)[1]) ) # column labels
-			text(x, -6, rownames(zi)[x], pos=3, 
-				xpd=NA,offs= coloffs, srt=90, cex=0.6)
-		
-		r <- par("usr")[2]
-		for (y in (1:dim(zi)[2]))  # row labels
-			text(r, y, colnames(zi)[y], pos=4, xpd=NA, offs=rowoffs,srt=0,cex=0.6)
-	} # textnames
-	
+#
 	
 	zi <- t(z)
 	opin <- par("pin"); on.exit(par(pin=opin))
-	parasp(zi)
 	par(mar=mar)
+	parasp(zi)
 	image(
 		1:nrow(zi),1:ncol(zi), zlim=zlim,
 		#xlim=xlim,
@@ -51,6 +38,8 @@ function (z,
 		breaks=breaks, oldstyle=oldstyle,
 #		frame.plot=FALSE,	
 		...)
+# print(paste("pin:",par("pin")))
+# print(paste("usr:",par("usr")))
 
 #	image(
 #		1:ncol(z), 1:nrow(z),z=t(z),zlim=zlim,
@@ -59,7 +48,20 @@ function (z,
 #	)
 
 	if (names) {
-		textnames(zi,coloffs=-4,rowoffs=1)
+		#! improve placement of names. use either nrow/ncol or par("usr")
+
+	# textnames <-	function (zi, coloffs=-1, rowoffs=NULL) {
+		# note: image interchanges rows/colums
+		for (x in (1:dim(zi)[1]) ) # column labels
+			text(x, 0 , rownames(zi)[x], pos=3, 
+				xpd=NA,offs= coloffs, srt=90, cex=0.6)
+		
+		r <- par("usr")[2]
+		for (y in (1:dim(zi)[2]))  # row labels
+			text(r, y, colnames(zi)[y], pos=4, xpd=NA, offs=rowoffs,srt=0,cex=0.6)
+#	} # textnames
+	
+#		textnames(zi,coloffs=-4,rowoffs=1)
 	} # names
 }#imagem
 
