@@ -1,7 +1,9 @@
+#$Id$#\\
+#$Revision$#\\
+#$Date$#\\
+#$Author$#
 imagem <- 
 # a variant of image.default keeping matrix orientation
-# gs 110831
-# $Date$
 function (z, 
 	zlim = range(z[is.finite(z)]), 
 	xlim = c(1,ncol(z)), 
@@ -26,12 +28,12 @@ function (z,
 	function (zi, coloffs=-1, rowoffs=NULL) {
 		# note: image interchanges rows/colums
 		for (x in (1:dim(zi)[1]) ) # column labels
-			text(x, ncol(zi)+0.5, rownames(zi)[x], pos=3, 
-				xpd=NA,offs= coloffs, srt=270)
+			text(x, -6, rownames(zi)[x], pos=3, 
+				xpd=NA,offs= coloffs, srt=90, cex=0.6)
 		
 		r <- par("usr")[2]
 		for (y in (1:dim(zi)[2]))  # row labels
-			text(r, y, colnames(zi)[y], pos=4, xpd=NA, offs=rowoffs,srt=0)
+			text(r, y, colnames(zi)[y], pos=4, xpd=NA, offs=rowoffs,srt=0,cex=0.6)
 	} # textnames
 	
 	

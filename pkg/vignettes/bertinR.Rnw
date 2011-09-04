@@ -104,6 +104,10 @@ data analysis, exploratory statistics, Bertin, R~language)
 \tableofcontents
 \endgroup
 
+<<echo=FALSE, results=hide>>=
+library(xtable)
+library(bertin)
+@
 \section{Bertin Plots}
 Among the rich material on graphical presentation of information, in \cite{brtn77gtg} (engl. \cite{seriation:Bertin:1999}) J. Bertin discusses the presentation of data matrices, with a particular view to seriation. \cite{seriation:Falguerolles:1997} gives an appraisal of this aspect of Bertin's work. The methods illustrated in \cite{seriation:Falguerolles:1997} have been first implemented in the Voyager system \cite{Sawitzki1996Extensible-Stat}. They have been partially re-implemented in \R{}, and this paper gives an introduction to the R-implementation.
 
@@ -254,8 +258,21 @@ As a final aspect, display space is limited. The number of variables and cases t
 
 The restriction to a matrix structure is arbitrary and can be omitted. Bertin has been working as a cartographer, and his main work applies to geographical data. What we call the Bertin matrices has been introduced in the very beginning of his book and are but a starting point. 
 
+\section{Coordinate System and Conventions}
+
+We provide prototypes for the display of bertin matrices. To simplify the implementation of exxtensions, we chose a coordinate system that allots unit square to each matrix cell. If we want to add separator lines to structure our data, we have to allocate additional space \ircode{sepwd}, measured in user space. 
+
+\ircode{image} requires increasing scales for both axes. To align with matrix conventions, we have to transform the row numbers.
+% So for a matrix \code{x} the data \code{x[i, j]}
+
+The total user space has the size \ircode{(nrrows * (1+2*sepwd), nrcols * (1+2*sepwd)}. The drwing area for cell \ircode{x[i, j]} is a unit square with bootom left coordinates \ircode{ (nrrows-i+1)* (1+2*sepwd) - sepwd* (1+2*sepwd) - sepwd, j* (1+2*sepwd) - sepwd }.
+
+
 \section{Challenges and test matrices}
-\subsection{random matrices}
+
+To test the implementation, a series of matrices is provided.
+
+\subsection{Random Matrices}
 <<>>=
 nrow <- 5
 ncol <- 3
@@ -286,21 +303,21 @@ BMExplNorm  <- matrix( rnorm(BMExplRows*BMExplCols),
 To visualize the full information, we can of course use cheap solutions such as a an image map:
 
 %
-<<fig=TRUE,label=imagedflt,width=9, height=9>>=
-oldpar <- par(mfrow=c(2,1))
-image(BMExplUnif)
-image(BMExplNorm)
-par(oldpar)
-@
+%<<fig=TRUE, label=imagedflt, width=18, height=18>>=
+%oldpar <- par(mfrow=c(2,1))
+%image(BMExplUnif)
+%image(BMExplNorm)
+%par(oldpar)
+%@
 
 %
 The deficits are obvious. The colours used by default appear qualitatively different, but they do not convey qunatitative information. This can be easily overcome by using better colour scales. The minimum to do is to use gray scales, but  of course better soliutions are readily available.
-<<fig=TRUE,label=imagegy>>=
-oldpar <- par(mfrow=c(2,1))
-image(BMExplUnif,col=grey(0:256/256))
-image(BMExplNorm,col=grey(0:256/256))
-par(oldpar)
-@
+%<<fig=TRUE,label=imagegy>>=
+%oldpar <- par(mfrow=c(2,1))
+%image(BMExplUnif,col=grey(0:256/256))
+%image(BMExplNorm,col=grey(0:256/256))
+%par(oldpar)
+%@
 
 The other obvious problem is that image does not  reflect the orientation of the matrix (image uses image-conventions with origin at the bottom left, wheres matrix numeration uses an origin at to top left). Moreover, the aspect ratio of the image does not correspond to the aspect ratio of the matrix. The only solution is to rewrite image to a variant that is adapted to matrix conventions.
 <<>>=
@@ -311,12 +328,12 @@ A hidden problem with image represetations is that they provide more information
 The secon cheap solution to presetnt a matrix is an array of  histograms:
 
 %
-<<fig=TRUE, width=16, height=16, label=multhist>>=
-olpar <- par(mfcol=c(3, 2))
-for (row in 1:3) hist(BMExplUnif[row,])
-for (row in 1:3) hist(BMExplNorm[row,])
-par(oldpar)
-@
+%<<fig=TRUE, width=16, height=16, label=multhist>>=
+%olpar <- par(mfcol=c(3, 2))
+%for (row in 1:3) hist(BMExplUnif[row,])
+%for (row in 1:3) hist(BMExplNorm[row,])
+%par(oldpar)
+%@
 
 \subsection{Vanilla}
 
@@ -365,6 +382,10 @@ Bcmatrixx <- cbind(Bzero, Bone, Bmone, Binc, Bdec, Bstep, Bhat,
 
 BrRndmatrixx <- Brmatrixx+rnorm(nrow(Brmatrixx)*ncol(Brmatrixx))
 @
+<<results=tex, echo=FALSE>>=
+print(xtable(Brmatrixx,label="Brmatrixx", caption="Brmatrixx: matrix with special values, by row"), floating=TRUE)
+@
+
 %
 
 \pagebreak
