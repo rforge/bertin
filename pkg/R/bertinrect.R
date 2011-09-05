@@ -2,6 +2,8 @@
 #$Revision$
 #$Date$
 #$Author$
+
+
 #!if plot are is too small, part of the plot is not show, without warning
 bertinrect0 <- function(x,main = deparse(substitute(x)),
 	sepwd=0.05,

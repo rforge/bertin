@@ -73,21 +73,21 @@ tail.colors(n=100, q1=0.125, q2=0.25, q3=1-q2,q4=1-q1, rev=FALSE)
 }
 
 \examples{
-par(mfrow=c(2,1)); colramp(green.colors(100)); colramp(green.colors(100, rev=TRUE))
-par(mfrow=c(2,1)); colramp(red.colors(100)); colramp(red.colors(100, rev=TRUE))
-par(mfrow=c(2,1)); colramp(blue.colors(100)); colramp(blue.colors(100, rev=TRUE))
+par(mfrow=c(2,1)); colramp(bertin:::green.colors(100)); colramp(bertin:::green.colors(100, rev=TRUE))
+par(mfrow=c(2,1)); colramp(bertin:::red.colors(100)); colramp(bertin:::red.colors(100, rev=TRUE))
+par(mfrow=c(2,1)); colramp(bertin:::blue.colors(100)); colramp(bertin:::blue.colors(100, rev=TRUE))
 
-par(mfrow=c(2,1)); colramp(blueyellow.colors(100)); colramp(blueyellow.colors(100, rev=TRUE))
-par(mfrow=c(2,1)); colramp(blueyellow2.colors(100)); colramp(blueyellow2.colors(100,rev=TRUE))
-par(mfrow=c(2,1)); colramp(blueyellow4.colors(100)); colramp(blueyellow4.colors(100,rev=TRUE))
+par(mfrow=c(2,1)); colramp(bertin:::blueyellow.colors(100)); colramp(bertin:::blueyellow.colors(100, rev=TRUE))
+par(mfrow=c(2,1)); colramp(bertin:::blueyellow2.colors(100)); colramp(bertin:::blueyellow2.colors(100,rev=TRUE))
+par(mfrow=c(2,1)); colramp(bertin:::blueyellow4.colors(100)); colramp(bertin:::blueyellow4.colors(100,rev=TRUE))
 
-par(mfrow=c(2,1)); colramp(bluered2.colors(100)); colramp(bluered2.colors(100,rev=TRUE))
-par(mfrow=c(2,1)); colramp(bluered4.colors(100)); colramp(bluered4.colors(100,rev=TRUE))
+par(mfrow=c(2,1)); colramp(bertin:::bluered2.colors(100)); colramp(bertin:::bluered2.colors(100,rev=TRUE))
+par(mfrow=c(2,1)); colramp(bertin:::bluered4.colors(100)); colramp(bertin:::bluered4.colors(100,rev=TRUE))
 
-par(mfrow=c(2,1)); colramp(greenred2.colors(100)); colramp(greenred2.colors(100,rev=TRUE))
-par(mfrow=c(2,1)); colramp(greenred4.colors(100)); colramp(greenred4.colors(100,rev=TRUE))
+par(mfrow=c(2,1)); colramp(bertin:::greenred2.colors(100)); colramp(bertin:::greenred2.colors(100,rev=TRUE))
+par(mfrow=c(2,1)); colramp(bertin:::greenred4.colors(100)); colramp(bertin:::greenred4.colors(100,rev=TRUE))
 
-par(mfrow=c(2,1)); colramp(tail.colors(100)); colramp(tail.colors(100,rev=TRUE))
+par(mfrow=c(2,1)); colramp(bertin:::tail.colors(100)); colramp(bertin:::tail.colors(100,rev=TRUE))
 }
 \seealso{
   \code{\link{Palettes}},

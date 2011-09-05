@@ -21,7 +21,7 @@ Optional permutations can be applied to rows and/or columns.
 \author{G. Sawitzki}
 \examples{
 data(Hotel)
-hotelrks <- bertin.ranks(Hotel,byrow=TRUE)
+hotelrks <- bertinrank(Hotel)
 image.bertin(hotelrks)
 }
 

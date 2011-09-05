@@ -8,11 +8,12 @@ bertinrect
 Display a data matrix using parallel coordinates as suggested by J. Bertin. Coordinates are set up such that each element \code{x[i, j]}is represented in a unit square with bottom left at coordinates \code{(i, j)}. By convention, variables are in rows, and cases are in columns.
 }
 \usage{
-bertinrect(x, sepwd = 0.05, mar = c(2, 2, 6, 6) + 0.1, ...)
+bertinrect(x, main, sepwd = 0.05, mar = c(1, 1, 6, 4) + 0.1, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{a data matrix, or data structure that can be casted to a matrix.}
+  \item{main}{a main title for the plot, see also \code{\link{title}}.}
   \item{sepwd}{
 a margin width. The display of an element should be based at \code{(i + sepwd, j + sepwd)}.}
   \item{mar}{Margin parameters, see   \code{par}. Row and column names are displayd in the margins. Adjust \code{mar}  or adjust the font size if necessary.}
