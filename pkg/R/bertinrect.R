@@ -1,10 +1,11 @@
-#$Id$#\\
-#$Revision$#\\
-#$Date$#\\
-#$Author$#
+#$Id$
+#$Revision$
+#$Date$
+#$Author$
+#!if plot are is too small, part of the plot is not show, without warning
 bertinrect0 <- function(x,main = deparse(substitute(x)),
 	sepwd=0.05,
-	mar= c(2,2,6,6)+0.1,
+	mar= c(1,1,6,6)+0.1,
 	...){
 	# [i,j] bottom left is at user coordinates (i,j)
 	# sepwd is internal margin
@@ -127,7 +128,7 @@ if (any(ranges[2,]==0)){
 # $Id$
 #! sepwd is used to allocate space for separator lines. 
 # So it should be in terms of linewidth, not in user coordinates
-bertinrect <- function(x,main = deparse(substitute(x)),
+bertinrect3 <- function(x,main = deparse(substitute(x)),
 	sepwd=0.05,
 	mar= c(2,2,6,6)+0.1,
 	...){
@@ -188,24 +189,33 @@ if (any(ranges[2,]==0)){
 }
 
 
-# ok
-bertinrect2 <- function(x,main = deparse(substitute(x)),
+# aspect ratio ok
+# single row: not ok, eg. bertinrect(Hotel[19,])
+bertinrect <- function(x,main = deparse(substitute(x)),
 	sepwd=0.05,
 	mar= c(1,1,6,4)+0.1,
 	...){
+#$Revision$
 	# [i,j] bottom left is at user coordinates (i,j)
 	# sepwd is internal margin
 	
-	oldpar <- par(mar=mar)
+	oldpar <- par(no.readonly = TRUE)
 	on.exit(par(oldpar))
 	#parasp(x)
-parasp(t(x))
+# 
+ par(mar=mar)
+ cat("mar  set up.pin:",par("pin")," mai:",par("mai"))
+ cat(" usr:",par("usr"),"\n")
+parasp(t(x))#par(pin=c(3,4))
+ cat("pin  set up.pin:",par("pin")," mai:",par("mai"))
+ cat(" usr:",par("usr"),"\n")
+
 	plot(c(1, ncol(x)+1), c(1, nrow(x)+1), 
 	main=main,type= "n", xlab="", ylab="", axes=FALSE,mar=mar,...)
-print(paste("pin:",par("pin")))
-print(paste("usr:",par("usr")))
+cat("Plot set up.pin:",par("pin")," mar:",par("mar"))
+cat(" usr:",par("usr"),"\n")
 
- par(mar=mar)
+
 	x <- as.matrix(x) #! support lists and data frames as well
 
 	#! improve. use scaling as in plot.window
@@ -217,9 +227,6 @@ print(paste("usr:",par("usr")))
 	scale[!is.finite(scale[] )] <- 0.1 	# fix zero scales
 	scale[scale[]==0] <- 0.1
 	#add some margin. ! improve. use scaling as in plot.window
-	#for now, is handled by sepwd
-	#ranges[1,] <- ranges[1,]- 0.04*scale[]
-	#ranges[2,] <- ranges[2,]+ 0.04*scale[]
 	scale <- (1-2*sepwd)/scale
 	zeroline <- -ranges[1,]*scale
 
@@ -232,8 +239,8 @@ print(paste("usr:",par("usr")))
 if (any(ranges[2,]==0)){
 	abline(h= xbottom[ranges[2,]==0],lty=3,col="gray")}
 	rect(xleft,xbottom,xright,xtop,...)
-print(paste("pin:",par("pin")))
-print(paste("usr:",par("usr")))
+cat("Rect set up.pin:",par("pin"))
+cat(" usr:",par("usr"),"\n")
 
 	#textnames(x)
        if (!is.null(colnames(x))){ 
