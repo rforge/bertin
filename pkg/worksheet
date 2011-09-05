@@ -15,7 +15,7 @@ R CMD BUILD pkg
 # install package
 R CMD INSTALL bertin
 # generate a pdf help file
-R CMD Rd2dvi -o bertin.pdf --pdf --title="Bertin" bertin
+rm bertin.pdf; R CMD Rd2dvi -o bertin.pdf --pdf --title="Bertin" bertin
 
 ##
 setwd("/Volumes/Untitled/bertin1")
@@ -33,4 +33,4 @@ source("R/whatis.R")
 ll <- ls()
 package.skeleton(name="bertin", ll)
 
-R CMD Rd2dvi --pdf --output=bertin.pdf --title="Bertin" /Users/gs/projects/rforge/bertin/pkg/man; open bertin.pdf
+rm bertin.pdf; R CMD Rd2dvi --pdf --output=bertin.pdf --title="Bertin" /Users/gs/projects/rforge/bertin/pkg/man; open bertin.pdf
