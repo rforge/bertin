@@ -190,25 +190,26 @@ if (any(ranges[2,]==0)){
 
 
 # aspect ratio ok
-# single row: not ok, eg. bertinrect(Hotel[19,])
-bertinrect <- function(x,main = deparse(substitute(x)),
+# single row: not ok, eg. bertinrect(Hotel[19,]) bertinrect(Hotel[,12])
+bertinrect <- function(x,main,
 	sepwd=0.05,
 	mar= c(1,1,6,4)+0.1,
 	...){
 #$Revision$
 	# [i,j] bottom left is at user coordinates (i,j)
 	# sepwd is internal margin
-	
+	if (missing(main)) {main <- deparse(substitute(x))}	
+	x <- as.matrix(x) #! support lists and data frames as well
+
 	oldpar <- par(no.readonly = TRUE)
 	on.exit(par(oldpar))
-	#parasp(x)
-# 
- par(mar=mar)
- cat("mar  set up.pin:",par("pin")," mai:",par("mai"))
- cat(" usr:",par("usr"),"\n")
-parasp(t(x))#par(pin=c(3,4))
- cat("pin  set up.pin:",par("pin")," mai:",par("mai"))
- cat(" usr:",par("usr"),"\n")
+
+    par(mar=mar)
+ #cat("mar  set up.pin:",par("pin")," mai:",par("mai"))
+ #cat(" usr:",par("usr"),"\n")
+	parasp(t(x))#par(pin=c(3,4))
+ #cat("pin  set up.pin:",par("pin")," mai:",par("mai"))
+# cat(" usr:",par("usr"),"\n")
 
 	plot(c(1, ncol(x)+1), c(1, nrow(x)+1), 
 	main=main,type= "n", xlab="", ylab="", axes=FALSE,mar=mar,...)
@@ -216,7 +217,6 @@ cat("Plot set up.pin:",par("pin")," mar:",par("mar"))
 cat(" usr:",par("usr"),"\n")
 
 
-	x <- as.matrix(x) #! support lists and data frames as well
 
 	#! improve. use scaling as in plot.window
 	ranges <- apply(x,1,range,finite=TRUE) # transposed
