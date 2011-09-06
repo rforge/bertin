@@ -4,7 +4,7 @@ cd "/Users/gs/projects/rforge/bertin/"
 
 # R cmds for ad hoc construction
 # setwd("/Users/gs/projects/rforge/bertin/")
-# install.packages("/Users/gs/projects/rforge/bertin/bertin_0.1-1.tar.gz", repos=NULL)
+# install.packages("/Users/gs/projects/rforge/bertin/bertin_0.1-1.tar.gz", repos=NULL, type="source")
 
 # install package
 

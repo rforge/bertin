@@ -1,3 +1,4 @@
+#$HeadURL$
 #$Id$
 #$Revision$
 #$Date$
@@ -17,6 +18,7 @@ function (z,
 	names=TRUE, 
 	coloffs=0.5, rowoffs=0.5,...)
 {
+#$Revision$
 #! adjust calling structure with image()
 #      image.default(x, y, z, zlim, xlim, ylim, col = heat.colors(12),
 #           add = FALSE, xaxs = "i", yaxs = "i", xlab, ylab,

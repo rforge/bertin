@@ -1,0 +1,21 @@
+#useDynLib(bertin)
+
+#import("TSP")
+#imports("gclus") 
+
+export(
+    plot.bertin,
+    image.bertin,
+    bertinrect,
+    imagem,
+    bertinrank,
+    bertinzscore,
+    bertin.order,
+    parasp,
+    whatis,
+    colramp
+    )
+
+S3method(plot, bertin)
+S3method(image, bertin)
+

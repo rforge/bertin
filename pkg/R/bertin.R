@@ -8,6 +8,18 @@
 ########################
 # bertin matrix support
 ########################
+
+ordercor <- function(z, pivot, var.orientation=c("byrow", "bycolumn") ){
+	var.orientation <- match.arg(var.orientation)
+	
+	ord <- switch(var.orientation,
+		byrow=order(cor(t(bertinrank(z)))[pivot,]),
+		bycolumn=order(cor(bertinrank(z))[,pivot])
+	)
+	ord
+	}
+
+
 bertinrank <- function (z, var.orientation=c("byrow", "bycolumn", "global"), ...)
 {
 branks <- function(v)
@@ -52,12 +64,12 @@ scores <- switch(var.orientation,
 	scores
 }
 
-bertinzscore <- function (z, var.orientation=c("byrow", "bycolumn", "global"), ...)
+bertinzscore <- function (z, var.orientation=c("byrow", "bycolumn", "global"), trim = 0, na.rm = FALSE, ...)
 {
 bzscore <- function(v)
 #! find proper rank correction for missing data
-{   mn <- mean(v)
-	sd <- sd(v)
+{   mn <- mean(v, trim, na.rm,...)
+	sd <- sd(v,na.rm)
 	v <- if (sd != 0)  (v-mn)/sd else 0
 	v
 } # branks

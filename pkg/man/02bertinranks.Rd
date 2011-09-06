@@ -1,6 +1,6 @@
 \name{bertinrank}
 \alias{bertinrank}
-\title{Calculate row or column statistics for Bertin analysis}
+\title{Calculate row or column ranks for Bertin analysis.}
 \description{Calculate row or column rank scores for a given matrix.
 	Marginal means and marginal permutation are cached.
 }
@@ -12,10 +12,8 @@
 \arguments{
 	\item{z}{A data matrix}
 	\item{var.orientation}{"byrow", "bycolumn", "global"). By defaults, following Bertin's conventions variables are in rows. Use
-	\code{} for \R{} conventions.}
-
-	\item{byrow}{Margin for building ranks. Default is to build ranks by column.}
-	\item{\dots}{other parameters,  (see \code{\link{rank}}.}
+	\code{var.orientation="bycolumn"} for \R{} conventions.}
+	\item{\dots}{other parameters,  (see \code{\link{rank}}).}
 }
 \value{
 	\item{scores}{An augmented matrix of rank scores.
@@ -27,6 +25,7 @@
 	\item{colmeans}{column wise mean ranks}
 	\item{colorder}{order of columns by column means}
 	}
+	This list is subject to change. 
 	}
 }
 
