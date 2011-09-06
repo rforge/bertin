@@ -1,10 +1,15 @@
+#$HeadURL$
+#$Id$
+#$Revision$
+#$Date$
+#$Author$
 Package: bertin
 Type: Package
 Title: Bertin matrix display
-Version: 0.1-2
-Date: 2011-08-31
+Version: 0.1-25
+Date: 2011-09-06
 Author: G. Sawitzki
 Maintainer: G. Sawitzki <gsl@statlab.uni-heidelberg.de>
-Description: Bertin matrix display
+Description: Graphical display for matrices, folling the suggestions of J. Bertin.
 URL: http://bertin.r-forge.r-project.org/
 License: LGPL

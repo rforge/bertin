@@ -154,7 +154,12 @@ Foires&0&0&0&1&1&1&0&0&1&1&1&1\\
 \label{tab:hotel}
 \end{table}%
 
-\section{Bertin Matrices}To repeat from  \cite{seriation:Falguerolles:1997}: In abstract terms, a Bertin matrix is a matrix of displays. Bertin matrices allow rearrangements totransform an initial matrix to a more homogeneous structure. The rearrangements are row or columnpermutations, and groupings of rows or columns. To fix ideas, think of a data matrix, variable bycase, with real valued variables. For each variable, draw a bar chart of variable value by case. Highlightall bars representing a value above some sample threshold for that variable. See Figure \ref{fig:hotel19}.
+\section{Bertin Matrices}
+To repeat from  \cite{seriation:Falguerolles:1997}: In abstract terms, a Bertin matrix is a matrix of displays. Bertin matrices allow rearrangements to
+transform an initial matrix to a more homogeneous structure. The rearrangements are row or column
+permutations, and groupings of rows or columns. To fix ideas, think of a data matrix, variable by
+case, with real valued variables. For each variable, draw a bar chart of variable value by case. Highlight
+all bars representing a value above some sample threshold for that variable. See Figure \ref{fig:hotel19}.
 
 <<fig=TRUE, include = FALSE, echo=FALSE, label=hotel19, width=8, height=1.5, >>=
 # bertinrect(Hotel[19,])
@@ -217,7 +222,8 @@ At this early point, let us put Bertin's work in place. Visualizing information 
 
 As Bertin has pointed out,
 \begin{quotation}
-\emph{Ce point est fondamental. C’est la mobilité interne de l’image qui charactérise lagraphique moderne.} [Bertin 1977, p. 5]
+\emph{Ce point est fondamental. C’est la mobilité interne de l’image qui charactérise la
+graphique moderne.} [Bertin 1977, p. 5]
 \end{quotation}
 Once we have solved the problem, the way can often be formulated as an optimization probem. But while we are searching for a solution, experimenting is necessary. In our implemenation, we separate to lines of experiment. Finding an adequate display is one branch. This amounts to building up a collection of proven models, and a certain data set can contribute by hinting at specific needs. This is  repeated not so often. Stability of implementation has priority over speed. We will provide a small number of basic model implementations.
 
