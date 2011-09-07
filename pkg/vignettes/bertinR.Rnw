@@ -107,6 +107,7 @@ data analysis, exploratory statistics, Bertin, R~language)
 <<echo=FALSE, results=hide>>=
 library(xtable)
 library(bertin)
+data(Hotel)
 @
 \section{Bertin Plots}
 Among the rich material on graphical presentation of information, in \cite{brtn77gtg} (engl. \cite{seriation:Bertin:1999}) J. Bertin discusses the presentation of data matrices, with a particular view to seriation. \cite{seriation:Falguerolles:1997} gives an appraisal of this aspect of Bertin's work. The methods illustrated in \cite{seriation:Falguerolles:1997} have been first implemented in the Voyager system \cite{Sawitzki1996Extensible-Stat}. They have been partially re-implemented in \R{}, and this paper gives an introduction to the R-implementation.
@@ -155,17 +156,23 @@ Foires&0&0&0&1&1&1&0&0&1&1&1&1\\
 \end{table}%
 
 \section{Bertin Matrices}
+
 To repeat from  \cite{seriation:Falguerolles:1997}: In abstract terms, a Bertin matrix is a matrix of displays. Bertin matrices allow rearrangements to
 transform an initial matrix to a more homogeneous structure. The rearrangements are row or column
 permutations, and groupings of rows or columns. To fix ideas, think of a data matrix, variable by
 case, with real valued variables. For each variable, draw a bar chart of variable value by case. Highlight
 all bars representing a value above some sample threshold for that variable. See Figure \ref{fig:hotel19}.
 
-<<fig=TRUE, include = FALSE, echo=FALSE, label=hotel19, width=8, height=1.5, >>=
+<<fig=TRUE, include = FALSE, echo=FALSE, results=hide, label=hotel19, width=8, height=2, >>=
 # bertinrect(Hotel[19,])
 #dev.new(width=8, height=1.5)
+#oldpar <- par(no.readonly=TRUE)
 col=ifelse(Hotel[19,]>mean(as.matrix(Hotel[19,])),"black","white")
+1
  bertinrect(Hotel[19,], main="", col=col,mar=c(0.5,0.3,2,8))
+# par(oldpar)
+ #bertinrect Hotel[19,], done
+ 2
 @
 
 %
@@ -179,19 +186,20 @@ col=ifelse(Hotel[19,]>mean(as.matrix(Hotel[19,])),"black","white")
 
 Variables are collected in a matrix to display the complete data set.  Figure \ref{fig:hotelorig}. By convetion,Bertin shows variables in rows and cases in columns. To make periodic structures more visible, Bertin repeats the data cyclically.
 
-<<fig=TRUE, include = FALSE, echo=FALSE, label=hotelorig>>=
+<<fig=TRUE, include = FALSE, echo=FALSE, label=hotelorig,width=8, height=5>>=
+#bertinrect Hotel2 start
 
 Hotel2 <- cbind(Hotel,Hotel)
-colmeans <- apply(Hotel2,1,mean)
-col=ifelse(Hotel2[,]>colmeans, "black","white")
-bertinrect(Hotel2, main="", col=col,mar=c(0.5,0.5,2,8))
+rowmeans <- apply(Hotel2,1,mean)
+col=ifelse(Hotel2[,]>rowmeans, "black","white")
+bertinrect(Hotel2, main="", col=col,mar=c(0.2,0.2,2,8))
 @
 
 %
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=0.9\linewidth]{"bertinR-hotelorig"}
-\caption{Display of a data matrix. Variables are shown as rows.}
+\includegraphics[width=1.0\linewidth]{"bertinR-hotelorig"}
+\caption{Display of a data matrix. Variables are shown as rows. Time axis is duplicated.}
 \label{fig:hotelorig}
 \end{center}
 \end{figure}
@@ -213,6 +221,24 @@ bertinrect(Hotel2[rowperm,], main="", col=col[rowperm,],mar=c(0.5,0.5,2,8))
 \label{fig:hotelperm}
 \end{center}
 \end{figure}
+
+As a second example, the is the
+
+<<fig=TRUE, include = FALSE, echo=FALSE, label=judgeorig,width=8, height=5>>=
+colmeans <- apply(USJudgeRatings,2,mean)
+col=ifelse(USJudgeRatings[,]>colmeans, "black","white")
+
+bertinrect(t(USJudgeRatings),col=t(col), sepwd=0.1, mar=c(0.2,0.2,7,6),main="USJudgeRatings")
+@
+%
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=01.0\linewidth]{"bertinR-judgeorig"}
+\caption{Display of a data matrix. Lawyers' ratings of state judges in the US Superior Court.}
+\label{fig:hotelperm}
+\end{center}
+\end{figure}
+
 
 At this early point, let us put Bertin's work in place. Visualizing information is but one aspect. In statistics, as we see it today, visualization may be one part of an analysis. The outcome will be a decision leading to an action, and then there is a loss (or gain) depending on the action taken on the one hand, and the ``true'' state of the world onthe other. Statistics has formulated a few standard problems, and given a suggestion to handle these. In our example, the problem can be seen as a prediction problem: find a prediction model to predict occupation and duration, based on the other variables. This is a control probem, and the statistical contribution is to find a regression model for occupation and duration, based on the other variables. The visualization can be seen as one way to hint at a regression model. There are few classical prolems. Regression is one of them, and prediction is closely related. Classification and clustering is another, closely related pair of problems, and their relation to bertin matices should be obvious.
 
@@ -264,6 +290,71 @@ As a final aspect, display space is limited. The number of variables and cases t
 
 The restriction to a matrix structure is arbitrary and can be omitted. Bertin has been working as a cartographer, and his main work applies to geographical data. What we call the Bertin matrices has been introduced in the very beginning of his book and are but a starting point. 
 
+\section{Colour, perception and pitfalls}
+
+to fix
+
+Perception is an active process, and any visual presentation may be swayed by the intricacies of perception. Colour perception is particularly complex. When working with colour (and this includes black and white), we strongly suggest to have a look at the image with inverted colours as well.
+
+Here is a sample implementation. On the \R{} level, provide a plotting function 
+
+<<print=FALSE, echo=TRUE >>=
+sampleimagem <- function(z, 
+	col = grey((1:256)/256), xlab, ylab, main, 
+	colinvert=FALSE){
+	if (colinvert) col <- col[length(col):1]
+	# x1, x2. y1, y2
+	oldpar <- par(fig=c(0, 1, 0.2, 1), 
+		mar=c(2.5,1.5,0.5,0.5), new=FALSE)
+	imagem(z, col=col)
+		#imagem(z, xlab=xlab, ylab=ylab, main=main, col=col, mar=c(0.1,,0.1,0.1,0.1))
+	par(yaxt="n", fig=c(0, 1, 0, 0.2), 
+		mar=c(3.5,4.0,0.5,4.0), new=TRUE)
+	zrange <- range(z, finite=TRUE)
+	image(z=t(matrix(seq(zrange[1],zrange[2],length.out=length(col)), 
+		1, length(col))), 
+		zlim=zrange,main="", ylab="", xlab="", col=col)
+	par(oldpar)
+}
+@
+and run it with \ircode{colinvert=FALSE} and  \ircode{colinvert=TRUE} .
+If your are using \ircode{Sweave}, use two separate chunks, and place the figure output side by side in \TeX.
+%	@
+%	%
+%	%
+%	% By registration
+%	\section{By registration}
+%	Technical preparation: extract tension by sequential recording number.
+%	<<echo=TRUE>>=
+%	du_lfd_nr  <-  matrix(nrow=max(d$seqVPNR), ncol=max(d$LFD_NR))
+%	for (k in (1:length(d$SPANNUNG))) {
+%		du_lfd_nr[d$seqVPNR[k], d$LFD_NR[k]]  <-  d$SPANNUNG[k]}
+%	@
+%	<<print=FALSE, echo=FALSE>>=
+%	graphics.off();quartz(width=8, height=10)
+%	@
+%	\clearpage
+%	% sequence heat
+<<fig=TRUE, eps= FALSE, echo=TRUE, height=12, width=10, include=FALSE, label=sampleimagem>>=
+sampleimagem(Brmatrix)
+@
+See Figure \ref{sampleimagem} left.
+
+<<fig=TRUE, echo=TRUE, height=12, width=10, include=FALSE, label=sampleimageminv >>=
+sampleimagem(Brmatrix, colinvert=TRUE)
+@
+See Figure \ref{sampleimageminv} right.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.48\linewidth]{bertinR-sampleimagem}
+\includegraphics[width=0.48\linewidth]{bertinR-sampleimageminv}
+\caption{Test matrix: same information, but colour table inverted on the right.}\label{sampleimagem}\label{sampleimageminv}
+\end{center}
+\end{figure}
+%
+\clearpage
+
 \section{Coordinate System and Conventions}
 
 We provide prototypes for the display of bertin matrices. To simplify the implementation of exxtensions, we chose a coordinate system that allots unit square to each matrix cell. If we want to add separator lines to structure our data, we have to allocate additional space \ircode{sepwd}, measured in user space. 
@@ -279,6 +370,7 @@ The total user space has the size \ircode{(nrrows * (1+2*sepwd), nrcols * (1+2*s
 To test the implementation, a series of matrices is provided.
 
 \subsection{Random Matrices}
+
 <<>>=
 nrow <- 5
 ncol <- 3
@@ -350,9 +442,9 @@ The next round of test cases are numeric, but not on a common scale. We provide 
 Bzero <- rep(0, BMExplCols)
 Bone <- rep(1, BMExplCols)
 Bmone <- rep(-1, BMExplCols)
-Binc <- (1:BMExplCols)
-Bdec <- (BMExplCols:1)
-Bstep <- c(Bmone[Binc < BMExplCols/2], Bone[Binc >= BMExplCols/2])
+Binc <- (1:BMExplCols)/BMExplCols
+Bdec <- (BMExplCols:1)/BMExplCols
+Bstep <- c(Bmone[1:floor(BMExplCols/2)], Bone[(1+floor(BMExplCols/2)):BMExplCols])
 Bhat <- Bone
 Bhat[(floor(BMExplCols/3)+1):(BMExplCols-floor(BMExplCols/3)) ] <- 0.5
 Bnazero <- rep(c(NA,0),length.out= BMExplCols)

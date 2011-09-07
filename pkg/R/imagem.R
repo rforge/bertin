@@ -4,7 +4,6 @@
 #$Date$
 #$Author$
 imagem <- 
-# a variant of image.default keeping matrix orientation
 function (z, 
 	zlim = range(z[is.finite(z)]), 
 	xlim = c(1,ncol(z)), 
@@ -18,6 +17,8 @@ function (z,
 	names=TRUE, 
 	coloffs=0.5, rowoffs=0.5,...)
 {
+# a variant of image.default keeping matrix orientation
+
 #$Revision$
 #! adjust calling structure with image()
 #      image.default(x, y, z, zlim, xlim, ylim, col = heat.colors(12),
@@ -27,7 +28,7 @@ function (z,
 #
 	
 	zi <- t(z)
-	opin <- par("pin"); on.exit(par(pin=opin))
+	opin <- par("pin","mar"); on.exit(par(pin=opin))
 	par(mar=mar)
 	parasp(zi)
 	image(
@@ -55,12 +56,13 @@ function (z,
 	# textnames <-	function (zi, coloffs=-1, rowoffs=NULL) {
 		# note: image interchanges rows/colums
 		for (x in (1:dim(zi)[1]) ) # column labels
-			text(x, 0 , rownames(zi)[x], pos=3, 
+			text(x, par("usr")[4]-coloffs , rownames(zi)[x], adj=c(0,0.5),#pos=3, 
 				xpd=NA,offs= coloffs, srt=90, cex=0.6)
 		
-		r <- par("usr")[2]
+		r <- par("usr")[2]+rowoffs
 		for (y in (1:dim(zi)[2]))  # row labels
-			text(r, y, colnames(zi)[y], pos=4, xpd=NA, offs=rowoffs,srt=0,cex=0.6)
+			text(r, y, colnames(zi)[y], adj=c(0,0.5),#pos=4, 
+			xpd=NA, offs=rowoffs,srt=0,cex=0.6)
 #	} # textnames
 	
 #		textnames(zi,coloffs=-4,rowoffs=1)

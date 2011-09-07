@@ -215,8 +215,8 @@ bertinrect <- function(x,main,
 
 	plot(c(1, ncol(x)+1), c(1, nrow(x)+1), 
 	main=main,type= "n", xlab="", ylab="", axes=FALSE,mar=mar,...)
-cat("Plot set up.pin:",par("pin")," mar:",par("mar"))
-cat(" usr:",par("usr"),"\n")
+#cat("Plot set up.pin:",par("pin")," mar:",par("mar"))
+#cat(" usr:",par("usr"),"\n")
 
 
 
@@ -241,14 +241,15 @@ cat(" usr:",par("usr"),"\n")
 if (any(ranges[2,]==0)){
 	abline(h= xbottom[ranges[2,]==0],lty=3,col="gray")}
 	rect(xleft,xbottom,xright,xtop,...)
-cat("Rect set up.pin:",par("pin"))
-cat(" usr:",par("usr"),"\n")
+#cat("Rect set up.pin:",par("pin"))
+#cat(" usr:",par("usr"),"\n")
 
 	#textnames(x)
        if (!is.null(colnames(x))){ 
        	for (col in (1:dim(x)[2])) 
-       		text(col+0.8, nrow(x)+1, colnames(x)[col], 
-            pos = 3, xpd = NA, offs = 1, srt = 90, cex=0.6)}
+       		text(col, par("usr")[4], colnames(x)[col], 
+  #          pos = 3, xpd = NA, offs = 1, srt = 90, cex=0.6)}
+             adj=c(0,1),xpd = NA,  srt = 90, cex=0.6)}
        if (!is.null(rownames(x))) {
        	r <- par("usr")[2] #right
        	for (row in (1:dim(x)[1])) 
