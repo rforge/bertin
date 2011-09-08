@@ -28,7 +28,7 @@ function (z,
 #
 	
 	zi <- t(z)
-	opin <- par("pin","mar"); on.exit(par(pin=opin))
+	opin <- par("pin","mar")#; #on.exit(par(pin=opin))
 	par(mar=mar)
 	parasp(zi)
 	image(

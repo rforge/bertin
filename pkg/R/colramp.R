@@ -1,7 +1,14 @@
+#$HeadURL$
+#$Id$
+#$Revision$
+#$Date$
+#$Author$
+
 colramp <-
-# test color image ramp
 function (col=  heat.colors(256),  nr=256, horizontal=FALSE, main,...)
 {
+# test color image ramp
+
 #! add support for functions passed as col
 #! add support for translated scale, e.g. log
 if (is.function(col) )

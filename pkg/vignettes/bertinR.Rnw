@@ -336,12 +336,12 @@ If your are using \ircode{Sweave}, use two separate chunks, and place the figure
 %	\clearpage
 %	% sequence heat
 <<fig=TRUE, eps= FALSE, echo=TRUE, height=12, width=10, include=FALSE, label=sampleimagem>>=
-sampleimagem(Brmatrix)
+sampleimagem(hotelrk)
 @
 See Figure \ref{sampleimagem} left.
 
 <<fig=TRUE, echo=TRUE, height=12, width=10, include=FALSE, label=sampleimageminv >>=
-sampleimagem(Brmatrix, colinvert=TRUE)
+sampleimagem(hotelrk, colinvert=TRUE)
 @
 See Figure \ref{sampleimageminv} right.
 
