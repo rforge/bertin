@@ -15,8 +15,7 @@
 image.bertin <- function
 (z, roworder,colorder,
 	main, col = gray((255:0 / 255)^0.5))
-{
-#$Revision$
+{#$Revision$
 	if (missing(roworder)) {
 	roworder <- attr(z,"roworder")
 	if (is.null(roworder) ) roworder <- 1:nrow(z)
@@ -33,5 +32,10 @@ image.bertin <- function
 	}
 
 	imagem(z[roworder,colorder], main=main, col=col)
+
+	attr(z,"roworder")<-roworder
+	attr(z,"colorder")<-colorder
+	attr(z,"main")<-main
+	invisible(z)
 }
 

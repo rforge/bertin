@@ -45,7 +45,7 @@ At present, a Bertin matrix is a matrix of class \code{bertin} which has has att
 Maintainer: G. Sawitzki <gs@statlab.uni-heidelberg.de>
 }
 
-\seealso{Package  \code{\link{tableplot}}, package \code{\link{seriation}}}
+\seealso{Package  \pkg{tableplot}, package \pkg{seriation}.}
 
 \references{
 J. Bertin: \emph{La graphique et le traitement graphique de l'information.} Flammarion: Paris 1977. 

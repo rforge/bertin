@@ -1,3 +1,4 @@
+%#$Id$
 \name{imagem}
 \alias{imagem}
 %- Also NEED an '\alias' for EACH other topic documented here.
@@ -14,12 +15,13 @@ imagem(z,
 	xaxs = "i", yaxs = "i", 
 	xlab, ylab, 
 	main= deparse(substitute(z)), 
-	mar = c(8, 2, 4, 6) + 0.1,
+	mar =c(2,2,6,6)+0.1,
 	breaks, 
 	oldstyle = FALSE, 
-	names = TRUE, coloffs = -1, rowoffs = 4, ...)
+	names = TRUE, coloffs=0.5, rowoffs=0.5, ...)
 }
 %- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{z}{a matrix containing the values to be plotted (\code{NA}s are
     allowed).  Note that \code{x} can be used instead of \code{z} for
@@ -60,18 +62,17 @@ imagem(z,
     \code{asp} and \code{axes} (see \code{\link{plot.window}}).}
 }
 % \details{ If necessary, more details than the description above }
-\value{
-  Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
-}
+%\value{
+%  Describe the value returned
+%  If it is a LIST, use
+%  \item{comp1 }{Description of 'comp1'}
+%  \item{comp2 }{Description of 'comp2'}
+%  ...
+%}
 %\references{ put references to the literature/web site here  }
 \author{G. Sawitzki}
-%\note{ further notes 
-% ~Make other sections like Warning with \section{Warning }{....} ~
-%}
+\note{  \code{imagem} is a low-level variant of  \code{\link{image}}. For higher level access, use  \code{\link{image.bertin}}. 
+}
 
 \seealso{
   \code{\link{image}} for a general purpose variant.

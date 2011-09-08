@@ -1,28 +1,33 @@
+%#$Id: bertin.R 25 2011-09-06 11:19:19Z gsawitzki $
 \name{plot.bertin}
 \alias{plot.bertin}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Bertin plot}
 \description{Display a Bertin plot of a data matrix.}
 \usage{
-plot.bertin(z, roworder, colorder, main = "", col = gray((255:0/255)^0.5))
+plot.bertin(z, roworder, colorder, main = "", zcol, palette = gray((255:0 / 255)^0.5))
 }
 \arguments{
   \item{z}{a data matrix.}
   \item{roworder}{permutation used for rows.}
   \item{colorder}{permutation used for columns.}
   \item{main}{main title.}
-  \item{col}{a matrix used as colour attributes in teh display of the data matrix.}
+  \item{zcol}{a data matrix of index values for use with the colour palette.}
+  \item{palette}{a colour palette for the display of the data matrix.}
 }
-\details{To come.
+\details{A grid of rectangles is displayd to represent the data. Typically, the value is encoded as height.
+See the references below for details.
 %%  ~~ If necessary, more details than the description above ~~
 }
-%\value{
+\value{
+A data matrix with display specification added as attributes. Details are subject to change.
+This is  \code{\link{invisible}}.
 %%%  ~Describe the value returned
 %%%  If it is a LIST, use
 %%%  \item{comp1 }{Description of 'comp1'}
 %%%  \item{comp2 }{Description of 'comp2'}
 %%% ...
-%}
+}
 \references{
 J. Bertin: \emph{La graphique et le traitement graphique de l'information.} Flammarion: Paris 1977. 
 
@@ -34,14 +39,14 @@ Lucius & Lucius, Stuttgart 1997. (provided in the doc section of this package)
 G. Sawitzki
 }
 \note{
-Still experimental
+Still experimental. This is a \pkg{bertin} specific wrapper for   \code{\link{bertinrect}}. 
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
- \code{\link{image.bertin}}, ~~~
-}
+ \code{\link{image.bertin}}
+ }
 \examples{
 ##---- Should be DIRECTLY executable !! ----
 ##-- ==>  Define data, use random,

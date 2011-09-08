@@ -112,7 +112,7 @@ data(Hotel)
 \section{Bertin Plots}
 Among the rich material on graphical presentation of information, in \cite{brtn77gtg} (engl. \cite{seriation:Bertin:1999}) J. Bertin discusses the presentation of data matrices, with a particular view to seriation. \cite{seriation:Falguerolles:1997} gives an appraisal of this aspect of Bertin's work. The methods illustrated in \cite{seriation:Falguerolles:1997} have been first implemented in the Voyager system \cite{Sawitzki1996Extensible-Stat}. They have been partially re-implemented in \R{}, and this paper gives an introduction to the R-implementation.
 
-The \R{}-implentation can be downloaded as a package bertin from \url{http://bertin.r-forge.r-project.org/}.  \cite{seriation:Falguerolles:1997} is included in the documentation section of the package.
+The \R{}-implementation can be downloaded as a package \ircode{bertin} from \url{http://bertin.r-forge.r-project.org/}.  \cite{seriation:Falguerolles:1997} is included in the documentation section of the package.
 
 Bertin uses a small data set on hotel occupancy data to illustrate his ideas.
 
@@ -184,7 +184,7 @@ col=ifelse(Hotel[19,]>mean(as.matrix(Hotel[19,])),"black","white")
 \end{center}
 \end{figure}
 
-Variables are collected in a matrix to display the complete data set.  Figure \ref{fig:hotelorig}. By convetion,Bertin shows variables in rows and cases in columns. To make periodic structures more visible, Bertin repeats the data cyclically.
+Variables are collected in a matrix to display the complete data set.  Figure \ref{fig:hotelorig}. By convention, Bertin shows variables in rows and cases in columns. To make periodic structures more visible, Bertin repeats the data cyclically.
 
 <<fig=TRUE, include = FALSE, echo=FALSE, label=hotelorig,width=8, height=5>>=
 #bertinrect Hotel2 start
@@ -204,7 +204,7 @@ bertinrect(Hotel2, main="", col=col,mar=c(0.2,0.2,2,8))
 \end{center}
 \end{figure}
 
-As Bertin points out, the indexing used is arbitrary. You can rearrage rows and/or columns to reveal the information of interest. If you run a hotel, of course the percentage of hotel occupation and the duration of the visits are most interesting for you. Move these variables to the top of the display, and rearrange the other variables by similarity or dissimilartity to these target variables.
+As Bertin points out, the indexing used is arbitrary. You can rearrange rows and/or columns to reveal the information of interest. If you run a hotel, of course the percentage of hotel occupation and the duration of the visits are most interesting for you. Move these variables to the top of the display, and rearrange the other variables by similarity or dissimilarity to these target variables.
 
 <<fig=TRUE, include = FALSE, echo=FALSE, label=hotelperm>>=
 colmeans <- apply(Hotel2,1,mean)
@@ -222,7 +222,7 @@ bertinrect(Hotel2[rowperm,], main="", col=col[rowperm,],mar=c(0.5,0.5,2,8))
 \end{center}
 \end{figure}
 
-As a second example, the is the
+As a second example, we use the  the \ircode{USJudgeRatings} data set.
 
 <<fig=TRUE, include = FALSE, echo=FALSE, label=judgeorig,width=8, height=5>>=
 colmeans <- apply(USJudgeRatings,2,mean)
@@ -240,10 +240,10 @@ bertinrect(t(USJudgeRatings),col=t(col), sepwd=0.1, mar=c(0.2,0.2,7,6),main="USJ
 \end{figure}
 
 
-At this early point, let us put Bertin's work in place. Visualizing information is but one aspect. In statistics, as we see it today, visualization may be one part of an analysis. The outcome will be a decision leading to an action, and then there is a loss (or gain) depending on the action taken on the one hand, and the ``true'' state of the world onthe other. Statistics has formulated a few standard problems, and given a suggestion to handle these. In our example, the problem can be seen as a prediction problem: find a prediction model to predict occupation and duration, based on the other variables. This is a control probem, and the statistical contribution is to find a regression model for occupation and duration, based on the other variables. The visualization can be seen as one way to hint at a regression model. There are few classical prolems. Regression is one of them, and prediction is closely related. Classification and clustering is another, closely related pair of problems, and their relation to bertin matices should be obvious.
+At this early point, let us put Bertin's work in place. Visualizing information is but one aspect. In statistics, as we see it today, visualization may be one part of an analysis. The outcome will be a decision leading to an action, and then there is a loss (or gain) depending on the action taken on the one hand, and the ``true'' state of the world on the other. Statistics has formulated a few standard problems, and given a suggestion to handle these. In our example, the problem can be seen as a prediction problem: find a prediction model to predict occupation and duration, based on the other variables. This is a control problem, and the statistical contribution is to find a regression model for occupation and duration, based on the other variables. The visualization can be seen as one way to hint at a regression model. There are few classical problems. Regression is one of them, and prediction is closely related. Classification and clustering is another, closely related pair of problems, and their relation to Bertin matrices should be obvious.
 
 %:cart and patches
-%We will discuss an implementation of Bertin's ideas. Implemantion his examples as is, is trivial. To catch his ideas demands some thoughts, and has immediate consequences for an \R{} environment.
+%We will discuss an implementation of Bertin's ideas. Implemanting his examples as is, is trivial. To catch his ideas demands some thoughts, and has immediate consequences for an \R{} environment.
 %
 
 As Bertin has pointed out,
@@ -251,10 +251,10 @@ As Bertin has pointed out,
 \emph{Ce point est fondamental. CÕest la mobilitŽ interne de lÕimage qui charactŽrise la
 graphique moderne.} [Bertin 1977, p. 5]
 \end{quotation}
-Once we have solved the problem, the way can often be formulated as an optimization probem. But while we are searching for a solution, experimenting is necessary. In our implemenation, we separate to lines of experiment. Finding an adequate display is one branch. This amounts to building up a collection of proven models, and a certain data set can contribute by hinting at specific needs. This is  repeated not so often. Stability of implementation has priority over speed. We will provide a small number of basic model implementations.
+Once we have solved the problem, the way can often be formulated as an optimization problem. But while we are searching for a solution, experimenting is necessary. In our implementation, we separate to lines of experiment. Finding an adequate display is one branch. This amounts to building up a collection of proven models, and a certain data set can contribute by hinting at specific needs. This is  repeated not so often. Stability of implementation has priority over speed. We will provide a small number of basic model implementations.
 
-The clasic Bertin display shown above is one of the examples. Following the ideas, but deviating in the details, is to use a simple gray scale image for representation. This may be the most economic variantt. But is ist most econic in the use of display space.
-See figure \ref{fig:hotelpermimage}. We will follow the clasic Bertin display  and an image display as main examples.
+The classic Bertin display shown above is one of the examples. Following the ideas, but deviating in the details, is to use a simple gray scale image for representation. This may be the most economic variant. But it is most economic in the use of display space.
+See figure \ref{fig:hotelpermimage}. We will follow the classic Bertin display  and an image display as main examples.
 <<fig=TRUE, include = FALSE, echo=FALSE, label=hotelpermimage>>=
 Hotel2 <-as.matrix(Hotel2)
 rowmeans <- apply(Hotel2,1,mean)
@@ -275,16 +275,16 @@ image.bertin(zscores[rowperm,], main="", col=gray((0:256)/256))
 \end{figure}
 
 
-For a chosen display, we have to compare different arragements (seriations, for example, If we alow for interactive work, speed of display has priority. We try to cach the information that is invariant of the permutation.
+For a chosen display, we have to compare different arrangements (seriations, for example, If we allow for interactive work, speed of display has priority. We try to cache the information that is invariant of the permutation.
 
-As a final aspect, display space is limited. The number of variables and cases that can be displayd simultaneously is limited byy the pixel size of the display. We can increase it by one or two magnitudes by using e sries of detail displays. Any display calibration however should be constant for this series We try to allow for this global calibration.
+As a final aspect, display space is limited. The number of variables and cases that can be displayed simultaneously is limited by the pixel size of the display. We can increase it by one or two magnitudes by using e series of detail displays. Any display calibration however should be constant for this series We try to allow for this global calibration.
 
 %:strategy
 %In very short terms, Bertin's matrix strategies starts with a data matrix, conventionally seen as variables by cases. Is uses three steps.
 %\begin{description}
 %\item[derive scores ] {This brings the variables to a comparable scale.}
-%\item[seriate ] {This brings the seriable to an infromative order.}
-%\item[visualize ] {This allows to percieve and interpret the data.}
+%\item[seriate ] {This brings the seriable to an informative order.}
+%\item[visualize ] {This allows to perceive and interpret the data.}
 %\end{description}
 
 
@@ -336,6 +336,7 @@ If your are using \ircode{Sweave}, use two separate chunks, and place the figure
 %	\clearpage
 %	% sequence heat
 <<fig=TRUE, eps= FALSE, echo=TRUE, height=12, width=10, include=FALSE, label=sampleimagem>>=
+hotelrk <- bertinrank(Hotel)
 sampleimagem(hotelrk)
 @
 See Figure \ref{sampleimagem} left.
@@ -353,16 +354,16 @@ See Figure \ref{sampleimageminv} right.
 \end{center}
 \end{figure}
 %
-\clearpage
+%\clearpage
 
 \section{Coordinate System and Conventions}
 
-We provide prototypes for the display of bertin matrices. To simplify the implementation of exxtensions, we chose a coordinate system that allots unit square to each matrix cell. If we want to add separator lines to structure our data, we have to allocate additional space \ircode{sepwd}, measured in user space. 
+We provide prototypes for the display of Bertin matrices. To simplify the implementation of extensions, we chose a coordinate system that allots unit square to each matrix cell. If we want to add separator lines to structure our data, we have to allocate additional space \ircode{sepwd}, measured in user space. 
 
 \ircode{image} requires increasing scales for both axes. To align with matrix conventions, we have to transform the row numbers.
 % So for a matrix \code{x} the data \code{x[i, j]}
 
-The total user space has the size \ircode{(nrrows * (1+2*sepwd), nrcols * (1+2*sepwd)}. The drwing area for cell \ircode{x[i, j]} is a unit square with bootom left coordinates \ircode{ (nrrows-i+1)* (1+2*sepwd) - sepwd* (1+2*sepwd) - sepwd, j* (1+2*sepwd) - sepwd }.
+The total user space has the size \ircode{(nrrows * (1+2*sepwd),} \ircode{nrcols * (1+2*sepwd)}. The drwing area for cell \ircode{x[i, j]} is a unit square with bootom left coordinates \ircode{ (nrrows-i+1)*}  \ircode{(1+2*sepwd) -} \ircode{sepwd*} \ircode{(1+2*sepwd)} \ircode{- sepwd,} \ircode{j* (1+2*sepwd) - sepwd }.
 
 
 \section{Challenges and test matrices}
@@ -386,7 +387,7 @@ rownames(BMnorm) <- rownames(BMnorm, do.NULL=FALSE)
 \subsection{Pure Vanilla}
 The most simple case: all variables are on a common scale, and the sequence is given (no seriation possible) or irrelevant (no seriation necessary).
 
-If we want to build tet matrices, there are two free parameters to be set, for example
+If we want to build test matrices, there are two free parameters to be set, for example
 <<>>= 
 BMExplRows=8
 BMExplCols=6
@@ -409,7 +410,7 @@ To visualize the full information, we can of course use cheap solutions such as 
 %@
 
 %
-The deficits are obvious. The colours used by default appear qualitatively different, but they do not convey qunatitative information. This can be easily overcome by using better colour scales. The minimum to do is to use gray scales, but  of course better soliutions are readily available.
+The deficits are obvious. The colours used by default appear qualitatively different, but they do not convey quantitative information. This can be easily overcome by using better colour scales. The minimum to do is to use gray scales, but  of course better solutions are readily available.
 %<<fig=TRUE,label=imagegy>>=
 %oldpar <- par(mfrow=c(2,1))
 %image(BMExplUnif,col=grey(0:256/256))
@@ -422,8 +423,8 @@ The other obvious problem is that image does not  reflect the orientation of the
 
 @
 
-A hidden problem with image represetations is that they provide more information than usually can be procesed. The colours ore grey tones may reflect to many differences.
-The secon cheap solution to presetnt a matrix is an array of  histograms:
+A hidden problem with image representations is that they provide more information than usually can be processed. The colours ore grey tones may reflect to many differences.
+The second cheap solution to present a matrix is an array of  histograms:
 
 %
 %<<fig=TRUE, width=16, height=16, label=multhist>>=
@@ -435,7 +436,7 @@ The secon cheap solution to presetnt a matrix is an array of  histograms:
 
 \subsection{Vanilla}
 
-The next round of test cases are numeric, but not on a common scale. We provide some test vectiors which we can use to construct various test matrices.
+The next round of test cases are numeric, but not on a common scale. We provide some test vectors which we can use to construct various test matrices.
 
 <<>>=
 # Test vectors, used to build a matrix
