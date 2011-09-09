@@ -1,5 +1,6 @@
 %!TEX root = bertinR.tex
 %$HeadURL$
+
 % svn propset svn:keywords "Date Author Id Revision HeadURL" bertinR.Rnw
 % setwd("/Users/gs/projects/rforge/bertin/pkg/vignettes")
 % enc <- options(width = 56);  Sweave("bertinR.Rnw",output="bertinR.tex", keep.source=TRUE, debug = TRUE, eps = FALSE); options(enc)
@@ -292,11 +293,13 @@ The restriction to a matrix structure is arbitrary and can be omitted. Bertin ha
 
 \section{Colour, perception and pitfalls}
 
-to fix
+still to fix
 
 Perception is an active process, and any visual presentation may be swayed by the intricacies of perception. Colour perception is particularly complex. When working with colour (and this includes black and white), we strongly suggest to have a look at the image with inverted colours as well.
 
 Here is a sample implementation. On the \R{} level, provide a plotting function 
+
+%		#imagem(z, xlab=xlab, ylab=ylab, main=main, col=col, mar=c(0.1,,0.1,0.1,0.1))
 
 <<print=FALSE, echo=TRUE >>=
 sampleimagem <- function(z, 
@@ -307,7 +310,6 @@ sampleimagem <- function(z,
 	oldpar <- par(fig=c(0, 1, 0.2, 1), 
 		mar=c(2.5,1.5,0.5,0.5), new=FALSE)
 	imagem(z, col=col)
-		#imagem(z, xlab=xlab, ylab=ylab, main=main, col=col, mar=c(0.1,,0.1,0.1,0.1))
 	par(yaxt="n", fig=c(0, 1, 0, 0.2), 
 		mar=c(3.5,4.0,0.5,4.0), new=TRUE)
 	zrange <- range(z, finite=TRUE)
@@ -363,7 +365,7 @@ We provide prototypes for the display of Bertin matrices. To simplify the implem
 \ircode{image} requires increasing scales for both axes. To align with matrix conventions, we have to transform the row numbers.
 % So for a matrix \code{x} the data \code{x[i, j]}
 
-The total user space has the size \ircode{(nrrows * (1+2*sepwd),} \ircode{nrcols * (1+2*sepwd)}. The drwing area for cell \ircode{x[i, j]} is a unit square with bootom left coordinates \ircode{ (nrrows-i+1)*}  \ircode{(1+2*sepwd) -} \ircode{sepwd*} \ircode{(1+2*sepwd)} \ircode{- sepwd,} \ircode{j* (1+2*sepwd) - sepwd }.
+The total user space has the size \ircode{(nrrows * (1+2*sepwd),} \ircode{nrcols * (1+2*sepwd)}. The drwing area for cell \ircode{x[i, j]} is a unit square with bottom left coordinates \ircode{ (nrrows-i+1)*}  \ircode{(1+2*sepwd) -} \ircode{sepwd*} \ircode{(1+} \ircode{2*sepwd)} \ircode{- sepwd,} \ircode{j* (1+2*sepwd) - sepwd }.
 
 
 \section{Challenges and test matrices}
@@ -445,7 +447,8 @@ Bone <- rep(1, BMExplCols)
 Bmone <- rep(-1, BMExplCols)
 Binc <- (1:BMExplCols)/BMExplCols
 Bdec <- (BMExplCols:1)/BMExplCols
-Bstep <- c(Bmone[1:floor(BMExplCols/2)], Bone[(1+floor(BMExplCols/2)):BMExplCols])
+Bstep <- c(Bmone[1:floor(BMExplCols/2)], 
+	Bone[(1+floor(BMExplCols/2)):BMExplCols])
 Bhat <- Bone
 Bhat[(floor(BMExplCols/3)+1):(BMExplCols-floor(BMExplCols/3)) ] <- 0.5
 Bnazero <- rep(c(NA,0),length.out= BMExplCols)
@@ -462,7 +465,8 @@ colnames(Brmatrix) <- colnames(Brmatrix,FALSE)
 @
 
 <<>>=
-## R may use internal housekeeping to keep matrix columns homogeneous. 
+## R may use internal housekeeping 
+## to keep matrix columns homogeneous. 
 ## Check!
 ## Use row matrix and column matrix for tests.
 Bcmatrix <- cbind(Bzero, Bone, Bmone, Binc, Bdec, Bstep, Bhat)

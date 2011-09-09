@@ -1,0 +1,68 @@
+citHeader("To cite in publications use:")
+
+## R >= 2.8.0 passes package metadata to citation().
+if(!exists("meta") || is.null(meta)) meta <- packageDescription("bertin")
+
+year <- sub("-.*", "", meta$Date)
+note <- sprintf("R package version %s.", meta$Version)
+
+#	B#	editor = {W. Bandilla and F. Faulbaum},
+ #       year = 1997,
+#         pages = "11--20"),
+
+citEntry(entry = "inproceedings",
+         title = "A Tribute to J. Bertin\'s Graphical Data Analysis",
+         author = {
+         	personList(
+             person("Antoine","de Falguerolles"),
+            person("Friedrich", "Felix"),
+           person("G\"unther","Sawitzki", email = "gs@statlab.uni-heidelberg.de")
+            )
+         },
+         booktitle = "SoftStat \'97 (Advances in Statistical Software 6)",
+year = "1997",
+pages = "11--20",
+editor = "W. Bandilla and F. Faulbaum",
+          textVersion = 
+             paste("Antoine de Falguerolles, Felix Friedrich and Günther Sawitzki (1997).",
+                         "A Tribute to J. Bertin\'s Graphical Data Analysis.",
+			 "in: W. Bandilla and F. Faulbaum (eds.)",
+                   "SoftStat \'97 (Advances in Statistical Software 6).",
+                   "Lucius & Lucius: HEIDELBERG.",
+                   sep = "  ")
+         )
+
+citEntry(entry = "Manual",
+         title = "Bertin Plots",
+         author = {
+             person("Günther","Sawitzki", 
+                               email = "gs@statlab.uni-heidelberg.de")
+         },
+         year = year,
+         note = note,
+         url = "http://bertin.r-forge.r-project.org/",
+         textVersion = {
+             paste("Günther Sawitzki",
+                   sprintf("(%s).", year),                         
+                   "Bertin Plots.",
+                   note,
+                   sep = "  ")
+         })
+
+citEntry(entry = "Manual",
+         title = "Bertin Plots: An R Implementation",
+         author = {
+             person("Günther","Sawitzki",
+                               email = "gs@statlab.uni-heidelberg.de")
+         },
+         year = year,
+         note = "Vignette, with implementation details and examples.",
+         url = "http://bertin.r-forge.r-project.org/",
+         textVersion = {
+             paste("Günther Sawitzki",
+                   sprintf("(%s).", year),                         
+                   "Bertin Plots.",
+                   note,
+                   sep = "  ")
+         })
+

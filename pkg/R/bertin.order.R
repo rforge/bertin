@@ -1,4 +1,10 @@
-`bertin.order` <-
+#$HeadURL$
+#$Id$
+#$Revision$
+#$Date$
+#$Author$
+
+bertin.order <-
 function (z, MARGIN=1, pivot=1, FUN=cor)
 {
 if (MARGIN==1)

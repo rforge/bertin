@@ -10,6 +10,9 @@ Version: 0.1-28
 Date: 2011-09-08
 Author: G. Sawitzki
 Maintainer: G. Sawitzki <gsl@statlab.uni-heidelberg.de>
-Description: Graphical display for matrices, folling the suggestions of J. Bertin.
+Description: Graphical display for matrices, following the suggestions of J. Bertin.
 URL: http://bertin.r-forge.r-project.org/
 License: LGPL
+Encoding: UTF-8
+Suggests: xtable
+VignetteDepends: xtable

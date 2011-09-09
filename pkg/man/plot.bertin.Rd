@@ -5,17 +5,19 @@
 \title{Bertin plot}
 \description{Display a Bertin plot of a data matrix.}
 \usage{
-plot.bertin(z, roworder, colorder, main = "", zcol, palette = gray((255:0 / 255)^0.5))
+plot.bertin(z, roworder, colorder,var.orientation = c("byrow",
+                 "bycolumn", "global"),  main = "", zcol, palette = gray((255:0 / 255)^0.5))
 }
 \arguments{
   \item{z}{a data matrix.}
   \item{roworder}{permutation used for rows.}
   \item{colorder}{permutation used for columns.}
+  \item{var.orientation}{variable oritentation. Shoule be one of "byrow"=Bertin conventions, "bycolumn"=\R{} conventions, "global".}
   \item{main}{main title.}
   \item{zcol}{a data matrix of index values for use with the colour palette.}
   \item{palette}{a colour palette for the display of the data matrix.}
 }
-\details{A grid of rectangles is displayd to represent the data. Typically, the value is encoded as height.
+\details{A grid of rectangles is displayed to represent the data. Typically, the value is encoded as height.
 See the references below for details.
 %%  ~~ If necessary, more details than the description above ~~
 }
@@ -40,6 +42,14 @@ G. Sawitzki
 }
 \note{
 Still experimental. This is a \pkg{bertin} specific wrapper for   \code{\link{bertinrect}}. 
+
+We try to follow Bertin's original model, but consistency with \R{} traditions suggest other choices occasionally.
+
+Following Bertin, we display variables as rows as a default. This can be controlled by \code{var.orientation}.
+
+We use a grey level palette as a default, whereas Bertin used black and white. Use \code{palette=c("white","black")} as an argument to get Bertin's choice.
+
+Break points for colour choice are based on range. We use the mid-range as default cut point for a two colour choice, whereas Bertin uses the mean as default.
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
@@ -55,14 +65,10 @@ library(bertin)
 data(Hotel)
 plot.bertin(Hotel)
 
+plot.bertin(Hotel, palette=c("white","black"))
+
 hotelrk <- bertinrank(Hotel)
 hotelvars <-bertin.order(hotelrk, pivot=19)
 plot.bertin(Hotel, roworder=hotelvars)
-
-## The function is currently defined as
-function (z, roworder, colorder, main = "", col = gray((255:0/255)^0.5)) 
-{
-    bertinrect(z, main = main, col = col)
-  }
 }
 \keyword{ hplot }% __ONLY ONE__ keyword per line
