@@ -1,3 +1,4 @@
+%#$Id$
 \name{bertinrect}
 \alias{bertinrect}
 %- Also NEED an '\alias' for EACH other topic documented here.
@@ -17,10 +18,9 @@ bertinrect(x, main, sepwd = 0.05, mar = c(1, 1, 6, 4) + 0.1, ...)
   \item{sepwd}{
 a margin width. The display of an element should be based at \code{(i + sepwd, j + sepwd)}.}
   \item{mar}{Margin parameters, see   \code{par}. Row and column names are displayd in the margins. Adjust \code{mar}  or adjust the font size if necessary.}
-  \item{\dots}{
-additional parameters, passed to \code{rect}.
+  \item{\dots}{additional parameters, passed to \code{\link{rect}}.}
 }
-}
+
 \details{
 All facilities of \code{rect} are accessible, to supply colour, shading, rearrangement.
 }

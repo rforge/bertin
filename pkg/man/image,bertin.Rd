@@ -9,7 +9,7 @@ Optional permutations can be applied to rows and/or columns. The layout of the o
 }
 \synopsis{
 	image.bertin(z, roworder,colorder,
-	main="",col = gray((0:8 / 8)^0.5)
+	main="",col = gray((0:8 / 8)^0.5), useRaster = TRUE,...
 }
 	
 \arguments{
@@ -17,6 +17,8 @@ Optional permutations can be applied to rows and/or columns. The layout of the o
 	\item{roworder, colorder}{Permutation or selection vector for rows or columns to display.}
 	\item{main}{Main plot title.}
 	\item{col}{A color palette to encode the data.}
+	\item{useRaster}{logical; if TRUE a bitmap raster is used to plot the image instead of polygons. The grid must be regular in that case, otherwise an error is raised. For \code{imagem}, the default is \code{TRUE}, in contrast to \code{image()}.}
+	 \item{\dots}{additional parameters, passed to \code{image}.}
 }
 
 \value{

@@ -14,6 +14,7 @@ bincodedata <- matrix(c(
 bincodedata
 
 image.bertin(bincodedata)
+plot.bertin(bincodedata)
 
 # 
 
@@ -31,4 +32,6 @@ bincodedatav <- matrix(c(
 bincodedatav
 
 image.bertin(bincodedatav)
+plot.bertin(bincodedatav)
+
 
