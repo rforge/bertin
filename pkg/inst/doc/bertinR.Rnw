@@ -1,5 +1,11 @@
 %!TEX root = bertinR.tex
 %$HeadURL$
+%$Id$
+%$Author$
+
+%\VignetteIndexEntry{Bertin Matrices}
+%\VignetteIndexEntry{Bertin implementation}
+%$HeadURL$
 
 % svn propset svn:keywords "Date Author Id Revision HeadURL" bertinR.Rnw
 % setwd("/Users/gs/projects/rforge/bertin/pkg/vignettes")

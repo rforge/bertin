@@ -1,0 +1,76 @@
+%!TEX root = bertinR.tex
+%$HeadURL$
+% svn propset svn:keywords "Date Author Id Revision HeadURL" bertinR.sty
+\NeedsTeXFormat{LaTeX2e}
+%\ProvidesPackage{Sweave}{}
+\ProvidesPackage{bertinR}{}
+
+\RequirePackage{color}
+
+
+%::Colours
+\ifx\notextcolor\undefied
+\definecolor{sincol}{rgb}{0.0,0.0,0.8}% darkblue [r=0,   g=0,   b=.8]
+\definecolor{soutcol}{rgb}{0.0,0.3,0.1}% darkgreen r=0.0,   g=.6, b=0]
+\else
+\definecolor{sincol}{gray}{0.2}
+\definecolor{soutcol}{gray}{0.4}
+\fi
+
+
+%:gs adapted from Sweave.sty
+\RequirePackage{ifthen}
+\newboolean{Sweave@gin}
+\setboolean{Sweave@gin}{true}
+\newboolean{Sweave@ae}
+\setboolean{Sweave@ae}{true}
+
+\DeclareOption{nogin}{\setboolean{Sweave@gin}{false}}
+\DeclareOption{noae}{\setboolean{Sweave@ae}{false}}
+\ProcessOptions
+
+\RequirePackage{graphicx,fancyvrb}
+\IfFileExists{upquote.sty}{\RequirePackage{upquote}}{}
+
+\ifthenelse{\boolean{Sweave@gin}}{\setkeys{Gin}{width=0.8\textwidth}}{}%
+\ifthenelse{\boolean{Sweave@ae}}{%
+  \RequirePackage[T1]{fontenc}  
+  \RequirePackage{ae}
+}{}%
+
+%\DefineVerbatimEnvironment{Sinput}{Verbatim}{fontshape=sl}
+%\DefineVerbatimEnvironment{Soutput}{Verbatim}{}
+%\DefineVerbatimEnvironment{Scode}{Verbatim}{fontshape=sl}
+
+%\newenvironment{Schunk}{}{}
+\newcommand\ircode[1]{\textsl{\texttt{#1}}}
+
+\DefineVerbatimEnvironment{Sinput}{Verbatim}{label={Input},fontshape=sl, frame=topline,gobble=1, formatcom=\color{sincol}, fontsize=\small\vskip5pt}%
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{label={Output},frame=topline, fontsize=\small,formatcom=\color{soutcol}}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{fontshape=sl}
+
+\newenvironment{Schunk}{\vskip-24pt}{}
+
+
+\newcommand{\Sconcordance}[1]{%
+  \ifx\pdfoutput\undefined%
+  \csname newcount\endcsname\pdfoutput\fi%
+  \ifcase\pdfoutput\special{#1}%
+  \else%
+   \begingroup%
+     \pdfcompresslevel=0%
+     \immediate\pdfobj stream{#1}%
+     \pdfcatalog{/SweaveConcordance \the\pdflastobj\space 0 R}%
+   \endgroup%
+  \fi}
+
+%: R specific
+\providecommand{\R}{R}
+\newcommand{\Rlogo}{\includegraphics[width=1cm]{Rlogo}}
+
+%:general
+
+%$Date$
+%$Author$
+%$Revision::$
+%$HeadURL::$
