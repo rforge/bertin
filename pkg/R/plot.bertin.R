@@ -1,8 +1,8 @@
-#$HeadURL: svn+ssh://gsawitzki@svn.r-forge.r-project.org/svnroot/bertin/pkg/R/bertin.R $
-#$Id: bertin.R 25 2011-09-06 11:19:19Z gsawitzki $
-#$Revision: 25 $
-#$Date: 2011-09-06 13:19:19 +0200 (Tue, 06 Sep 2011) $
-#$Author: gsawitzki $
+#$HeadURL$
+#$Id$
+#$Revision$
+#$Date$
+#$Author$
 
 #args(plot.default)
 #function (x, y = NULL, type = "p", xlim = NULL, ylim = NULL, 
@@ -12,7 +12,7 @@
     
 plot.bertin <- function(z, roworder,colorder, var.orientation=c("byrow", "bycolumn", "global"),
 	main="", zcol, palette = gray((255:0 / 255)^0.5))
-{#$Revision: 25 $
+{#$Revision$
 bzcol <- function(v) {
 	vcol <- imagecolindex(v,ncolour=length(palette))
 	vcol

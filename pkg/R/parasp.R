@@ -13,13 +13,13 @@ function(dat, aspr=dim(dat)[1]/dim(dat)[2], tol=0.01)
 	if (aspr<= 0) stop("parasp: aspr must be positive")
 	pin<-par("pin")
 	ar <- pin[1]/pin[2]
-		cat("parasp: ",ar, aspr,ar/aspr,"\n")
+#		cat("parasp: ",ar, aspr,ar/aspr,"\n")
 	if (abs(1- ar/aspr)>tol) {
-		cat("changing.\n")
+#		cat("changing.\n")
 		if (ar < aspr) 
 			pin[2] <- pin[1]/aspr  else pin[1] <- pin[2]* aspr
-	par("fig", "fin", "plt", "pin","usr")
+#	par("fig", "fin", "plt", "pin","usr")
 		par(pin=pin)
-	par("fig", "fin", "plt", "pin","usr")
+#	par("fig", "fin", "plt", "pin","usr")
 	}
 }

@@ -15,7 +15,7 @@ function (z,
 	mar= c(2,2,6,6)+0.1,
 	breaks, oldstyle=FALSE,
 	names=TRUE, 
-	coloffs=0.5, rowoffs=0.5,...)
+	coloffs=0.5, rowoffs=0.5, ...)
 {
 # a variant of image.default keeping matrix orientation
 
@@ -39,7 +39,11 @@ function (z,
 		xlab="", ylab="",z=zi, 
 		main=main,
 		breaks=breaks, oldstyle=oldstyle,
-#		frame.plot=FALSE,	
+#		useRaster=TRUE,	
+#Error in image.default(1:nrow(zi), 1:ncol(zi), zlim = zlim, ylim = c(ncol(zi) +  : 
+#  formal argument "useRaster" matched by multiple actual arguments
+#  ????
+#		frame.plot=FALSE,
 		...)
 # print(paste("pin:",par("pin")))
 # print(paste("usr:",par("usr")))

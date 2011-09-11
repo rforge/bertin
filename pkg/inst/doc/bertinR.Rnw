@@ -103,7 +103,9 @@ data analysis, exploratory statistics, Bertin, R~language)
 %\setcounter{secnumdepth}{4}
 \makeindex
 
+%:\begin{document}
 \begin{document}
+\setkeys{Gin}{width=1.0\textwidth}
 \maketitle
 
 \begingroup
@@ -249,10 +251,24 @@ bertinrect(t(USJudgeRatings),col=t(col), sepwd=0.1, mar=c(0.2,0.2,7,6),main="USJ
 
 At this early point, let us put Bertin's work in place. Visualizing information is but one aspect. In statistics, as we see it today, visualization may be one part of an analysis. The outcome will be a decision leading to an action, and then there is a loss (or gain) depending on the action taken on the one hand, and the ``true'' state of the world on the other. Statistics has formulated a few standard problems, and given a suggestion to handle these. In our example, the problem can be seen as a prediction problem: find a prediction model to predict occupation and duration, based on the other variables. This is a control problem, and the statistical contribution is to find a regression model for occupation and duration, based on the other variables. The visualization can be seen as one way to hint at a regression model. There are few classical problems. Regression is one of them, and prediction is closely related. Classification and clustering is another, closely related pair of problems, and their relation to Bertin matrices should be obvious.
 
-%:cart and patches
-%We will discuss an implementation of Bertin's ideas. Implemanting his examples as is, is trivial. To catch his ideas demands some thoughts, and has immediate consequences for an \R{} environment.
-%
+\section{Work flow}
 
+We prefer to see Bertin matrices as a part of a work flow.
+
+In a first step, we transfer the input data to allow for  common, or comparable scales. In the Hotel example, Bertin rescales by the maximum value of each variable. The dichotomous variable Faires is recoded as 0/1. Our  implementation default is to rescale for  \ircode{(0, max)} for positive variables,  \ircode{(min, 0)} for negative variables,  \ircode{(min, max)} for general variables. Out preferred, or recommended rescaling however is to use ranks. We use the term \ircode{score} for the rescaled variables. Orientation of the data set is critical  in this step. Usually, rescaling should be by variable, not by case. Depending on the orientation, this can lead for example to ranks by row or by column. We allow global scaling as an additional option for those situations where all data are already on a common scale. Following Bertin, our  implementation default is to expect variables in rows.
+
+In a second step, the scores are translated to visualization attributes.  Colour is handled in two steps. The scores are translated to  a colour index, which is used together with a colour palette to determine the display colour for a data element. This allows rapid experiments with various colour palettes, as long as the length of the palette is compatible. We strongly recommend to always look at the inverted table together with a chosen one  to mitigate the effects of colour  perception. Simple image displays limit the  visualization attributes to colour. \ircode{rect} for example allows rectangle geometry, colour, and border width. Shading and shading should be considered as an alternative for print media. 
+
+Visualization attributes may reflect different aspect. So for example in the classical Bertin display, height of a rectangle is used to reflect the value of a data element, colour is used to show an indicator whether the value is above or below variable mean.
+
+A third step controls the actual placement of the graphical elements. With a matrix layout, it is specified by possible permutations of rows and of columns. This may be related to information used in the first two steps, but should be considered an independent step. A vector or row orders and of column orders is the critical information from this step. Various seriation methods apply. The typical situation is to select scores and display attributes, and then search for optimal or good seriations. The arrangement often leads to hard optimization problems. Placing this step later allows to use information from score transformation and attributes, which may allow more efficient algorithms.
+
+The final step is to merge these informations and render a display. 
+
+%:cart and patches
+%We will discuss an implementation of Bertin's ideas. Implementing his examples as is, is trivial. To catch his ideas demands some thoughts, and has immediate consequences for an \R{} environment.
+%
+\section{Permutation, Seriation, Arrangement}
 As Bertin has pointed out,
 \begin{quotation}
 \emph{Ce point est fondamental. C’est la mobilité interne de l’image qui charactérise la
@@ -262,20 +278,20 @@ Once we have solved the problem, the way can often be formulated as an optimizat
 
 The classic Bertin display shown above is one of the examples. Following the ideas, but deviating in the details, is to use a simple gray scale image for representation. This may be the most economic variant. But it is most economic in the use of display space.
 See figure \ref{fig:hotelpermimage}. We will follow the classic Bertin display  and an image display as main examples.
-<<fig=TRUE, include = FALSE, echo=FALSE, label=hotelpermimage>>=
+<<fig=TRUE, include = FALSE, echo=FALSE, width=11, height=9, label=hotelpermimage>>=
 Hotel2 <-as.matrix(Hotel2)
 rowmeans <- apply(Hotel2,1,mean)
 rowsd<- apply(Hotel2,1,sd)
 zscores <-as.matrix( (Hotel2-rowmeans)/rowsd)
 rowperm <- c(19,18,20, 8, 11, 4, 12, 13,16,14,1,2, 7, 9, 10, 17, 6, 3, 5,15)
 #col=gray((0:256)/[zscores]
-image.bertin(zscores[rowperm,], main="", col=gray((0:256)/256))
+image.bertin(zscores[rowperm,], main="", col=gray((0:256)/256), useRaster=TRUE)
 @
 
 %
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=0.9\linewidth]{"bertinR-hotelpermimage"}
+\includegraphics[width=1.0\linewidth]{"bertinR-hotelpermimage"}
 \caption{Display of a data matrix as gray scale image. Variables rearranged by similarity to occupation and duration.}
 \label{fig:hotelpermimage}
 \end{center}
@@ -316,8 +332,10 @@ sampleimagem <- function(z,
 	oldpar <- par(fig=c(0, 1, 0.2, 1), 
 		mar=c(2.5,1.5,0.5,0.5), new=FALSE)
 	imagem(z, col=col)
+	
 	par(yaxt="n", fig=c(0, 1, 0, 0.2), 
-		mar=c(3.5,4.0,0.5,4.0), new=TRUE)
+		mar=c(3.5,12.0,0.5,12.0), new=TRUE)
+#	colramp(col=col, horizontal=TRUE)
 	zrange <- range(z, finite=TRUE)
 	image(z=t(matrix(seq(zrange[1],zrange[2],length.out=length(col)), 
 		1, length(col))), 
@@ -374,7 +392,7 @@ We provide prototypes for the display of Bertin matrices. To simplify the implem
 The total user space has the size \ircode{(nrrows * (1+2*sepwd),} \ircode{nrcols * (1+2*sepwd)}. The drwing area for cell \ircode{x[i, j]} is a unit square with bottom left coordinates \ircode{ (nrrows-i+1)*}  \ircode{(1+2*sepwd) -} \ircode{sepwd*} \ircode{(1+} \ircode{2*sepwd)} \ircode{- sepwd,} \ircode{j* (1+2*sepwd) - sepwd }.
 
 
-\section{Challenges and test matrices}
+\section{Test matrices}
 
 To test the implementation, a series of matrices is provided.
 
@@ -407,7 +425,34 @@ BMExplUnif  <- matrix( runif(BMExplRows*BMExplCols),
 BMExplNorm  <- matrix( rnorm(BMExplRows*BMExplCols), 
 	nrow= BMExplRows, ncol= BMExplCols)
 @
-To visualize the full information, we can of course use cheap solutions such as a an image map:
+
+<<fig=TRUE,width=10, height=6,label=imageBMExplUnif>>=
+oldpar <- par(mfrow=c(1,2))
+imagem(BMExplUnif)
+image.bertin(BMExplUnif)
+par(oldpar)
+@
+
+<<fig=TRUE,width=12, height=6,label=plotBMExplUnif>>=
+oldpar <- par(mfrow=c(1,2))
+bertinrect(BMExplUnif)
+plot.bertin(BMExplUnif)
+par(oldpar)
+@
+
+<<fig=TRUE,width=12, height=6,label=imageBMExplNorm>>=
+oldpar <- par(mfrow=c(1,2))
+imagem(BMExplNorm)
+image.bertin(BMExplNorm)
+par(oldpar)
+@
+
+<<fig=TRUE,width=12, height=6,label=plotBMExplNorm>>=
+oldpar <- par(mfrow=c(1,2))
+bertinrect(BMExplNorm)
+plot.bertin(BMExplNorm)
+par(oldpar)
+@
 
 %
 %<<fig=TRUE, label=imagedflt, width=18, height=18>>=

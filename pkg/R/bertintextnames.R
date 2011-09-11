@@ -1,7 +1,7 @@
-#$Id: bertinR.Rnw 10 2011-08-31 18:49:48Z gsawitzki $
-#$Revision: 10 $
-#$Date: 2011-08-31 20:49:48 +0200 (Wed, 31 Aug 2011) $
-#$Author: gsawitzki $
+#$Id$
+#$Revision$
+#$Date$
+#$Author$
 
 #add row/columnnames to Bertin display
 #This funtion is repeated inline where appropriate

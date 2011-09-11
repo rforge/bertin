@@ -1,16 +1,16 @@
-#$HeadURL: $
-#$HeadURL: svn+ssh://gsawitzki@svn.r-forge.r-project.org/svnroot/bertin/pkg/vignettes/bertinR.Rnw $
-#$Id: bertinR.Rnw 10 2011-08-31 18:49:48Z gsawitzki $
-#$Revision: 10 $
-#$Date: 2011-08-31 20:49:48 +0200 (Wed, 31 Aug 2011) $
-#$Author: gsawitzki $
+#$HeadURL$
+#$HeadURL$
+#$Id$
+#$Revision$
+#$Date$
+#$Author$
 
 #extracted from imagem.default
 #! improve support for data.frame, list
 
 # return a matrix of colour indices, based on range
 imagecolindex <-function(z, zlim= range(z[is.finite(z)]), ncolour, oldstyle=FALSE) {
-#$Revision: 10 $
+#$Revision$
         #nc <- length(col)
         z <- as.matrix(z)
         if (missing(ncolour)) ncolour <- length(palette())
@@ -32,7 +32,7 @@ imagecolindex <-function(z, zlim= range(z[is.finite(z)]), ncolour, oldstyle=FALS
 # return a matrix of colour indices, based on a break table
 imagecolbybreak <- function(z, breaks, ncolour)
 {
-#$Revision: 10 $
+#$Revision$
         z <- as.matrix(z)
        if (missing(ncolour)) ncolour <- length(palette())
        if (length(breaks) != ncolour + 1) 
