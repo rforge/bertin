@@ -76,7 +76,7 @@
 \date{Aug. 2010.\\
 %For quotation, please use the general reference \cite{gs94oned}.\\
 Revised: August 2011\\
-Typeset, with minor revisions: \today}  
+Typeset, with minor revisions: \today from SVN $Revision$}  
 \thanks{\emph{URL:} \url{http://bertin-forge.r-project.org/}}
 %	\translator{...} |3 |3
 \keywords{statistical computing, S~programming language, R~programming,
@@ -130,7 +130,7 @@ Bertin uses a small data set on hotel occupancy data to illustrate his ideas.
 \begin{center}
 %\begin{table}
 \tiny{
-\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|l|r|r|r|r|r|r|r|r|r|r|r|r|}
 \hline\\
 &Jan&Fev&Mars&Avril&May&Juin&Juil&Aout&Sept&Oct&Nov&Dec\\
 \hline
@@ -177,11 +177,9 @@ all bars representing a value above some sample threshold for that variable. See
 #dev.new(width=8, height=1.5)
 #oldpar <- par(no.readonly=TRUE)
 col=ifelse(Hotel[19,]>mean(as.matrix(Hotel[19,])),"black","white")
-1
  bertinrect(Hotel[19,], main="", col=col,mar=c(0.5,0.3,2,8))
 # par(oldpar)
  #bertinrect Hotel[19,], done
- 2
 @
 
 %
@@ -195,61 +193,81 @@ col=ifelse(Hotel[19,]>mean(as.matrix(Hotel[19,])),"black","white")
 
 Variables are collected in a matrix to display the complete data set.  Figure \ref{fig:hotelorig}. By convention, Bertin shows variables in rows and cases in columns. To make periodic structures more visible, Bertin repeats the data cyclically.
 
-<<fig=TRUE, include = FALSE, echo=FALSE, label=hotelorig,width=8, height=5>>=
+<<fig=TRUE, include = FALSE, echo=FALSE, label=hotelorig, width=8, height=5>>=
 #bertinrect Hotel2 start
 
 Hotel2 <- cbind(Hotel,Hotel)
 rowmeans <- apply(Hotel2,1,mean)
 col=ifelse(Hotel2[,]>rowmeans, "black","white")
-bertinrect(Hotel2, main="", col=col,mar=c(0.2,0.2,2,8))
+bertinrect(Hotel2, main="", col=col, mar=c(0.2,0.2,2,8))
 @
 
 %
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=1.0\linewidth]{"bertinR-hotelorig"}
-\caption{Display of a data matrix. Variables are shown as rows. Time axis is duplicated.}
+\caption{Display of a data matrix: Hotel data. Variables are shown as rows. To make periodic structures more visible, time is duplicated.}
 \label{fig:hotelorig}
 \end{center}
 \end{figure}
 
-As Bertin points out, the indexing used is arbitrary. You can rearrange rows and/or columns to reveal the information of interest. If you run a hotel, of course the percentage of hotel occupation and the duration of the visits are most interesting for you. Move these variables to the top of the display, and rearrange the other variables by similarity or dissimilarity to these target variables.
+As Bertin points out, the indexing used is arbitrary. You can rearrange rows and/or columns to reveal the information of interest. If you run a hotel, of course the percentage of hotel occupation and the duration of the visits are most interesting for you. Move these variables to the top of the display, and rearrange the other variables by similarity or dissimilarity to these target variables. See Figure \ref{fig:hotelperm}. Time points have a natural order. No rearragement is used here.
 
-<<fig=TRUE, include = FALSE, echo=FALSE, label=hotelperm>>=
+<<fig=TRUE, include = FALSE, echo=FALSE, label=hotelperm, width=8, height=5>>=
 colmeans <- apply(Hotel2,1,mean)
 rowperm <- c(19,18,20, 8, 11, 4, 12, 13,16,14,1,2, 7, 9, 10, 17, 6, 3, 5,15)
 col=ifelse(Hotel2[,]>colmeans, "black","white")
-bertinrect(Hotel2[rowperm,], main="", col=col[rowperm,],mar=c(0.5,0.5,2,8))
+bertinrect(Hotel2[rowperm,], main="", col=col[rowperm,],mar=c(0.2,0.2,2,8))
 @
 
 %
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=0.9\linewidth]{"bertinR-hotelperm"}
-\caption{Display of a data matrix. Variables rearranged by similarity to occupation and duration.}
+\includegraphics[width=1.0\linewidth]{"bertinR-hotelperm"}
+\caption{Display of a data matrix: Hotel data. Variables are rearranged by similarity to occupation and duration.}
 \label{fig:hotelperm}
 \end{center}
 \end{figure}
 
-As a second example, we use the  the \ircode{USJudgeRatings} data set.
+As a second example, we use the  the \ircode{USJudgeRatings} data set (Figure \ref{fig:judgeorig})..
 
-<<fig=TRUE, include = FALSE, echo=FALSE, label=judgeorig,width=8, height=5>>=
+<<fig=TRUE, include = FALSE, echo=FALSE, label=judgeorig,width=10, height=4>>=
 colmeans <- apply(USJudgeRatings,2,mean)
 col=ifelse(USJudgeRatings[,]>colmeans, "black","white")
-
-bertinrect(t(USJudgeRatings),col=t(col), sepwd=0.1, mar=c(0.2,0.2,7,6),main="USJudgeRatings")
+bertinrect(t(USJudgeRatings),col=t(col), sepwd=0.1, mar=c(0.05,0.05,10,4), main="")
+#bertinrect(t(USJudgeRatings),col=t(col), sepwd=0.1, mar=c(0.2,0.2,7,6), main="")
 @
 %
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=01.0\linewidth]{"bertinR-judgeorig"}
-\caption{Display of a data matrix. Lawyers' ratings of state judges in the US Superior Court.}
-\label{fig:hotelperm}
+\includegraphics[width=1.0\linewidth]{"bertinR-judgeorig"}
+\caption{Display of a data matrix: USJudgeRatings data. Lawyers' ratings of state judges in the US Superior Court.}
+\label{fig:judgeorig}
 \end{center}
 \end{figure}
 
+Botth cases (the judges) and variables (the qualitites) allow for a rearragment. Just sorting for row and column avarages gives a more informative picture  (Figure \ref{fig:judgeperm}). The number of contacts stands out - it has a different structure than the other variables. Judge G. A. Saden seems to be special. Most variables would rank him to the upper group, be his worth of retention is below average. The esteem of his integrity and demeanor go along with this. Overall, there is a very clear separation into an upper and a lower group.
 
-At this early point, let us put Bertin's work in place. Visualizing information is but one aspect. In statistics, as we see it today, visualization may be one part of an analysis. The outcome will be a decision leading to an action, and then there is a loss (or gain) depending on the action taken on the one hand, and the ``true'' state of the world on the other. Statistics has formulated a few standard problems, and given a suggestion to handle these. In our example, the problem can be seen as a prediction problem: find a prediction model to predict occupation and duration, based on the other variables. This is a control problem, and the statistical contribution is to find a regression model for occupation and duration, based on the other variables. The visualization can be seen as one way to hint at a regression model. There are few classical problems. Regression is one of them, and prediction is closely related. Classification and clustering is another, closely related pair of problems, and their relation to Bertin matrices should be obvious.
+<<fig=TRUE, include = FALSE, echo=FALSE, label=judgeperm,width=10, height=4>>=
+colmeans <- apply(USJudgeRatings,2,mean)
+colorder<- order(colmeans)
+rowmeans <-  apply(USJudgeRatings,1,mean)
+roworder <- order(rowmeans)
+col=ifelse(USJudgeRatings[,]>colmeans, "black","white")
+bertinrect(t(USJudgeRatings)[colorder, roworder],col=t(col)[colorder, roworder], sepwd=0.1, mar=c(0.05,0.05,10,4), main="")
+#bertinrect(t(USJudgeRatings),col=t(col), sepwd=0.1, mar=c(0.2,0.2,7,6), main="")
+@
+%
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=1.0\linewidth]{"bertinR-judgeperm"}
+\caption{Display of a data matrix: USJudgeRatings data. Lawyers' ratings of state judges in the US Superior Court.}
+\label{fig:judgeperm}
+\end{center}
+\end{figure}
+
+At this early point, let us put Bertin's work in place. Visualizing information is but one aspect. In statistics, as we see it today, visualization may be one part of an analysis. The outcome will be a decision leading to an action, and then there is a loss (or gain) depending on the action taken on the one hand, and the ``true'' state of the world on the other. Statistics has formulated a few standard problems, and given a suggestion to handle these. In our example, the problem can be seen as a prediction problem: find a prediction model to predict occupation and duration, based on the other variables. This is a control problem, and the statistical contribution is to find a regression model for occupation and duration, based on the other variables. The visualization can be seen as one way to hint at a regression model. There are few classical problems. Regression is one of them, and prediction is closely related. Classification and clustering is another, closely related pair of problems, and their relation to Bertin matrices should be obvious. The USJudgeRatings can be looked at as a classification problem.
+
 
 \section{Work flow}
 
@@ -278,27 +296,80 @@ Once we have solved the problem, the way can often be formulated as an optimizat
 
 The classic Bertin display shown above is one of the examples. Following the ideas, but deviating in the details, is to use a simple gray scale image for representation. This may be the most economic variant. But it is most economic in the use of display space.
 See figure \ref{fig:hotelpermimage}. We will follow the classic Bertin display  and an image display as main examples.
-<<fig=TRUE, include = FALSE, echo=FALSE, width=11, height=9, label=hotelpermimage>>=
+%<<fig=TRUE, include = FALSE, echo=FALSE, width=22, height=18, label=hotelpermimage>>=
+<<fig=TRUE, include = FALSE, echo=FALSE, label=hotelpermimage>>=
 Hotel2 <-as.matrix(Hotel2)
 rowmeans <- apply(Hotel2,1,mean)
 rowsd<- apply(Hotel2,1,sd)
 zscores <-as.matrix( (Hotel2-rowmeans)/rowsd)
 rowperm <- c(19,18,20, 8, 11, 4, 12, 13,16,14,1,2, 7, 9, 10, 17, 6, 3, 5,15)
 #col=gray((0:256)/[zscores]
-image.bertin(zscores[rowperm,], main="", col=gray((0:256)/256), useRaster=TRUE)
+#image.bertin(zscores[rowperm,], main="", col=gray((0:256)/256), useRaster=TRUE)
+imagem(zscores[rowperm,], main="", col=gray((0:256)/256), useRaster=FALSE)
+
+#image.bertin(zscores[rowperm,], main="",  useRaster=TRUE)
 @
 
 %
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=1.0\linewidth]{"bertinR-hotelpermimage"}
-\caption{Display of a data matrix as gray scale image. Variables rearranged by similarity to occupation and duration.}
+\caption{Display of a data matrix as gray scale image. Variables are rearranged by similarity to occupation and duration.} 
 \label{fig:hotelpermimage}
 \end{center}
 \end{figure}
 
 
-For a chosen display, we have to compare different arrangements (seriations, for example, If we allow for interactive work, speed of display has priority. We try to cache the information that is invariant of the permutation.
+%:hunting for the alias problem
+hunting for the alias problem
+
+<<fig=TRUE, include = TRUE, echo=TRUE, label=hotelpermimage1>>=
+Hotel2 <-as.matrix(Hotel2)
+rowmeans <- apply(Hotel2,1,mean)
+rowsd<- apply(Hotel2,1,sd)
+zscores <-as.matrix( (Hotel2-rowmeans)/rowsd)
+rowperm <- c(19,18,20, 8, 11, 4, 12, 13,16,14,1,2, 7, 9, 10, 17, 6, 3, 5,15)
+#col=gray((0:256)/[zscores]
+#image.bertin(zscores[rowperm,], main="", col=gray((0:256)/256), useRaster=TRUE)
+image(zscores[rowperm,], main="", col=gray((0:256)/256), useRaster=TRUE)
+
+#image.bertin(zscores[rowperm,], main="",  useRaster=TRUE)
+@
+
+<<fig=TRUE, include = TRUE, echo=TRUE, label=hotelpermimage11>>=
+Hotel2 <-as.matrix(Hotel2)
+rowmeans <- apply(Hotel2,1,mean)
+rowsd<- apply(Hotel2,1,sd)
+zscores <-as.matrix( (Hotel2-rowmeans)/rowsd)
+rowperm <- c(19,18,20, 8, 11, 4, 12, 13,16,14,1,2, 7, 9, 10, 17, 6, 3, 5,15)
+#col=gray((0:256)/[zscores]
+#image.bertin(zscores[rowperm,], main="", col=gray((0:256)/256), useRaster=TRUE)
+image(zscores[rowperm,], main="", col=gray((0:256)/256))
+
+#image.bertin(zscores[rowperm,], main="",  useRaster=TRUE)
+@
+<<fig=TRUE, include = TRUE, echo=TRUE, label=hotelpermimage13>>=
+x <- 10*(1:nrow(volcano))
+y <- 10*(1:ncol(volcano))
+image(x, y, volcano, col =gray((0:256)/256), axes = FALSE)
+
+
+#image.bertin(zscores[rowperm,], main="",  useRaster=TRUE)
+@
+
+<<fig=TRUE, include = TRUE, echo=TRUE, label=hotelpermimage2>>=
+Hotel2 <-as.matrix(Hotel2)
+rowmeans <- apply(Hotel2,1,mean)
+rowsd<- apply(Hotel2,1,sd)
+zscores <-as.matrix( (Hotel2-rowmeans)/rowsd)
+rowperm <- c(19,18,20, 8, 11, 4, 12, 13,16,14,1,2, 7, 9, 10, 17, 6, 3, 5,15)
+#col=gray((0:256)/[zscores]
+#image.bertin(zscores[rowperm,], main="", col=gray((0:256)/256), useRaster=TRUE)
+imagem(zscores[rowperm,], main="", col=gray((0:256)/256), useRaster=TRUE)
+
+#image.bertin(zscores[rowperm,], main="",  useRaster=TRUE)
+@
+For a chosen display, we have to compare different arrangements (seriations, for example). If we allow for interactive work, speed of display has priority. We try to cache the information that is invariant of the permutation.
 
 As a final aspect, display space is limited. The number of variables and cases that can be displayed simultaneously is limited by the pixel size of the display. We can increase it by one or two magnitudes by using e series of detail displays. Any display calibration however should be constant for this series We try to allow for this global calibration.
 
@@ -429,7 +500,7 @@ BMExplNorm  <- matrix( rnorm(BMExplRows*BMExplCols),
 <<fig=TRUE,width=10, height=6,label=imageBMExplUnif>>=
 oldpar <- par(mfrow=c(1,2))
 imagem(BMExplUnif)
-image.bertin(BMExplUnif)
+image.bertin(BMExplUnif,useRaster=FALSE)
 par(oldpar)
 @
 
