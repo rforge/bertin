@@ -13,7 +13,8 @@
 \tabular{ll}{
 Package: \tab bertin\cr
 Type: \tab Package\cr
-Version: \tab 0.1-xxx \cr
+Version: \tab 0.1-xxx\cr
+SVN:\tab $Revision$\cr
 First Release Date: \tab 2007-12-08\cr
 This Release Date: \tab 2011-09-09\cr
 License: \tab LGPL \cr

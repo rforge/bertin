@@ -19,6 +19,17 @@ ordercor <- function(z, pivot, var.orientation=c("byrow", "bycolumn") ){
 	ord
 	}
 
+#!  order rows/columns by their mean
+ordermean <- function(z, var.orientation=c("byrow", "bycolumn") ){
+	var.orientation <- match.arg(var.orientation)
+	
+	ord <- switch(var.orientation,
+		byrow= order(cor(t(bertinrank(z)))[pivot,]),
+		bycolumn=order(cor(bertinrank(z))[,pivot])
+	)
+	ord
+	}
+
 
 bertinrank <- function (z, var.orientation=c("byrow", "bycolumn", "global"), ...)
 {

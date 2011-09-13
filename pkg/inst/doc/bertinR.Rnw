@@ -30,7 +30,7 @@
 \fi
 
 \SweaveOpts{strip.white=true}
-\AtBeginDocument{\setkeys{Gin}{width=0.6\textwidth}}
+\AtBeginDocument{\setkeys{Gin}{width=0.8\textwidth}}
 
 \def\private{true}% comment out for public version
 
@@ -127,11 +127,11 @@ Bertin uses a small data set on hotel occupancy data to illustrate his ideas.
 
 %:Hotel Data
 \begin{table}[htdp]
-\begin{center}
+\begin{center}\leftskip-2em
 %\begin{table}
 \tiny{
 \begin{tabular}{|l|r|r|r|r|r|r|r|r|r|r|r|r|}
-\hline\\
+\hline
 &Jan&Fev&Mars&Avril&May&Juin&Juil&Aout&Sept&Oct&Nov&Dec\\
 \hline
 ClienteleFeminine&26&21&26&28&20&20&20&20&20&40&15&40\\
@@ -229,7 +229,152 @@ bertinrect(Hotel2[rowperm,], main="", col=col[rowperm,],mar=c(0.2,0.2,2,8))
 \end{center}
 \end{figure}
 
-As a second example, we use the  the \ircode{USJudgeRatings} data set (Figure \ref{fig:judgeorig})..
+As a second example, we use the  the \ircode{USJudgeRatings} data set (Figure \ref{fig:judgeorig}). The data  is in Table\ref{tab:judge}.% on page \pref{tab:judge}.
+%<<results=tex, echo=FALSE, include=FALSE>>=
+%print(xtable(USJudgeRatings,label="tab:judge", caption="US judge ratings"), floating=TRUE)
+%@
+
+%	%\begin{minipage}{0.6\linewidth}
+%	\begin{table}[ht]
+%	\begin{center}
+%	\tiny{
+%	\begin{tabular}{rrrrrrrrrrrrr}
+%	 \hline
+%	&CONT&INTG&DMNR&DILG&CFMG&DECI&PREP&FAMI&ORAL&WRIT&PHYS&RTEN\\
+%	 \hline
+%	AAR,L.H.&5.7&7.9&7.7&7.3&7.1&7.4&7.1&7.1&7.1&7.0&8.3&7.80 \\ 
+%	ALE,J.M.&6.8&8.9&8.8&8.5&7.8&8.1&8.0&8.0&7.8&7.9&8.5&8.7\\ 
+%	ARM,A.J.&7.2&8.1&7.8&7.8&7.5&7.6&7.5&7.5&7.3&7.4&7.9&7.8\\ 
+%	BER,R.I.&6.8&8.8&8.5&8.8&8.3&8.5&8.7&8.7&8.4&8.5&8.8&8.7\\ 
+%	BRA,J.J.&7.3&6.4&4.3&6.5&6.0&6.2&5.7&5.7&5.1&5.3&5.5&4.8\\ 
+%	BUR,E.B.&6.2&8.8&8.7&8.5&7.9&8.0&8.1&8.0&8.0&8.0&8.6&8.6\\ 
+%	CAL,R.J.&10.6&9.0&8.9&8.7&8.5&8.5&8.5&8.5&8.6&8.4&9.1&9.0\\ 
+%	COH,S.S.&7.0&5.9&4.9&5.1&5.4&5.9&4.8&5.1&4.7&4.9&6.8&5.0\\ 
+%	DAL,J.J.&7.3&8.9&8.9&8.7&8.6&8.5&8.4&8.4&8.4&8.5&8.8&8.8\\ 
+%	DAN,J.F.&8.2&7.9&6.7&8.1&7.9&8.0&7.9&8.1&7.7&7.8&8.5&7.9\\ 
+%	DEA,H.H.&7.0&8.0&7.6&7.4&7.3&7.5&7.1&7.2&7.1&7.2&8.4&7.7\\ 
+%	DEV,H.J.&6.5&8.0&7.6&7.2&7.0&7.1&6.9&7.0&7.0&7.1&6.9&7.2\\ 
+%	DRI,P.J.&6.7&8.6&8.2&6.8&6.9&6.6&7.1&7.3&7.2&7.2&8.1&7.7\\ 
+%	GRI,A.E.&7.0&7.5&6.4&6.8&6.5&7.0&6.6&6.8&6.3&6.6&6.2&6.5\\ 
+%	HAD,W.L.JR.&6.5&8.1&8.0&8.0&7.9&8.0&7.9&7.8&7.8&7.8&8.4&8.0\\ 
+%	HAM,E.C.&7.3&8.0&7.4&7.7&7.3&7.3&7.3&7.2&7.1&7.2&8.0&7.6\\ 
+%	HEA,A.H.&8.0&7.6&6.6&7.2&6.5&6.5&6.8&6.7&6.4&6.5&6.9&6.7\\ 
+%	HUL,T.C.&7.7&7.7&6.7&7.5&7.4&7.5&7.1&7.3&7.1&7.3&8.1&7.4\\ 
+%	LEV,I.&8.3&8.2&7.4&7.8&7.7&7.7&7.7&7.8&7.5&7.6&8.0&8.0\\ 
+%	LEV,R.L.&9.6&6.9&5.7&6.6&6.9&6.6&6.2&6.0&5.8&5.8&7.2&6.0\\ 
+%	MAR,L.F.&7.1&8.2&7.7&7.1&6.6&6.6&6.7&6.7&6.8&6.8&7.5&7.3\\ 
+%	MCG,J.F.&7.6&7.3&6.9&6.8&6.7&6.8&6.4&6.3&6.3&6.3&7.4&6.6\\ 
+%	MIG,A.F.&6.6&7.4&6.2&6.2&5.4&5.7&5.8&5.9&5.2&5.8&4.7&5.2\\ 
+%	MISL,H.M.&6.2&8.3&8.1&7.7&7.4&7.3&7.3&7.3&7.2&7.3&7.8&7.6\\ 
+%	MUL,H.M.&7.5&8.7&8.5&8.6&8.5&8.4&8.5&8.5&8.4&8.4&8.7&8.7\\ 
+%	NAR,H.J.&7.8&8.9&8.7&8.9&8.7&8.8&8.9&9.0&8.8&8.9&9.0&9.0\\ 
+%	O'BR,F.J.&7.1&8.5&8.3&8.0&7.9&7.9&7.8&7.8&7.8&7.7&8.3&8.2\\ 
+%	O'SU,T.J.&7.5&9.0&8.9&8.7&8.4&8.5&8.4&8.3&8.3&8.3&8.8&8.7\\ 
+%	PAS,L.&7.5&8.1&7.7&8.2&8.0&8.1&8.2&8.4&8.0&8.1&8.4&8.1\\ 
+%	RUB,J.E.&7.1&9.2&9.0&9.0&8.4&8.6&9.1&9.1&8.9&9.0&8.9&9.2\\ 
+%	SAD.G.A.&6.6&7.4&6.9&8.4&8.0&7.9&8.2&8.4&7.7&7.9&8.4&7.5\\ 
+%	SAT,A.G.&8.4&8.0&7.9&7.9&7.8&7.8&7.6&7.4&7.4&7.4&8.1&7.9\\ 
+%	SHE,D.M.&6.9&8.5&7.8&8.5&8.1&8.2&8.4&8.5&8.1&8.3&8.7&8.3\\ 
+%	SHE,J.F.JR.&7.3&8.9&8.8&8.7&8.4&8.5&8.5&8.5&8.4&8.4&8.8&8.8\\ 
+%	SID,W.J.&7.7&6.2&5.1&5.6&5.6&5.9&5.6&5.6&5.3&5.5&6.3&5.3\\ 
+%	SPE,J.A.&8.5&8.3&8.1&8.3&8.4&8.2&8.2&8.1&7.9&8.0&8.0&8.2\\ 
+%	SPO,M.J.&6.9&8.3&8.0&8.1&7.9&7.9&7.9&7.7&7.6&7.7&8.1&8.0\\ 
+%	STA,J.F.&6.5&8.2&7.7&7.8&7.6&7.7&7.7&7.7&7.5&7.6&8.5&7.7\\ 
+%	TES,R.J.&8.3&7.3&7.0&6.8&7.0&7.1&6.7&6.7&6.7&6.7&8.0&7.0\\ 
+%	TIE,W.L.JR.&8.3&8.2&7.8&8.3&8.4&8.3&7.7&7.6&7.5&7.7&8.1&7.9\\ 
+%	WAL,R.A.&9.0&7.0&5.9&7.0&7.0&7.2&6.9&6.9&6.5&6.6&7.6&6.6\\ 
+%	WRI,D.B.&7.1&8.4&8.4&7.7&7.5&7.7&7.8&8.2&8.0&8.1&8.3&8.1\\ 
+%	ZAR,K.J.&8.6&7.4&7.0&7.5&7.5&7.7&7.4&7.2&6.9&7.0&7.8&7.1\\ 
+%	  \hline
+%	\end{tabular}
+%	}
+%	\caption{US judge ratings}
+%	\label{tab:judge}
+%	\end{center}
+%	\end{table}
+%	%\end{minipage}
+%	
+%:USJudgeRatings Data
+%\begin{minipage}\linewidth
+\begin{table}[ht]
+\begin{center}\tabcolsep0.2em\leftskip-2em
+\tiny{
+\begin{tabular}{rrrrrrrrrrrrr}
+\hline
+& CONT&INTG&DMNR&DILG&CFMG&DECI&PREP&FAMI&ORAL&WRIT&PHYS&RTEN \\ 
+\hline
+AARONSON,L.H.&5.70&7.90&7.70&7.30&7.10&7.40&7.10&7.10&7.10&7.00&8.30&7.80 \\ 
+ALEXANDER,J.M.&6.80&8.90&8.80&8.50&7.80&8.10&8.00&8.00&7.80&7.90&8.50&8.70 \\ 
+ARMENTANO,A.J.&7.20&8.10&7.80&7.80&7.50&7.60&7.50&7.50&7.30&7.40&7.90&7.80 \\ 
+BERDON,R.I.&6.80&8.80&8.50&8.80&8.30&8.50&8.70&8.70&8.40&8.50&8.80&8.70 \\ 
+BRACKEN,J.J.&7.30&6.40&4.30&6.50&6.00&6.20&5.70&5.70&5.10&5.30&5.50&4.80 \\ 
+BURNS,E.B.&6.20&8.80&8.70&8.50&7.90&8.00&8.10&8.00&8.00&8.00&8.60&8.60 \\ 
+CALLAHAN,R.J.&10.60&9.00&8.90&8.70&8.50&8.50&8.50&8.50&8.60&8.40&9.10&9.00 \\ 
+COHEN,S.S.&7.00&5.90&4.90&5.10&5.40&5.90&4.80&5.10&4.70&4.90&6.80&5.00 \\ 
+DALY,J.J.&7.30&8.90&8.90&8.70&8.60&8.50&8.40&8.40&8.40&8.50&8.80&8.80 \\ 
+DANNEHY,J.F.&8.20&7.90&6.70&8.10&7.90&8.00&7.90&8.10&7.70&7.80&8.50&7.90 \\ 
+DEAN,H.H.&7.00&8.00&7.60&7.40&7.30&7.50&7.10&7.20&7.10&7.20&8.40&7.70 \\ 
+DEVITA,H.J.&6.50&8.00&7.60&7.20&7.00&7.10&6.90&7.00&7.00&7.10&6.90&7.20 \\ 
+DRISCOLL,P.J.&6.70&8.60&8.20&6.80&6.90&6.60&7.10&7.30&7.20&7.20&8.10&7.70 \\ 
+GRILLO,A.E.&7.00&7.50&6.40&6.80&6.50&7.00&6.60&6.80&6.30&6.60&6.20&6.50 \\ 
+HADDEN,W.L.JR.&6.50&8.10&8.00&8.00&7.90&8.00&7.90&7.80&7.80&7.80&8.40&8.00 \\ 
+HAMILL,E.C.&7.30&8.00&7.40&7.70&7.30&7.30&7.30&7.20&7.10&7.20&8.00&7.60 \\ 
+HEALEY.A.H.&8.00&7.60&6.60&7.20&6.50&6.50&6.80&6.70&6.40&6.50&6.90&6.70 \\ 
+HULL,T.C.&7.70&7.70&6.70&7.50&7.40&7.50&7.10&7.30&7.10&7.30&8.10&7.40 \\ 
+LEVINE,I.&8.30&8.20&7.40&7.80&7.70&7.70&7.70&7.80&7.50&7.60&8.00&8.00 \\ 
+LEVISTER,R.L.&9.60&6.90&5.70&6.60&6.90&6.60&6.20&6.00&5.80&5.80&7.20&6.00 \\ 
+MARTIN,L.F.&7.10&8.20&7.70&7.10&6.60&6.60&6.70&6.70&6.80&6.80&7.50&7.30 \\ 
+MCGRATH,J.F.&7.60&7.30&6.90&6.80&6.70&6.80&6.40&6.30&6.30&6.30&7.40&6.60 \\ 
+MIGNONE,A.F.&6.60&7.40&6.20&6.20&5.40&5.70&5.80&5.90&5.20&5.80&4.70&5.20 \\ 
+MISSAL,H.M.&6.20&8.30&8.10&7.70&7.40&7.30&7.30&7.30&7.20&7.30&7.80&7.60 \\ 
+MULVEY,H.M.&7.50&8.70&8.50&8.60&8.50&8.40&8.50&8.50&8.40&8.40&8.70&8.70 \\ 
+NARUK,H.J.&7.80&8.90&8.70&8.90&8.70&8.80&8.90&9.00&8.80&8.90&9.00&9.00 \\ 
+O'BRIEN,F.J.&7.10&8.50&8.30&8.00&7.90&7.90&7.80&7.80&7.80&7.70&8.30&8.20 \\ 
+O'SULLIVAN,T.J.&7.50&9.00&8.90&8.70&8.40&8.50&8.40&8.30&8.30&8.30&8.80&8.70 \\ 
+PASKEY,L.&7.50&8.10&7.70&8.20&8.00&8.10&8.20&8.40&8.00&8.10&8.40&8.10 \\ 
+RUBINOW,J.E.&7.10&9.20&9.00&9.00&8.40&8.60&9.10&9.10&8.90&9.00&8.90&9.20 \\ 
+SADEN.G.A.&6.60&7.40&6.90&8.40&8.00&7.90&8.20&8.40&7.70&7.90&8.40&7.50 \\ 
+SATANIELLO,A.G.&8.40&8.00&7.90&7.90&7.80&7.80&7.60&7.40&7.40&7.40&8.10&7.90 \\ 
+SHEA,D.M.&6.90&8.50&7.80&8.50&8.10&8.20&8.40&8.50&8.10&8.30&8.70&8.30 \\ 
+SHEA,J.F.JR.&7.30&8.90&8.80&8.70&8.40&8.50&8.50&8.50&8.40&8.40&8.80&8.80 \\ 
+SIDOR,W.J.&7.70&6.20&5.10&5.60&5.60&5.90&5.60&5.60&5.30&5.50&6.30&5.30 \\ 
+SPEZIALE,J.A.&8.50&8.30&8.10&8.30&8.40&8.20&8.20&8.10&7.90&8.00&8.00&8.20 \\ 
+SPONZO,M.J.&6.90&8.30&8.00&8.10&7.90&7.90&7.90&7.70&7.60&7.70&8.10&8.00 \\ 
+STAPLETON,J.F.&6.50&8.20&7.70&7.80&7.60&7.70&7.70&7.70&7.50&7.60&8.50&7.70 \\ 
+TESTO,R.J.&8.30&7.30&7.00&6.80&7.00&7.10&6.70&6.70&6.70&6.70&8.00&7.00 \\ 
+TIERNEY,W.L.JR.&8.30&8.20&7.80&8.30&8.40&8.30&7.70&7.60&7.50&7.70&8.10&7.90 \\ 
+WALL,R.A.&9.00&7.00&5.90&7.00&7.00&7.20&6.90&6.90&6.50&6.60&7.60&6.60 \\ 
+WRIGHT,D.B.&7.10&8.40&8.40&7.70&7.50&7.70&7.80&8.20&8.00&8.10&8.30&8.10 \\ 
+ZARRILLI,K.J.&8.60&7.40&7.00&7.50&7.50&7.70&7.40&7.20&6.90&7.00&7.80&7.10 \\ 
+\hline
+\end{tabular}
+}
+\caption{US judge ratings}
+\label{tab:judge}
+\end{center}
+\end{table}
+%\end{minipage}
+
+%
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=1.0\linewidth]{"bertinR-judgeorig"}
+\caption{Display of a data matrix: USJudgeRatings data. Lawyers' ratings of state judges in the US Superior Court.}
+\label{fig:judgeorig}
+\end{center}
+\end{figure}
+
+Botth cases (the judges) and variables (the qualitites) allow for a rearragment. Just sorting for row and column avarages gives a more informative picture  (Figure \ref{fig:judgeperm}). The number of contacts stands out - it has a different structure than the other variables. Judge G. A. Saden seems to be special. Most variables would rank him to the upper group, be his worth of retention is below average. The esteem of his integrity and demeanor go along with this. Overall, there is a very clear separation into an upper and a lower group.
+
+%
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=1.0\linewidth]{"bertinR-judgeperm"}
+\caption{Display of a data matrix: USJudgeRatings data. Lawyers' ratings of state judges in the US Superior Court.}
+\label{fig:judgeperm}
+\end{center}
+\end{figure}
+
 
 <<fig=TRUE, include = FALSE, echo=FALSE, label=judgeorig,width=10, height=4>>=
 colmeans <- apply(USJudgeRatings,2,mean)
@@ -286,6 +431,40 @@ The final step is to merge these informations and render a display.
 %:cart and patches
 %We will discuss an implementation of Bertin's ideas. Implementing his examples as is, is trivial. To catch his ideas demands some thoughts, and has immediate consequences for an \R{} environment.
 %
+\section{Scores}
+
+In principle, scores can be generated using an appropriate score function and\ircode{apply} or any of its variants. As  examples, and for convenience, we provide a small collection of score functions. Each is applied by row to the Hotel data set, and the result is shown using a default Bertin plot. A second plot shows a poor mans's regression: assuming that the hotel occupancy, variable 19, is the parameter of interst, the scores are sorted by correlation to the score of this variable.
+
+\ircode{var.orientation="byrow"} is the default, so this parameter can be omitted. Add \ircode{var.orientation="bycolumn"} or  \ircode{var.orientation="global"} if needed.
+
+\subsection{Ranks}
+ $$
+ x \mapsto rank(x)
+ $$
+<<fig=TRUE, width=12, height=6, label=scbertinrank >>=
+oldpar <-par(mfcol=c(1,2))
+hotelrank <- bertinrank(Hotel2)
+plot.bertin(hotelrank)
+hotelrankorder <- bertin:::ordercor(hotelrank, 19)
+plot.bertin(hotelrank, roworder=hotelrankorder)
+par(oldpar)
+@
+
+\subsection{z Scores}
+$$
+x \mapsto \frac{ x - mean(x)}{sd(x)}
+$$
+<<fig=TRUE, width=12, height=6, label=scbertinzscore >>=
+oldpar <-par(mfcol=c(1,2))
+hotelzscore <- bertinzscore(Hotel2)
+plot.bertin(hotelzscore)
+hotelzscoreorder <- bertin:::ordercor(hotelzscore, 19)
+plot.bertin(hotelzscore, roworder=hotelzscoreorder)
+par(oldpar)
+@
+
+$$
+$$
 \section{Permutation, Seriation, Arrangement}
 As Bertin has pointed out,
 \begin{quotation}
@@ -458,14 +637,14 @@ See Figure \ref{sampleimageminv} right.
 We provide prototypes for the display of Bertin matrices. To simplify the implementation of extensions, we chose a coordinate system that allots unit square to each matrix cell. If we want to add separator lines to structure our data, we have to allocate additional space \ircode{sepwd}, measured in user space. 
 
 \ircode{image} requires increasing scales for both axes. To align with matrix conventions, we have to transform the row numbers.
-% So for a matrix \code{x} the data \code{x[i, j]}
+% So for a matrix\ircode{x} the data\ircode{x[i, j]}
 
 The total user space has the size \ircode{(nrrows * (1+2*sepwd),} \ircode{nrcols * (1+2*sepwd)}. The drwing area for cell \ircode{x[i, j]} is a unit square with bottom left coordinates \ircode{ (nrrows-i+1)*}  \ircode{(1+2*sepwd) -} \ircode{sepwd*} \ircode{(1+} \ircode{2*sepwd)} \ircode{- sepwd,} \ircode{j* (1+2*sepwd) - sepwd }.
 
 
 \section{Test matrices}
 
-To test the implementation, a series of matrices is provided.
+To test the implementation, a series of matrices is provided. Each matrix is shown in four displays: as an image using default setting of teh low level function\ircode{imagem}, as an image using the defult setting of\ircode{image.bertin}, as a rectangle display using the low level function\ircode{bertinrect} and as a display using the default setting of\ircode{plot.bertin}.
 
 \subsection{Random Matrices}
 
@@ -585,6 +764,19 @@ Brmatrix <- rbind(Bzero, Bone, Bmone, Binc, Bdec, Bstep, Bhat)
 colnames(Brmatrix) <- colnames(Brmatrix,FALSE)
 
 @
+<<fig=TRUE,width=10, height=6,label=imageBrmatrix>>=
+oldpar <- par(mfrow=c(1,2))
+imagem(Brmatrix)
+image.bertin(Brmatrix,useRaster=FALSE)
+par(oldpar)
+@
+
+<<fig=TRUE,width=12, height=6,label=plotBrmatrix>>=
+oldpar <- par(mfrow=c(1,2))
+bertinrect(Brmatrix)
+plot.bertin(Brmatrix)
+par(oldpar)
+@
 
 <<>>=
 ## R may use internal housekeeping 
@@ -594,19 +786,94 @@ colnames(Brmatrix) <- colnames(Brmatrix,FALSE)
 Bcmatrix <- cbind(Bzero, Bone, Bmone, Binc, Bdec, Bstep, Bhat)
 rownames(Bcmatrix) <- rownames(Bcmatrix,FALSE)
 
-# Basic test matrices with random error
-BrRndmatrix <- Brmatrix+rnorm(nrow(Brmatrix)*ncol(Brmatrix))
-
 @
+<<fig=TRUE,width=10, height=6,label=imageBcmatrix>>=
+oldpar <- par(mfrow=c(1,2))
+imagem(Bcmatrix)
+image.bertin(Bcmatrix,useRaster=FALSE)
+par(oldpar)
+@
+
+<<fig=TRUE,width=12, height=6,label=plotBcmatrix>>=
+oldpar <- par(mfrow=c(1,2))
+bertinrect(Bcmatrix)
+plot.bertin(Bcmatrix)
+par(oldpar)
+@
+
+Basic test matrices with random error
 <<>>=
-# Test matrices with IEEE specials
+BrRndmatrix <- Brmatrix+rnorm(nrow(Brmatrix)*ncol(Brmatrix))
+@
+
+<<fig=TRUE,width=10, height=6,label=imageBrRndmatrix>>=
+oldpar <- par(mfrow=c(1,2))
+imagem(BrRndmatrix)
+image.bertin(BrRndmatrix,useRaster=FALSE)
+par(oldpar)
+@
+
+<<fig=TRUE,width=12, height=6,label=plotBrRndmatrix>>=
+oldpar <- par(mfrow=c(1,2))
+bertinrect(BrRndmatrix)
+plot.bertin(BrRndmatrix)
+par(oldpar)
+@
+
+\subsection{Test matrices with IEEE specials}
+<<>>=
 Brmatrixx <- rbind(Bzero, Bone, Bmone, Binc, Bdec, Bstep, Bhat, 
 	Bnazero, Bnanzero, Binf)
+@
+<<fig=TRUE,width=10, height=6,label=imageBrmatrixx>>=
+oldpar <- par(mfrow=c(1,2))
+imagem(Brmatrixx)
+image.bertin(Brmatrixx,useRaster=FALSE)
+par(oldpar)
+@
+
+<<fig=TRUE,width=12, height=6,label=plotBrmatrixx>>=
+oldpar <- par(mfrow=c(1,2))
+bertinrect(Brmatrixx)
+plot.bertin(Brmatrixx)
+par(oldpar)
+@
+
+<<>>=
 Bcmatrixx <- cbind(Bzero, Bone, Bmone, Binc, Bdec, Bstep, Bhat, 
 	Bnazero, Bnanzero,Binf)
+@
+<<fig=TRUE,width=10, height=6,label=imageBcmatrixx>>=
+oldpar <- par(mfrow=c(1,2))
+imagem(Bcmatrixx)
+image.bertin(Bcmatrixx,useRaster=FALSE)
+par(oldpar)
+@
 
+<<fig=TRUE,width=12, height=6,label=plotBcmatrixx>>=
+oldpar <- par(mfrow=c(1,2))
+bertinrect(Bcmatrixx)
+plot.bertin(Bcmatrixx)
+par(oldpar)
+@
+
+<<>>=
 BrRndmatrixx <- Brmatrixx+rnorm(nrow(Brmatrixx)*ncol(Brmatrixx))
 @
+<<fig=TRUE,width=10, height=6,label=imageBrRndmatrixx>>=
+oldpar <- par(mfrow=c(1,2))
+imagem(BrRndmatrixx)
+image.bertin(BrRndmatrixx,useRaster=FALSE)
+par(oldpar)
+@
+
+<<fig=TRUE,width=12, height=6,label=plotBrRndmatrixx>>=
+oldpar <- par(mfrow=c(1,2))
+bertinrect(BrRndmatrixx)
+plot.bertin(BrRndmatrixx)
+par(oldpar)
+@
+
 <<results=tex, echo=FALSE>>=
 print(xtable(Brmatrixx,label="Brmatrixx", caption="Brmatrixx: matrix with special values, by row"), floating=TRUE)
 @
