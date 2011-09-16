@@ -6,7 +6,7 @@
   Displays a horizontal or vertical color ramp.
 }
 \usage{
-colramp(col = heat.colors(256), nr = 256, horizontal = FALSE, main, ...)
+colramp(col = heat.colors(256), nr = 256, horizontal = TRUE, main, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

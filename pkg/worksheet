@@ -18,7 +18,7 @@ R CMD INSTALL bertin
 rm bertin.pdf; R CMD Rd2dvi -o bertin.pdf --pdf --title="Bertin" bertin
 
 ##
-setwd("/Volumes/Untitled/bertin1")
+setwd("/Volumes/Untitled/bertin1")cd 
 
 source("R/parasp.R")
 source("R/imagem.R")

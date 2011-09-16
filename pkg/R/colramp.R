@@ -5,7 +5,7 @@
 #$Author$
 
 colramp <-
-function (col=  heat.colors(256),  nr=256, horizontal=FALSE, main,...)
+function (col=  heat.colors(256),  nr=256, horizontal=TRUE, main,...)
 {
 # test color image ramp
 
@@ -24,13 +24,13 @@ if (horizontal)
 	a <- matrix(nrow= nr, ncol= 1)
 	a[,1]<-c(1:nr)
 	oldpar <- par(yaxt="n")
-	image(,,a,col=col,main=main,...)
+	image(x= (1:nr)/nr*100,, a, xlim=c(1,100), col=col,main=main, xlab="",...)
 	} else
 	{
 	a <- matrix(ncol= nr, nrow= 1)
 	a[1,]<-c(1:nr)
 	oldpar <- par(xaxt="n")
-	image(,,a,col=col,main=main,...)
+	image(,y= (1:nr)/nr*100,a,ylim=c(1,100), col=col,main=main, ylab="",...)
 	}
 	par(oldpar)
 }
@@ -39,4 +39,5 @@ if (horizontal)
 
 # colramp(heat.colors)
 # colramp(heat.colors(128),main="Heat colors")
+# colramp(heat.colors(128),main="Heat colors", horizontal=FALSE)
 

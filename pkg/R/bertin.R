@@ -31,7 +31,38 @@ ordermean <- function(z, var.orientation=c("byrow", "bycolumn") ){
 	}
 
 
-bertinrank <- function (z, var.orientation=c("byrow", "bycolumn", "global"), ...)
+bertinrank <- function (z, var.orientation=c("byrow", "bycolumn", "global"), na.last = TRUE,
+     ties.method = c("average", "first", "random", "max", "min"))
+{
+branks <- function(v)
+#! find proper rank correction for missing data
+{
+	vr <- rank(v, na.last, ties.method)
+	nrna <- length(v[is.na(v)])
+	if (nrna > 0) {
+		vr<- vr + nrna/(2*length(v))
+		vr[is.na(v)] <- NA
+	}
+	vr
+} # branks
+var.orientation <- match.arg(var.orientation)
+scores <- switch(var.orientation, 
+	byrow= t(apply(z,1,branks)),
+	bycolumn= apply(z,2,branks),
+	global=branks(z)
+	)
+	# maybe ranking has destroyed attributes
+	dim(scores) <- dim(z)
+	colnames(scores) <- colnames(z)
+	rownames(scores) <- rownames(z)	
+
+	attr(scores,"var.orientation") <- var.orientation
+
+	attr(scores,"class") <- "bertin"
+	scores
+}
+
+bertinrank37 <- function (z, var.orientation=c("byrow", "bycolumn", "global"), ...)
 {
 branks <- function(v)
 #! find proper rank correction for missing data
@@ -76,6 +107,64 @@ scores <- switch(var.orientation,
 }
 
 bertinzscore <- function (z, var.orientation=c("byrow", "bycolumn", "global"), trim = 0, na.rm = FALSE, ...)
+{
+bzscore <- function(v)
+#! find proper correction for missing data
+{   mn <- mean(v, trim, na.rm,...)
+	sd <- sd(v,na.rm)
+	v <- if (sd != 0)  (v-mn)/sd else 0
+	v
+} # branks
+var.orientation <- match.arg(var.orientation)
+scores <- switch(var.orientation, 
+	byrow= t(apply(z,1, bzscore)),
+	bycolumn= apply(z,2, bzscore),
+	global= bzscore(z)
+	)
+	# maybe ranking has destroyed attributes
+	dim(scores) <- dim(z)
+	colnames(scores) <- colnames(z)
+	rownames(scores) <- rownames(z)	
+
+	attr(scores,"var.orientation") <- var.orientation
+
+	attr(scores,"class") <- "bertin"
+	scores
+}
+
+
+bertinrangescore <- function (z, var.orientation=c("byrow", "bycolumn", "global"), na.rm=TRUE, finite=FALSE)
+{
+brangescore <- function(v)
+#! find proper correction for missing data
+{   r <- range(v, na.rm=na.rm, finite=finite)
+	sc <- r[2]-r[1]
+	if (sc==0) {sc <- 1}
+	v <- (v-r[1])/sc
+	v
+} # brangescore
+var.orientation <- match.arg(var.orientation)
+if (is.null(var.orientation)) var.orientation <- attr(z,"var.orientation")
+if (is.null(var.orientation)) var.orientation <- "byrow"
+scores <- switch(var.orientation, 
+	byrow= t(apply(z,1, brangescore)),
+	bycolumn= apply(z,2, brangescore),
+	global= brangescore(z)
+	)
+	# maybe ranking has destroyed attributes
+	dim(scores) <- dim(z)
+	colnames(scores) <- colnames(z)
+	rownames(scores) <- rownames(z)	
+
+	attr(scores,"var.orientation") <- var.orientation
+
+	attr(scores,"class") <- "bertin"
+	scores
+}
+
+
+#37
+bertinzscore37 <- function (z, var.orientation=c("byrow", "bycolumn", "global"), trim = 0, na.rm = FALSE, ...)
 {
 bzscore <- function(v)
 #! find proper rank correction for missing data

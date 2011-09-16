@@ -29,7 +29,17 @@
 \DeclareOption{noae}{\setboolean{Sweave@ae}{false}}
 \ProcessOptions
 
+%: from Rd.sty
+\addtolength{\textheight}{12mm}
+\addtolength{\topmargin}{-9mm}   % still fits on US paper
+\addtolength{\textwidth}{26mm}   % 24mm still fits on US paper?? on a4 paper
+\setlength{\oddsidemargin}{10mm}
+\setlength{\evensidemargin}{\oddsidemargin}
+
+%\usepackage[english]{fancyref}
+\RequirePackage[english]{fancyref}
 \RequirePackage{graphicx,fancyvrb}
+\RequirePackage{layouts}
 \IfFileExists{upquote.sty}{\RequirePackage{upquote}}{}
 
 \ifthenelse{\boolean{Sweave@gin}}{\setkeys{Gin}{width=0.8\textwidth}}{}%
@@ -67,6 +77,13 @@
 %: R specific
 \providecommand{\R}{R}
 \newcommand{\Rlogo}{\includegraphics[width=1cm]{Rlogo}}
+
+\newcommand{\pref}[1]{page~\pageref{#1}}
+\newcommand{\refchap}[2][]{Chapter \ref{#2} #1 (page~\pageref{#2})}
+\newcommand{\refsec}[2][]{Section \ref{#2} #1 (page~\pageref{#2})}
+\newcommand{\reffig}[1]{Figure \ref{#1} on \pref{#1}}
+\newcommand{\refeq}[1]{Equation (\ref{#1}) on \pref{#1}}
+\newcommand{\reftab}[1]{Table \ref{#1} on \pref{#1}}
 
 %:general
 

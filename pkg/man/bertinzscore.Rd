@@ -7,7 +7,7 @@
 \name{bertinzscore}
 \alias{bertinzscore}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{Calculate standardized matrix}
+\title{Standardised (studentised) matrix}
 \description{
 Calculate standardized matrix  for Bertin analysis.
 	Marginal means and marginal permutation, sorting by score, are cached.
@@ -44,9 +44,9 @@ bertinzscore(z, var.orientation = c("byrow", "bycolumn", "global"), trim = 0, na
 %%% ~put references to the literature/web site here ~
 %}
 \author{G. Sawitzki}
-%\note{
-%%%  ~~further notes~~
-%}
+\note{
+If \code{trim !=0}, a trimmed version of \code{sd()} or a robust version should be used.
+}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 

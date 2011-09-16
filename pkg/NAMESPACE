@@ -10,6 +10,7 @@ export(
     imagem,
     bertinrank,
     bertinzscore,
+    bertinrangescore,
     bertin.order,
     parasp,
     whatis,

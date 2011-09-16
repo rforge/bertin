@@ -5,7 +5,8 @@
 	Marginal means and marginal permutation are cached.
 }
 \usage{
-	bertinrank(z,  var.orientation=c("byrow", "bycolumn", "global"),...)
+	bertinrank(z,  var.orientation=c("byrow", "bycolumn", "global"), na.last = TRUE,
+     ties.method = c("average", "first", "random", "max", "min"))
 
 }
 	
@@ -13,7 +14,9 @@
 	\item{z}{A data matrix}
 	\item{var.orientation}{"byrow", "bycolumn", "global"). By defaults, following Bertin's conventions variables are in rows. Use
 	\code{var.orientation="bycolumn"} for \R{} conventions.}
-	\item{\dots}{other parameters,  (see \code{\link{rank}}).}
+	\item{na.last}{passed to rank}
+	\item{ties.method}{passed to rank}
+%	\item{\dots}{other parameters,  (see \code{\link{rank}}).}
 }
 \value{
 	\item{scores}{An augmented matrix of rank scores.
