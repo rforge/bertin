@@ -7,7 +7,7 @@
 Row names and column names are shown if available. Arguments correspond tp those of \code{image} as far as possible.}
 \usage{
 imagem(z, 
-	zlim = range(z[is.finite(z)]), 
+	zlim, 
 	xlim = c(1, ncol(z)), 
 	ylim = c(1, nrow(z)), 
 	col = heat.colors(12), 
@@ -15,7 +15,7 @@ imagem(z,
 	xaxs = "i", yaxs = "i", 
 	xlab, ylab, 
 	main= deparse(substitute(z)), 
-	mar =c(2,2,6,6)+0.1,
+	pars,
 	breaks, 
 	oldstyle = FALSE, 
 	names = TRUE, coloffs=0.5, rowoffs=0.5, ...)
@@ -24,7 +24,7 @@ imagem(z,
 
 \arguments{
   \item{z}{a matrix containing the values to be plotted (\code{NA}s are
-    allowed).  Note that \code{x} can be used instead of \code{z} for
+    allowed). Note that \code{x} can be used instead of \code{z} for
     convenience.}
   \item{zlim}{the minimum and maximum \code{z} values for which colors
     should be plotted, defaulting to the range of the finite values of
@@ -47,28 +47,39 @@ imagem(z,
     y axis.  Default to the \sQuote{call names} of \code{x} or \code{y}, or to
     \code{""} if these were unspecified.}
   \item{main}{ Main title. }
-  \item{mar}{ Margin sizes, passed to \code{par}. Adjust this parameter for row/column names, or change font size. }  
+  \item{pars}{Graphical parameters, see   \code{par}. See details}
   \item{breaks}{a set of breakpoints for the colours: must give one more
     breakpoint than colour.}
   \item{oldstyle}{logical. If true the midpoints of the colour intervals
     are equally spaced, and \code{zlim[1]} and \code{zlim[2]} were taken
     to be midpoints.  The default is to have colour intervals of equal
     lengths between the limits.}
-  \item{names}{ Describe \code{names} here }
-  \item{coloffs}{ Describe \code{coloffs} here }
-  \item{rowoffs}{ Describe \code{rowoffs} here }
+  \item{names}{ boolean. If \code{TRUE}, row names and column names are shown. }
+  \item{coloffs}{ Offset for column names. }
+  \item{rowoffs}{ Offset for row names. }
    \item{\dots}{\link{graphical parameters} for \code{\link{plot}} may also be
     passed as arguments to this function, as can the plot aspect ratio
     \code{asp} and \code{axes} (see \code{\link{plot.window}}).}
 }
-% \details{ If necessary, more details than the description above }
-%\value{
-%  Describe the value returned
-%  If it is a LIST, use
-%  \item{comp1 }{Description of 'comp1'}
-%  \item{comp2 }{Description of 'comp2'}
-%  ...
-%}
+\details{
+
+If \code{pars} is undefined, default parameters are selected, based on the data valuues and lables. The picture aspect ratio is chosen to allocate unit squares to each data cell.
+If \code{pars}  is \code{NULL}, no graphical parameters are changed, else \code{pars} is passed to \code{\link{par}}
+
+
+Row and column names are displayd in the margins. Adjust \code{mar}  or adjust the font size if necessary.}
+
+\value{
+A list of graphical parameters, used to set \code{par} is returened as invisible result.
+Use this to generate series of plots with comparable geometry-
+
+This is subject to change.
+%%  ~Describe the value returned
+%%  If it is a LIST, use
+%%  \item{comp1 }{Description of 'comp1'}
+%%  \item{comp2 }{Description of 'comp2'}
+%% ...
+}
 %\references{ put references to the literature/web site here  }
 \author{G. Sawitzki}
 \note{  \code{imagem} is a low-level variant of  \code{\link{image}}. For higher level access, use  \code{\link{image.bertin}}. 

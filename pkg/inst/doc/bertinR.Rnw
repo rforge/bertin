@@ -71,13 +71,13 @@
 \address{Address: StatLab Heidelberg}
 %	\curraddr{...} no no
 \email{gs@statlab.uni-heidelberg.de}
-\urladdr{http://www.statlab.uni-heidelberg.de/projects/r/}
-\dedicatory{in preparation}
+\urladdr{http://bertin.r-forge.r-project.org/}
+%\dedicatory{in preparation}
 \date{Aug. 2010.\\
 %For quotation, please use the general reference \cite{gs94oned}.\\
-Revised: August 2011\\
-Typeset, with minor revisions: \today\  from SVN $Revision$}  
-\thanks{\emph{URL:} \url{http://bertin-forge.r-project.org/}}
+\emph{Revised:} August 2011\\
+\emph{Typeset}, with minor revisions: \today\  from SVN $Revision$}  
+\thanks{\emph{URL:} \url{http://bertin. r-forge.r-project.org/}}
 %	\translator{...} |3 |3
 \keywords{statistical computing, S~programming language, R~programming,
 data analysis, exploratory statistics, residual diagnostics, R language}
@@ -121,7 +121,7 @@ data(Hotel)
 \section{Bertin Plots}
 Among the rich material on graphical presentation of information, in \cite{brtn77gtg} (engl. \cite{seriation:Bertin:1999}) J. Bertin discusses the presentation of data matrices, with a particular view to seriation. \cite{seriation:Falguerolles:1997} gives an appraisal of this aspect of Bertin's work. The methods illustrated in \cite{seriation:Falguerolles:1997} have been first implemented in the Voyager system \cite{Sawitzki1996Extensible-Stat}. They have been partially re-implemented in \R{}, and this paper gives an introduction to the R-implementation.
 
-The \R{}-implementation can be downloaded as a package \ircode{bertin} from \url{http://bertin.r-forge.r-project.org/}.  \cite{seriation:Falguerolles:1997} is included in the documentation section of the package.
+The \R{}-implementation can be downloaded as a package \ircode{bertin} from \url{http://bertin.r-forge.r-project.org/}.  \cite{seriation:Falguerolles:1997} is included as bertin.pdf in the documentation section of the package.
 
 Bertin uses a small data set on hotel occupancy data to illustrate his ideas.
 
@@ -170,14 +170,14 @@ To repeat from  \cite{seriation:Falguerolles:1997}: In abstract terms, a Bertin 
 transform an initial matrix to a more homogeneous structure. The rearrangements are row or column
 permutations, and groupings of rows or columns. To fix ideas, think of a data matrix, variable by
 case, with real valued variables. For each variable, draw a bar chart of variable value by case. Highlight
-all bars representing a value above some sample threshold for that variable. See Figure \ref{fig:hotel19}.
+all bars representing a value above some sample threshold for that variable (\reffig{fig:hotel19}).
 
 <<fig=TRUE, include = FALSE, echo=FALSE, results=hide, label=hotel19, width=8, height=2, >>=
 # bertinrect(Hotel[19,])
 #dev.new(width=8, height=1.5)
 #oldpar <- par(no.readonly=TRUE)
 col=ifelse(Hotel[19,]>mean(as.matrix(Hotel[19,])),"black","white")
- bertinrect(Hotel[19,], main="", col=col,mar=c(0.5,0.3,2,8))
+ bertinrect(Hotel[19,], main="", col=col, pars = list(mar=c(0.5,0.3,2,8)))
 # par(oldpar)
  #bertinrect Hotel[19,], done
 @
@@ -191,7 +191,7 @@ col=ifelse(Hotel[19,]>mean(as.matrix(Hotel[19,])),"black","white")
 \end{center}
 \end{figure}
 
-Variables are collected in a matrix to display the complete data set.  Figure \ref{fig:hotelorig}. By convention, Bertin shows variables in rows and cases in columns. To make periodic structures more visible, Bertin repeats the data cyclically.
+Variables are collected in a matrix to display the complete data set (\reffig{fig:hotelorig}). By convention, Bertin shows variables in rows and cases in columns. To make periodic structures more visible, the data are  repeated cyclically.
 
 <<fig=TRUE, include = FALSE, echo=FALSE, label=hotelorig, width=8, height=5>>=
 #bertinrect Hotel2 start
@@ -199,7 +199,7 @@ Variables are collected in a matrix to display the complete data set.  Figure \r
 Hotel2 <- cbind(Hotel,Hotel)
 rowmeans <- apply(Hotel2,1,mean)
 col=ifelse(Hotel2[,]>rowmeans, "black","white")
-bertinrect(Hotel2, main="", col=col, mar=c(0.2,0.2,2,8))
+bertinrect(Hotel2, main="", col=col,  pars = list(mar=c(0.2,0.2,2,8)))
 @
 
 %
@@ -211,13 +211,14 @@ bertinrect(Hotel2, main="", col=col, mar=c(0.2,0.2,2,8))
 \end{center}
 \end{figure}
 
-As Bertin points out, the indexing used is arbitrary. You can rearrange rows and/or columns to reveal the information of interest. If you run a hotel, of course the percentage of hotel occupation and the duration of the visits are most interesting for you. Move these variables to the top of the display, and rearrange the other variables by similarity or dissimilarity to these target variables. See Figure \ref{fig:hotelperm}. Time points have a natural order. No rearrangement is used here.
+As Bertin points out, the indexing used is arbitrary. You can rearrange rows and/or columns to reveal the information of interest. If you run a hotel, of course the percentage of hotel occupation and the duration of the visits are most interesting for you. Move these variables to the top of the display, and rearrange the other variables by similarity or dissimilarity to these target variables (\reffig{fig:hotelperm}). Time points have a natural order. No rearrangement is used here.
 
 <<fig=TRUE, include = FALSE, echo=FALSE, label=hotelperm, width=8, height=5>>=
 colmeans <- apply(Hotel2,1,mean)
 rowperm <- c(19,18,20, 8, 11, 4, 12, 13,16,14,1,2, 7, 9, 10, 17, 6, 3, 5,15)
 col=ifelse(Hotel2[,]>colmeans, "black","white")
-bertinrect(Hotel2[rowperm,], main="", col=col[rowperm,],mar=c(0.2,0.2,2,8))
+bertinrect(Hotel2[rowperm,], main="", 
+	col=col[rowperm,],  pars = list(mar=c(0.2,0.2,2,8)))
 @
 
 %
@@ -229,7 +230,7 @@ bertinrect(Hotel2[rowperm,], main="", col=col[rowperm,],mar=c(0.2,0.2,2,8))
 \end{center}
 \end{figure}
 
-As a second example, we use the  the \ircode{USJudgeRatings} data set (Figure \ref{fig:judgeorig}). 
+As a second example, we use the  the \ircode{USJudgeRatings} data set (\reffig{fig:judgeorig}). 
 The data  is in Table \ref{tab:judge} (\pref{tab:judge}).
 %<<results=tex, echo=FALSE, include=FALSE>>=
 %print(xtable(USJudgeRatings,label="tab:judge", caption="US judge ratings"), floating=TRUE)
@@ -362,8 +363,8 @@ ZARRILLI,K.J.&8.60&7.40&7.00&7.50&7.50&7.70&7.40&7.20&6.90&7.00&7.80&7.10 \\
 <<fig=TRUE, include = FALSE, echo=FALSE, label=judgeorig,width=12, height=6>>=
 colmeans <- apply(USJudgeRatings,2,mean)
 col=ifelse(USJudgeRatings[,]>colmeans, "black","white")
-bertinrect(t(USJudgeRatings),col=t(col), sepwd=0.1, mar=c(0.05,0.05,10,4), main="")
-#bertinrect(t(USJudgeRatings),col=t(col), sepwd=0.1, mar=c(0.2,0.2,7,6), main="")
+bertinrect(t(USJudgeRatings),col=t(col), sepwd=0.1,  pars = list(mar=c(0.05,0.05,10,4)), main="")
+#bertinrect(t(USJudgeRatings),col=t(col), sepwd=0.1,  pars = list(mar=c(0.2,0.2,7,6)), main="")
 @
 
 \begin{figure}[htbp]
@@ -374,7 +375,7 @@ bertinrect(t(USJudgeRatings),col=t(col), sepwd=0.1, mar=c(0.05,0.05,10,4), main=
 \end{center}
 \end{figure}
 
-Both cases (the judges) and variables (the qualities) allow for a rearrangement. Just sorting for row and column averages gives a more informative picture  (Figure \ref{fig:judgeperm}). The number of contacts stands out - it has a different structure than the other variables. After all, this is not a rating variable at all, but ancillary information. There is little reason why it shouldgo along with the rating variables. Judge G. A. Saden seems to be special. Most variables would rank him to the upper group, be his worth of retention is below average. The esteem of his integrity and demeanour go along with this. Overall, there is a very clear separation into an upper and a lower group.
+Both cases (the judges) and variables (the qualities) allow for a rearrangement. Just sorting for row and column averages gives a more informative picture  (\reffig{fig:judgeperm}). The number of contacts stands out - it has a different structure than the other variables. After all, this is not a rating variable at all, but ancillary information. There is little reason why it should go along with the rating variables. Judge G. A. Saden seems to be special. Most variables would rank him to the upper group, be his worth of retention is below average. The esteem of his integrity and demeanour go along with this. Overall, there is a very clear separation into an upper and a lower group.
 
 %:  fig judgeperm
 <<fig=TRUE, include = FALSE, echo=FALSE, label=judgeperm,width=12, height=6>>=
@@ -383,8 +384,8 @@ colorder<- order(colmeans)
 rowmeans <-  apply(USJudgeRatings,1,mean)
 roworder <- order(rowmeans)
 col=ifelse(USJudgeRatings[,]>colmeans, "black","white")
-bertinrect(t(USJudgeRatings)[colorder, roworder],col=t(col)[colorder, roworder], sepwd=0.1, mar=c(0.05,0.05,10,4), main="")
-#bertinrect(t(USJudgeRatings),col=t(col), sepwd=0.1, mar=c(0.2,0.2,7,6), main="")
+bertinrect(t(USJudgeRatings)[colorder, roworder],col=t(col)[colorder, roworder], sepwd=0.1,  pars = list(mar=c(0.05,0.05,10,4)), main="")
+#bertinrect(t(USJudgeRatings),col=t(col), sepwd=0.1,  pars = list(mar=c(0.2,0.2,7,6)), main="")
 @
 %
 \begin{figure}[htbp]
@@ -395,7 +396,7 @@ bertinrect(t(USJudgeRatings)[colorder, roworder],col=t(col)[colorder, roworder],
 \end{center}
 \end{figure}
 
-We remove the variable \ircode{CONT} and re-run the analysis. Of course this changes the averag scores per judge, and the arrangement changes.
+We remove the variable \ircode{CONT} and re-run the analysis. Of course this changes the average scores per judge, and the arrangement changes (\reffig{fig:judgeperm1}).
 
 <<fig=TRUE, include = FALSE, echo=FALSE, label=judgeperm1,width=12, height=6>>=
 USJudgeRatings1 <- USJudgeRatings[,-1]
@@ -404,32 +405,32 @@ colorder<- order(colmeans)
 rowmeans <-  apply(USJudgeRatings1,1,mean)
 roworder <- order(rowmeans)
 col=ifelse(USJudgeRatings1[,]>colmeans, "black","white")
-bertinrect(t(USJudgeRatings1)[colorder, roworder],col=t(col)[colorder, roworder], sepwd=0.1, mar=c(0.05,0.05,10,4), main="")
+bertinrect(t(USJudgeRatings1)[colorder, roworder],col=t(col)[colorder, roworder], sepwd=0.1,  pars = list(mar=c(0.05,0.05,10,4)), main="")
 @
  %
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=1.0\linewidth]{"bertinR-judgeperm1"}
 \caption{Display of a data matrix: USJudgeRatings data. Lawyers' ratings of state judges in the US Superior Court. Variable \ircode{CONT} removed.}
-\label{fig:judgeperm}
+\label{fig:judgeperm1}
 \end{center}
 \end{figure}
 
  
-At this early point, let us put Bertin's work in place. Visualising information is but one aspect. In statistics, as we see it today, visualisation may be one part of an analysis. The outcome will be a decision leading to an action, and then there is a loss (or gain) depending on the action taken on the one hand, and the ``true'' state of the world on the other. Statistics has formulated a few standard problems, and given a suggestion to handle these. In our example, the problem can be seen as a prediction problem: find a prediction model to predict occupation and duration, based on the other variables. This is a control problem, and the statistical contribution is to find a regression model for occupation and duration, based on the other variables. The visualisation can be seen as one way to hint at a regression model. There are few classical problems. Regression is one of them, and prediction is closely related. Classification and clustering is another, closely related pair of problems, and their relation to Bertin matrices should be obvious. The USJudgeRatings can be looked at as a classification problem.
+At this early point, let us put Bertin's work in place. Visualising information is but one aspect. In statistics, as we see it today, visualisation may be one part of an analysis. The outcome will be a decision leading to an action. Then there is a loss (or gain) depending on the action taken on the one hand, and the ``true'' state of the world on the other. This is the common decision theoretical setting. Statistics has formulated a few standard problems, and given suggestions how to handle these. In our Hotel example, the problem can be seen as a prediction problem: find a prediction model to predict occupation and duration, based on the other variables. More specifically this is a control problem, and the statistical contribution is to find a regression model for occupation and duration, based on the other variables. The visualisation can be seen as one way to hint at a regression model. There are very few classical problems. Regression is one of them, and prediction is closely related. Classification and clustering is another, closely related pair of problems, and their relation to Bertin matrices should be obvious. The USJudgeRatings can be looked at as a classification problem.
 
 
 \section{Work flow}
 
 Bertin matrices usually are part of a work flow.
 
-In a first step, we transfer the input data to allow for  common, or comparable scales. In the Hotel example, Bertin rescales by the maximum value of each variable. The dichotomous variable Faires is recoded as 0/1. Our  implementation default is to rescale for  \ircode{(0, max)} for positive variables,  \ircode{(min, 0)} for negative variables,  \ircode{(min, max)} for general variables. Out preferred, or recommended rescaling however is to use ranks. We use the term \ircode{score} for the rescaled variables. Orientation of the data set is critical  in this step. Usually, rescaling should be by variable, not by case. Depending on the orientation, this can lead for example to ranks by row or by column. We allow global scaling as an additional option for those situations where all data are already on a common scale. Following Bertin, our  implementation default is to expect variables in rows.
+In a first step, we transfer the input data to allow for  common, or comparable scales. In the Hotel example, Bertin rescales by the maximum value of each variable. The dichotomous variable Faires is encoded as 0/1. Our  implementation default is to rescale for  \ircode{(0, max)} for positive variables,  \ircode{(min, 0)} for negative variables,  \ircode{(min, max)} for general variables. Out preferred, or recommended rescaling however is to use ranks. We use the term \ircode{score} for the rescaled variables. Orientation of the data set is critical convention in this step. Usually, rescaling should be by variable, not by case. Depending on the orientation, this can lead for example to ranks by row or by column. We allow global scaling as an additional option for those situations where all data are already on a common scale. Following Bertin, our  implementation default is to expect variables in rows, but we provide the means to switch to the \R{} convention with variables in columns. The raw data may come in data frames, or lists, or views on a data base, and the original convention should be preserved. The scores however are a matrix, or an array (which we consider a stacked list of matrices in our context.) We prefer to keep these in Bertin conventions, that is variables are in rows.
 
-In a second step, the scores are translated to visualisation attributes.  Colour is handled in two steps. The scores are translated to  a colour index, which is used together with a colour palette to determine the display colour for a data element. This allows rapid experiments with various colour palettes, as long as the length of the palette is compatible. We strongly recommend to always look at the inverted table together with a chosen one  to mitigate the effects of colour  perception. Simple image displays limit the  visualisation attributes to colour. \ircode{rect} for example allows rectangle geometry, colour, and border width. Shading and shading should be considered as an alternative for print media. 
+In a second step, the scores are translated to visualisation attributes.  Colour is handled in two steps. The scores are translated to  a colour index, which is used together with a colour palette to determine the display colour for a data element. This allows rapid experiments with various colour palettes, as long as the length of the palettes are compatible. We strongly recommend to always look at the inverted colour palette together with a chosen one  to mitigate the effects of colour  perception. Simple image displays limit the  visualisation attributes to colour. \ircode{rect} for example allows rectangle geometry, colour, and border width. Shading and line types should be considered as an alternative for print media. 
 
-Visualisation attributes may reflect different aspect. So for example in the classical Bertin display, height of a rectangle is used to reflect the value of a data element, colour is used to show an indicator whether the value is above or below variable mean.
+Visualisation attributes may reflect different aspects. So for example in the classical Bertin display, height of a rectangle is used to reflect the value of a data element, colour is used to show an indicator whether the value is above or below variable mean.
 
-A third step controls the actual placement of the graphical elements. With a matrix layout, it is specified by possible permutations of rows and of columns. This may be related to information used in the first two steps, but should be considered an independent step. A vector or row orders and of column orders is the critical information from this step. Various seriation methods apply. The typical situation is to select scores and display attributes, and then search for optimal or good seriations. The arrangement often leads to hard optimisation problems. Placing this step later allows to use information from score transformation and attributes, which may allow more efficient algorithms.
+A third step controls the actual placement of the graphical elements. With a matrix layout, it is specified by possible permutations of rows and of columns. This may be related to information used in the first two steps, but should be considered an independent step. A vector or row orders and of column orders is the critical information from this step. Various seriation methods apply. This is where Bertin's ideas about ``internal mobility''  as a characteristics of modern graphics come to action. The typical situation is to select scores and display attributes, and then search for optimal or good seriations. The arrangement often leads to hard optimisation problems. Placing this step later allows to use information from score transformation and attributes, which may allow more efficient algorithms. In the end, we may be better with a good solution which helps to solve the practical problem, instead of an optimal solution to a theoretical one. These may differ considerably.
 
 The final step is to merge these informations and render a display. 
 
@@ -438,10 +439,19 @@ The final step is to merge these informations and render a display.
 %
 \section{Scores}
 
-In principle, scores can be generated using an appropriate score function and\ircode{apply} or any of its variants. As  examples, and for convenience, we provide a small collection of score functions. Each is applied by row to the Hotel data set, and the result is shown using a default Bertin plot. A second plot shows a poor mans's regression: assuming that the hotel occupancy, variable 19, is the parameter of interest, the scores are sorted by correlation to the score of this variable.
+In principle, scores can be generated using an appropriate score function and \ircode{apply} or any of its variants. 
+As  examples, and for convenience, we provide a small collection of score functions. 
 
-\ircode{var.orientation="byrow"} is the default, so this parameter can be omitted. Add \ircode{var.orientation="bycolumn"} or  \ircode{var.orientation="global"} if needed.
+As an illustration, each is applied by row to the Hotel data set, and the result is shown using a default Bertin plot. 
+A second plot shows a poor man's regression: assuming that the hotel occupancy, variable 19, is the parameter 
+of interest. Sort the scores by correlation to the score of occupancy.
 
+\ircode{var.orientation = "byrow"} is the default,  it can be omitted. If needed in other data sets, add \ircode{var.orientation =}
+\ircode{"bycolumn"} or  \ircode{var.orientation =} \ircode{"global"}. This allows to follow our design decision to keep the 
+original data following the original conventions. The results here are matrices. They can be transposed at convenience.
+
+\vspace{\stretch{1}}
+\pagebreak
 \subsection{Ranks}
  $$
  x \mapsto rank(x)
@@ -455,7 +465,9 @@ plot.bertin(hotelrank, roworder=hotelrankorder)
 par(oldpar)
 @
 
-Rank scores have a sound basis. The bring us back to the range of rank statistics. However, since they scale any rank difference by unit steps, they convey order, but not quantiatative differences. Preferably they are combined with colour palettes which do not suggest a quantitative scale. The default colour palette uses 256 steps of grey and suggests a quantitative order, whereas the ranks by variable provide at most 12 steps in this example. It is preferable to use a palette with reduced resolution. For 12 rank values, a scale with 3 or four steps should do. 
+Rank scores have a sound basis. The bring us back to the range of rank statistics. However, since they scale any rank difference by unit steps, they convey order, but not quantitative differences. Preferably they are combined with colour palettes which do not suggest a quantitative scale. The default colour palette uses 256 steps of grey and suggests a quantitative order, whereas the ranks by variable provide at most 12 steps in this example. 
+
+It is preferable to use a palette with reduced resolution. For 12 rank values, a scale with 3 or 4 steps should do. 
 
 <<fig=TRUE, width=12, height=6, label=scbertinrank2 >>=
 oldpar <-par(mfcol=c(1,2))
@@ -468,6 +480,8 @@ plot.bertin(hotelrank, roworder=hotelrankorder,
 par(oldpar)
 @
 
+\vspace{\stretch{1}}
+\pagebreak
 \subsection{z Scores}
 $$
 x \mapsto \frac{ x - mean(x)}{sd(x)}
@@ -483,8 +497,10 @@ par(oldpar)
 
 Bertin uses to highlight ``above average''  observations. If the data is not degenerate, this corresponds to \ircode{bertinzscore > 0}.
 
-Since z Scores center the variables around the mean, they require positive and negative values for display. This leads in effet to a reduction of the display space to a half, which should be compensated by a more expressive choice of colour coding.
+Since z Scores center the variables around the mean, they require positive and negative values for display. This leads in effect to a reduction of the display space to a half, which should be compensated by a more expressive choice of colour coding.
 
+\vspace{\stretch{1}}
+\pagebreak
 \subsection{Range Scores}
 $$
 x \mapsto \frac{ x - min(x)}{maxd(x)-min(x)}
@@ -498,16 +514,16 @@ plot.bertin(hotelrangescore, roworder=hotelrangescoreorder)
 par(oldpar)
 @
 
-This score just rescales to $[0, 1]$. On contrast to ranks, ti preserves quantitative proportions.
+This score just rescales to $[0, 1]$. On contrast to ranks, it preserves quantitative proportions.
 
-<<fig=TRUE, include = FALSE, echo=FALSE, label=judgeperm1rng,width=12, height=6>>=
-USJudgeRatings1rng <- bertinrangescore(USJudgeRatings1)
-colmeans <- apply(USJudgeRatings1rng, 2, mean)
+<<fig=TRUE, include = TRUE, echo=TRUE, label=judgeperm1rng,width=12, height=6>>=
+USJudgeRatings1rngt <- t(bertinrangescore(USJudgeRatings1))
+colmeans <- apply(USJudgeRatings1rngt, 2, mean)
 colorder<- order(colmeans)
-rowmeans <-  apply(USJudgeRatings1rng, 1, mean)
+rowmeans <-  apply(USJudgeRatings1rngt, 1, mean)
 roworder <- order(rowmeans)
-col=ifelse(USJudgeRatings1rng[,]>rowmeans, "black","white")
-bertinrect(t(USJudgeRatings1rng)[colorder, roworder],col=t(col)[colorder, roworder], sepwd=0.1, mar=c(0.05,0.05,10,4), main="")
+col=ifelse(USJudgeRatings1rngt[,]>rowmeans, "black","white")
+bertinrect(USJudgeRatings1rngt[roworder, colorder],col=(col)[roworder, colorder], sepwd=0.1,  pars = list(mar=c(0.05,0.05,10,4)), main="")
 @
 
 \section{Permutation, Seriation, Arrangement}
@@ -516,12 +532,13 @@ As Bertin has pointed out,
 \emph{Ce point est fondamental. C’est la mobilité interne de l’image qui charactérise la
 graphique moderne.} [Bertin 1977, p. 5]
 \end{quotation}
-Once we have solved the problem, the problem can often be formulated as an optimisation problem. But while we are searching for a solution, experimenting is necessary. In our implementation, we separate to lines of experiment. Finding an adequate display is one branch. This amounts to building up a collection of proven models, and a certain data set can contribute by hinting at specific needs. This is  repeated not so often. Stability of implementation has priority over speed. We will provide a small number of basic model implementations.
+Once we have solved the problem, the problem can often be formulated as an optimisation problem. But while we are searching for a solution, experimenting is necessary. In our implementation, we separate two branches of experiment. Finding an adequate display is one branch. This amounts to building up a collection of proven models. A specific data set at hand can contribute by hinting at specific needs and simplify model choice. Building a collection of models and model choice is  repeated not so often. Stability of implementation has priority over speed. We will provide a small number of basic model implementations.
 
-The classic Bertin display shown above is one of the examples. Following the ideas, but deviating in the details, is to use a simple grey scale image for representation. This may be not the most informative variant. But it is most economic in the use of display space.
-See figure \ref{fig:hotelpermimage}. We will follow the classic Bertin display  and an image display as main examples.
+The classic Bertin display shown above is one of the examples to represent certain models. Following the ideas, but deviating in the details, is to use a simple grey scale image for representation. This may be not the most informative variant. But it is most economic in the use of display space (\reffig{fig:hotelpermimage}). %We will follow the classic Bertin display  and an image display as main examples.
+
 %<<fig=TRUE, include = FALSE, echo=FALSE, width=22, height=18, label=hotelpermimage>>=
-<<fig=TRUE, include = FALSE, echo=FALSE, label=hotelpermimage>>=
+<<fig=TRUE, include = FALSE, echo=FALSE, width=6, height=6, label=hotelpermimage1>>=
+#oldpar <- par(mfrow=c(1,2))
 Hotel2 <-as.matrix(Hotel2)
 rowmeans <- apply(Hotel2,1,mean)
 rowsd<- apply(Hotel2,1,sd)
@@ -529,15 +546,16 @@ zscores <-as.matrix( (Hotel2-rowmeans)/rowsd)
 rowperm <- c(19,18,20, 8, 11, 4, 12, 13,16,14,1,2, 7, 9, 10, 17, 6, 3, 5,15)
 #col=gray((0:256)/[zscores]
 #image.bertin(zscores[rowperm,], main="", col=gray((0:256)/256), useRaster=TRUE)
-imagem(zscores[rowperm,], main="", col=gray((0:256)/256), useRaster=FALSE)
-
-#image.bertin(zscores[rowperm,], main="",  useRaster=TRUE)
+image(zscores[rowperm,], main="", col=gray((0:256)/256), useRaster=FALSE)
+#par(oldpar)
 @
-
+<<fig=TRUE, include = FALSE, echo=FALSE, width=6, height=6, label=hotelpermimage2>>=
+image(zscores[rowperm,], main="", col=gray((0:3)/3), useRaster=FALSE)
+@
 %
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=1.0\linewidth]{"bertinR-hotelpermimage"}
+\includegraphics[width=0.48\linewidth]{"bertinR-hotelpermimage1"}\includegraphics[width=0.48\linewidth]{"bertinR-hotelpermimage2"}
 \caption{Display of a data matrix as grey scale image. Variables are rearranged by similarity to occupation and duration.} 
 \label{fig:hotelpermimage}
 \end{center}
@@ -612,18 +630,28 @@ The restriction to a matrix structure is arbitrary and can be omitted. Bertin ha
 \section{Colour, perception and pitfalls}
 
 
-Colour may need some experiments to find an informative choice. To allow easy experiments, we use a two step procedure. Baed on the original data or the score, we derive a colour index. From an abstract point of view, this is just another score with values in $1, \ldots nrColours$. Colours are provided as a olour palette, and the index is used to select the colour to apply. 
+Colour may need some experiments to find an informative choice. To allow easy experiments, we use a two step procedure. Based on the original data or the score, we derive a colour index. From an abstract point of view, this is just another score with values in $1, \ldots nrColours$. Colours are provided as a colour palette, and the index is used to select the colour to apply. 
 See \ircode{help(palette)} for information on colour palettes.
 
 Some colour palettes that may be useful for Bertin displays are provided.
 
+There is an abundant literature on chosing colour palettes for the visual display of quantitative information. Please read.
+
+Be aware that not all people perceive colour the same way. In perticular, if you are using red and green in you coulour palette, about 6\% of the male popultion will have difficulties.
+
+Do trivial tests. If you have a smat colour scale: give a sample to some frinds and ask tehm tio tell which shoes higher and which shows lower values.
+
+Colour displays are a means to convey some information. Check that your choices serve this purpose. In particular: if it is of importance to recognize high or low values, chose a colour scale thet does not focus on differences in neutral values.
+
+\vspace{\stretch{1}}
 \pagebreak
-<<fig=TRUE, echo=TRUE, width=6, height=4, label= palgreencolors>>=
+<<fig=TRUE, echo=TRUE, width=6, height=3, label= palgreencolors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
 colramp(bertin:::green.colors(100))
 colramp(bertin:::green.colors(100, rev=TRUE))
 par(oldpar)
 @
+\vspace{\stretch{1}}
 \pagebreak
 <<fig=TRUE, echo=TRUE, width=6, height=3,  label= palgredcolors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
@@ -631,6 +659,7 @@ colramp(bertin:::red.colors(100), horizontal=TRUE)
 colramp(bertin:::red.colors(100, rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
+\vspace{\stretch{1}}
 \pagebreak
 <<fig=TRUE, echo=TRUE, width=6, height=3, label= palbluecolors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
@@ -638,6 +667,7 @@ colramp(bertin:::blue.colors(100), horizontal=TRUE)
 colramp(bertin:::blue.colors(100, rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
+\vspace{\stretch{1}}
 \pagebreak
 <<fig=TRUE, echo=TRUE, width=6, height=3, label= palblueyellowcolors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
@@ -645,6 +675,7 @@ colramp(bertin:::blueyellow.colors(100),horizontal=TRUE)
 colramp(bertin:::blueyellow.colors(100, rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
+\vspace{\stretch{1}}
 \pagebreak
 <<fig=TRUE, echo=TRUE, width=6, height=3, label= palblueyellow2colors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
@@ -652,6 +683,7 @@ colramp(bertin:::blueyellow2.colors(100),horizontal=TRUE)
 colramp(bertin:::blueyellow2.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
+\vspace{\stretch{1}}
 \pagebreak
 <<fig=TRUE, echo=TRUE, width=6, height=3, label= palblueyellow4colors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
@@ -659,6 +691,7 @@ colramp(bertin:::blueyellow4.colors(100),horizontal=TRUE)
 colramp(bertin:::blueyellow4.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
+\vspace{\stretch{1}}
 \pagebreak
 <<fig=TRUE, echo=TRUE, width=6, height=3, label= palbluered2colors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
@@ -666,6 +699,7 @@ colramp(bertin:::bluered2.colors(100),horizontal=TRUE)
 colramp(bertin:::bluered2.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
+\vspace{\stretch{1}}
 \pagebreak
 <<fig=TRUE, echo=TRUE, width=6, height=3, label= palbluered4colors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
@@ -673,13 +707,15 @@ colramp(bertin:::bluered4.colors(100),horizontal=TRUE)
 colramp(bertin:::bluered4.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
+\vspace{\stretch{1}}
 \pagebreak
-<<fig=TRUE, echo=TRUE, width=6, height=4, label= palgreenred2colors>>=
+<<fig=TRUE, echo=TRUE, width=6, height=3, label= palgreenred2colors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
 colramp(bertin:::greenred2.colors(100),horizontal=TRUE)
 colramp(bertin:::greenred2.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
+\vspace{\stretch{1}}
 \pagebreak
 <<fig=TRUE, echo=TRUE, width=6, height=3, label= palgreenred4colors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
@@ -687,6 +723,7 @@ colramp(bertin:::greenred4.colors(100),horizontal=TRUE)
 colramp(bertin:::greenred4.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
+\vspace{\stretch{1}}
 \pagebreak
 <<fig=TRUE, echo=TRUE, width=6, height=3, label= paltailcolors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
@@ -743,18 +780,18 @@ If your are using \ircode{Sweave}, use two separate chunks, and place the figure
 hotelrk <- bertinrank(Hotel)
 sampleimagem(hotelrk)
 @
-See Figure \ref{sampleimagem} left.
+See  \reffig{fig:sampleimagem} left.
 
 <<fig=TRUE, echo=TRUE, height=12, width=10, include=FALSE, label=sampleimageminv >>=
 sampleimagem(hotelrk, colinvert=TRUE)
 @
-See Figure \ref{sampleimageminv} right.
+See  \reffig{fig:sampleimageminv} right.
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=0.48\linewidth]{bertinR-sampleimagem}
 \includegraphics[width=0.48\linewidth]{bertinR-sampleimageminv}
-\caption{Test matrix: same information, but colour table inverted on the right.}\label{sampleimagem}\label{sampleimageminv}
+\caption{Test matrix: same information, but colour table inverted on the right.}\label{fig:sampleimagem}\label{fig:sampleimageminv}
 \end{center}
 \end{figure}
 %
@@ -767,8 +804,10 @@ We provide prototypes for the display of Bertin matrices. To simplify the implem
 \ircode{image} requires increasing scales for both axes. To align with matrix conventions, we have to transform the row numbers.
 % So for a matrix\ircode{x} the data\ircode{x[i, j]}
 
-The total user space has the size \ircode{(nrrows * (1+2*sepwd),} \ircode{nrcols * (1+2*sepwd)}. The drwing area for cell \ircode{x[i, j]} is a unit square with bottom left coordinates \ircode{ (nrrows-i+1)*}  \ircode{(1+2*sepwd) -} \ircode{sepwd*} \ircode{(1+} \ircode{2*sepwd)} \ircode{- sepwd,} \ircode{j* (1+2*sepwd) - sepwd }.
+We return the relevant graphical parameters as an invisible result in the basic  functions \ircode{imagem()} and \ircode{bertinrect}. The \ircode{usr} parameters are set to have $(1,1)$ as the bottom left corner, and \ircode{x[i, j]} has a unit square figure area with bottom left coordinates at $nrow(x) - i +1, j$, with drawing coordinates following the usual plot conventions, that is the $y$ axis is pointing upwards.
 
+%The drawing area for cell \ircode{x[i, j]} is a unit square with bottom left coordinates \ircode{ (nrrows-i+1)*} 
+%\ircode{(1+2*sepwd) -} \ircode{sepwd*} \ircode{(1+} \ircode{2*sepwd)} \ircode{- sepwd,} \ircode{j* (1+2*sepwd) - sepwd }.
 
 \section{Test matrices}
 
@@ -930,7 +969,6 @@ print(xtable(Bcmatrix, label="Bcmatrix", caption="Bcmatrix: test matrix, by colu
 @
 \end{center}
 
-@
 <<fig=TRUE,width=10, height=6,label=imageBcmatrix>>=
 oldpar <- par(mfrow=c(1,2))
 imagem(Bcmatrix)
@@ -1037,8 +1075,8 @@ plot.bertin(BrRndmatrixx)
 par(oldpar)
 @
 
-
-%
+\vfill
+%\vspace{\stretch{1}}
 
 \pagebreak
 \bibliographystyle{amsxport}

@@ -15,7 +15,7 @@ R CMD BUILD pkg
 # install package
 R CMD INSTALL bertin
 # generate a pdf help file
-rm bertin.pdf; R CMD Rd2dvi -o bertin.pdf --pdf --title="Bertin" bertin
+rm bertin.pdf; R CMD Rd2dvi -o bertin.pdf --pdf --title="Bertin" pkg
 
 ##
 setwd("/Volumes/Untitled/bertin1")cd 
