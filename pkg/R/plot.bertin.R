@@ -11,10 +11,12 @@
 #    panel.last = NULL, asp = NA, ...) 
     
 plot.bertin <- function(z, roworder,colorder, var.orientation=c("byrow", "bycolumn", "global"),
-	main="", zcol, palette = gray((255:0 / 255)^0.5))
-{#$Revision$
+	main, 
+	zcol, palette = gray((255:0 / 255)^0.5),...)
+{
+#$Revision$
 bzcol <- function(v) {
-	vcol <- imagecolindex(v,ncolour=length(palette))
+	vcol <- bertin:::imagecolindex(v, ncolour=length(palette))
 	vcol
 } # bzcol
 
@@ -57,7 +59,7 @@ bzcol <- function(v) {
 	oldpalette <-palette(palette)
 	bertinrect(z[roworder,colorder], 
 		main=main, 
-		col= palette[zcol[roworder,colorder]])
+		col= palette[zcol[roworder,colorder]],...)
 	#bertinrect(z[roworder,colorder], main=main, col= zcol)
 	palette(oldpalette)
 

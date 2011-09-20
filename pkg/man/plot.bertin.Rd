@@ -5,8 +5,12 @@
 \title{Bertin plot}
 \description{Display a Bertin plot of a data matrix.}
 \usage{
-plot.bertin(z, roworder, colorder,var.orientation = c("byrow",
-                 "bycolumn", "global"),  main = "", zcol, palette = gray((255:0 / 255)^0.5))
+plot.bertin(z, 
+		roworder, colorder,
+		var.orientation = c("byrow", "bycolumn", "global"),  
+                 main = "", 
+                 zcol, palette = gray((255:0 / 255)^0.5),
+                 ...)
 }
 \arguments{
   \item{z}{a data matrix.}
@@ -16,6 +20,7 @@ plot.bertin(z, roworder, colorder,var.orientation = c("byrow",
   \item{main}{main title.}
   \item{zcol}{a data matrix of index values for use with the colour palette.}
   \item{palette}{a colour palette for the display of the data matrix.}
+  \item{\dots}{additional parameters, passed to \code{bertinrect}.}
 }
 \details{A grid of rectangles is displayed to represent the data. Typically, the value is encoded as height.
 See the references below for details.

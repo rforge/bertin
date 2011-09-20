@@ -10,7 +10,8 @@
 #
 # aspect ratio ok
 # single row: not ok, eg. bertinrect(Hotel[19,]) bertinrect(Hotel[,12])
-bertinrect <- function(z, main, 
+bertinrect <- function(z, 
+	main = deparse(substitute(z)), 
 	sepwd=0.05,
 	pars,  # mar= c(1,1,6,4)+0.1,
 	...){
@@ -21,13 +22,18 @@ bertinrect <- function(z, main,
 	z <- as.matrix(z) #! support lists and data frames as well
 	nrow <- nrow(z)
 	ncol <- ncol(z)
+ 
+ titleline<- 2 
 	if (missing(pars)){
     strwrow <- max(strwidth(rownames(z),"inch"))
     strcol <- max(strwidth(colnames(z),"inch"))
     chwidth <- par("cin")[1]
+    lineheight <- par("lheight")*par("cin")[2]
+    titleline <- ceiling(strcol/lineheight)+1
 	mai <- par("mai")
-	mai[2]<- chwidth
-	mai[3]<-strcol + 2*chwidth
+	# mai[1] unchanged
+	mai[2]<- chwidth #minimal
+	mai[3]<-strcol + 2*chwidth +4.1* lineheight# up: usual 4.1 lines
 	mai[4]<-strwrow + 2*chwidth
 	par(mai=mai)
 	plot.new()
@@ -51,6 +57,8 @@ bertinrect <- function(z, main,
 
 
 	plot.window(c(1, ncol(z)+1), c(1, nrow(z)+1),xaxs="i",yaxs="i", asp=1)
+#	title(main=main, sub=as.character(titleline ),line=titleline, ...)
+	title(main=main, line=titleline)
 	p <-par("cin","din","fin","pin","plt","mai", "mar","usr")
 #	oldpar <- par(no.readonly = TRUE)
 	#on.exit(par(oldpar))
@@ -82,8 +90,6 @@ bertinrect <- function(z, main,
 if (any(ranges[2,]==0)){
 	abline(h= xbottom[ranges[2,]==0],lty=3,col="gray")}
 	rect(xleft,xbottom,xright,xtop,...)
-#cat("Rect set up.pin:",par("pin"))
-#cat(" usr:",par("usr"),"\n")
 
 	#textnames(z)
    #          pos = 3, xpd = NA, offs = 1, srt = 90, cex=0.6)}
@@ -103,7 +109,9 @@ if (any(ranges[2,]==0)){
    	text(xleft[badpos]+0.4,xbottom[badpos],labels=z[badpos], pos=3, offs=0.5,col="red",cex=0.6)
    }
 } 
- invisible(p)
+	par(usr=c(1, ncol(z)+1, nrow(z), 0))
+	p <-par("cin","din","fin","pin","plt","mai", "mar","usr")
+	invisible(p)
 }
 
 # bertinrect(Hotel)

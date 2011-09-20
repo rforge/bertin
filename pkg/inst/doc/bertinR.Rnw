@@ -799,15 +799,15 @@ See  \reffig{fig:sampleimageminv} right.
 
 \section{Coordinate System and Conventions}
 
-We provide prototypes for the display of Bertin matrices. To simplify the implementation of extensions, we chose a coordinate system that allots unit square to each matrix cell. If we want to add separator lines to structure our data, we have to allocate additional space \ircode{sepwd}, measured in user space. 
+We provide prototypes for the display of Bertin matrices. To simplify the implementation of extensions, we chose a coordinate system that allots unit square to each matrix cell. If we want to add separator lines to structure our data, we have to reserve some space \ircode{sepwd}, measured in user space. 
 
-\ircode{image} requires increasing scales for both axes. To align with matrix conventions, we have to transform the row numbers.
-% So for a matrix\ircode{x} the data\ircode{x[i, j]}
+The convention for a matrix\ircode{x} the data\ircode{x[i, j]}, the display is a unit square with bottom left corner at \ircode{(i, j)}.
+Coordinates follow matrix conventions,  that is the $y$ axis is pointing downwards, and the top right corner is at \ircode{(i+1, j-1)}.
 
-We return the relevant graphical parameters as an invisible result in the basic  functions \ircode{imagem()} and \ircode{bertinrect}. The \ircode{usr} parameters are set to have $(1,1)$ as the bottom left corner, and \ircode{x[i, j]} has a unit square figure area with bottom left coordinates at $nrow(x) - i +1, j$, with drawing coordinates following the usual plot conventions, that is the $y$ axis is pointing upwards.
+Additional graphical elements can be used immediately, using this coordinat system
+\ircode{image} uses the center of a cell as an anchor point. To use \ircode{image} to generate an overlay, change the user coordinate system temporarily to \ircode{par("usr")-0.5}.
 
-%The drawing area for cell \ircode{x[i, j]} is a unit square with bottom left coordinates \ircode{ (nrrows-i+1)*} 
-%\ircode{(1+2*sepwd) -} \ircode{sepwd*} \ircode{(1+} \ircode{2*sepwd)} \ircode{- sepwd,} \ircode{j* (1+2*sepwd) - sepwd }.
+We return the relevant graphical parameters as an invisible result in the basic  functions \ircode{imagem()} and \ircode{bertinrect}. This allows to generate a sequence of graphics with consistent layout.
 
 \section{Test matrices}
 

@@ -9,7 +9,10 @@ Optional permutations can be applied to rows and/or columns. The layout of the o
 }
 \synopsis{
 	image.bertin(z, roworder,colorder,
-	main="",col = gray((0:8 / 8)^0.5), useRaster = FALSE,...
+	main="",
+	col = gray((0:8 / 8)^0.5), 
+	useRaster = FALSE,
+	...
 }
 	
 \arguments{
