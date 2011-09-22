@@ -1,8 +1,8 @@
 Package: bertin
 Type: Package
 Title: Bertin matrix display
-Version: 0.1-39
-Date: 2011-09-13
+Version: 0.1-40
+Date: 2011-09-20
 Author: G. Sawitzki
 Maintainer: G. Sawitzki <gsl@statlab.uni-heidelberg.de>
 Description: Graphical display for matrices, following the suggestions of J. Bertin.

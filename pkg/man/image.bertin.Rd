@@ -4,9 +4,17 @@
 \title{Display Bertin image}
 \description{Display a Bertin matrix image.
 }
-\details{A matrix is displayed, with values color encoded by \code{col}.
+\details{
+A matrix is displayed, with values color encoded by \code{col}.
 Optional permutations can be applied to rows and/or columns. The layout of the original data matrix is preserved in the display.
+
+See the implementation references BertinR.pdf (included in the documentation) for details.
+
+\code{sub} is shown in the first margin line. To get more control of title format and pages, use \code{\link{title}}.
+
+If \code{showpalette} is TRUE, the palette is shown in the plot margin area.
 }
+
 \synopsis{
 	image.bertin(z, roworder,colorder,
 	main="",
@@ -19,8 +27,10 @@ Optional permutations can be applied to rows and/or columns. The layout of the o
 	\item{z}{a data matrix.}
 	\item{roworder, colorder}{Permutation or selection vector for rows or columns to display.}
 	\item{main}{Main plot title.}
-	\item{col}{A color palette to encode the data.}
+         \item{sub}{sub-title.}
+         \item{palette}{a colour palette for the display of the data matrix.}
 	\item{useRaster}{logical; if TRUE a bitmap raster is used to plot the image instead of polygons. The grid must be regular in that case, otherwise an error is raised.  \code{TRUE}  seems to give aliasing problems.}
+         \item{showpalette}{include palette ramp in display.}
 	 \item{\dots}{additional parameters, passed to \code{image}.}
 }
 

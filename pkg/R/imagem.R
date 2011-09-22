@@ -9,14 +9,15 @@ function (z,
 	zlim, 
 	xlim = c(1,ncol(z)), 
     ylim = c(1,nrow(z)), 
-    col = heat.colors(12),
+    palette = heat.colors(12),
 	add = FALSE, xaxs = "i", yaxs = "i", 
 	xlab, ylab,
 	main = deparse(substitute(z)),
 	pars, # mar= c(2,2,6,6)+0.1,
-	breaks, oldstyle=FALSE,
-	names=TRUE, 
-	coloffs=0.5, rowoffs=0.5, ...)
+	mar= c(2,1,3,1)+0.1, # default mar= c(1,1,6,4)+0.1,
+	breaks, oldstyle = FALSE,
+	names = TRUE, 
+	...)
 {
 # a variant of image.default keeping matrix orientation
 # note: image() shows matrix columns as rows, i.e. transposes
@@ -39,18 +40,18 @@ function (z,
 	nrow <- nrow(z)
 	ncol <- ncol(z)
 	 
- titleline<- 2 
+ titleline<- 1 
 	if (missing(pars)){
     strwrow <- max(strwidth(rownames(z),"inch"))
     strcol <- max(strwidth(colnames(z),"inch"))
     chwidth <- par("cin")[1]
     lineheight <- par("lheight")*par("cin")[2]
-    titleline <- ceiling(strcol/lineheight)+1
-	mai <- par("mai")
-	# mai[1] unchanged
-	mai[2]<- chwidth #minimal
-	mai[3]<-strcol + 2*chwidth +4.1* lineheight# up: usual 4.1 lines
-	mai[4]<-strwrow + 2*chwidth
+    titleline <- ceiling(strcol/lineheight)+0.5
+	#mai <- par("mai")
+	mai <- c(0, chwidth, strcol + chwidth, strwrow + chwidth) + mar* lineheight
+	#mai[3]<-strcol + 2*chwidth +4.1* lineheight# up: usual 4.1 lines
+	#mai[4]<-strwrow + 2*chwidth
+	#mai <- mai + mar* lineheight
 	par(mai=mai)
 #	plot.new()
 	#adjust plot region
@@ -69,7 +70,7 @@ function (z,
 		1:nrow(zi),1:ncol(zi), zlim=zlim,
 		#xlim=xlim,
 		ylim=c(ncol(zi)+0.5,0.5), 
-		col=col, add=add, xaxs=xaxs, yaxs=yaxs,
+		col= palette, add=add, xaxs=xaxs, yaxs=yaxs,
 		xlab="", ylab="",z=zi, xaxt="n",  yaxt="n",
 #		main=main,
 		breaks=breaks, oldstyle=oldstyle,
@@ -98,7 +99,7 @@ par(usr=c(1, ncol(z)+1, 1, nrow(z)+1))#,xaxs="i",yaxs="i"
        	r <- par("usr")[2] #right
        	for (row in (1:dim(z)[1])) 
        		text(r, nrow(z)-row+1.4, rownames(z)[row], 
-            pos = 4, xpd = NA, offset = 0.5, srt = 0, cex=0.6)
+            pos = 4, xpd = NA, offset = 0.2, srt = 0, cex=0.6)
 }
 }
 	par(usr=c(1, ncol(z)+1, nrow(z), 0))

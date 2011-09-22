@@ -9,15 +9,18 @@ bertinrect
 Display a data matrix using parallel coordinates as suggested by J. Bertin. Coordinates are set up such that each element \code{x[i, j]}is represented in a unit square with bottom left at coordinates \code{(i, j)}. By convention, variables are in rows, and cases are in columns.
 }
 \usage{
-bertinrect(z, main, sepwd = 0.05, pars, ...)
+bertinrect(z, main = deparse(substitute(z)), sepwd = 0.05, pars,  
+	mar = c(2, 1, 2, 1) + 0.1, names = TRUE, ...)
 }
+                  
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{z}{a data matrix, or data structure that can be casted to a matrix.}
   \item{main}{a main title for the plot, see also \code{\link{title}}.}
-  \item{sepwd}{
-a margin width. The display of an element should be based at \code{(i + sepwd, j + sepwd)}.}
+  \item{sepwd}{ padding width for cells. The display of an element should be based at \code{(i + sepwd, j + sepwd)}.}
   \item{pars}{Graphical parameters, see   \code{par}. See details}
+  \item{mar}{margin. Margin space for row and column labels will be added.}
+  \item{names}{logical. If true, show row and column names.}
   \item{\dots}{additional parameters, passed to \code{\link{rect}}.}
 }
 

@@ -13,7 +13,9 @@
 bertinrect <- function(z, 
 	main = deparse(substitute(z)), 
 	sepwd=0.05,
-	pars,  # mar= c(1,1,6,4)+0.1,
+	pars,
+	mar= c(2,1,2,1)+0.1, # default mar= c(1,1,6,4)+0.1,
+	names=TRUE, 
 	...){
 #$Revision$
 	# [i,j] bottom left is at user coordinates (i,j)
@@ -27,14 +29,14 @@ bertinrect <- function(z,
 	if (missing(pars)){
     strwrow <- max(strwidth(rownames(z),"inch"))
     strcol <- max(strwidth(colnames(z),"inch"))
-    chwidth <- par("cin")[1]
+    chwidth <- par("cin")[1] * 0.6 # using our cex=0.6
     lineheight <- par("lheight")*par("cin")[2]
-    titleline <- ceiling(strcol/lineheight)+1
-	mai <- par("mai")
-	# mai[1] unchanged
-	mai[2]<- chwidth #minimal
-	mai[3]<-strcol + 2*chwidth +4.1* lineheight# up: usual 4.1 lines
-	mai[4]<-strwrow + 2*chwidth
+    titleline <- ceiling(strcol/lineheight)+0.5
+	#mai <- par("mai")
+	mai <- c(0, chwidth, strcol + chwidth, strwrow + chwidth) + mar* lineheight
+	#mai[3]<-strcol + 2*chwidth +4.1* lineheight# up: usual 4.1 lines
+	#mai[4]<-strwrow + 2*chwidth
+	#mai <- mai + mar* lineheight
 	par(mai=mai)
 	plot.new()
 	#adjust plot region
@@ -101,7 +103,7 @@ if (any(ranges[2,]==0)){
        	r <- par("usr")[2] #right
        	for (row in (1:dim(z)[1])) 
        		text(r, nrow(z)-row+1.4, rownames(z)[row], 
-            pos = 4, xpd = NA, offset = 0.5, srt = 0, cex=0.6)
+            pos = 4, xpd = NA, offset = 0.2, srt = 0, cex=0.6)
             
    if (!all(is.finite(z))) {
    	badpos <- !is.finite(z)

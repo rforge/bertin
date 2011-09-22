@@ -8,8 +8,10 @@
 plot.bertin(z, 
 		roworder, colorder,
 		var.orientation = c("byrow", "bycolumn", "global"),  
-                 main = "", 
-                 zcol, palette = gray((255:0 / 255)^0.5),
+                 main, sub,
+                 zcol, 
+                 palette = gray((255:0 / 255)^0.5),
+                 showpalette = TRUE,
                  ...)
 }
 \arguments{
@@ -18,14 +20,21 @@ plot.bertin(z,
   \item{colorder}{permutation used for columns.}
   \item{var.orientation}{variable oritentation. Shoule be one of "byrow"=Bertin conventions, "bycolumn"=\R{} conventions, "global".}
   \item{main}{main title.}
+  \item{sub}{sub-title.}
   \item{zcol}{a data matrix of index values for use with the colour palette.}
   \item{palette}{a colour palette for the display of the data matrix.}
+  \item{showpalette}{include palette ramp in display.}
   \item{\dots}{additional parameters, passed to \code{bertinrect}.}
 }
+
 \details{A grid of rectangles is displayed to represent the data. Typically, the value is encoded as height.
 See the references below for details.
-%%  ~~ If necessary, more details than the description above ~~
+
+\code{sub} is shown in the first margin line. To get more control of title format and pages, use \code{\link{title}}.
+
+If \code{showpalette} is TRUE, the palette is shown in the plot margin area.
 }
+
 \value{
 A data matrix with display specification added as attributes. Details are subject to change.
 This is  \code{\link{invisible}}.

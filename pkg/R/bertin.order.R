@@ -4,6 +4,7 @@
 #$Date$
 #$Author$
 
+#! or ordercor() ? see bertin.R
 bertin.order <-
 function (z, MARGIN=1, pivot=1, FUN=cor)
 {

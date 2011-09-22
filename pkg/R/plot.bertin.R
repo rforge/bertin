@@ -12,7 +12,9 @@
     
 plot.bertin <- function(z, roworder,colorder, var.orientation=c("byrow", "bycolumn", "global"),
 	main, 
-	zcol, palette = gray((255:0 / 255)^0.5),...)
+	sub,
+	zcol, palette = gray((255:0 / 255)^0.5),
+	showpalette=TRUE, ...)
 {
 #$Revision$
 bzcol <- function(v) {
@@ -42,6 +44,10 @@ bzcol <- function(v) {
 	main <- attr(z,"main")
 	if (is.null(main) ) main <- deparse(substitute(z))	
 	}
+
+	if (missing(sub)) {
+	sub <- attr(z,"sub")
+	}
 	
 	if (missing(zcol)) {
 	zcol <- attr(z,"zcol")
@@ -62,6 +68,10 @@ bzcol <- function(v) {
 		col= palette[zcol[roworder,colorder]],...)
 	#bertinrect(z[roworder,colorder], main=main, col= zcol)
 	palette(oldpalette)
+
+	if (!is.null(sub)) {title(sub=sub, line=1)}
+	if (showpalette) {bertin:::colrampmarg(palette, main="Score Colour Codes (by %)")}
+#! improve. feed back user scale
 
 	attr(z,"roworder")<-roworder
 	attr(z,"colorder")<-colorder

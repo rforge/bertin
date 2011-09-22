@@ -8,7 +8,7 @@
 ########################
 # bertin matrix support
 ########################
-
+#! or bertin.order() ? see bertin.order.R
 ordercor <- function(z, pivot, var.orientation=c("byrow", "bycolumn") ){
 	var.orientation <- match.arg(var.orientation)
 	
@@ -20,12 +20,12 @@ ordercor <- function(z, pivot, var.orientation=c("byrow", "bycolumn") ){
 	}
 
 #!  order rows/columns by their mean
-ordermean <- function(z, var.orientation=c("byrow", "bycolumn") ){
+ordermean <- function(z, var.orientation=c("byrow", "bycolumn"), ... ){
 	var.orientation <- match.arg(var.orientation)
 	
 	ord <- switch(var.orientation,
-		byrow= order(cor(t(bertinrank(z)))[pivot,]),
-		bycolumn=order(cor(bertinrank(z))[,pivot])
+		byrow= order(t(apply(z,1,mean,...))),
+		bycolumn=order(apply(z,2,mean,...))
 	)
 	ord
 	}
