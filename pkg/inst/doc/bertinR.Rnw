@@ -676,96 +676,97 @@ Colour displays are a means to convey some information. Check that your choices 
 
 Basic colour palettes. 
 
-<<fig=TRUE, echo=TRUE, width=6, height=3, label= palgreencolors>>=
-oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
+<<fig=TRUE, echo=TRUE, width=4, height=2, label= palgreencolors>>=
+oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::green.colors(100))
 colramp(bertin:::green.colors(100, rev=TRUE))
 par(oldpar)
 @
 \vspace{\stretch{1}}
-\pagebreak
-<<fig=TRUE, echo=TRUE, width=6, height=3,  label= palgredcolors>>=
-oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
+%\pagebreak
+<<fig=TRUE, echo=TRUE,  width=4, height=2,  label= palgredcolors>>=
+oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::red.colors(100), horizontal=TRUE)
 colramp(bertin:::red.colors(100, rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
 \vspace{\stretch{1}}
-\pagebreak
-<<fig=TRUE, echo=TRUE, width=6, height=3, label= palbluecolors>>=
-oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
+%\pagebreak
+<<fig=TRUE, echo=TRUE,  width=4, height=2, label= palbluecolors>>=
+oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::blue.colors(100), horizontal=TRUE)
 colramp(bertin:::blue.colors(100, rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
 \vspace{\stretch{1}}
-\pagebreak
+%\pagebreak
 This is a rather stable palette, with less than 0.1\%readers being affected by colour vision particularities. Scale interpretation seeing yellow as higher is also very stable.
 
-<<fig=TRUE, echo=TRUE, width=6, height=3, label= palblueyellowcolors>>=
-oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
+<<fig=TRUE, echo=TRUE,  width=4, height=2,  label= palblueyellowcolors>>=
+oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::blueyellow.colors(100),horizontal=TRUE)
 colramp(bertin:::blueyellow.colors(100, rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
 %
-\clearpage
+%\clearpage
 \vspace{\stretch{1}}
-\pagebreak
+%\pagebreak
 Variant of the above, highlighting the tails and  attenuating the center. For an application, see \refsec[Case Studies: cDNA Data]{sec:caseDNA}. This is a rather stable palette, with less than 0.1\% readers being affected by colour vision particularities. Scale interpretation seeing yellow as higher is also very stable.
 
-<<fig=TRUE, echo=TRUE, width=6, height=3, label= palblueyellow2colors>>=
-oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
+<<fig=TRUE, echo=TRUE,  width=4, height=2,  label= palblueyellow2colors>>=
+oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::blueyellow2.colors(100),horizontal=TRUE)
 colramp(bertin:::blueyellow2.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
 \vspace{\stretch{1}}
-\pagebreak
-<<fig=TRUE, echo=TRUE, width=6, height=3, label= palblueyellow4colors>>=
-oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
+%\pagebreak
+<<fig=TRUE, echo=TRUE,  width=4, height=2,  label= palblueyellow4colors>>=
+oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::blueyellow4.colors(100),horizontal=TRUE)
 colramp(bertin:::blueyellow4.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
 \vspace{\stretch{1}}
-\pagebreak
-<<fig=TRUE, echo=TRUE, width=6, height=3, label= palbluered2colors>>=
-oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
+%\pagebreak
+<<fig=TRUE, echo=TRUE,  width=4, height=2,  label= palbluered2colors>>=
+oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::bluered2.colors(100),horizontal=TRUE)
 colramp(bertin:::bluered2.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
 \vspace{\stretch{1}}
-\pagebreak
-<<fig=TRUE, echo=TRUE, width=6, height=3, label= palbluered4colors>>=
-oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
+%\pagebreak
+<<fig=TRUE, echo=TRUE,  width=4, height=2,  label= palbluered4colors>>=
+oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::bluered4.colors(100),horizontal=TRUE)
 colramp(bertin:::bluered4.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
 \vspace{\stretch{1}}
-\pagebreak
-<<fig=TRUE, echo=TRUE, width=6, height=3, label= palgreenred2colors>>=
-oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
+%\pagebreak
+<<fig=TRUE, echo=TRUE, width=4, height=2, label= palgreenred2colors>>=
+oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::greenred2.colors(100),horizontal=TRUE)
 colramp(bertin:::greenred2.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
 \vspace{\stretch{1}}
-\pagebreak
-<<fig=TRUE, echo=TRUE, width=6, height=3, label= palgreenred4colors>>=
-oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
+%\pagebreak
+<<fig=TRUE, echo=TRUE, width=4, height=2, label= palgreenred4colors>>=
+oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::greenred4.colors(100),horizontal=TRUE)
 colramp(bertin:::greenred4.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
 \vspace{\stretch{1}}
-\pagebreak
+%\pagebreak
+
 In \cite{tukey1991manycovar}, J. Tukey suggested to use a drastic reduction of information for analysis with many covariates. The tail palettes are provided to support a graphical variant of this strategy.
 
-<<fig=TRUE, echo=TRUE, width=6, height=3, label= paltailcolors>>=
-oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
+<<fig=TRUE, echo=TRUE, width=4, height=2, label= paltailcolors>>=
+oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::tail.colors(100),horizontal=TRUE)
 colramp(bertin:::tail.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)

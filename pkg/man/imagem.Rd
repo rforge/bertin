@@ -16,7 +16,7 @@ imagem(z,
 	xlab, ylab, 
 	main= deparse(substitute(z)), 
 	pars,
-	mar = c(2, 1, 3, 1) + 0.1, 
+	mar = c(1, 1, 2, 1) + 0.1, 
 	breaks, 
 	oldstyle = FALSE, 
 	names = TRUE, ...)

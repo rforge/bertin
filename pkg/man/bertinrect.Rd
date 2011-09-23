@@ -10,10 +10,11 @@ Display a data matrix using parallel coordinates as suggested by J. Bertin. Coor
 }
 \usage{
 bertinrect(z, main = deparse(substitute(z)), sepwd = 0.05,  
-	mar = c(2, 1, 2, 1) + 0.1, pars, 
+	pars,
+	mar = c(1, 1, 2, 1) + 0.1,  
 	names = TRUE, ...)
 }
-                  
+
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{z}{a data matrix, or data structure that can be casted to a matrix.}

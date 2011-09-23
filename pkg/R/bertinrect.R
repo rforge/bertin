@@ -7,14 +7,14 @@
 # rect function (xleft, ybottom, xright, ytop, density = NULL, angle = 45, 
 #    col = NA, border = NULL, lty = par("lty"), lwd = par("lwd"), 
 #    ...) 
-#
-# aspect ratio ok
+
 # single row: not ok, eg. bertinrect(Hotel[19,]) bertinrect(Hotel[,12])
+
 bertinrect <- function(z, 
 	main = deparse(substitute(z)), 
 	sepwd=0.05,
-	mar= c(2,1,2,1)+0.1, # default mar= c(1,1,6,4)+0.1,
 	pars,
+	mar= c(1,1,2,1)+0.1, # default mar= c(1,1,6,4)+0.1,
 	names=TRUE, 
 	...){
 #$Revision$
@@ -22,16 +22,17 @@ bertinrect <- function(z,
 	# sepwd is internal margin
 	if (missing(main)) {main <- deparse(substitute(z))}	
 	z <- as.matrix(z) #! support lists and data frames as well
+
 	nrow <- nrow(z)
 	ncol <- ncol(z)
- 
- titleline<- 2 
+
+ titleline<- 1 
 	if (missing(pars)){
     strwrow <- max(strwidth(rownames(z),"inch"))
     strcol <- max(strwidth(colnames(z),"inch"))
-    chwidth <- par("cin")[1] * 0.6 # using our cex=0.6
+	chwidth <- par("cin")[1] * 0.6 # using our cex=0.6
     lineheight <- par("lheight")*par("cin")[2]
-    titleline <- ceiling(strcol/lineheight)+0.5
+	titleline <- ceiling(strcol/lineheight)+0.5
 	#mai <- par("mai")
 	mai <- c(0, chwidth, strcol + chwidth, strwrow + chwidth) + mar* lineheight
 	#mai[3]<-strcol + 2*chwidth +4.1* lineheight# up: usual 4.1 lines
@@ -50,18 +51,12 @@ bertinrect <- function(z,
 		if(!is.null(pars)) { par(pars)}
 	}
 	
-#	}
-#	else 
-#	{
-#		plot.new()
-#		if(!is.null(pars)) { par(pars)}
-#	}
-
 
 	plot.window(c(1, ncol(z)+1), c(1, nrow(z)+1),xaxs="i",yaxs="i", asp=1)
-#	title(main=main, sub=as.character(titleline ),line=titleline, ...)
-	title(main=main, line=titleline)
-	p <-par("cin","din","fin","pin","plt","mai", "mar","usr")
+
+	title(main=main, line=titleline) # let sub etc be handled by image
+
+	p <-par("cin","din","fin","pin","plt","mai", "mar","usr") # for debug
 #	oldpar <- par(no.readonly = TRUE)
 	#on.exit(par(oldpar))
 #    par(mar=mar)
@@ -89,10 +84,10 @@ bertinrect <- function(z,
 		sepwd +zeroline #box zero line
 	xtop <- z*scale+xbottom
 
-if (any(ranges[2,]==0)){
-	abline(h= xbottom[ranges[2,]==0],lty=3,col="gray")}
 	rect(xleft,xbottom,xright,xtop,...)
-
+if (any(ranges[2,]==0)){
+	abline(h= xbottom[ranges[2,]==0],lty=3,col="darkgray")}
+	
 	#textnames(z)
 	pu <- par("usr")
    #          pos = 3, xpd = NA, offs = 1, srt = 90, cex=0.6)}
@@ -112,11 +107,11 @@ if (any(ranges[2,]==0)){
    	badpos <- !is.finite(z)
    	xbottom <-  1+nrow(z)-(matrix((1:nrow(z)),nrow(z),ncol(z))) + sepwd #box zero line
    	text(xleft[badpos]+0.4,xbottom[badpos],labels=z[badpos], pos=3, offs=0.5,col="red",cex=0.6)
-   }
-} 
+	}
+}
 	par(usr=c(1, ncol(z)+1, nrow(z), 0))
 	p <-par("cin","din","fin","pin","plt","mai", "mar","usr")
 	invisible(p)
-}
+}#bertinrect
 
 # bertinrect(Hotel)
