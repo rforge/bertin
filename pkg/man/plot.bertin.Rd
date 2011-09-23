@@ -4,17 +4,18 @@
 \alias{plot.bertin}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Bertin plot}
-\description{Display a Bertin plot of a data matrix.}
+\description{Display a Bertin plot of a data matrix. 
+This is a high level variant of \code{\link{bertinrect}}.}
 \usage{
 plot.bertin(z, 
-		roworder, colorder,
-		var.orientation = c("byrow", "bycolumn", "global"),  
-                 main, sub,
- 				 mar= c(6,1,2,1)+0.1,
-                 zcol, 
-                 palette = gray((255:0 / 255)^0.5),
-                 showpalette = TRUE,
-                 ...)
+            roworder, colorder,
+            var.orientation = c("byrow", "bycolumn", "global"),  
+            main, sub,
+            mar= c(6,1,2,1)+0.1,
+            zcol, 
+            palette = gray((255:0 / 255)^0.5),
+            showpalette = TRUE,
+            ...)
 }
 \arguments{
   \item{z}{a data matrix.}
@@ -64,28 +65,23 @@ We try to follow Bertin's original model, but consistency with \R{} traditions s
 
 Following Bertin, we display variables as rows as a default. This can be controlled by \code{var.orientation}.
 
-We use a grey level palette as a default, whereas Bertin used black and white. Use \code{palette=c("white","black")} as an argument to get Bertin's choice.
+We use a grey level palette as a default, whereas Bertin used black and white. Use \code{palette = c("white", "black")} as an argument to get Bertin's choice.
 
-Break points for colour choice are based on range. We use the mid-range as default cut point for a two colour choice, whereas Bertin uses the mean as default.
+Break points for colour choice are based on range. We use the mid-range as default cut point for a two colour choice, whereas Bertin uses the mean as cut point.
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
-\seealso{
- \code{\link{image.bertin}}
- }
+\seealso{\code{\link{image.bertin}}}
+
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 library(bertin)
 data(Hotel)
 plot.bertin(Hotel)
 
 plot.bertin(Hotel, palette=c("white","black"))
 
-hotelrk <- bertinrank(Hotel)
-hotelvars <-bertin.order(hotelrk, pivot=19)
-plot.bertin(Hotel, roworder=hotelvars)
+# rows rearranged by rank correlation to varible 19 (Occupation)
+plot.bertin(Hotel, roworder = bertin.order(bertinrank(Hotel), pivot="Occupation"))
 }
-\keyword{ hplot }% __ONLY ONE__ keyword per line
+\keyword{ hplot }

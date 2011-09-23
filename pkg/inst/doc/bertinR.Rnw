@@ -68,7 +68,7 @@
 %
 \author[G\"unther Sawitzki]{G\"unther Sawitzki\\StatLab Heidelberg}
 %	\contrib[...]{...} no2 |
-\address{Address: StatLab Heidelberg}
+\address{Address: G. Sawitzki, StatLab Heidelberg, Im Neuenheimer Feld 294, D 69120 Heidelberg}
 %	\curraddr{...} no no
 \email{gs@statlab.uni-heidelberg.de}
 \urladdr{http://bertin.r-forge.r-project.org/}
@@ -240,7 +240,7 @@ abline(h=16, col= "green", lwd=3)
 \end{figure}
 
 As a second example, we use the  the \ircode{USJudgeRatings} data set (\reffig{fig:judgeorig}). 
-The data  is in Table \ref{tab:judge} (\pref{tab:judge}).
+The data  is listed in  \reftab{tab:judge}.
 %<<results=tex, echo=FALSE, include=FALSE>>=
 %print(xtable(USJudgeRatings,label="tab:judge", caption="US judge ratings"), floating=TRUE)
 %@
@@ -672,7 +672,9 @@ Colour displays are a means to convey some information. Check that your choices 
 \pagebreak
 \subsection{Colour Palettes}
 
-Basic colour palette. 
+%:Basic colour palettes. 
+
+Basic colour palettes. 
 
 <<fig=TRUE, echo=TRUE, width=6, height=3, label= palgreencolors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(1, 1, 4, 1) + 0.1)
@@ -846,6 +848,9 @@ Additional graphical elements can be used immediately, using this coordinate sys
 
 We return the relevant graphical parameters as an invisible result in the basic  functions \ircode{imagem()} and \ircode{bertinrect}. This allows to generate a sequence of graphics with consistent layout.
 
+\clearpage
+\vspace{\stretch{1}}
+\pagebreak
 \section{Case Studies}
 \label{sec:case}
 %
@@ -862,6 +867,9 @@ We return the relevant graphical parameters as an invisible result in the basic 
 \end{center}
 \end{figure}
 
+\clearpage
+\vspace{\stretch{1}}
+\pagebreak
 \subsection{cDNA Data}
 \label{sec:caseDNA}
 \smallskip
@@ -874,7 +882,10 @@ In 2-dye cDNA data, hybridisation results are measured using a colour scan, with
 \caption{\textbf{cDNA data}. Channel intensities for red and green channel of a cDNA scan (foreground and background).}\label{fig:L34qcLegend}
 \end{center}
 \end{figure}
-Œ
+
+\clearpage
+\vspace{\stretch{1}}
+\pagebreak
 \section{Test matrices}
 
 To test the implementation, a series of matrices is provided. Each matrix is shown in four displays: as an image using default setting of the low level function \ircode{imagem}, as an image using the default setting of \ircode{image.bertin}, as a rectangle display using the low level function \ircode{bertinrect} and as a display using the default setting of \ircode{plot.bertin}.
@@ -886,34 +897,38 @@ testplot <- function(z, main=deparse(substitute(z)))
 	bertinrect(z, main= main)
 	title(sub="bertinrect", line=1)
 par(mfg=c(1,2)) # fix for stray display allocation
-	plot.bertin(z, main= main)
-par(mfg=c(1,2)) # fix for stray display allocation -- this is very bad
-	title(sub="plot.bertin", line=1)
-par(mfg=c(2,1)) # fix for stray display allocation
 	imagem(z, main= main)
 	title(sub="imagem", line=1)
+par(mfg=c(2,1)) # fix for stray display allocation -- this is very bad
+	plot.bertin(z, main= main)
+par(mfg=c(2,1)) # fix for stray display allocation -- this is very very bad
+	title(sub="plot.bertin", line=1)
 par(mfg=c(2,2)) # fix for stray display allocation
 	image.bertin(z, main= main)
 	title(sub="image.bertin", line=1)
 	par(oldpar)
 }
 @
+%testplot <- function(z, main=deparse(substitute(z)))
+%{
+%	oldpar <- par(mfcol=c(2,2))
+%	bertinrect(z, main= main)
+%	title(sub="bertinrect", line=1)
+%par(mfg=c(1,2)) # fix for stray display allocation
+%	plot.bertin(z, main= main)
+%par(mfg=c(1,2)) # fix for stray display allocation -- this is very bad
+%	title(sub="plot.bertin", line=1)
+%par(mfg=c(2,1)) # fix for stray display allocation
+%	imagem(z, main= main)
+%	title(sub="imagem", line=1)
+%par(mfg=c(2,2)) # fix for stray display allocation
+%	image.bertin(z, main= main)
+%	title(sub="image.bertin", line=1)
+%	par(oldpar)
+%}
 
-\subsection{Random Matrices}
-
-<<>>=
-nrow <- 5
-ncol <- 3
-BMunif <- matrix(runif(nrow*ncol), nrow, ncol)
-colnames(BMunif) <- colnames(BMunif, do.NULL=FALSE)
-rownames(BMunif) <- rownames(BMunif, do.NULL=FALSE)
-
-BMnorm <- matrix(rnorm(nrow*ncol), nrow, ncol)
-colnames(BMnorm) <- colnames(BMnorm, do.NULL=FALSE)
-rownames(BMnorm) <- rownames(BMnorm, do.NULL=FALSE)
-@
 \smallskip
-\subsection{Pure Vanilla}
+\subsection{Pure Vanilla Random Matrices}
 The most simple case: all variables are on a common scale, and the sequence is given (no seriation possible) or irrelevant (no seriation necessary).
 
 If we want to build test matrices, there are two free parameters to be set, for example
@@ -963,15 +978,16 @@ Binf <- rep(c(Inf,0,-Inf),length.out= BMExplCols)
 @
 \smallskip
 \subsubsection{Basic test matrices}
-
+L
 <<>>=
-Brmatrix <- rbind(Bzero, Bone, Bmone, Binc, Bdec, Bstep, Bhat)
-colnames(Brmatrix) <- colnames(Brmatrix,FALSE)
+Brmatrix <- rbind(Bhat, Bzero, Bone, Bmone, Binc, Bdec, Bstep)
+colnames(Brmatrix) <- colnames(Brmatrix, FALSE)
 @
+See \reftab{tab:Brmatrix}.
 
 \begin{center}
 <<results=tex, echo=FALSE>>=
-print(xtable(Brmatrix,label="Brmatrix", caption="Brmatrix: test matrix, by row."), floating=FALSE)
+print(xtable(Brmatrix, align="|r|rrrrrr|", label="tab:Brmatrix", caption="\\textbf{Brmatrix}: test matrix, by row."), floating=TRUE)
 @
 \end{center}
 
@@ -988,9 +1004,11 @@ Check! Use row matrix and column matrix for tests.
 Bcmatrix <- cbind(Bzero, Bone, Bmone, Binc, Bdec, Bstep, Bhat)
 rownames(Bcmatrix) <- rownames(Bcmatrix,FALSE)
 @
+See \reftab{tab:Bcmatrix}.
+
 \begin{center}
 <<results=tex, echo=FALSE>>=
-print(xtable(Bcmatrix, label="Bcmatrix", caption="Bcmatrix: test matrix, by column."), floating=FALSE)
+print(xtable(Bcmatrix, align="|r|rrrrrrr|", label="tab:Bcmatrix", caption="\\textbf{Bcmatrix}: test matrix, by column."), floating=TRUE)
 @
 \end{center}
 
@@ -1021,10 +1039,13 @@ Test matrix by row with normal random error, using default settings
 Brmatrixx <- rbind(Bzero, Bone, Bmone, Binc, Bdec, Bstep, Bhat, 
 	Bnazero, Bnanzero, Binf)
 @
+
+See \reftab{tab:Brmatrixx}.
+
 \begin{center}
 <<results=tex, echo=FALSE>>=
 print(xtable(Brmatrixx, 
-label="Brmatrixx", caption="Brmatrixx: matrix with special values, by row."), floating=FALSE)
+label="tab:Brmatrixx", align="|r|rrrrrr|", caption="\\textbf{Brmatrixx}: matrix with special values, by row. NaN and NA values are not printed."), floating=TRUE)
 @
 \end{center}
 

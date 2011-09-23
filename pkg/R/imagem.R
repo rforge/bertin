@@ -90,11 +90,14 @@ par(usr=c(1, ncol(z)+1, 1, nrow(z)+1))#,xaxs="i",yaxs="i"
 		#! improve placement of names. use either nrow/ncol or par("usr")
 
 	#textnames(z)
+	pu <- par("usr")
    #          pos = 3, xpd = NA, offs = 1, srt = 90, cex=0.6)}
       if (!is.null(colnames(z))){ 
+      	colwidth <- (pu[2]-pu[1])/ncol
+      	rowheight <- (pu[4]-pu[3])/nrow
        	for (col in (1:dim(z)[2])) 
-       		text(col+0.2, par("usr")[4]+0.5, colnames(z)[col], 
-             adj=c(0,1),xpd = NA, offset = 4, srt = 90, cex=0.6)}
+       		text(col+0.5*colwidth, par("usr")[4]+0.1*rowheight, colnames(z)[col], #pos=3,
+             adj=c(0,1),xpd = NA, offset = 2.0, srt = 90, cex=0.6)}
        if (!is.null(rownames(z))) {
        	r <- par("usr")[2] #right
        	for (row in (1:dim(z)[1])) 
