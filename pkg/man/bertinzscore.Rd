@@ -1,8 +1,8 @@
-%$HeadURL: svn+ssh://gsawitzki@svn.r-forge.r-project.org/svnroot/bertin/pkg/vignettes/bertinR.Rnw $
-%$Id: bertinR.Rnw 17 2011-09-04 12:30:06Z gsawitzki $
-%$Revision: 17 $
-%$Date: 2011-09-04 14:30:06 +0200 (Sun, 04 Sep 2011) $
-%$Author: gsawitzki $
+%$HeadURL$
+%$Id$
+%$Revision$
+%$Date$
+%$Author$
 
 \name{bertinzscore}
 \alias{bertinzscore}

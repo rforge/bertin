@@ -13,8 +13,8 @@
 bertinrect <- function(z, 
 	main = deparse(substitute(z)), 
 	sepwd=0.05,
-	pars,
 	mar= c(2,1,2,1)+0.1, # default mar= c(1,1,6,4)+0.1,
+	pars,
 	names=TRUE, 
 	...){
 #$Revision$

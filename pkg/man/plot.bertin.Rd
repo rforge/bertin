@@ -1,4 +1,5 @@
-%#$Id: bertin.R 25 2011-09-06 11:19:19Z gsawitzki $
+%$Id$
+%$Revision$
 \name{plot.bertin}
 \alias{plot.bertin}
 %- Also NEED an '\alias' for EACH other topic documented here.
@@ -9,6 +10,7 @@ plot.bertin(z,
 		roworder, colorder,
 		var.orientation = c("byrow", "bycolumn", "global"),  
                  main, sub,
+ 				 mar= c(6,1,2,1)+0.1,
                  zcol, 
                  palette = gray((255:0 / 255)^0.5),
                  showpalette = TRUE,
@@ -18,9 +20,10 @@ plot.bertin(z,
   \item{z}{a data matrix.}
   \item{roworder}{permutation used for rows.}
   \item{colorder}{permutation used for columns.}
-  \item{var.orientation}{variable oritentation. Shoule be one of "byrow"=Bertin conventions, "bycolumn"=\R{} conventions, "global".}
+  \item{var.orientation}{variable oritentation. Should be one of "byrow"=Bertin conventions, "bycolumn"=\R{} conventions, "global".}
   \item{main}{main title.}
   \item{sub}{sub-title.}
+  \item{mar}{margin. Margin space for row and column labels will be added.}
   \item{zcol}{a data matrix of index values for use with the colour palette.}
   \item{palette}{a colour palette for the display of the data matrix.}
   \item{showpalette}{include palette ramp in display.}

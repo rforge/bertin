@@ -13,7 +13,9 @@
 plot.bertin <- function(z, roworder,colorder, var.orientation=c("byrow", "bycolumn", "global"),
 	main, 
 	sub,
-	zcol, palette = gray((255:0 / 255)^0.5),
+	mar= c(6,1,2,1)+0.1, # default mar= c(1,1,6,4)+0.1,
+	zcol, 
+	palette = gray((255:0 / 255)^0.5),
 	showpalette=TRUE, ...)
 {
 #$Revision$
@@ -65,7 +67,7 @@ bzcol <- function(v) {
 	oldpalette <-palette(palette)
 	bertinrect(z[roworder,colorder], 
 		main=main, 
-		col= palette[zcol[roworder,colorder]],...)
+		col= palette[zcol[roworder,colorder]], mar=mar,...)
 	#bertinrect(z[roworder,colorder], main=main, col= zcol)
 	palette(oldpalette)
 

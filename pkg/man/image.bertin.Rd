@@ -16,9 +16,12 @@ If \code{showpalette} is TRUE, the palette is shown in the plot margin area.
 }
 
 \synopsis{
-	image.bertin(z, roworder,colorder,
-	main="",
-	col = gray((0:8 / 8)^0.5), 
+	image.bertin(z, 
+	roworder,colorder,
+	main, sub,
+	mar= c(6,1,2,1)+0.1
+	palette = gray((255:0 / 255)^0.5),
+	showpalette=TRUE,
 	useRaster = FALSE,
 	...
 }
@@ -27,11 +30,12 @@ If \code{showpalette} is TRUE, the palette is shown in the plot margin area.
 	\item{z}{a data matrix.}
 	\item{roworder, colorder}{Permutation or selection vector for rows or columns to display.}
 	\item{main}{Main plot title.}
-         \item{sub}{sub-title.}
-         \item{palette}{a colour palette for the display of the data matrix.}
+    \item{sub}{sub-title.}
+    \item{mar}{margin. Margin space for row and column labels will be added.}
+    \item{palette}{a colour palette for the display of the data matrix.}
+    \item{showpalette}{include palette ramp in display.}
 	\item{useRaster}{logical; if TRUE a bitmap raster is used to plot the image instead of polygons. The grid must be regular in that case, otherwise an error is raised.  \code{TRUE}  seems to give aliasing problems.}
-         \item{showpalette}{include palette ramp in display.}
-	 \item{\dots}{additional parameters, passed to \code{image}.}
+	\item{\dots}{additional parameters, passed to \code{image}.}
 }
 
 \value{
