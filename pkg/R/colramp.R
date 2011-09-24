@@ -64,6 +64,7 @@ colrampmarg <- function(col=  heat.colors(256), nr=100, minlab=0, maxlab=100, ma
  #	str(par())
 # 	str(oldpar)
 	par(oldpar1)
+	par(mfg= oldpar1$mfg)
 }
 # p <- imagem(Hotel); colrampmarg()
 
@@ -74,3 +75,27 @@ colrampmarg <- function(col=  heat.colors(256), nr=100, minlab=0, maxlab=100, ma
 # colramp(heat.colors(128),main="Heat colors")
 # colramp(heat.colors(128),main="Heat colors", horizontal=FALSE)
 # colrampmarg(c("black","white"))
+
+colrampmarg1 <- function(col=  heat.colors(256), nr=100, minlab=0, maxlab=100, main,...){
+	if (missing(main)) main<-deparse(substitute(col))
+	plt <- par("plt") # x1,x2, y1, y2
+	plt[1] <- plt[1]+0.02
+	plt[2] <- plt[2]-0.02
+	plt[3] <- 0.05
+	plt[4] <- 0.08
+	oldpar1 <- par(no.readonly=TRUE)
+	oldpar <- par(yaxt="n", plt = plt,  new=TRUE)#, mar=c(2,0,2,0)+0.1)#,mar=c(1,0,1,0)+0.1)#, mar=c(1,0,0,0)+0.1)plt=c(0,1,0,1), 
+#        mar=c(3.5,12.0,0.5,12.0), new=TRUE, xaxt="n", las=1)
+ 	#colramp(col=col, nr=nr, horizontal=TRUE, ...)
+ 	a <- matrix(nrow= nr, ncol= 1)
+	a[,1]<-c(1:nr)
+#	image(x= (1:nr)/nr*100,, a, xlim=c(1,100), col=col,main="", xlab="", cex.axis=0.6, tcl=-0.2, padj=0, add=FALSE,...) #, tcl=0.5
+	image(x= (1:nr)/nr*100,, a, xlim=c(1,100), col=col, main="", xlab="", ylab="", xaxt="n",yaxt="n",add=TRUE,...) #, tcl=0.5
+	title(main=main, line=0.5, cex.main=0.6)
+	axis(1,padj=-3, tcl=-0.2, cex.axis=0.6)
+	cat("par0 ");str(par())
+	par(oldpar1)
+	cat("oldpar1 ");str(oldpar1)
+	cat("par1 ");str(par())
+} # colrampmarg1
+# p <- imagem(Hotel); colrampmarg()
