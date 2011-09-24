@@ -13,7 +13,7 @@
 plot.bertin <- function(z, roworder,colorder, var.orientation=c("byrow", "bycolumn", "global"),
 	main, 
 	sub,
-	mar= c(6,1,2,1)+0.1, # default mar= c(1,1,6,4)+0.1,
+	mar= c(1,1,3,1)+0.1, # default mar= c(1,1,6,4)+0.1,
 	zcol, 
 	palette = gray((255:0 / 255)^0.5),
 	showpalette=TRUE, ...)

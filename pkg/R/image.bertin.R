@@ -16,7 +16,7 @@ image.bertin <- function
 (z, roworder,colorder,
 	main, 
 	sub,
-	mar= c(6,1,2,1)+0.1, # default mar= c(1,1,6,4)+0.1,
+	mar= c(1,1,3,1)+0.1, # default mar= c(1,1,6,4)+0.1,
 	palette = gray((255:0 / 255)^0.5),
 	showpalette=TRUE,
 	useRaster = FALSE,
