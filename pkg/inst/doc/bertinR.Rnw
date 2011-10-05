@@ -119,9 +119,9 @@ library(bertin)
 data(Hotel)
 @
 \section{Bertin Plots}
-Among the rich material on graphical presentation of information, in \cite{brtn77gtg} (engl. \cite{seriation:Bertin:1999}) J. Bertin discusses the presentation of data matrices, with a particular view to seriation. \cite{seriation:Falguerolles:1997} gives an appraisal of this aspect of Bertin's work. The methods discussed in \cite{seriation:Falguerolles:1997} have been implemented in the Voyager system \cite{Sawitzki1996Extensible-Stat}. They have been partially re-implemented in \R{}, and this paper gives an introduction to the R-implementation.
+Among the rich material on graphical presentation of information, in \cite{brtn77gtg} (engl. \cite{seriation:Bertin:1999}) J. Bertin discusses the presentation of data matrices, with a particular view to seriation. \cite{seriation:Falguerolles:1997} gives an appraisal of this aspect of Bertin's work. The methods discussed in \cite{seriation:Falguerolles:1997} have been implemented in the Voyager system \cite{Sawitzki1996Extensible-Stat}. They have been partially re-implemented in \R{}, and this paper gives an introduction to the \R{} implementation.
 
-The \R{}-implementation can be downloaded as a package \ircode{bertin} from \url{http://bertin.r-forge.r-project.org/}.  \cite{seriation:Falguerolles:1997} is included as bertin.pdf in the documentation section of the package.
+The \R{}-implementation can be downloaded as a package \ircode{bertin} from \url{http://bertin.r-forge.r-project.org/}.  The paper \cite{seriation:Falguerolles:1997} is included as bertin.pdf in the documentation section of the package.
 
 Bertin uses a small data set on hotel occupancy data to illustrate his ideas.
 
@@ -172,7 +172,7 @@ permutations, and groupings of rows or columns. To fix ideas, think of a data ma
 case, with real valued variables. For each variable, draw a bar chart of variable value by case. Highlight
 all bars representing a value above some sample threshold for that variable (\reffig{fig:hotel19}).
 
-<<fig=TRUE, include = FALSE, echo=FALSE, results=hide, label=hotel19, width=8, height=4, >>=
+<<fig=TRUE, include = FALSE, echo=FALSE, results=hide, label=hotel19, width=6, height=2 >>=
 col=ifelse(Hotel[19,]>mean(as.matrix(Hotel[19,])),"black","white")
  bertinrect(Hotel["Occupation",], col=col)
 @
@@ -181,18 +181,18 @@ col=ifelse(Hotel[19,]>mean(as.matrix(Hotel[19,])),"black","white")
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=0.9\linewidth]{"bertinR-hotel19"}
-\caption{Display of one variable: \textbf{Hotel data}.  Observations above average are highlighted.}
+\caption{Display of one variable: \textbf{Hotel data}.  Observations above average are highlighted in black.}
 \label{fig:hotel19}
 \end{center}
 \end{figure}
 
 Variables are collected in a matrix to display the complete data set (\reffig{fig:hotelorig}). By convention, Bertin shows variables in rows and cases in columns. To make periodic structures more visible, the data are  repeated cyclically.
 
-<<fig=TRUE, include = FALSE, echo=FALSE, label=hotelorig, width=8, height=5>>=
+<<fig=TRUE, include = FALSE, echo=FALSE, label=hotelorig, width=5, height=4>>=
 Hotel2 <- cbind(Hotel,Hotel)
 rowmeans <- apply(Hotel2,1,mean)
 col=ifelse(Hotel2[,]>rowmeans, "black","white")
-bertinrect(Hotel2, main="Hotel 2", col=col,  pars = list(mar=c(0.2,0.2,4,8)))
+bertinrect(Hotel2, main="Hotel 2", col=col)
 @
 
 %: fig 02 hotelorig
@@ -912,18 +912,20 @@ testplot <- function(z, main=deparse(substitute(z)))
 {
 	oldpar <- par(mfcol=c(2,2))
 	bertinrect(z, main= main)
-	title(sub="bertinrect", line=1)
+	title(sub="bertinrect", line=1, cex.sub=0.6)
+
 par(mfg=c(1,2)) # fix for stray display allocation
 	imagem(z, main= main)
-	title(sub="imagem", line=1)
+	title(sub="imagem", line=1, cex.sub=0.6)
+
 par(mfg=c(2,1)) # fix for stray display allocation -- this is very bad
 	plot.bertin(z, main= main)
 par(mfg=c(2,1)) # fix for stray display allocation -- this is very very bad
-	title(sub="plot.bertin", line=1)
+	title(sub="plot.bertin", line=0, cex.sub=0.6)
 par(mfg=c(2,2)) # fix for stray display allocation
 	image.bertin(z, main= main)
-	title(sub="image.bertin", line=1)
-	par(oldpar)
+	title(sub="image.bertin", line=0,  cex.sub=0.6)
+		par(oldpar)
 }
 @
 %testplot <- function(z, main=deparse(substitute(z)))
@@ -1018,7 +1020,7 @@ R may use internal housekeeping to keep matrix columns homogeneous.
 Check! Use row matrix and column matrix for tests.
 
 <<>>=
-Bcmatrix <- cbind(Bzero, Bone, Bmone, Binc, Bdec, Bstep, Bhat)
+Bcmatrix <- cbind(Bhat, Bzero, Bone, Bmone, Binc, Bdec, Bstep)
 rownames(Bcmatrix) <- rownames(Bcmatrix,FALSE)
 @
 See \reftab{tab:Bcmatrix}.
@@ -1053,7 +1055,7 @@ Test matrix by row with normal random error, using default settings
 \subsection{Test matrices with IEEE specials}
 
 <<>>=
-Brmatrixx <- rbind(Bzero, Bone, Bmone, Binc, Bdec, Bstep, Bhat, 
+Brmatrixx <- rbind(Bhat, Bzero, Bone, Bmone, Binc, Bdec, Bstep,  
 	Bnazero, Bnanzero, Binf)
 @
 
@@ -1062,7 +1064,8 @@ See \reftab{tab:Brmatrixx}.
 \begin{center}
 <<results=tex, echo=FALSE>>=
 print(xtable(Brmatrixx, 
-label="tab:Brmatrixx", align="|r|rrrrrr|", caption="\\textbf{Brmatrixx}: matrix with special values, by row. NaN and NA values are not printed."), floating=TRUE)
+label="tab:Brmatrixx", align="|r|rrrrrr|", 
+	caption="\\textbf{Brmatrixx}: matrix with special values, by row. NaN and NA values are not printed."), floating=TRUE)
 @
 \end{center}
 
@@ -1073,8 +1076,8 @@ testplot(Brmatrixx)
 Test matrix with IEEE specials by row,  using default settings
 
 <<>>=
-Bcmatrixx <- cbind(Bzero, Bone, Bmone, Binc, Bdec, Bstep, Bhat, 
-	Bnazero, Bnanzero,Binf)
+Bcmatrixx <- cbind(Bhat, Bzero, Bone, Bmone, Binc, Bdec, Bstep,
+	Bnazero, Bnanzero, Binf)
 @
 
 <<fig=TRUE,width=10, height=10, echo=FALSE, label=testplotBcmatrixx>>=

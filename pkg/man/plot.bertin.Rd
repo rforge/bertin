@@ -11,7 +11,7 @@ plot.bertin(z,
             roworder, colorder,
             var.orientation = c("byrow", "bycolumn", "global"),  
             main, sub,
-            mar= c(6,1,2,1)+0.1,
+            mar= c(3, 1, 3, 1) + 0.1,
             zcol, 
             palette = gray((255:0 / 255)^0.5),
             showpalette = TRUE,
@@ -24,7 +24,7 @@ plot.bertin(z,
   \item{var.orientation}{variable oritentation. Should be one of "byrow"=Bertin conventions, "bycolumn"=\R{} conventions, "global".}
   \item{main}{main title.}
   \item{sub}{sub-title.}
-  \item{mar}{margin. Margin space for row and column labels will be added.}
+  \item{mar}{margin. Margin space for row and column labels will be added. The \R{} default is c(5, 4, 4, 2) + 0.1.}
   \item{zcol}{a data matrix of index values for use with the colour palette.}
   \item{palette}{a colour palette for the display of the data matrix.}
   \item{showpalette}{include palette ramp in display.}
