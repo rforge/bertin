@@ -85,8 +85,9 @@ colrampmarg <- function(colpalette =  palette(), vals=0:100, main,...){
 #	image(x= (1:nr)/nr*100,, a, xlim=c(1,100), col=col, main="", xlab="", ylab="", xaxt="s",padj=-3, tcl=-0.2, cex.axis=0.6, yaxt="n", add=FALSE,...)		
 	title(main=main, line=0.2, cex.main=0.6)
 	axis(1,padj=-3, tcl=-0.2, cex.axis=0.6)
-	par(oldpar1)
-	par(mfg= oldpar1$mfg, new=FALSE)
+	par(oldpar1) #?? does not set -- see next line
+	par(mfg= oldpar1$mfg, pin=oldpar1$pin, plt=oldpar1$plt, new=FALSE)
+#	oldpar1
 }
 
 
