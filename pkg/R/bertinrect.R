@@ -10,6 +10,9 @@
 
 # single row: not ok, eg. bertinrect(Hotel[19,]) bertinrect(Hotel[,12])
 
+############
+# bertinrect
+############
 bertinrect <- function(z, 
 	main = deparse(substitute(z)), 
 	sepwd=0.05,
@@ -18,6 +21,8 @@ bertinrect <- function(z,
 	names=TRUE, 
 	...){
 #$Revision$
+#! adjust calling structure with rect()
+# keep imagem() and bertinrect() in parallel 
 	# [i,j] bottom left is at user coordinates (i,j)
 	# sepwd is internal margin
 	if (missing(main)) {main <- deparse(substitute(z))}	
@@ -34,7 +39,7 @@ bertinrect <- function(z,
     lineheight <- par("lheight")*par("cin")[2]
 	titleline <- ceiling(strcol/lineheight)+0.5
 	#mai <- par("mai")
-	mai <- c(0, chwidth, strcol + chwidth, strwrow + chwidth) + mar* lineheight
+	mai <- c(0, chwidth, strcol + chwidth, strwrow + chwidth) + mar * lineheight
 	#mai[3]<-strcol + 2*chwidth +4.1* lineheight# up: usual 4.1 lines
 	#mai[4]<-strwrow + 2*chwidth
 	#mai <- mai + mar* lineheight
@@ -85,9 +90,10 @@ bertinrect <- function(z,
 	xtop <- z*scale+xbottom
 
 	rect(xleft,xbottom,xright,xtop,...)
-if (any(ranges[2,]==0)){
-	abline(h= xbottom[ranges[2,]==0],lty=3,col="darkgray")}
 	
+	if (any(ranges[2,]==0)){
+		abline(h= xbottom[ranges[2,]==0],lty=3,col="darkgray")}
+
 	#textnames(z)
 	pu <- par("usr")
    #          pos = 3, xpd = NA, offs = 1, srt = 90, cex=0.6)}
@@ -113,5 +119,6 @@ if (any(ranges[2,]==0)){
 	p <-par("cin","din","fin","pin","plt","mai", "mar","usr")
 	invisible(p)
 }#bertinrect
+
 
 # bertinrect(Hotel)

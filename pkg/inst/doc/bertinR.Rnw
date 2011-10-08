@@ -212,8 +212,8 @@ colmeans <- apply(Hotel2,1,mean)
 rowperm <- c(19,18,20, 8, 11, 4, 12, 13,16,14,1,2, 7, 9, 10, 17, 6, 3, 5,15)
 plot.bertin(Hotel2, roworder=rowperm,
 	zcol=ifelse(Hotel2[,]>colmeans, 2,1),
-	palette=c("white","black"))
-title(sub="Variables rearranged", line=0)
+	palette=c("white","black"), main="Hotel (repeated)")
+title(sub="Variables rearranged", line=1)
 abline(h=6, col= "green", lwd=3)
 abline(h=12, col= "green", lwd=3)
 abline(h=16, col= "green", lwd=3)
@@ -371,41 +371,47 @@ ZARRILLI,K.J.&8.60&7.40&7.00&7.50&7.50&7.70&7.40&7.20&6.90&7.00&7.80&7.10 \\
 \end{table}
 %\end{minipage}
 
-%:  fig judgeorig
+%: fig04 judgeorig
 
 
 <<fig=TRUE, include = FALSE, echo=FALSE, label=judgeorig,width=12, height=6>>=
 colmeans <- apply(USJudgeRatings,2,mean)
-col=ifelse(USJudgeRatings[,]>colmeans, "black","white")
-bertinrect(t(USJudgeRatings),col=t(col), sepwd=0.1,  pars = list(mar=c(0.05,0.05,10,4)), main="")
-#bertinrect(t(USJudgeRatings),col=t(col), sepwd=0.1,  pars = list(mar=c(0.2,0.2,7,6)), main="")
+col = ifelse(USJudgeRatings[,] > colmeans, "black", "white")
+bertinrect( t(USJudgeRatings), col=t(col), sepwd=0.1, mar=c(1,1,1,1))
+title( main="US Judge Ratings", line=5)
 @
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=1.0\linewidth]{"bertinR-judgeorig"}
-\caption{Display of a data matrix: USJudgeRatings data. Lawyers' ratings of state judges in the US Superior Court.}
+\caption{Display of a data matrix: \textbf{USJudgeRatings data}. Lawyers' ratings of state judges in the US Superior Court.}
 \label{fig:judgeorig}
 \end{center}
 \end{figure}
 
-Both cases (the judges) and variables (the qualities) allow for a rearrangement. Just sorting for row and column averages gives a more informative picture  (\reffig{fig:judgeperm}). The number of contacts stands out - it has a different structure than the other variables. After all, this is not a rating variable at all, but ancillary information. There is little reason why it should go along with the rating variables. Judge G.~A.~Saden seems to be special. Most variables would rank him to the upper group, be his worth of retention is below average. The esteem of his integrity and demeanour go along with this. Overall, there is a very clear separation into an upper and a lower group.
+Both the cases (the judges) and the variables (the qualities) allow for a rearrangement. Just sorting for row and column averages gives a more informative picture  (\reffig{fig:judgeperm}). The number of contacts \ircode{CONT} stands out - it has a different structure than the other variables. After all, this is not a rating variable at all, but ancillary information. There is little reason why it should go along with the rating variables. Judge G.~A.~Saden seems to be special. Most variables would rank him to the upper group, be his worth of retention is below average. The esteem of his integrity and demeanour go along with this. Overall, there is a very clear separation into an upper and a lower group.
 
-%:  fig judgeperm
+
+
+%: fig05 judgeperm
 <<fig=TRUE, include = FALSE, echo=FALSE, label=judgeperm,width=12, height=6>>=
 colmeans <- apply(USJudgeRatings,2,mean)
 colorder<- order(colmeans)
 rowmeans <-  apply(USJudgeRatings,1,mean)
 roworder <- order(rowmeans)
 col=ifelse(USJudgeRatings[,]>colmeans, "black","white")
-bertinrect(t(USJudgeRatings)[colorder, roworder],col=t(col)[colorder, roworder], sepwd=0.1,  pars = list(mar=c(0.05,0.05,10,4)), main="")
+#bertinrect(t(USJudgeRatings)[colorder, roworder],col=t(col)[colorder, roworder], sepwd=0.1,  pars = list(mar=c(0.05,0.05,10,4)), main="")
+bertinrect(t(USJudgeRatings)[colorder, roworder],col=t(col)[colorder, roworder], sepwd=0.1,  mar=c(1,1,1,1), main="")
+title( main="US Judge Ratings", line=5)
+title( sub="observations and variables sorted by mean", line=1)
+
 #bertinrect(t(USJudgeRatings),col=t(col), sepwd=0.1,  pars = list(mar=c(0.2,0.2,7,6)), main="")
 @
 %
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=1.0\linewidth]{"bertinR-judgeperm"}
-\caption{Display of a data matrix. \textbf{USJudgeRatings data}. Lawyers' ratings of state judges in the US Superior Court.}
+\caption{Display of a data matrix. \textbf{USJudgeRatings data}. Lawyers' ratings of state judges in the US Superior Court, rearranged.}
 \label{fig:judgeperm}
 \end{center}
 \end{figure}
@@ -419,20 +425,24 @@ colorder<- order(colmeans)
 rowmeans <-  apply(USJudgeRatings1,1,mean)
 roworder <- order(rowmeans)
 col=ifelse(USJudgeRatings1[,]>colmeans, "black","white")
-bertinrect(t(USJudgeRatings1)[colorder, roworder],col=t(col)[colorder, roworder], sepwd=0.1,  pars = list(mar=c(0.05,0.05,10,4)), main="")
+#bertinrect(t(USJudgeRatings1)[colorder, roworder],col=t(col)[colorder, roworder], sepwd=0.1,  pars = list(mar=c(0.05,0.05,10,4)), main="")
+bertinrect(t(USJudgeRatings1)[colorder, roworder],col=t(col)[colorder, roworder], sepwd=0.1,  mar=c(1,1,1,1),main="")
+title( main="US Judge Ratings", line=5)
+title( sub="observations and variables sorted by mean. CONT removed.", line=1)
 abline(v=23, col= "green", lwd=3)
 abline(v=14, col= "green", lwd=3)
- lines(c(15,23),c(5,5),col= "green", lwd=3)
+lines(c(15,23),c(5,5),col= "green", lwd=3)
 lines(c(15,23),c(6,6),col= "green", lwd=3)
 @
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=1.0\linewidth]{"bertinR-judgeperm1"}
-\caption{Display of a data matrix. \textbf{USJudgeRatings data} Lawyers' ratings of state judges in the US Superior Court. Variable \ircode{CONT} removed, and resorted.}
+\caption{Display of a data matrix. \textbf{USJudgeRatings data} Lawyers' ratings of state judges in the US Superior Court. Variable \ircode{CONT} removed, and rearranged.}
 \label{fig:judgeperm1}
 \end{center}
 \end{figure}
 
+The highlight features of the  display give a clear picture of a rather homogeneous upper and homogeneous lower group of judges. All criteria seem to say the same. For a small intermediate group, the variables seem to fall into two or three groups. 
  
 At this early point, let us put Bertin's work in place. Visualising information is but one aspect. In statistics, as we see it today, visualisation may be one part of an analysis. The outcome will be a decision leading to an action. Then there is a loss (or gain) depending on the action taken on the one hand, and the ``true'' state of the world on the other. This is the common decision theoretical setting. Statistics has formulated a few standard problems, and given suggestions how to handle these. In our Hotel example, the problem can be seen as a prediction problem: find a prediction model to predict occupation and duration, based on the other variables. More specifically this is a control problem, and the statistical contribution is to find a regression model for occupation and duration, based on the other variables. The visualisation can be seen as one way to hint at a regression model. There are very few classical problems. Regression is one of them, and prediction is closely related. Classification and clustering is another, closely related pair of problems, and their relation to Bertin matrices should be obvious. The USJudgeRatings can be looked at as a classification problem.
 
@@ -581,7 +591,7 @@ imagem(zscores[rowperm,], main="", palette=gray((0:3)/3))
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=0.48\linewidth]{"bertinR-hotelpermimage1"}\includegraphics[width=0.48\linewidth]{"bertinR-hotelpermimage2"}
-\caption{Display of a data matrix as grey scale image: \textbf{Hotel data}. Variables are rearranged by similarity to occupation and duration. Grey scale with 256 on the left, reduced grey scale with 4 steps on the right, applied to zscores.} 
+\caption{Display of a data matrix as grey scale image: \textbf{Hotel data}. Variables are rearranged by similarity to occupation and duration. Grey scale with 256 on the left, reduced grey scale with 4 steps on the right, applied to \ircode{zscores}.} 
 \label{fig:hotelpermimage}
 \end{center}
 \end{figure}
@@ -638,7 +648,10 @@ imagem(zscores[rowperm,], main="", palette=gray((0:3)/3))
 %@
 @
 
-As a final aspect, display space is limited. The number of variables and cases that can be displayed simultaneously is limited by the pixel size of the display. We can increase it by one or two magnitudes by using e series of detail displays. Any display calibration however should be constant for this series We try to allow for this global calibration.
+As a final aspect, display space is limited. The number of variables and cases that can be displayed simultaneously is limited by the pixel size of the display. We can increase it by one or two magnitudes by using e series of detail displays. Any display calibration however should be constant for this series. We try to allow for this global calibration (see \refsec{sec:coords}).
+
+
+So far, the interactive possibilities used in Voyager \cite{Sawitzki1996Extensible-Stat} are not provided in the \R{} implementation, and only rudimentary parts of the static arrangements are provided in \R{}.
 
 \section{Patch Strategy}
 %:cart and patches
@@ -666,11 +679,11 @@ The high level routines accept the usual possibilities of \R{} for subset and in
 the indices are accessible as function arguments. Certain actions are provided as special functions. See the reference pages for details.
 
 
-
 \section{Colour, perception and pitfalls}
+%:! give references
 
+Colour may need some experiments to find an informative choice. To allow easy experiments, we use a two step procedure. Based on the original data or the score, we derive a colour index. From an abstract point of view, this is just another score with values in $1, \ldots, nrColours$. Colours are provided as a colour palette, and in the second step the index is used to select the colour to apply. 
 
-Colour may need some experiments to find an informative choice. To allow easy experiments, we use a two step procedure. Based on the original data or the score, we derive a colour index. From an abstract point of view, this is just another score with values in $1, \ldots nrColours$. Colours are provided as a colour palette, and the index is used to select the colour to apply. 
 See \ircode{help(palette)} for information on colour palettes.
 
 Some colour palettes that may be useful for Bertin displays are provided. For some palettes, there are variants to highlight the tail behaviour. They are marked by a ``2'' for quadratic and a ``4'' for a quartic flattening around the mid value which is mapped to white.
@@ -853,17 +866,196 @@ See  \reffig{fig:sampleimageminv} right.
 %\clearpage
 
 \section{Coordinate System and Conventions}
+\label{sec:coords}
 
-We provide prototypes for the display of Bertin matrices. To simplify the implementation of extensions, we chose a coordinate system that allots unit square to each matrix cell. If we want to add separator lines to structure our data, we have to reserve some space \ircode{sepwd}, measured in user space. 
+We provide prototypes for the display of Bertin matrices. To simplify the implementation of extensions, we chose a coordinate system that allots a unit square to each matrix cell. If we want to add separator lines to structure our data, we have to reserve some space \ircode{sepwd}, measured in user space. 
 
-By convention for a matrix \ircode{x} with the data \ircode{x[i, j]}, the display is a unit square with bottom left corner at \ircode{(i, j)}.
-Coordinates follow matrix conventions,  that is the $y$ axis is pointing downwards, and the top right corner is at \ircode{(i+1, j-1)}.
+To recall: the basic graphic system of  \R{} shows the proper content in a plot region, with additional information such as axis and labels in an imbedding figure region  (\reffig{fig:plotregions}).
+%
+<<fig=TRUE, eps= FALSE, echo=FALSE, include=FALSE, label=plotregions>>=
+#figure 3.1
+#http://www.stat.auckland.ac.nz/~paul/RG2e/custombase-baseregions1fig.R
+#line 111 "custombase.Rnw"
+par(oma=rep(3, 4), bg="gray80")
+plot(c(0, 1), c(0, 1), type="n", ann=FALSE, axes=FALSE)
+box("outer", col="gray")
+# set clipping to figure region
+par(xpd=TRUE)
+# deliberately draw a stupidly large rectangle
+rect(-1, -1, 2, 2, col="gray90")
+box("figure")
+# set clipping back to plot region
+par(xpd=FALSE)
+# deliberately draw a stupidly large rectangle
+rect(-1, -1, 2, 2, col="gray80")
+box("plot", lty="dashed")
+text(.5, .5, "Plot Region")
+mtext("Figure Region", side=3, line=2)
+for (i in 1:4)
+    mtext(paste("Outer margin", i), side=i, line=1, outer=TRUE)
+@
+
+\begin{figure}[htbp]
+\begin{center}
+%\includegraphics[width=0.5\linewidth]{{custombase-plotregions}
+\includegraphics[width=0.5\linewidth]{bertinR-plotregions}
+\caption{Graphic regions.  From \cite{Murrell2011R-Graphics}}
+\label{fig:plotregions}
+\end{center}
+\end{figure}
+%
+%custombase-figurecoords
+The figure and its contents is presented on a device, which may allow for an outer margin for exceptional purposes. This gives rise to a list oft parameters as in \reffig{fig:figurecoords}.
+<<fig=TRUE, eps= FALSE, echo=FALSE, include=FALSE, label=figurecoords>>=
+#figure 3.11
+#line 1451 "custombase.Rnw"
+library(gridBase)
+options(warn=-1) # gs avoid warnings for grid.arrow
+par(oma=rep(3, 4))
+vps <- baseViewports()
+# Annotation helper function
+annWidth <- function(x, y, lab, above=TRUE, horiz=TRUE) {
+  grid.arrows(x=x, y=y, 
+              ends="both", angle=10, type="closed",
+              length=unit(3, "mm"), gp=gpar(fill="black"))
+  nl <- length(lab)
+  if (nl > 1) {
+    y <- y + unit(c(-0.5, 0.5), "lines")
+    if (horiz) {
+      vjust <- 1:0
+      hjust <- 0.5
+      rot <- 0
+    } else {
+      hjust <- 1:0
+      vjust <- 0.5
+      rot <- 90
+    }
+  } else {
+    hjust <- 0.5
+    rot <- 0
+    if (above) {
+      y <- y + unit(0.5, "lines")
+      vjust <- 0
+    } else {
+      y <- y - unit(0.5, "lines")
+      vjust <- 1
+    }
+  }
+  grid.text(lab,
+            x=0.5*sum(x),
+            y=y, hjust=hjust, vjust=vjust, rot=rot,
+            gp=gpar(fontfamily="mono", cex=1))
+}
+# Annotate whole page
+grid.rect(gp=gpar(col="gray", fill="gray80"))
+annWidth(0:1, unit(1, "npc") - unit(1.5, "lines"), "din[1]")
+# grid.lines(x=0.5)
+annWidth(unit(c(0, 3), "lines"), unit(0.7, "npc"), c("omi[2]", "oma[2]"))
+annWidth(unit(1, "npc") - unit(c(0, 3), "lines"),
+         unit(0.7, "npc"), c("omi[4]", "oma[4]"))
+annWidth(unit(c(0, 3), "lines"), unit(0.3, "npc"), 
+         "omd[1]", above=FALSE)
+annWidth(unit.c(unit(0, "npc"),
+                unit(1, "npc") - unit(3, "lines")),
+         unit(2, "lines"), "omd[2]",
+         above=FALSE)
+# Annotate figure region
+pushViewport(do.call("vpStack", vps[1:2]))
+grid.rect(gp=gpar(fill="gray90"))
+annWidth(0:1, unit(1, "npc") - unit(1.5, "lines"), "fin[1]")
+annWidth(unit(c(0, 4.1), "lines"), unit(0.6, "npc"), c("mai[2]", "mar[2]"))
+annWidth(unit(1, "npc") - unit(c(0, 2.1), "lines"),
+         unit(0.6, "npc"), c("mai[4]", "mar[4]"), horiz=FALSE)
+annWidth(unit(c(0, 4.1), "lines"), unit(0.4, "npc"), 
+         "plt[1]", above=FALSE)
+annWidth(unit.c(unit(0, "npc"),
+                unit(1, "npc") - unit(2.1, "lines")),
+         unit(4, "lines"), "plt[2]",
+         above=FALSE)
+# Annotate plot region
+pushViewport(vps[[3]])
+grid.rect(gp=gpar(lty="dashed", fill="gray80"))
+annWidth(0:1, unit(1, "npc") - unit(1.5, "lines"), "pin[1]")
+popViewport(3)
+options(warn=0) # gs reset
+
+@
+%
+\begin{figure}[htbp]
+\begin{center}
+%\includegraphics[width=0.5\linewidth]{{custombase-figurecoords}
+\includegraphics[width=0.5\linewidth]{bertinR-figurecoords}
+\caption{Graphic parameters.  From \cite{Murrell2011R-Graphics}}
+\label{fig:figurecoords}
+\end{center}
+\end{figure}
+%
+The device space may be alloted to several figures, leading to a hierachy of coordinate systems and displays (\reffig{fig:baseregionsnfig}).
+
+%http://www.stat.auckland.ac.nz/~paul/RG2e/custombase-baseregionsnfig.png
+<<fig=TRUE, eps= FALSE, echo=FALSE, include=FALSE, label=baseregionsnfig>>=
+#figure 3.2
+#line 144 "custombase.Rnw"
+#par(oma=rep(3, 4), mfrow=c(3,2), bg="gray80")
+oldpar <- par(oma=rep(3, 4), mfrow=c(3,2), bg="gray80")
+for (i in 1:6) {
+    if (i == 3) {
+      omar <- par(mar=c(2, 2, 2, 1))  
+      plot(c(0, 1), c(0, 1), type="n", ann=FALSE, axes=FALSE)
+      par(xpd=TRUE)
+      rect(-1, -1, 2, 2, col="gray90")
+      box("figure")
+      par(xpd=FALSE)
+      rect(-1, -1, 2, 2, col="gray80")
+      box("plot", lty="dashed")
+      text(.5, .5, "Current Plot Region", cex=1.5)
+      mtext("Current Figure Region", side=3)
+      par(omar)
+    } else {
+      omar <- par(mar=rep(0, 4))  
+      plot(c(0, 1), c(0, 1), type="n", ann=FALSE, axes=FALSE)
+      par(xpd=TRUE)
+      rect(-1, -1, 2, 2, col="gray90")
+      box("figure")
+      text(.5, .5, paste("Figure", i), cex=1.5)
+      par(omar)
+    }
+}
+box("outer", col="gray")
+for (i in 1:4)
+    mtext(paste("Outer margin", i), side=i, line=1, outer=TRUE)
+par(oldpar) # gs
+@
+%clean up after P.M. code - the brute way
+<<fig=FALSE, eps= FALSE, echo=FALSE, include=FALSE>>=
+dev.off()
+@
+%
+\begin{figure}[htbp]
+\begin{center}
+%\includegraphics[width=0.5\linewidth]{{custombase-figurecoords}
+\includegraphics[width=0.5\linewidth]{bertinR-baseregionsnfig}
+\caption{Graphic parameters.  From \cite{Murrell2011R-Graphics}}
+\label{fig:baseregionsnfig}
+\end{center}
+\end{figure}
+%
+
+%http://www.stat.auckland.ac.nz/~paul/RGraphics/custombase-plotregions.png
+By convention, for a matrix \ircode{x}  the data \ircode{x[i, j]} is displayed in a unit square with bottom left corner at \ircode{(i, j)}.
+Coordinates follow matrix conventions,  that is the $y$ axis is pointing downwards and the top right corner of this cell is at \ircode{(i+1, j-1)}. The space allocated to the matrix fills defines the plot region.  The basic  functions \ircode{imagem()} and \ircode{bertinrect} will adjust (shrink) this region to match the aspect ratio of the matrix and establish a user coordinate system with top=$0$, bottom=$nrow(x)$, left$=1$, right=$ncol(x)$.
 
 Additional graphical elements can be used immediately, using this coordinate system.
 
 \ircode{image} uses the center of a cell as an anchor point, and shows a transposed view. To use \ircode{image} to generate an overlay, change the user coordinate system temporarily to \ircode{par("usr")-0.5} and use \ircode{t()}.
 
-We return the relevant graphical parameters as an invisible result in the basic  functions \ircode{imagem()} and \ircode{bertinrect}. This allows to generate a sequence of graphics with consistent layout.
+Space for row names and column names is allocated in the inner margins of the figure area. By convention, if a parameter \ircode{mar} is provided, this will be added. If a parameter \ircode{pars} is provided, it is assumed to contain the user's choice of graphic parameters and will be taken ``as is'', without further adjustment.
+
+We return the relevant graphical parameters as an invisible result in the basic  functions \ircode{imagem()} and \ircode{bertinrect()}. This can be passed as  \ircode{pars} to generate graphics with consistent layout. 
+
+The higher level functions may attach the actual parameters as attributes to the data, or retrieve from there if provided. Details are subject to change.
+
+If colour encoding is used, a colour ramp should be provided as a key for interpretation. The higher level functions can imbed a colour ramp in the inner margin. While this is an additional picture, this is hidden and the colour ramp appears as an annotation.  Other mechanisms for arranging plots on a device should not be affected.
 
 \clearpage
 \vspace{\stretch{1}}
@@ -880,7 +1072,7 @@ We return the relevant graphical parameters as an invisible result in the basic 
 \begin{center}
 \includegraphics[width=0.45\linewidth]{Ebner02-timemap60topo}
 \includegraphics[width=0.45\linewidth]{Ebner02-timemap60topoinv}
-\caption{\textbf{Borderline data}. Tension level, all observations, by time.}\label{fig:timemapseqtopo}\label{fig:timemapseqtopoinv}
+\caption{\textbf{Borderline data}. Tension level, all observations, by time. Spot the cases in the control group (Id index > 50) who have tension levels that rather fit into the patient group.}\label{fig:timemapseqtopo}\label{fig:timemapseqtopoinv}
 \end{center}
 \end{figure}
 
