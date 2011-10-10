@@ -71,7 +71,7 @@ bzcol <- function(v) {
 	#bertinrect(z[roworder,colorder], main=main, col= zcol)
 	palette(oldpalette)
 
-	if (!is.null(sub)) {title(sub=sub, line=1)}
+	if (!is.null(sub)) {title(sub=sub, line=1, cex.sub=0.8)}
 	if (showpalette) {bertin:::colrampmarg(palette, main="Score Colour Codes (by %)")}
 #! improve. feed back user scale
 

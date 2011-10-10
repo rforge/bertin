@@ -16,7 +16,7 @@ image.bertin <- function
 (z, roworder,colorder,
 	main, 
 	sub,
-	mar= c(3,1,3,1)+0.1, # default mar= c(1,1,6,4)+0.1,
+	mar= c(3,1,3,1)+0.1,
 	palette = gray((255:0 / 255)^0.5),
 	showpalette=TRUE,
 	useRaster = FALSE,
@@ -46,7 +46,7 @@ image.bertin <- function
 		palette = palette, 
 		mar=mar, useRaster=useRaster, ...)
 
-	if (!is.null(sub)) {title(sub=sub, line=1)}
+	if (!is.null(sub)) {title(sub=sub, line=1, cex.sub=0.8)}
 	if (showpalette) {bertin:::colrampmarg(palette, main="Score Colour Codes (by %)")}
 
 	attr(z,"roworder")<-roworder

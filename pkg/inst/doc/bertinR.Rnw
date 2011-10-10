@@ -208,11 +208,12 @@ As Bertin points out, the indexing used is arbitrary. You can rearrange rows and
 
 %: fig 03 hotelperm
 <<fig=TRUE, include = FALSE, echo=FALSE, label=hotelperm, width=6, height=6>>=
-colmeans <- apply(Hotel2,1,mean)
+rowmeans <- apply(Hotel2,1,mean)
 rowperm <- c(19,18,20, 8, 11, 4, 12, 13,16,14,1,2, 7, 9, 10, 17, 6, 3, 5,15)
 plot.bertin(Hotel2, roworder=rowperm,
-	zcol=ifelse(Hotel2[,]>colmeans, 2,1),
-	palette=c("white","black"), main="Hotel (repeated)")
+	zcol=ifelse(Hotel2[,]>rowmeans, 2,1),
+	palette=c("white","black"), main="Hotel",
+	showpalette=FALSE)
 title(sub="Variables rearranged", line=1)
 abline(h=6, col= "green", lwd=3)
 abline(h=12, col= "green", lwd=3)
@@ -239,10 +240,42 @@ lines( c(22,22), c(20,6), col="green", lwd=3)
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=1.0\linewidth]{"bertinR-hotelperm"}
-\caption{Display of a data matrix: Hotel data. Variables are rearranged by similarity to occupation and duration.}
+\caption{Display of a data matrix: \textbf{Hotel data}. Variables are rearranged by similarity to occupation and duration.}
 \label{fig:hotelperm}
 \end{center}
 \end{figure}
+
+Variables need not enter at their face value; they can be transformed, or derived variable can e added. In the case of the hotel data, this has already done in the original data set. For example, the guests have been classified in tourists and business, and both sum up to 100\%.  If we want, we can remove this redundant information. This may clean up the picture. But it may hide information. For example, >tourists are ``anti-cyclic'' to the hotel occupation and just fill the gaps. Removing this variable because it is $1-business$ would hide this point.
+%! clean up. Fix data for 100% sums. Fix age groups.
+
+<<fig=TRUE, include = FALSE, echo=FALSE, label=hotelperm1, width=6, height=6>>=
+rowmeans <- apply(Hotel2,1,mean)
+rowperm <- c(19, 18, 20, 8, 11,  12, 13,16,14,1,2,  9, 17, 7, 6, 4, 3, 5)
+plot.bertin(Hotel2, roworder=rowperm,
+	zcol=ifelse(Hotel2[,]>rowmeans, 2,1),
+	palette=c("white","black"), main="Hotel",
+	mar= c(3, 1, 3, 1) + 0.1,
+	showpalette=FALSE)
+title(sub="Variables rearranged", line=1)
+abline(h=5, col= "green", lwd=3)
+abline(h=11, col= "green", lwd=3)
+abline(h=13, col= "green", lwd=3)
+
+lines( c(5,5), c(20,5), col="green", lwd=3)
+lines( c(10,10), c(20,5), col="green", lwd=3)
+lines( c(17,17), c(20,5), col="green", lwd=3)
+lines( c(22,22), c(20,5), col="green", lwd=3)
+@
+
+%
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=1.0\linewidth]{"bertinR-hotelperm1"}
+\caption{Display of a data matrix: \textbf{Hotel data}. Variables are rearranged by similarity to occupation and duration. Some redundancy removed.}
+\label{fig:hotelperm1}
+\end{center}
+\end{figure}
+
 
 As a second example, we use the  the \ircode{USJudgeRatings} data set (\reffig{fig:judgeorig}). 
 The data  is listed in  \reftab{tab:judge}.
@@ -319,49 +352,92 @@ The data  is listed in  \reftab{tab:judge}.
 \hline
 & CONT&INTG&DMNR&DILG&CFMG&DECI&PREP&FAMI&ORAL&WRIT&PHYS&RTEN \\ 
 \hline
-AARONSON,L.H.&5.70&7.90&7.70&7.30&7.10&7.40&7.10&7.10&7.10&7.00&8.30&7.80 \\ 
-ALEXANDER,J.M.&6.80&8.90&8.80&8.50&7.80&8.10&8.00&8.00&7.80&7.90&8.50&8.70 \\ 
-ARMENTANO,A.J.&7.20&8.10&7.80&7.80&7.50&7.60&7.50&7.50&7.30&7.40&7.90&7.80 \\ 
-BERDON,R.I.&6.80&8.80&8.50&8.80&8.30&8.50&8.70&8.70&8.40&8.50&8.80&8.70 \\ 
-BRACKEN,J.J.&7.30&6.40&4.30&6.50&6.00&6.20&5.70&5.70&5.10&5.30&5.50&4.80 \\ 
-BURNS,E.B.&6.20&8.80&8.70&8.50&7.90&8.00&8.10&8.00&8.00&8.00&8.60&8.60 \\ 
-CALLAHAN,R.J.&10.60&9.00&8.90&8.70&8.50&8.50&8.50&8.50&8.60&8.40&9.10&9.00 \\ 
-COHEN,S.S.&7.00&5.90&4.90&5.10&5.40&5.90&4.80&5.10&4.70&4.90&6.80&5.00 \\ 
-DALY,J.J.&7.30&8.90&8.90&8.70&8.60&8.50&8.40&8.40&8.40&8.50&8.80&8.80 \\ 
-DANNEHY,J.F.&8.20&7.90&6.70&8.10&7.90&8.00&7.90&8.10&7.70&7.80&8.50&7.90 \\ 
-DEAN,H.H.&7.00&8.00&7.60&7.40&7.30&7.50&7.10&7.20&7.10&7.20&8.40&7.70 \\ 
-DEVITA,H.J.&6.50&8.00&7.60&7.20&7.00&7.10&6.90&7.00&7.00&7.10&6.90&7.20 \\ 
-DRISCOLL,P.J.&6.70&8.60&8.20&6.80&6.90&6.60&7.10&7.30&7.20&7.20&8.10&7.70 \\ 
-GRILLO,A.E.&7.00&7.50&6.40&6.80&6.50&7.00&6.60&6.80&6.30&6.60&6.20&6.50 \\ 
-HADDEN,W.L.JR.&6.50&8.10&8.00&8.00&7.90&8.00&7.90&7.80&7.80&7.80&8.40&8.00 \\ 
-HAMILL,E.C.&7.30&8.00&7.40&7.70&7.30&7.30&7.30&7.20&7.10&7.20&8.00&7.60 \\ 
-HEALEY.A.H.&8.00&7.60&6.60&7.20&6.50&6.50&6.80&6.70&6.40&6.50&6.90&6.70 \\ 
-HULL,T.C.&7.70&7.70&6.70&7.50&7.40&7.50&7.10&7.30&7.10&7.30&8.10&7.40 \\ 
-LEVINE,I.&8.30&8.20&7.40&7.80&7.70&7.70&7.70&7.80&7.50&7.60&8.00&8.00 \\ 
-LEVISTER,R.L.&9.60&6.90&5.70&6.60&6.90&6.60&6.20&6.00&5.80&5.80&7.20&6.00 \\ 
-MARTIN,L.F.&7.10&8.20&7.70&7.10&6.60&6.60&6.70&6.70&6.80&6.80&7.50&7.30 \\ 
-MCGRATH,J.F.&7.60&7.30&6.90&6.80&6.70&6.80&6.40&6.30&6.30&6.30&7.40&6.60 \\ 
-MIGNONE,A.F.&6.60&7.40&6.20&6.20&5.40&5.70&5.80&5.90&5.20&5.80&4.70&5.20 \\ 
-MISSAL,H.M.&6.20&8.30&8.10&7.70&7.40&7.30&7.30&7.30&7.20&7.30&7.80&7.60 \\ 
-MULVEY,H.M.&7.50&8.70&8.50&8.60&8.50&8.40&8.50&8.50&8.40&8.40&8.70&8.70 \\ 
-NARUK,H.J.&7.80&8.90&8.70&8.90&8.70&8.80&8.90&9.00&8.80&8.90&9.00&9.00 \\ 
-O'BRIEN,F.J.&7.10&8.50&8.30&8.00&7.90&7.90&7.80&7.80&7.80&7.70&8.30&8.20 \\ 
-O'SULLIVAN,T.J.&7.50&9.00&8.90&8.70&8.40&8.50&8.40&8.30&8.30&8.30&8.80&8.70 \\ 
-PASKEY,L.&7.50&8.10&7.70&8.20&8.00&8.10&8.20&8.40&8.00&8.10&8.40&8.10 \\ 
-RUBINOW,J.E.&7.10&9.20&9.00&9.00&8.40&8.60&9.10&9.10&8.90&9.00&8.90&9.20 \\ 
-SADEN.G.A.&6.60&7.40&6.90&8.40&8.00&7.90&8.20&8.40&7.70&7.90&8.40&7.50 \\ 
-SATANIELLO,A.G.&8.40&8.00&7.90&7.90&7.80&7.80&7.60&7.40&7.40&7.40&8.10&7.90 \\ 
-SHEA,D.M.&6.90&8.50&7.80&8.50&8.10&8.20&8.40&8.50&8.10&8.30&8.70&8.30 \\ 
-SHEA,J.F.JR.&7.30&8.90&8.80&8.70&8.40&8.50&8.50&8.50&8.40&8.40&8.80&8.80 \\ 
-SIDOR,W.J.&7.70&6.20&5.10&5.60&5.60&5.90&5.60&5.60&5.30&5.50&6.30&5.30 \\ 
-SPEZIALE,J.A.&8.50&8.30&8.10&8.30&8.40&8.20&8.20&8.10&7.90&8.00&8.00&8.20 \\ 
-SPONZO,M.J.&6.90&8.30&8.00&8.10&7.90&7.90&7.90&7.70&7.60&7.70&8.10&8.00 \\ 
-STAPLETON,J.F.&6.50&8.20&7.70&7.80&7.60&7.70&7.70&7.70&7.50&7.60&8.50&7.70 \\ 
-TESTO,R.J.&8.30&7.30&7.00&6.80&7.00&7.10&6.70&6.70&6.70&6.70&8.00&7.00 \\ 
-TIERNEY,W.L.JR.&8.30&8.20&7.80&8.30&8.40&8.30&7.70&7.60&7.50&7.70&8.10&7.90 \\ 
-WALL,R.A.&9.00&7.00&5.90&7.00&7.00&7.20&6.90&6.90&6.50&6.60&7.60&6.60 \\ 
-WRIGHT,D.B.&7.10&8.40&8.40&7.70&7.50&7.70&7.80&8.20&8.00&8.10&8.30&8.10 \\ 
-ZARRILLI,K.J.&8.60&7.40&7.00&7.50&7.50&7.70&7.40&7.20&6.90&7.00&7.80&7.10 \\ 
+AAR,L.H.&5.7&7.9&7.7&7.3&7.1&7.4&7.1&7.1&7.1&7.0&8.3&7.80 \\ 
+ALE,J.M.&6.8&8.9&8.8&8.5&7.8&8.1&8.0&8.0&7.8&7.9&8.5&8.7\\ 
+ARM,A.J.&7.2&8.1&7.8&7.8&7.5&7.6&7.5&7.5&7.3&7.4&7.9&7.8\\ 
+BER,R.I.&6.8&8.8&8.5&8.8&8.3&8.5&8.7&8.7&8.4&8.5&8.8&8.7\\ 
+BRA,J.J.&7.3&6.4&4.3&6.5&6.0&6.2&5.7&5.7&5.1&5.3&5.5&4.8\\ 
+BUR,E.B.&6.2&8.8&8.7&8.5&7.9&8.0&8.1&8.0&8.0&8.0&8.6&8.6\\ 
+CAL,R.J.&10.6&9.0&8.9&8.7&8.5&8.5&8.5&8.5&8.6&8.4&9.1&9.0\\ 
+COH,S.S.&7.0&5.9&4.9&5.1&5.4&5.9&4.8&5.1&4.7&4.9&6.8&5.0\\ 
+DAL,J.J.&7.3&8.9&8.9&8.7&8.6&8.5&8.4&8.4&8.4&8.5&8.8&8.8\\ 
+DAN,J.F.&8.2&7.9&6.7&8.1&7.9&8.0&7.9&8.1&7.7&7.8&8.5&7.9\\ 
+DEA,H.H.&7.0&8.0&7.6&7.4&7.3&7.5&7.1&7.2&7.1&7.2&8.4&7.7\\ 
+DEV,H.J.&6.5&8.0&7.6&7.2&7.0&7.1&6.9&7.0&7.0&7.1&6.9&7.2\\ 
+DRI,P.J.&6.7&8.6&8.2&6.8&6.9&6.6&7.1&7.3&7.2&7.2&8.1&7.7\\ 
+GRI,A.E.&7.0&7.5&6.4&6.8&6.5&7.0&6.6&6.8&6.3&6.6&6.2&6.5\\ 
+HAD,W.L.JR.&6.5&8.1&8.0&8.0&7.9&8.0&7.9&7.8&7.8&7.8&8.4&8.0\\ 
+HAM,E.C.&7.3&8.0&7.4&7.7&7.3&7.3&7.3&7.2&7.1&7.2&8.0&7.6\\ 
+HEA,A.H.&8.0&7.6&6.6&7.2&6.5&6.5&6.8&6.7&6.4&6.5&6.9&6.7\\ 
+HUL,T.C.&7.7&7.7&6.7&7.5&7.4&7.5&7.1&7.3&7.1&7.3&8.1&7.4\\ 
+LEV,I.&8.3&8.2&7.4&7.8&7.7&7.7&7.7&7.8&7.5&7.6&8.0&8.0\\ 
+LEV,R.L.&9.6&6.9&5.7&6.6&6.9&6.6&6.2&6.0&5.8&5.8&7.2&6.0\\ 
+MAR,L.F.&7.1&8.2&7.7&7.1&6.6&6.6&6.7&6.7&6.8&6.8&7.5&7.3\\ 
+MCG,J.F.&7.6&7.3&6.9&6.8&6.7&6.8&6.4&6.3&6.3&6.3&7.4&6.6\\ 
+MIG,A.F.&6.6&7.4&6.2&6.2&5.4&5.7&5.8&5.9&5.2&5.8&4.7&5.2\\ 
+MISL,H.M.&6.2&8.3&8.1&7.7&7.4&7.3&7.3&7.3&7.2&7.3&7.8&7.6\\ 
+MUL,H.M.&7.5&8.7&8.5&8.6&8.5&8.4&8.5&8.5&8.4&8.4&8.7&8.7\\ 
+NAR,H.J.&7.8&8.9&8.7&8.9&8.7&8.8&8.9&9.0&8.8&8.9&9.0&9.0\\ 
+O'BR,F.J.&7.1&8.5&8.3&8.0&7.9&7.9&7.8&7.8&7.8&7.7&8.3&8.2\\ 
+O'SU,T.J.&7.5&9.0&8.9&8.7&8.4&8.5&8.4&8.3&8.3&8.3&8.8&8.7\\ 
+PAS,L.&7.5&8.1&7.7&8.2&8.0&8.1&8.2&8.4&8.0&8.1&8.4&8.1\\ 
+RUB,J.E.&7.1&9.2&9.0&9.0&8.4&8.6&9.1&9.1&8.9&9.0&8.9&9.2\\ 
+SAD.G.A.&6.6&7.4&6.9&8.4&8.0&7.9&8.2&8.4&7.7&7.9&8.4&7.5\\ 
+SAT,A.G.&8.4&8.0&7.9&7.9&7.8&7.8&7.6&7.4&7.4&7.4&8.1&7.9\\ 
+SHE,D.M.&6.9&8.5&7.8&8.5&8.1&8.2&8.4&8.5&8.1&8.3&8.7&8.3\\ 
+SHE,J.F.JR.&7.3&8.9&8.8&8.7&8.4&8.5&8.5&8.5&8.4&8.4&8.8&8.8\\ 
+SID,W.J.&7.7&6.2&5.1&5.6&5.6&5.9&5.6&5.6&5.3&5.5&6.3&5.3\\ 
+SPE,J.A.&8.5&8.3&8.1&8.3&8.4&8.2&8.2&8.1&7.9&8.0&8.0&8.2\\ 
+SPO,M.J.&6.9&8.3&8.0&8.1&7.9&7.9&7.9&7.7&7.6&7.7&8.1&8.0\\ 
+STA,J.F.&6.5&8.2&7.7&7.8&7.6&7.7&7.7&7.7&7.5&7.6&8.5&7.7\\ 
+TES,R.J.&8.3&7.3&7.0&6.8&7.0&7.1&6.7&6.7&6.7&6.7&8.0&7.0\\ 
+TIE,W.L.JR.&8.3&8.2&7.8&8.3&8.4&8.3&7.7&7.6&7.5&7.7&8.1&7.9\\ 
+WAL,R.A.&9.0&7.0&5.9&7.0&7.0&7.2&6.9&6.9&6.5&6.6&7.6&6.6\\ 
+WRI,D.B.&7.1&8.4&8.4&7.7&7.5&7.7&7.8&8.2&8.0&8.1&8.3&8.1\\ 
+ZAR,K.J.&8.6&7.4&7.0&7.5&7.5&7.7&7.4&7.2&6.9&7.0&7.8&7.1\\ 
+%AARONSON,L.H.&5.70&7.90&7.70&7.30&7.10&7.40&7.10&7.10&7.10&7.00&8.30&7.80 \\ 
+%ALEXANDER,J.M.&6.80&8.90&8.80&8.50&7.80&8.10&8.00&8.00&7.80&7.90&8.50&8.70 \\ 
+%ARMENTANO,A.J.&7.20&8.10&7.80&7.80&7.50&7.60&7.50&7.50&7.30&7.40&7.90&7.80 \\ 
+%BERDON,R.I.&6.80&8.80&8.50&8.80&8.30&8.50&8.70&8.70&8.40&8.50&8.80&8.70 \\ 
+%BRACKEN,J.J.&7.30&6.40&4.30&6.50&6.00&6.20&5.70&5.70&5.10&5.30&5.50&4.80 \\ 
+%BURNS,E.B.&6.20&8.80&8.70&8.50&7.90&8.00&8.10&8.00&8.00&8.00&8.60&8.60 \\ 
+%CALLAHAN,R.J.&10.60&9.00&8.90&8.70&8.50&8.50&8.50&8.50&8.60&8.40&9.10&9.00 \\ 
+%COHEN,S.S.&7.00&5.90&4.90&5.10&5.40&5.90&4.80&5.10&4.70&4.90&6.80&5.00 \\ 
+%DALY,J.J.&7.30&8.90&8.90&8.70&8.60&8.50&8.40&8.40&8.40&8.50&8.80&8.80 \\ 
+%DANNEHY,J.F.&8.20&7.90&6.70&8.10&7.90&8.00&7.90&8.10&7.70&7.80&8.50&7.90 \\ 
+%DEAN,H.H.&7.00&8.00&7.60&7.40&7.30&7.50&7.10&7.20&7.10&7.20&8.40&7.70 \\ 
+%DEVITA,H.J.&6.50&8.00&7.60&7.20&7.00&7.10&6.90&7.00&7.00&7.10&6.90&7.20 \\ 
+%DRISCOLL,P.J.&6.70&8.60&8.20&6.80&6.90&6.60&7.10&7.30&7.20&7.20&8.10&7.70 \\ 
+%GRILLO,A.E.&7.00&7.50&6.40&6.80&6.50&7.00&6.60&6.80&6.30&6.60&6.20&6.50 \\ 
+%HADDEN,W.L.JR.&6.50&8.10&8.00&8.00&7.90&8.00&7.90&7.80&7.80&7.80&8.40&8.00 \\ 
+%HAMILL,E.C.&7.30&8.00&7.40&7.70&7.30&7.30&7.30&7.20&7.10&7.20&8.00&7.60 \\ 
+%HEALEY.A.H.&8.00&7.60&6.60&7.20&6.50&6.50&6.80&6.70&6.40&6.50&6.90&6.70 \\ 
+%HULL,T.C.&7.70&7.70&6.70&7.50&7.40&7.50&7.10&7.30&7.10&7.30&8.10&7.40 \\ 
+%LEVINE,I.&8.30&8.20&7.40&7.80&7.70&7.70&7.70&7.80&7.50&7.60&8.00&8.00 \\ 
+%LEVISTER,R.L.&9.60&6.90&5.70&6.60&6.90&6.60&6.20&6.00&5.80&5.80&7.20&6.00 \\ 
+%MARTIN,L.F.&7.10&8.20&7.70&7.10&6.60&6.60&6.70&6.70&6.80&6.80&7.50&7.30 \\ 
+%MCGRATH,J.F.&7.60&7.30&6.90&6.80&6.70&6.80&6.40&6.30&6.30&6.30&7.40&6.60 \\ 
+%MIGNONE,A.F.&6.60&7.40&6.20&6.20&5.40&5.70&5.80&5.90&5.20&5.80&4.70&5.20 \\ 
+%MISSAL,H.M.&6.20&8.30&8.10&7.70&7.40&7.30&7.30&7.30&7.20&7.30&7.80&7.60 \\ 
+%MULVEY,H.M.&7.50&8.70&8.50&8.60&8.50&8.40&8.50&8.50&8.40&8.40&8.70&8.70 \\ 
+%NARUK,H.J.&7.80&8.90&8.70&8.90&8.70&8.80&8.90&9.00&8.80&8.90&9.00&9.00 \\ 
+%O'BRIEN,F.J.&7.10&8.50&8.30&8.00&7.90&7.90&7.80&7.80&7.80&7.70&8.30&8.20 \\ 
+%O'SULLIVAN,T.J.&7.50&9.00&8.90&8.70&8.40&8.50&8.40&8.30&8.30&8.30&8.80&8.70 \\ 
+%PASKEY,L.&7.50&8.10&7.70&8.20&8.00&8.10&8.20&8.40&8.00&8.10&8.40&8.10 \\ 
+%RUBINOW,J.E.&7.10&9.20&9.00&9.00&8.40&8.60&9.10&9.10&8.90&9.00&8.90&9.20 \\ 
+%SADEN.G.A.&6.60&7.40&6.90&8.40&8.00&7.90&8.20&8.40&7.70&7.90&8.40&7.50 \\ 
+%SATANIELLO,A.G.&8.40&8.00&7.90&7.90&7.80&7.80&7.60&7.40&7.40&7.40&8.10&7.90 \\ 
+%SHEA,D.M.&6.90&8.50&7.80&8.50&8.10&8.20&8.40&8.50&8.10&8.30&8.70&8.30 \\ 
+%SHEA,J.F.JR.&7.30&8.90&8.80&8.70&8.40&8.50&8.50&8.50&8.40&8.40&8.80&8.80 \\ 
+%SIDOR,W.J.&7.70&6.20&5.10&5.60&5.60&5.90&5.60&5.60&5.30&5.50&6.30&5.30 \\ 
+%SPEZIALE,J.A.&8.50&8.30&8.10&8.30&8.40&8.20&8.20&8.10&7.90&8.00&8.00&8.20 \\ 
+%SPONZO,M.J.&6.90&8.30&8.00&8.10&7.90&7.90&7.90&7.70&7.60&7.70&8.10&8.00 \\ 
+%STAPLETON,J.F.&6.50&8.20&7.70&7.80&7.60&7.70&7.70&7.70&7.50&7.60&8.50&7.70 \\ 
+%TESTO,R.J.&8.30&7.30&7.00&6.80&7.00&7.10&6.70&6.70&6.70&6.70&8.00&7.00 \\ 
+%TIERNEY,W.L.JR.&8.30&8.20&7.80&8.30&8.40&8.30&7.70&7.60&7.50&7.70&8.10&7.90 \\ 
+%WALL,R.A.&9.00&7.00&5.90&7.00&7.00&7.20&6.90&6.90&6.50&6.60&7.60&6.60 \\ 
+%WRIGHT,D.B.&7.10&8.40&8.40&7.70&7.50&7.70&7.80&8.20&8.00&8.10&8.30&8.10 \\ 
+%ZARRILLI,K.J.&8.60&7.40&7.00&7.50&7.50&7.70&7.40&7.20&6.90&7.00&7.80&7.10 \\ 
 \hline
 \end{tabular}
 }
@@ -442,8 +518,23 @@ lines(c(15,23),c(6,6),col= "green", lwd=3)
 \end{center}
 \end{figure}
 
-The highlight features of the  display give a clear picture of a rather homogeneous upper and homogeneous lower group of judges. All criteria seem to say the same. For a small intermediate group, the variables seem to fall into two or three groups. 
+The highlight features of the  display give a clear picture of a rather homogeneous upper and homogeneous lower group of judges. All criteria seem to say the same in these groups. For a small intermediate group of cases, the variables seem to fall into two or three groups, and it is only for this small group that a closer look at the variables and their meaning may be necessary. 
+ If you want to model the rating of the worthiness of retention, say, as a function ot the other ratings, it is only here that a refined model might be necessary, whereas in the case most judges a rough model would do.
  
+ For this data set, the low resolution of the variables may be a problem. No details are given in the documentation, but  presumably the rating has been taken on a $1, \ldots, 10$ scale, and in all variables the median is higher than $7$. Changing the scale may give a better contrast and improve the resolution (see \reffig{fig:judgeperm1rng}).  Here we used the rescaled variables to define the height of the bars. For highlighting by colour (only black/white here) we used the data in the original scale. Both display attributes, height and colour, are independent and we are free to encode different aspects of the data. In  \reffig{fig:judgeperm1rng} we sorted the cases by the value of \ircode{RTEN}. This lets us view the data from a different point of view.
+ 
+Again we have a clear upper and lower group, with consistency over all variables, and a small intermediate group which needs closer inspection. Judge G.A. Saden stands out. By most criteria, he qualifies for a higher ranking, but demeanor and judicial integrity go along with a low scored worthy of retention.
+
+Two judges are on the boundary and may well be exchanged - this is where random fluctuation may be at work to decide for the ranking.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{"bertinR-judgeperm1rng"}
+\caption{Data set: \textbf{USJudgeRatings}. Cases sorted by RTEN, variables sorted by mean. Rescaled for range. CONT removed. Scores above mean are highlighted.}
+\label{fig:judgeperm1rng}
+\end{center}
+\end{figure}
+
 At this early point, let us put Bertin's work in place. Visualising information is but one aspect. In statistics, as we see it today, visualisation may be one part of an analysis. The outcome will be a decision leading to an action. Then there is a loss (or gain) depending on the action taken on the one hand, and the ``true'' state of the world on the other. This is the common decision theoretical setting. Statistics has formulated a few standard problems, and given suggestions how to handle these. In our Hotel example, the problem can be seen as a prediction problem: find a prediction model to predict occupation and duration, based on the other variables. More specifically this is a control problem, and the statistical contribution is to find a regression model for occupation and duration, based on the other variables. The visualisation can be seen as one way to hint at a regression model. There are very few classical problems. Regression is one of them, and prediction is closely related. Classification and clustering is another, closely related pair of problems, and their relation to Bertin matrices should be obvious. The USJudgeRatings can be looked at as a classification problem.
 
 
@@ -484,9 +575,9 @@ original data following the original conventions. The results here are matrices.
 oldpar <-par(mfcol=c(1,2))
 hotelrank <- bertinrank(Hotel2)
 plot.bertin(hotelrank)
-par(mfg=c(1,2)) # fix for stray display allocation
 hotelrankorder <- bertin:::ordercor(hotelrank, 19)
 plot.bertin(hotelrank, roworder=hotelrankorder)
+title(sub="Variable sorted by correlation to Occupation", cex.sub=0.6, line=1)
 par(oldpar)
 @
 
@@ -499,10 +590,10 @@ oldpar <-par(mfcol=c(1,2))
 hotelrank <- bertinrank(Hotel2)
 plot.bertin(hotelrank,
 	palette = gray((2:0 / 2)^0.5))
-par(mfg=c(1,2)) # fix for stray display allocation
 hotelrankorder <- bertin:::ordercor(hotelrank, 19)
 plot.bertin(hotelrank, roworder=hotelrankorder,
 	palette = gray((2:0 / 2)^0.5))
+title(sub="Variable sorted by correlation to Occupation", cex.sub=0.6, line=1)
 par(oldpar)
 @
 
@@ -516,7 +607,6 @@ $$
 oldpar <-par(mfcol=c(1,2))
 hotelzscore <- bertinzscore(Hotel2)
 plot.bertin(hotelzscore)
-par(mfg=c(1,2)) # fix for stray display allocation
 hotelzscoreorder <- bertin:::ordercor(hotelzscore, 19)
 plot.bertin(hotelzscore, roworder=hotelzscoreorder)
 par(oldpar)
@@ -536,30 +626,29 @@ $$
 oldpar <-par(mfcol=c(1,2))
 hotelrangescore <- bertinrangescore(Hotel2)
 plot.bertin(hotelrangescore)
-par(mfg=c(1,2)) # fix for stray display allocation
 hotelrangescoreorder <- bertin:::ordercor(hotelrangescore, 19)
 plot.bertin(hotelrangescore, roworder=hotelrangescoreorder)
 par(oldpar)
 @
 
 This score just rescales to $[0, 1]$. On contrast to ranks, it preserves quantitative proportions. See \reffig{fig:judgeperm1rng}.
-<<fig=TRUE, include = FALSE, echo=TRUE, label=judgeperm1rng,width=12, height=6>>=
-USJudgeRatings1rngt <- t(bertinrangescore(USJudgeRatings1))
+<<fig=TRUE, include = FALSE, echo=FALSE, label=judgeperm1rng,width=12, height=6>>=
+USJudgeRatings1rngt <- bertinrangescore(t(USJudgeRatings1))
 colmeans <- apply(USJudgeRatings1rngt, 2, mean)
-colorder<- order(colmeans)
-rowmeans <-  apply(USJudgeRatings1rngt, 1, mean)
+#colorder<- order(colmeans)
+colorder <- order(USJudgeRatings1rngt["RTEN",])
+#rowmeans <-  apply(USJudgeRatings1rngt, 1, mean)
+rowmeans <-  apply(t(USJudgeRatings1), 1, mean)
 roworder <- order(rowmeans)
-col=ifelse(USJudgeRatings1rngt[,]>rowmeans, "black","white")
-bertinrect(USJudgeRatings1rngt[roworder, colorder],col=(col)[roworder, colorder], sepwd=0.1,  pars = list(mar=c(0.05,0.05,10,4)), main="")
+#col=ifelse(USJudgeRatings1rngt[,]>rowmeans, "black","white")
+col=ifelse(t(USJudgeRatings1)[,]>rowmeans, "black","white")
+#bertinrect(USJudgeRatings1rngt[roworder, colorder], col=(col)[roworder, colorder], sepwd=0.1,  pars = list(mar=c(0.05,0.05,10,4)), main="")
+bertinrect(USJudgeRatings1rngt[roworder, colorder],col=(col)[roworder, colorder], 
+	sepwd=0.1,  mar=c(1,1,1,1), main="")
+title( main="US Judge Ratings", line=5)
+title( sub="Cases sorted by RTEN, variables sorted by mean. Rescaled for range. CONT removed.", 
+	line=1, cex.sub=0.6)
 @
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics{"bertinR-judgeperm1rng"}
-
-\caption{Data set: \textbf{USJudgeRatings}. Rescaled by range, rows sorted by row means. Scores above mean are highlighted.}
-\label{fig:judgeperm1rng}
-\end{center}
-\end{figure}
 
 \section{Permutation, Seriation, Arrangement}
 As Bertin has pointed out,
@@ -682,9 +771,31 @@ the indices are accessible as function arguments. Certain actions are provided a
 \section{Colour, perception and pitfalls}
 %:! give references
 
+Colour is one of the simplest qualities, and barely understood. One basis of colour is light, and if we follow todays physics this is best described as electromagnetic wave with energy distributed over a spectum of wavelenghts. So the mathematiical home is some Hilbert space.
+
+We do not know how light translate into perceived colour, but we know some of the steps, and we have some artefacts that may help us to understand the process. Today, the most helpful concept seems to be that of a colour space - a finite dimensional space mapped into the true space of colours. 
+
+In a technical context as we see it today, colour became manageable with colour displays using phosphors, coming in three colours (red, green and blue). The relative intensities of these colours are enough to specify the visual impact, and the RGB space is still the basis space for colours presented on a display.
+
+Of course there is a huge discrepancy between the full Hilbert space of lights, and three dimensional RGB space.  The gap is bridged by perception. Different spectral distributions may give the same perceived coulours. By mixing only few colours, you can generate the impression to nearly cover a spectrum. Colours thus matched perceptually are called metamers. 
+
+This leads to an experimental setup. Take the space of single frequency colours, i.e. monochrome light. For each frequency, find a combination of red, green and blue to match this colour.
+
+What they tell us in school is that all colours can be mixed from three basic colours. No, note quite. Not even for monochrome light. For many frequency, the impression can be generated by an RGB combination. For several colours in the green range, it is necessary to reduce the colour by a complement before it is accessible in RGB space. See \url{<http://www.statlab.uni-heidelberg.de/data/color/>}. However the mapping  from monochromous coulor space to RGB space is fairly understood and allows us  to generate (within limits) the colour of any frequency if we can control RGB values.
+
+Technology requires differin spaces. While for displays we originally had three colours encoded in RGB, for printing the readily available dyes ware cyan, magenta and yellow, defining a CMY space. Fortunately these dyes could be calibratetd to be roughly complimentary to RGB, so we think of a colour cube with pure R, G, B on three corners, C, M, Y on the opposite corners and an easy translation from RGB to CMY coordinates. Today, quality colour printing is starting with six dyes, and a more complex colour space is standard.
+
+Still these technical colours are far away of the complexity of colours of light, and the use of metamers is the way to cope with this discrepancy.
+
+Colour spaces are just a means to specify colours, and the technical colour spaces are a rough approximation of the possibilities. If we go from coloured light to perceived colours, we have some information. Coloured light must be perceived by receptors, and as of today it seems that the human eye has four kinds of receptors.  There is a group of receptors for black and white (or light intensity), the rods. Another group of receptors, the cones, has a frequency dependent sensitivity, and the sensitivity characteristics is known. An additional group seems to be only receptive for light/darkness. So colour perception is effectively channeld through three colour channels. From the analysis of colour deficiency, a model of the interaction of these channels can be derived  \url{<http://www.statlab.uni-heidelberg.de/data/color/background.html>}. 
+
+The distribution of these receptors is not homogeneous. It is a mental reconstruction to perceive a homogeneous colour of some area. The is not sustained by primary reception.
+
+Colour is perceived as a quality, and it is an open issue how to represent quantitative information by colour. One basic aspect has been extensively studied: how to find a colour scheme that allows to represent equidistant information by apparingly equidstant colours. Several suggestions have been developed, and the current consensus is  the CIELAB colour space. If you want to represent information on an interval scale by colour, mapping it to CIELAB space is the first choice. However, very often the data give information on a scale suggested by the measuremnt process avaiiblable. An interval scale may be the exception rather than the rule, and finding an appropriate scale may be part of the challenge.
+
 Colour may need some experiments to find an informative choice. To allow easy experiments, we use a two step procedure. Based on the original data or the score, we derive a colour index. From an abstract point of view, this is just another score with values in $1, \ldots, nrColours$. Colours are provided as a colour palette, and in the second step the index is used to select the colour to apply. 
 
-See \ircode{help(palette)} for information on colour palettes.
+See \ircode{help(palette)} for information on colour palettes. \ircode{library(colorspace)} provides translations between several common colour spaces.
 
 Some colour palettes that may be useful for Bertin displays are provided. For some palettes, there are variants to highlight the tail behaviour. They are marked by a ``2'' for quadratic and a ``4'' for a quartic flattening around the mid value which is mapped to white.
 
