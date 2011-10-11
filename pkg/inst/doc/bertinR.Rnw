@@ -1193,7 +1193,9 @@ If colour encoding is used, a colour ramp should be provided as a key for interp
 \subsection{cDNA Data}
 \label{sec:caseDNA}
 \smallskip
-In 2-dye cDNA data, hybridisation results are measured using a colour scan, with two samples applied simultaneously to any one microscope slide. The dyes uses for the samples can be recovered by colour separation.  Background noise is a major concern. Standard techniques from image analysis is to spot intensity and background intensity for each spot on the slide.\reffig{fig:L34qcLegend} shows the colour separated channels for foreground and background for one chip (see \cite{Rnews:Sawitzki:2002} for details).
+In 2-dye cDNA data, hybridisation results are measured using a colour scan, with two samples applied simultaneously to any one microscope slide. The dyes uses for the samples can be recovered by colour separation.  Background noise is a major concern. Standard techniques from image analysis is to spot intensity and background intensity for each spot on the slide.\reffig{fig:L34qcLegend} shows the colour separated channels for foreground and background for one chip. See \cite{Rnews:Sawitzki:2002} for details.
+
+This display is used in the quality control of the process. The aim is to decide about the quality of a chip, or of a production protocol. The identification of differentially expressed genes, and ultimately the identification of tumor genes is a different question. To interpret the plot, you need some information about the null behaviour. The probes are not spotted at random, but slected from  gene libraries. In this case two libraries have been used, one of kidney related genes, and one of presumably tumour related genes. You expect differences between the upper half and lower half, reflecting these libraries. Not all spots have been used, and you expect bands of unused spots. But other inhomogeneities are informative, for example the accumulation of bad spots on this chip on the sides, which here comes from an asymmetrie in handling the cubation cells for the chip - a production problem which can be overcome, once you have identified it.
 
 
 \begin{figure}[htbp]
