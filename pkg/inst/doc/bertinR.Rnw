@@ -8,9 +8,12 @@
 %$HeadURL$
 
 % svn propset svn:keywords "Date Author Id Revision HeadURL" bertinR.Rnw
-% setwd("/Users/gs/projects/rforge/bertin/pkg/vignettes")
+% setwd("/Users/gs/projects/rforge/bertin/pkg/inst/doc/")
+%
 % enc <- options(width = 56);  Sweave("bertinR.Rnw",output="bertinR.tex", keep.source=TRUE, debug = TRUE, eps = FALSE); options(enc)
+%
 %%  #enc <- options(encoding = "MacRoman", width = 56)
+%   install.packages(pkgs="/Users/gs/projects/rforge/bertin/bertin_0.1-52.tar.gz", type="source", repos=NULL)
 % \usepackage{Sweave}
 %global flags for conditional builds
 %:flags
@@ -119,7 +122,7 @@ library(bertin)
 data(Hotel)
 @
 \section{Bertin Plots}
-Among the rich material on graphical presentation of information, in \cite{brtn77gtg} (engl. \cite{seriation:Bertin:1999}) J. Bertin discusses the presentation of data matrices, with a particular view to seriation. \cite{seriation:Falguerolles:1997} gives an appraisal of this aspect of Bertin's work. The methods discussed in \cite{seriation:Falguerolles:1997} have been implemented in the Voyager system \cite{Sawitzki1996Extensible-Stat}. They have been partially re-implemented in \R{}, and this paper gives an introduction to the \R{} implementation.
+Among the rich material on graphical presentation of information, in \cite{brtn77gtg}, engl. \cite{seriation:Bertin:1999}, J. Bertin discusses the presentation of data matrices, with a particular view to seriation. \cite{seriation:Falguerolles:1997} gives an appraisal of this aspect of Bertin's work. The methods discussed in \cite{seriation:Falguerolles:1997} have been implemented in the Voyager system \cite{Sawitzki1996Extensible-Stat}. They have been partially re-implemented in \R{}, and this paper gives an introduction to the \R{} implementation.
 
 The \R{}-implementation can be downloaded as a package \ircode{bertin} from \url{http://bertin.r-forge.r-project.org/}.  The paper \cite{seriation:Falguerolles:1997} is included as bertin.pdf in the documentation section of the package.
 
@@ -172,7 +175,7 @@ permutations, and groupings of rows or columns. To fix ideas, think of a data ma
 case, with real valued variables. For each variable, draw a bar chart of variable value by case. Highlight
 all bars representing a value above some sample threshold for that variable (\reffig{fig:hotel19}).
 
-<<fig=TRUE, include = FALSE, echo=FALSE, results=hide, label=hotel19, width=6, height=2 >>=
+<<fig=TRUE, include = FALSE, echo=FALSE, results=hide, label=hotel19, width=6, height=1.8 >>=
 col=ifelse(Hotel[19,]>mean(as.matrix(Hotel[19,])),"black","white")
  bertinrect(Hotel["Occupation",], col=col)
 @
@@ -188,7 +191,8 @@ col=ifelse(Hotel[19,]>mean(as.matrix(Hotel[19,])),"black","white")
 
 Variables are collected in a matrix to display the complete data set (\reffig{fig:hotelorig}). By convention, Bertin shows variables in rows and cases in columns. To make periodic structures more visible, the data are  repeated cyclically.
 
-<<fig=TRUE, include = FALSE, echo=FALSE, label=hotelorig, width=5, height=4>>=
+%<<fig=TRUE, include = FALSE, echo=FALSE, label=hotelorig, width=5, height=4>>=
+<<fig=TRUE, include = FALSE, echo=FALSE, label=hotelorig>>=
 Hotel2 <- cbind(Hotel,Hotel)
 rowmeans <- apply(Hotel2,1,mean)
 col=ifelse(Hotel2[,]>rowmeans, "black","white")
@@ -214,7 +218,7 @@ plot.bertin(Hotel2, roworder=rowperm,
 	zcol=ifelse(Hotel2[,]>rowmeans, 2,1),
 	palette=c("white","black"), main="Hotel",
 	showpalette=FALSE)
-title(sub="Variables rearranged", line=1)
+title(sub="Variables rearranged", line=1,cex.sub=1.8)
 abline(h=6, col= "green", lwd=3)
 abline(h=12, col= "green", lwd=3)
 abline(h=16, col= "green", lwd=3)
@@ -245,7 +249,7 @@ lines( c(22,22), c(20,6), col="green", lwd=3)
 \end{center}
 \end{figure}
 
-Variables need not enter at their face value; they can be transformed, or derived variable can e added. In the case of the hotel data, this has already done in the original data set. For example, the guests have been classified in tourists and business, and both sum up to 100\%.  If we want, we can remove this redundant information. This may clean up the picture. But it may hide information. For example, >tourists are ``anti-cyclic'' to the hotel occupation and just fill the gaps. Removing this variable because it is $1-business$ would hide this point.
+Variables need not enter at their face value; they can be transformed, or derived variable can be added. In the case of the hotel data, this has already done in the original data set. For example, the guests have been classified in tourists and business, and both sum up to 100\%.  If we want, we can remove this redundant information. This may clean up the picture. But it may hide information. For example, $tourists$ are ``anti-cyclic'' to the hotel occupation and just fill the gaps. Removing this variable because it is $(1-business)$ would hide this point.
 %! clean up. Fix data for 100% sums. Fix age groups.
 
 <<fig=TRUE, include = FALSE, echo=FALSE, label=hotelperm1, width=6, height=6>>=
@@ -276,7 +280,7 @@ lines( c(22,22), c(20,5), col="green", lwd=3)
 \end{center}
 \end{figure}
 
-
+\cleardoublepage
 As a second example, we use the  the \ircode{USJudgeRatings} data set (\reffig{fig:judgeorig}). 
 The data  is listed in  \reftab{tab:judge}.
 %<<results=tex, echo=FALSE, include=FALSE>>=
@@ -460,7 +464,7 @@ title( main="US Judge Ratings", line=5)
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=1.0\linewidth]{"bertinR-judgeorig"}
-\caption{Display of a data matrix: \textbf{USJudgeRatings data}. Lawyers' ratings of state judges in the US Superior Court.}
+\caption{Display of a data matrix: \textbf{USJudgeRatings data}. Lawyers' ratings of state judges in the US Superior Court. Original arrangement, judges by lexical order of name.}
 \label{fig:judgeorig}
 \end{center}
 \end{figure}
@@ -479,7 +483,7 @@ col=ifelse(USJudgeRatings[,]>colmeans, "black","white")
 #bertinrect(t(USJudgeRatings)[colorder, roworder],col=t(col)[colorder, roworder], sepwd=0.1,  pars = list(mar=c(0.05,0.05,10,4)), main="")
 bertinrect(t(USJudgeRatings)[colorder, roworder],col=t(col)[colorder, roworder], sepwd=0.1,  mar=c(1,1,1,1), main="")
 title( main="US Judge Ratings", line=5)
-title( sub="observations and variables sorted by mean", line=1)
+title( sub="cases and variables sorted by mean", line=1, cex.sub=1.4)
 
 #bertinrect(t(USJudgeRatings),col=t(col), sepwd=0.1,  pars = list(mar=c(0.2,0.2,7,6)), main="")
 @
@@ -504,7 +508,7 @@ col=ifelse(USJudgeRatings1[,]>colmeans, "black","white")
 #bertinrect(t(USJudgeRatings1)[colorder, roworder],col=t(col)[colorder, roworder], sepwd=0.1,  pars = list(mar=c(0.05,0.05,10,4)), main="")
 bertinrect(t(USJudgeRatings1)[colorder, roworder],col=t(col)[colorder, roworder], sepwd=0.1,  mar=c(1,1,1,1),main="")
 title( main="US Judge Ratings", line=5)
-title( sub="observations and variables sorted by mean. CONT removed.", line=1)
+title( sub="Observations and variables sorted by mean. CONT removed.", line=1, cex.sub=1.4)
 abline(v=23, col= "green", lwd=3)
 abline(v=14, col= "green", lwd=3)
 lines(c(15,23),c(5,5),col= "green", lwd=3)
@@ -519,11 +523,11 @@ lines(c(15,23),c(6,6),col= "green", lwd=3)
 \end{figure}
 
 The highlight features of the  display give a clear picture of a rather homogeneous upper and homogeneous lower group of judges. All criteria seem to say the same in these groups. For a small intermediate group of cases, the variables seem to fall into two or three groups, and it is only for this small group that a closer look at the variables and their meaning may be necessary. 
- If you want to model the rating of the worthiness of retention, say, as a function ot the other ratings, it is only here that a refined model might be necessary, whereas in the case most judges a rough model would do.
+ If you want to model the rating of the worthiness of retention, say, as a function of the other ratings, it is only here that a refined model might be necessary. For most judges, a rough model would do.
  
- For this data set, the low resolution of the variables may be a problem. No details are given in the documentation, but  presumably the rating has been taken on a $1, \ldots, 10$ scale, and in all variables the median is higher than $7$. Changing the scale may give a better contrast and improve the resolution (see \reffig{fig:judgeperm1rng}).  Here we used the rescaled variables to define the height of the bars. For highlighting by colour (only black/white here) we used the data in the original scale. Both display attributes, height and colour, are independent and we are free to encode different aspects of the data. In  \reffig{fig:judgeperm1rng} we sorted the cases by the value of \ircode{RTEN}. This lets us view the data from a different point of view.
+ For this data set, the low resolution of the variables may be a problem. No details are given in the documentation, but  presumably the rating has been taken on a $1, \ldots, 10$ scale, and in all variables the median is higher than $7$. (only one data point, a contact recorded as 10.6 does not fit into this and asks for explanation.) Changing the scale may give a better contrast and improves the resolution (see \reffig{fig:judgeperm1rng}).  Here we used the rescaled variables to define the height of the bars. For highlighting by colour (only black/white here) we used the data in the original scale. Both display attributes, height and colour, are independent and we are free to encode different aspects of the data. In  \reffig{fig:judgeperm1rng} we sorted the cases by the value of \ircode{RTEN}. This lets us view the data from a different point of view.
  
-Again we have a clear upper and lower group, with consistency over all variables, and a small intermediate group which needs closer inspection. Judge G.A. Saden stands out. By most criteria, he qualifies for a higher ranking, but demeanor and judicial integrity go along with a low scored worthy of retention.
+Again we have a clear upper and lower group, with consistency over all variables, and a small intermediate group which needs closer inspection. Judge G.A. Saden stands out. By most criteria, he qualifies for a higher ranking, but demeanour and judicial integrity go along with a low scored worthy of retention.
 
 Two judges are on the boundary and may well be exchanged - this is where random fluctuation may be at work to decide for the ranking.
 
@@ -535,12 +539,21 @@ Two judges are on the boundary and may well be exchanged - this is where random 
 \end{center}
 \end{figure}
 
+\cleardoublepage
 At this early point, let us put Bertin's work in place. Visualising information is but one aspect. In statistics, as we see it today, visualisation may be one part of an analysis. The outcome will be a decision leading to an action. Then there is a loss (or gain) depending on the action taken on the one hand, and the ``true'' state of the world on the other. This is the common decision theoretical setting. Statistics has formulated a few standard problems, and given suggestions how to handle these. In our Hotel example, the problem can be seen as a prediction problem: find a prediction model to predict occupation and duration, based on the other variables. More specifically this is a control problem, and the statistical contribution is to find a regression model for occupation and duration, based on the other variables. The visualisation can be seen as one way to hint at a regression model. There are very few classical problems. Regression is one of them, and prediction is closely related. Classification and clustering is another, closely related pair of problems, and their relation to Bertin matrices should be obvious. The USJudgeRatings can be looked at as a classification problem.
 
 
 \section{Work flow}
 
 Bertin matrices usually are part of a work flow.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{workflow}
+\caption{Data flow for Bertin}
+\label{fig:workflow}
+\end{center}
+\end{figure}
 
 In a first step, we transfer the input data to allow for  common, or comparable scales. In the Hotel example, Bertin rescales by the maximum value of each variable. The dichotomous variable Faires is encoded as 0/1. Our  implementation default is to rescale for  \ircode{(0, max)} for positive variables,  \ircode{(min, 0)} for negative variables,  \ircode{(min, max)} for general variables. Out preferred, or recommended rescaling however is to use ranks. We use the term \ircode{score} for the rescaled variables. Orientation of the data set is critical convention in this step. Usually, rescaling should be by variable, not by case. Depending on the orientation, this can lead for example to ranks by row or by column. We allow global scaling as an additional option for those situations where all data are already on a common scale. Following Bertin, our  implementation default is to expect variables in rows, but we provide the means to switch to the \R{} convention with variables in columns. The raw data may come in data frames, or lists, or views on a data base, and the original convention should be preserved. The scores however are a matrix, or an array (which we consider a stacked list of matrices in our context.) We prefer to keep these in Bertin conventions, that is variables are in rows.
 
@@ -577,11 +590,11 @@ hotelrank <- bertinrank(Hotel2)
 plot.bertin(hotelrank)
 hotelrankorder <- bertin:::ordercor(hotelrank, 19)
 plot.bertin(hotelrank, roworder=hotelrankorder)
-title(sub="Variable sorted by correlation to Occupation", cex.sub=0.6, line=1)
+title(sub="Variable sorted by correlation to Occupation", cex.sub=1.4, line=1)
 par(oldpar)
 @
 
-Rank scores have a sound basis. The bring us back to the range of rank statistics. However, since they scale any rank difference by unit steps, they convey order, but not quantitative differences. Preferably they are combined with colour palettes which do not suggest a quantitative scale. The default colour palette uses 256 steps of grey and suggests a quantitative order, whereas the ranks by variable provide at most 12 steps in this example. 
+Rank scores have a sound statistical basis. They bring us back to the field of rank statistics. However, since they scale any rank difference by unit steps, they convey order, but not quantitative differences. Preferably they are combined with colour palettes which do not suggest a quantitative scale. The default colour palette uses 256 steps of grey and suggests a quantitative order, whereas the ranks by variable provide at most 12 steps in this example. 
 
 It is preferable to use a palette with reduced resolution. For 12 rank values, a scale with 3 or 4 steps should do. 
 
@@ -593,7 +606,7 @@ plot.bertin(hotelrank,
 hotelrankorder <- bertin:::ordercor(hotelrank, 19)
 plot.bertin(hotelrank, roworder=hotelrankorder,
 	palette = gray((2:0 / 2)^0.5))
-title(sub="Variable sorted by correlation to Occupation", cex.sub=0.6, line=1)
+title(sub="Variable sorted by correlation to Occupation", cex.sub=1.4, line=1)
 par(oldpar)
 @
 
@@ -614,7 +627,7 @@ par(oldpar)
 
 Bertin uses to highlight ``above average''  observations. If the data is not degenerate, this corresponds to \ircode{bertinzscore > 0}.
 
-Since z Scores center the variables around the mean, they require positive and negative values for display. This leads in effect to a reduction of the display space to a half, which should be compensated by a more expressive choice of colour coding.
+Since $z$ scores center the variables around the mean, they require positive and negative values for display. This leads in effect to a reduction of the display space to a half, which should be compensated by a more expressive choice of colour coding.
 
 \vspace{\stretch{1}}
 \pagebreak
@@ -631,7 +644,7 @@ plot.bertin(hotelrangescore, roworder=hotelrangescoreorder)
 par(oldpar)
 @
 
-This score just rescales to $[0, 1]$. On contrast to ranks, it preserves quantitative proportions. See \reffig{fig:judgeperm1rng}.
+This score just rescales to $[0, 1]$. In contrast to ranks, it preserves quantitative proportions. See \reffig{fig:judgeperm1rng}.
 <<fig=TRUE, include = FALSE, echo=FALSE, label=judgeperm1rng,width=12, height=6>>=
 USJudgeRatings1rngt <- bertinrangescore(t(USJudgeRatings1))
 colmeans <- apply(USJudgeRatings1rngt, 2, mean)
@@ -646,8 +659,8 @@ col=ifelse(t(USJudgeRatings1)[,]>rowmeans, "black","white")
 bertinrect(USJudgeRatings1rngt[roworder, colorder],col=(col)[roworder, colorder], 
 	sepwd=0.1,  mar=c(1,1,1,1), main="")
 title( main="US Judge Ratings", line=5)
-title( sub="Cases sorted by RTEN, variables sorted by mean. Rescaled for range. CONT removed.", 
-	line=1, cex.sub=0.6)
+title( sub="Cases sorted by RTEN, variables sorted by mean and rescaled. Rescaled for range. CONT removed.", 
+	line=1, cex.sub=1.4)
 @
 
 \section{Permutation, Seriation, Arrangement}
@@ -677,14 +690,15 @@ imagem(zscores[rowperm,], main="", palette=gray((0:256)/256))
 imagem(zscores[rowperm,], main="", palette=gray((0:3)/3))
 @
 %
+\setkeys{Gin}{width=1.0\textwidth}
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=0.48\linewidth]{"bertinR-hotelpermimage1"}\includegraphics[width=0.48\linewidth]{"bertinR-hotelpermimage2"}
+\includegraphics[width=0.49\linewidth]{"bertinR-hotelpermimage1"}\includegraphics[width=0.49\linewidth]{"bertinR-hotelpermimage2"}
 \caption{Display of a data matrix as grey scale image: \textbf{Hotel data}. Variables are rearranged by similarity to occupation and duration. Grey scale with 256 on the left, reduced grey scale with 4 steps on the right, applied to \ircode{zscores}.} 
 \label{fig:hotelpermimage}
 \end{center}
 \end{figure}
-
+\setkeys{Gin}{width=1.0\textwidth}
 
 %%:hunting for the alias problem
 %hunting for the alias problem
@@ -737,7 +751,7 @@ imagem(zscores[rowperm,], main="", palette=gray((0:3)/3))
 %@
 @
 
-As a final aspect, display space is limited. The number of variables and cases that can be displayed simultaneously is limited by the pixel size of the display. We can increase it by one or two magnitudes by using e series of detail displays. Any display calibration however should be constant for this series. We try to allow for this global calibration (see \refsec{sec:coords}).
+As a final aspect, display space is limited. The number of variables and cases that can be displayed simultaneously is limited by the pixel size of the display. We can increase it by one or two magnitudes by using a series of detail displays. Any display calibration however should be constant for this series. We try to allow for this global calibration (see \refsec{sec:coords}).
 
 
 So far, the interactive possibilities used in Voyager \cite{Sawitzki1996Extensible-Stat} are not provided in the \R{} implementation, and only rudimentary parts of the static arrangements are provided in \R{}.
@@ -748,7 +762,7 @@ So far, the interactive possibilities used in Voyager \cite{Sawitzki1996Extensib
 %We will discuss an implementation of Bertin's ideas. Implementing his examples as is, is trivial. To catch his ideas demands some thoughts, and has immediate consequences for an \R{} environment.
 %
 
-It may be useful to think of classical statistical methods and see how they may be reflected in a bertin setting. For a start, regression and classification may serve as starting points. For both, traditional statistics has provided solutions, in the classical framework as least squares regression and as discriminance analysis. Many variations have followed.
+It may be useful to think of classical statistical methods and see how they may be reflected in a Bertin setting. For a start, regression and classification may serve as starting points. For both, traditional statistics has provided solutions, in the classical framework as least squares regression and as discriminance analysis. Many variations have followed.
 
 Classification and regression trees \cite{Breiman1984CART} have thrown a new light on these problems. In principle, CART is a higher dimensional strategy. In the Bertin context, we deliberately restrict ourselves to a two dimensional display context. CART suggests to look for ``patches'', rectangular areas that allow for an economic model.  CART uses a simple strategy, splitting one variable at a point. However this leads to a fragmentation of the data material, dividing it on the average by a factor $2^k$ for k splits, and gives a corresponding penalty in terms of variance. Friedman \cite{Friedman1996LocalLearning} has pointed out that this fragmentation is not necessary. Instead of one set of patches you can have two: one used for estimation, and a second one, possibly different, uses to apply the estimation for fitting. You want to keep the first one large to control variance, and the second one small to reduce bias.
 
@@ -768,30 +782,30 @@ The high level routines accept the usual possibilities of \R{} for subset and in
 the indices are accessible as function arguments. Certain actions are provided as special functions. See the reference pages for details.
 
 
-\section{Colour, perception and pitfalls}
+\section{Colour, Perception and Pitfalls}
 %:! give references
 
-Colour is one of the simplest qualities, and barely understood. One basis of colour is light, and if we follow todays physics this is best described as electromagnetic wave with energy distributed over a spectum of wavelenghts. So the mathematiical home is some Hilbert space.
+Colour is one of the simplest qualities, and barely understood. One basis of colour is light, and if we follow todays physics this is best described as electromagnetic wave with energy distributed over a spectrum of wavelengths. So the mathematical home is some Hilbert space.
 
-We do not know how light translate into perceived colour, but we know some of the steps, and we have some artefacts that may help us to understand the process. Today, the most helpful concept seems to be that of a colour space - a finite dimensional space mapped into the true space of colours. 
+We do not know how light translates into perceived colour, but we know some of the steps, and we have some artefacts that may help us to understand the process. Today, the most helpful concept seems to be that of a colour space - a finite dimensional space mapped into the true space of colours. 
 
 In a technical context as we see it today, colour became manageable with colour displays using phosphors, coming in three colours (red, green and blue). The relative intensities of these colours are enough to specify the visual impact, and the RGB space is still the basis space for colours presented on a display.
 
-Of course there is a huge discrepancy between the full Hilbert space of lights, and three dimensional RGB space.  The gap is bridged by perception. Different spectral distributions may give the same perceived coulours. By mixing only few colours, you can generate the impression to nearly cover a spectrum. Colours thus matched perceptually are called metamers. 
+Of course there is a huge discrepancy between the full Hilbert space of lights, and three dimensional RGB space.  The gap is bridged by perception. Different spectral distributions may give the same perceived colours. By mixing only few colours, you can generate the impression to nearly cover a spectrum. Colours thus matched perceptually are called metamers. 
 
 This leads to an experimental setup. Take the space of single frequency colours, i.e. monochrome light. For each frequency, find a combination of red, green and blue to match this colour.
 
-What they tell us in school is that all colours can be mixed from three basic colours. No, note quite. Not even for monochrome light. For many frequency, the impression can be generated by an RGB combination. For several colours in the green range, it is necessary to reduce the colour by a complement before it is accessible in RGB space. See \url{<http://www.statlab.uni-heidelberg.de/data/color/>}. However the mapping  from monochromous coulor space to RGB space is fairly understood and allows us  to generate (within limits) the colour of any frequency if we can control RGB values.
+What they tell us in school is that all colours can be mixed from three basic colours. No, note quite. Not even for monochrome light. For many frequency, the impression can be generated by an RGB combination. For several colours in the green range, it is necessary to reduce the colour by a complement before it is accessible in RGB space. See \url{<http://www.statlab.uni-heidelberg.de/data/color/>}. However the mapping  from monochromous colour space to RGB space is fairly understood and allows us  to generate (within limits) the colour of any frequency if we can control RGB values.
 
-Technology requires differin spaces. While for displays we originally had three colours encoded in RGB, for printing the readily available dyes ware cyan, magenta and yellow, defining a CMY space. Fortunately these dyes could be calibratetd to be roughly complimentary to RGB, so we think of a colour cube with pure R, G, B on three corners, C, M, Y on the opposite corners and an easy translation from RGB to CMY coordinates. Today, quality colour printing is starting with six dyes, and a more complex colour space is standard.
+Technology requires differing spaces. While for displays we originally had three colours encoded in RGB, for printing the readily available dyes ware cyan, magenta and yellow, defining a CMY space. Fortunately these dyes could be calibrated to be roughly complimentary to RGB, so we think of a colour cube with pure R, G, B on three corners, C, M, Y on the opposite corners and an easy translation from RGB to CMY coordinates. Today, quality colour printing is starting with six dyes, and a more complex colour space is standard.
 
 Still these technical colours are far away of the complexity of colours of light, and the use of metamers is the way to cope with this discrepancy.
 
-Colour spaces are just a means to specify colours, and the technical colour spaces are a rough approximation of the possibilities. If we go from coloured light to perceived colours, we have some information. Coloured light must be perceived by receptors, and as of today it seems that the human eye has four kinds of receptors.  There is a group of receptors for black and white (or light intensity), the rods. Another group of receptors, the cones, has a frequency dependent sensitivity, and the sensitivity characteristics is known. An additional group seems to be only receptive for light/darkness. So colour perception is effectively channeld through three colour channels. From the analysis of colour deficiency, a model of the interaction of these channels can be derived  \url{<http://www.statlab.uni-heidelberg.de/data/color/background.html>}. 
+Colour spaces are just a means to specify colours, and the technical colour spaces are a rough approximation of the possibilities. If we go from coloured light to perceived colours, we have some information. Coloured light must be perceived by receptors, and as of today it seems that the human eye has four kinds of receptors.  There is a group of receptors for black and white (or light intensity), the rods. Another group of receptors, the cones, has a frequency dependent sensitivity, and the sensitivity characteristics is known. An additional group seems to be only receptive for light/darkness. So colour perception is effectively channelled through three colour channels. From the analysis of colour deficiency, a model of the interaction of these channels can be derived  \url{<http://www.statlab.uni-heidelberg.de/data/color/background.html>}. 
 
 The distribution of these receptors is not homogeneous. It is a mental reconstruction to perceive a homogeneous colour of some area. The is not sustained by primary reception.
 
-Colour is perceived as a quality, and it is an open issue how to represent quantitative information by colour. One basic aspect has been extensively studied: how to find a colour scheme that allows to represent equidistant information by apparingly equidstant colours. Several suggestions have been developed, and the current consensus is  the CIELAB colour space. If you want to represent information on an interval scale by colour, mapping it to CIELAB space is the first choice. However, very often the data give information on a scale suggested by the measuremnt process avaiiblable. An interval scale may be the exception rather than the rule, and finding an appropriate scale may be part of the challenge.
+Colour is perceived as a quality, and it is an open issue how to represent quantitative information by colour. One basic aspect has been extensively studied: how to find a colour scheme that allows to represent equidistant information by apparently equidistant colours. Several suggestions have been developed, and the current consensus is  the CIELAB colour space. If you want to represent information on an interval scale by colour, mapping it to CIELAB space is the first choice. However, very often the data give information on a scale suggested by the measurement process available. An interval scale may be the exception rather than the rule, and finding an appropriate scale may be part of the challenge.
 
 Colour may need some experiments to find an informative choice. To allow easy experiments, we use a two step procedure. Based on the original data or the score, we derive a colour index. From an abstract point of view, this is just another score with values in $1, \ldots, nrColours$. Colours are provided as a colour palette, and in the second step the index is used to select the colour to apply. 
 
@@ -810,38 +824,63 @@ Colour displays are a means to convey some information. Check that your choices 
 \vspace{\stretch{1}}
 \pagebreak
 \subsection{Colour Palettes}
-
+\setkeys{Gin}{width=0.8\textwidth}
 %:Basic colour palettes. 
 
-Basic colour palettes. 
 
-<<fig=TRUE, echo=TRUE, width=4, height=2, label= palgreencolors>>=
-oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
-colramp(bertin:::green.colors(100))
-colramp(bertin:::green.colors(100, rev=TRUE))
-par(oldpar)
-@
-\vspace{\stretch{1}}
+The calling structure for all examples in this section is the same.
+Here are just two examples.
+
 %\pagebreak
-<<fig=TRUE, echo=TRUE,  width=4, height=2,  label= palgredcolors>>=
+<<fig=TRUE, echo=TRUE,  width=4, height=1.9,  label= palgredcolors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::red.colors(100), horizontal=TRUE)
 colramp(bertin:::red.colors(100, rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
 \vspace{\stretch{1}}
+
+<<fig=TRUE, echo=TRUE, width=4, height=1.9, label= palgreencolors>>=
+oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
+colramp(bertin:::green.colors(100))
+colramp(bertin:::green.colors(100, rev=TRUE))
+par(oldpar)
+@
+\vspace{\stretch{1}}
+
+\clearpage
+\subsubsection{Basic Colour Palettes}\ 
+
+<<fig=TRUE, echo=FALSE,  width=4, height=1.9,  label= palgredcolors>>=
+oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
+colramp(bertin:::red.colors(100), horizontal=TRUE)
+colramp(bertin:::red.colors(100, rev=TRUE),horizontal=TRUE)
+par(oldpar)
+@
+\vspace{\stretch{1}}
+
+<<fig=TRUE, echo=FALSE, width=4, height=1.9, label= palgreencolors>>=
+oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
+colramp(bertin:::green.colors(100))
+colramp(bertin:::green.colors(100, rev=TRUE))
+par(oldpar)
+@
+
+\vspace{\stretch{1}}
 %\pagebreak
-<<fig=TRUE, echo=TRUE,  width=4, height=2, label= palbluecolors>>=
+<<fig=TRUE, echo=FALSE,  width=4, height=1.9, label= palbluecolors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::blue.colors(100), horizontal=TRUE)
 colramp(bertin:::blue.colors(100, rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
 \vspace{\stretch{1}}
-%\pagebreak
-This is a rather stable palette, with less than 0.1\%readers being affected by colour vision particularities. Scale interpretation seeing yellow as higher is also very stable.
+\clearpage
+\subsubsection{Contrast Colour Palettes}
 
-<<fig=TRUE, echo=TRUE,  width=4, height=2,  label= palblueyellowcolors>>=
+Blue-yellow: This is a rather stable palette, with less than 0.1\%readers being affected by colour vision particularities. Scale interpretation seeing yellow as higher is also very stable.
+
+<<fig=TRUE, echo=FALSE,  width=4, height=1.9,  label= palblueyellowcolors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::blueyellow.colors(100),horizontal=TRUE)
 colramp(bertin:::blueyellow.colors(100, rev=TRUE),horizontal=TRUE)
@@ -850,66 +889,81 @@ par(oldpar)
 %
 %\clearpage
 \vspace{\stretch{1}}
+
 %\pagebreak
 Variant of the above, highlighting the tails and  attenuating the center. For an application, see \refsec[Case Studies: cDNA Data]{sec:caseDNA}. This is a rather stable palette, with less than 0.1\% readers being affected by colour vision particularities. Scale interpretation seeing yellow as higher is also very stable.
 
-<<fig=TRUE, echo=TRUE,  width=4, height=2,  label= palblueyellow2colors>>=
+<<fig=TRUE, echo=FALSE,  width=4, height=1.9,  label= palblueyellow2colors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::blueyellow2.colors(100),horizontal=TRUE)
 colramp(bertin:::blueyellow2.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
 \vspace{\stretch{1}}
+
 %\pagebreak
-<<fig=TRUE, echo=TRUE,  width=4, height=2,  label= palblueyellow4colors>>=
+<<fig=TRUE, echo=FALSE,  width=4, height=1.9,  label= palblueyellow4colors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::blueyellow4.colors(100),horizontal=TRUE)
 colramp(bertin:::blueyellow4.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
 \vspace{\stretch{1}}
-%\pagebreak
-<<fig=TRUE, echo=TRUE,  width=4, height=2,  label= palbluered2colors>>=
+\clearpage
+
+<<fig=TRUE, echo=FALSE,  width=4, height=2,  label= palbluered2colors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::bluered2.colors(100),horizontal=TRUE)
 colramp(bertin:::bluered2.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
 \vspace{\stretch{1}}
+
 %\pagebreak
-<<fig=TRUE, echo=TRUE,  width=4, height=2,  label= palbluered4colors>>=
+<<fig=TRUE, echo=FALSE,  width=4, height=2,  label= palbluered4colors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::bluered4.colors(100),horizontal=TRUE)
 colramp(bertin:::bluered4.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
 \vspace{\stretch{1}}
-%\pagebreak
-<<fig=TRUE, echo=TRUE, width=4, height=2, label= palgreenred2colors>>=
+
+\clearpage
+<<fig=TRUE, echo=FALSE, width=4, height=2, label= palgreenred2colors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::greenred2.colors(100),horizontal=TRUE)
 colramp(bertin:::greenred2.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
 \vspace{\stretch{1}}
+
 %\pagebreak
-<<fig=TRUE, echo=TRUE, width=4, height=2, label= palgreenred4colors>>=
+<<fig=TRUE, echo=FALSE, width=4, height=2, label= palgreenred4colors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::greenred4.colors(100),horizontal=TRUE)
 colramp(bertin:::greenred4.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
 \vspace{\stretch{1}}
-%\pagebreak
+\clearpage
+
+\subsubsection{Tail Colours}\ 
 
 In \cite{tukey1991manycovar}, J. Tukey suggested to use a drastic reduction of information for analysis with many covariates. The tail palettes are provided to support a graphical variant of this strategy.
 
-<<fig=TRUE, echo=TRUE, width=4, height=2, label= paltailcolors>>=
+{\em{Note: This variant is poor for dichromers.}}
+
+
+<<fig=TRUE, echo=FALSE, width=4, height=2, label= paltailcolors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::tail.colors(100),horizontal=TRUE)
 colramp(bertin:::tail.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
+
+\clearpage
+
+\subsection{Using Inverted Palettes}
 
 Perception is an active process, and any visual presentation may be swayed by the intricacies of perception. Colour perception is particularly complex. When working with colour (and this includes black and white), we strongly suggest to have a look at the image with inverted colours as well.
 
@@ -919,7 +973,7 @@ Here is a sample implementation. On the \R{} level, provide a plotting function
 
 <<print=FALSE, echo=TRUE >>=
 sampleimagem <- function(z, 
-	palette = grey((1:256)/256), xlab, ylab, main, 
+	palette = grey((1:256)/256), xlab, ylab, main = NULL, 
 	colinvert=FALSE){
 	if (colinvert) palette <- palette[length(palette):1]
 	# x1, x2. y1, y2
@@ -938,7 +992,7 @@ sampleimagem <- function(z,
 }
 @
 and run it with \ircode{colinvert=FALSE} and  \ircode{colinvert=TRUE} .
-If your are using \ircode{Sweave}, use two separate chunks, and place the figure output side by side in \TeX.
+If your are using \ircode{Sweave}, use two separate chunks, and place the figure output side by side using \TeX.
 %	@
 %	%
 %	%
@@ -955,6 +1009,7 @@ If your are using \ircode{Sweave}, use two separate chunks, and place the figure
 %	@
 %	\clearpage
 %	% sequence heat
+\setkeys{Gin}{width=1.0\textwidth}
 <<fig=TRUE, eps= FALSE, echo=TRUE, height=12, width=10, include=FALSE, label=sampleimagem>>=
 hotelrk <- bertinrank(Hotel)
 sampleimagem(hotelrk)
@@ -966,6 +1021,8 @@ sampleimagem(hotelrk, colinvert=TRUE)
 @
 See  \reffig{fig:sampleimageminv} right.
 
+\setkeys{Gin}{width=1.0\textwidth}
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=0.48\linewidth]{bertinR-sampleimagem}
@@ -975,11 +1032,14 @@ See  \reffig{fig:sampleimageminv} right.
 \end{figure}
 %
 %\clearpage
+\setkeys{Gin}{width=1.0\textwidth}
+
+\clearpage
 
 \section{Coordinate System and Conventions}
 \label{sec:coords}
 
-We provide prototypes for the display of Bertin matrices. To simplify the implementation of extensions, we chose a coordinate system that allots a unit square to each matrix cell. If we want to add separator lines to structure our data, we have to reserve some space \ircode{sepwd}, measured in user space. 
+We provide prototypes for the display of Bertin matrices. To simplify the implementation of extensions, we choose a coordinate system that allots a unit square to each matrix cell. If we want to add separator lines to structure our data, we have to reserve some space \ircode{sepwd}, measured in user space. 
 
 To recall: the basic graphic system of  \R{} shows the proper content in a plot region, with additional information such as axis and labels in an imbedding figure region  (\reffig{fig:plotregions}).
 %
@@ -1101,7 +1161,7 @@ options(warn=0) # gs reset
 \end{center}
 \end{figure}
 %
-The device space may be alloted to several figures, leading to a hierachy of coordinate systems and displays (\reffig{fig:baseregionsnfig}).
+The device space may be allotted to several figures, leading to a hierarchy of coordinate systems and displays (\reffig{fig:baseregionsnfig}).
 
 %http://www.stat.auckland.ac.nz/~paul/RG2e/custombase-baseregionsnfig.png
 <<fig=TRUE, eps= FALSE, echo=FALSE, include=FALSE, label=baseregionsnfig>>=
@@ -1138,8 +1198,8 @@ for (i in 1:4)
 par(oldpar) # gs
 @
 %clean up after P.M. code - the brute way
-<<fig=FALSE, eps= FALSE, echo=FALSE, include=FALSE>>=
-dev.off()
+<<fig=FALSE, eps= FALSE, echo=FALSE, include=FALSE, label=33cleanup>>=
+if (dev.cur()>1) {dev.off()}
 @
 %
 \begin{figure}[htbp]
@@ -1183,7 +1243,7 @@ If colour encoding is used, a colour ramp should be provided as a key for interp
 \begin{center}
 \includegraphics[width=0.45\linewidth]{Ebner02-timemap60topo}
 \includegraphics[width=0.45\linewidth]{Ebner02-timemap60topoinv}
-\caption{\textbf{Borderline data}. Tension level, all observations, by time. Spot the cases in the control group (Id index > 50) who have tension levels that rather fit into the patient group.}\label{fig:timemapseqtopo}\label{fig:timemapseqtopoinv}
+\caption{\textbf{Borderline data}. Tension level, all observations, by time. Spot the cases in the control group (Id index > 50) that have tension levels fitting into the patient group rather than the control group.}\label{fig:timemapseqtopo}\label{fig:timemapseqtopoinv}
 \end{center}
 \end{figure}
 
@@ -1195,7 +1255,7 @@ If colour encoding is used, a colour ramp should be provided as a key for interp
 \smallskip
 In 2-dye cDNA data, hybridisation results are measured using a colour scan, with two samples applied simultaneously to any one microscope slide. The dyes uses for the samples can be recovered by colour separation.  Background noise is a major concern. Standard techniques from image analysis is to spot intensity and background intensity for each spot on the slide.\reffig{fig:L34qcLegend} shows the colour separated channels for foreground and background for one chip. See \cite{Rnews:Sawitzki:2002} for details.
 
-This display is used in the quality control of the process. The aim is to decide about the quality of a chip, or of a production protocol. The identification of differentially expressed genes, and ultimately the identification of tumor genes is a different question. To interpret the plot, you need some information about the null behaviour. The probes are not spotted at random, but slected from  gene libraries. In this case two libraries have been used, one of kidney related genes, and one of presumably tumour related genes. You expect differences between the upper half and lower half, reflecting these libraries. Not all spots have been used, and you expect bands of unused spots. But other inhomogeneities are informative, for example the accumulation of bad spots on this chip on the sides, which here comes from an asymmetrie in handling the cubation cells for the chip - a production problem which can be overcome, once you have identified it.
+This display is used in the quality control of the process. The aim is to decide about the quality of a chip, or of a production protocol. The identification of differentially expressed genes, and ultimately the identification of tumour genes is a different question. To interpret the plot, you need some information about the null behaviour. The probes are not spotted at random, but selected from  gene libraries. In this case two libraries have been used, one of kidney related genes, and one of presumably tumour related genes. You expect differences between the upper half and lower half, reflecting these libraries. Not all spots have been used, and you expect bands of unused spots. But other inhomogeneities are informative, for example the accumulation of bad spots on this chip on the sides, which here comes from an asymmetry in handling the incubation cells for the chip - a production problem which can be overcome, once you have identified it.
 
 
 \begin{figure}[htbp]
@@ -1208,7 +1268,7 @@ This display is used in the quality control of the process. The aim is to decide
 \clearpage
 \vspace{\stretch{1}}
 \pagebreak
-\section{Test matrices}
+\section{Test Matrices}
 
 To test the implementation, a series of matrices is provided. Each matrix is shown in four displays: as an image using default setting of the low level function \ircode{imagem}, as an image using the default setting of \ircode{image.bertin}, as a rectangle display using the low level function \ircode{bertinrect} and as a display using the default setting of \ircode{plot.bertin}.
 \smallskip
@@ -1217,19 +1277,19 @@ testplot <- function(z, main=deparse(substitute(z)))
 {
 	oldpar <- par(mfcol=c(2,2))
 	bertinrect(z, main= main)
-	title(sub="bertinrect", line=1, cex.sub=0.6)
+	title(sub="bertinrect", line=1, cex.sub=1.2)
 
 par(mfg=c(1,2)) # fix for stray display allocation
 	imagem(z, main= main)
-	title(sub="imagem", line=1, cex.sub=0.6)
+	title(sub="imagem", line=1, cex.sub=1.2)
 
 par(mfg=c(2,1)) # fix for stray display allocation -- this is very bad
 	plot.bertin(z, main= main)
 par(mfg=c(2,1)) # fix for stray display allocation -- this is very very bad
-	title(sub="plot.bertin", line=0, cex.sub=0.6)
+	title(sub="plot.bertin", line=0, cex.sub=1.2)
 par(mfg=c(2,2)) # fix for stray display allocation
 	image.bertin(z, main= main)
-	title(sub="image.bertin", line=0,  cex.sub=0.6)
+	title(sub="image.bertin", line=0,  cex.sub=1.2)
 		par(oldpar)
 }
 @
@@ -1281,6 +1341,8 @@ testplot(BMExplNorm)
 
 Random normal,  using default settings.
 
+\clearpage
+
 \subsection{Vanilla}
 
 The next round of test cases are numeric, but not on a common scale. We provide some test vectors which we can use to construct various test matrices.
@@ -1300,8 +1362,9 @@ Bnazero <- rep(c(NA,0),length.out= BMExplCols)
 Bnanzero <- rep(c(NaN,0),length.out= BMExplCols)
 Binf <- rep(c(Inf,0,-Inf),length.out= BMExplCols)
 @
-\smallskip
-\subsubsection{Basic test matrices}
+\clearpage
+
+\subsubsection{Basic Test Matrices}
 
 <<>>=
 Brmatrix <- rbind(Bhat, Bzero, Bone, Bmone, Binc, Bdec, Bstep)
@@ -1319,7 +1382,9 @@ print(xtable(Brmatrix, align="|r|rrrrrr|", label="tab:Brmatrix", caption="\\text
 testplot(Brmatrix)
 @
 
-Test matrix by row, using default settings
+{\center{Test matrix by row, using default settings}
+
+}
 
 R may use internal housekeeping to keep matrix columns homogeneous. 
 Check! Use row matrix and column matrix for tests.
@@ -1343,8 +1408,9 @@ testplot(Bcmatrix)
 
 Test matrix by column,  using default settings
 
-\smallskip
-\subsubsection{Basic test matrices with normal random error}
+\clearpage
+
+\subsubsection{Basic Test Matrices With Normal Random Error}
 
 <<>>=
 BrRndmatrix <- Brmatrix+rnorm(nrow(Brmatrix)*ncol(Brmatrix))
@@ -1356,8 +1422,8 @@ testplot(BrRndmatrix)
 
 Test matrix by row with normal random error, using default settings
 
-\smallskip
-\subsection{Test matrices with IEEE specials}
+\clearpage
+\subsection{Test Matrices With IEEE Specials}
 
 <<>>=
 Brmatrixx <- rbind(Bhat, Bzero, Bone, Bmone, Binc, Bdec, Bstep,  
@@ -1378,7 +1444,9 @@ label="tab:Brmatrixx", align="|r|rrrrrr|",
 testplot(Brmatrixx)
 @
 
-Test matrix with IEEE specials by row,  using default settings
+\clearpage
+
+\subsubsection{Test Matrix With IEEE Specials By Row,  Using Default Settings}
 
 <<>>=
 Bcmatrixx <- cbind(Bhat, Bzero, Bone, Bmone, Binc, Bdec, Bstep,
@@ -1389,7 +1457,9 @@ Bcmatrixx <- cbind(Bhat, Bzero, Bone, Bmone, Binc, Bdec, Bstep,
 testplot(Bcmatrixx)
 @
 
-Test matrix with IEEE specials by column, using default settings.
+\clearpage
+
+\subsubsection{Test Matrix With IEEE Specials by Column, Using Default Settings}\ 
 
 <<>>=
 BrRndmatrixx <- Brmatrixx+rnorm(nrow(Brmatrixx)*ncol(Brmatrixx))
@@ -1416,6 +1486,7 @@ testplot(BrRndmatrixx)
 \vspace{\stretch{1}}
 \noindent
 {\tiny%
+\verb#$HeadURL$#\\
 \verb#$Id$#\\
 \verb#$Revision$#\\
 \verb#$Date$#\\

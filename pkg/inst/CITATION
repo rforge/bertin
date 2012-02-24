@@ -28,7 +28,7 @@ editor = "W. Bandilla and F. Faulbaum",
                          "A Tribute to J. Bertin\'s Graphical Data Analysis.",
 			 "in: W. Bandilla and F. Faulbaum (eds.)",
                    "SoftStat \'97 (Advances in Statistical Software 6).",
-                   "Lucius & Lucius: HEIDELBERG.",
+                   "Lucius & Lucius: Heidelberg.",
                    sep = "  ")
          )
 
@@ -61,7 +61,7 @@ citEntry(entry = "Manual",
          textVersion = {
              paste("Günther Sawitzki",
                    sprintf("(%s).", year),                         
-                   "Bertin Plots.",
+                   "Bertin Plots: An R Implementation",
                    note,
                    sep = "  ")
          })

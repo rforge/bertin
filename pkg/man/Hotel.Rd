@@ -7,6 +7,8 @@
 \format{
   A data frame with 20 variables for 12 months.
 }
+\note{For February, the origin proportions sum up to 101\%.}
+}
 \source{
 J. Bertin: \emph{La graphique et le traitement graphique de l'information.} Flammarion: Paris 1977. 
 }
