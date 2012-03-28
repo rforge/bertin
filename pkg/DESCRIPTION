@@ -11,5 +11,3 @@ License: LGPL
 Encoding: UTF-8
 Suggests: xtable
 VignetteDepends: xtable
-#SVN $Revision$
-#SVN $Date$
