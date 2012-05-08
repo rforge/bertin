@@ -17,6 +17,36 @@ function (n=100, rev=FALSE)
 #
 # par(mfrow=c(2,1)); colramp(green.colors(100)); colramp(green.colors(100, rev=TRUE))
 
+wgreen.colors <-
+function (n=100, rev=FALSE)
+{
+	if ((n <- as.integer(n[1])) > 0) {
+		n<-n-1
+		if (rev)
+			rgb(1-(0:n)/n,1, 1-(0:n)/n)
+		else
+			rgb(1-(n:0)/n,1, 1-(n:0)/n)
+    	}
+    else character(0)
+}
+#
+# par(mfrow=c(2,1)); colramp(wgreen.colors(100)); colramp(wgreen.colors(100, rev=TRUE))
+
+wmagenta.colors <-
+function (n=100, rev=FALSE)
+{
+	if ((n <- as.integer(n[1])) > 0) {
+		n<-n-1
+		if (rev)
+			rgb(1,1-(n:0)/n, 1)
+		else
+			rgb(1,1-(0:n)/n, 1)
+    	}
+    else character(0)
+}
+#
+# par(mfrow=c(2,1)); colramp(wmagenta.colors(100)); colramp(wmagenta.colors(100, rev=TRUE))
+
 ###################
 ## red.colors
 ###################
@@ -35,7 +65,35 @@ function (n=100, rev=FALSE)
 #
 # par(mfrow=c(2,1)); colramp(red.colors(100)); colramp(red.colors(100, rev=TRUE))
 
+wred.colors <-
+function (n=100, rev=FALSE)
+{
+	if ((n <- as.integer(n[1])) > 0) {
+		n<-n-1
+		if (rev)
+			rgb(1,1-(0:n)/n, 1-(0:n)/n)
+		else
+			rgb(1,1-(n:0)/n, 1-(n:0)/n)
+    	}
+    else character(0)
+}
+#
+# par(mfrow=c(2,1)); colramp(wred.colors(100)); colramp(wred.colors(100, rev=TRUE))
 
+wcyan.colors <-
+function (n=100, rev=FALSE)
+{
+	if ((n <- as.integer(n[1])) > 0) {
+		n<-n-1
+		if (rev)
+			rgb(1-(n:0)/n, 1, 1)
+		else
+			rgb(1-(0:n)/n, 1, 1)
+    	}
+    else character(0)
+}
+#
+# par(mfrow=c(2,1)); colramp(wcyan.colors(100)); colramp(wcyan.colors(100, rev=TRUE))
 ###################
 ## blue.colors
 ###################
@@ -54,8 +112,35 @@ function (n=100, rev=FALSE)
 #
 # par(mfrow=c(2,1)); colramp(blue.colors(100)); colramp(blue.colors(100, rev=TRUE))
 
+wblue.colors <-
+function (n=100, rev=FALSE)
+{
+	if ((n <- as.integer(n[1])) > 0) {
+		n<-n-1
+		if (rev)
+			rgb(1-(0:n)/n, 1-(0:n)/n, 1)
+		else
+			rgb(1-(n:0)/n, 1-(n:0)/n,1)
+    	}
+    else character(0)
+}
+#
+# par(mfrow=c(2,1)); colramp(wblue.colors(100)); colramp(wblue.colors(100, rev=TRUE))
 
-
+wyellow.colors <-
+function (n=100, rev=FALSE)
+{
+	if ((n <- as.integer(n[1])) > 0) {
+		n<-n-1
+		if (rev)
+			rgb( 1, 1 ,1-(n:0)/n)
+		else
+			rgb( 1, 1,1-(0:n)/n)
+    	}
+    else character(0)
+}
+#
+# par(mfrow=c(2,1)); colramp(wyellow.colors(100)); colramp(wyellow.colors(100, rev=TRUE))
 ###################
 ## blueyellow
 ###################

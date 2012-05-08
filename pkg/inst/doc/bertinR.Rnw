@@ -838,6 +838,7 @@ colramp(bertin:::red.colors(100), horizontal=TRUE)
 colramp(bertin:::red.colors(100, rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
+
 \vspace{\stretch{1}}
 
 <<fig=TRUE, echo=TRUE, width=4, height=1.9, label= palgreencolors>>=
@@ -846,6 +847,7 @@ colramp(bertin:::green.colors(100))
 colramp(bertin:::green.colors(100, rev=TRUE))
 par(oldpar)
 @
+
 \vspace{\stretch{1}}
 
 \clearpage
@@ -857,7 +859,18 @@ colramp(bertin:::red.colors(100), horizontal=TRUE)
 colramp(bertin:::red.colors(100, rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
+
 \vspace{\stretch{1}}
+
+<<fig=TRUE, echo=FALSE,  width=4, height=1.9,  label= palgwredcolors>>=
+oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
+colramp(bertin:::wred.colors(100), horizontal=TRUE)
+colramp(bertin:::wred.colors(100, rev=TRUE),horizontal=TRUE)
+par(oldpar)
+@
+
+\vspace{\stretch{1}}
+\clearpage
 
 <<fig=TRUE, echo=FALSE, width=4, height=1.9, label= palgreencolors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
@@ -867,6 +880,17 @@ par(oldpar)
 @
 
 \vspace{\stretch{1}}
+
+<<fig=TRUE, echo=FALSE, width=4, height=1.9, label= palgwreencolors>>=
+oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
+colramp(bertin:::wgreen.colors(100))
+colramp(bertin:::wgreen.colors(100, rev=TRUE))
+par(oldpar)
+@
+
+\vspace{\stretch{1}}
+\clearpage
+
 %\pagebreak
 <<fig=TRUE, echo=FALSE,  width=4, height=1.9, label= palbluecolors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
@@ -874,9 +898,53 @@ colramp(bertin:::blue.colors(100), horizontal=TRUE)
 colramp(bertin:::blue.colors(100, rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
+
 \vspace{\stretch{1}}
+
+%\pagebreak
+<<fig=TRUE, echo=FALSE,  width=4, height=1.9, label= palwbluecolors>>=
+oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
+colramp(bertin:::wblue.colors(100), horizontal=TRUE)
+colramp(bertin:::wblue.colors(100, rev=TRUE),horizontal=TRUE)
+par(oldpar)
+@
+
+\vspace{\stretch{1}}
+
 \clearpage
-\subsubsection{Contrast Colour Palettes}
+%\pagebreak
+<<fig=TRUE, echo=FALSE,  width=4, height=1.9, label= pawcyancolors>>=
+oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
+colramp(bertin:::wcyan.colors(100), horizontal=TRUE)
+colramp(bertin:::wcyan.colors(100, rev=TRUE),horizontal=TRUE)
+par(oldpar)
+@
+
+\vspace{\stretch{1}}
+
+%\pagebreak
+<<fig=TRUE, echo=FALSE,  width=4, height=1.9, label= pawmagentacolors>>=
+oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
+colramp(bertin:::wmagenta.colors(100), horizontal=TRUE)
+colramp(bertin:::wmagenta.colors(100, rev=TRUE),horizontal=TRUE)
+par(oldpar)
+@
+
+\vspace{\stretch{1}}
+
+%\pagebreak
+<<fig=TRUE, echo=FALSE,  width=4, height=1.9, label= pawyellowcolors>>=
+oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
+colramp(bertin:::wyellow.colors(100), horizontal=TRUE)
+colramp(bertin:::wyellow.colors(100, rev=TRUE),horizontal=TRUE)
+par(oldpar)
+@
+
+\vspace{\stretch{1}}
+
+\clearpage
+\subsubsection{Contrast Colour Palettes} If high and low values should be considered of different qualities, a contrast palette may be appropriate instead of a sequential palette. These palettes are also colled ``divergent'' paletes.
+
 
 Blue-yellow: This is a rather stable palette, with less than 0.1\%readers being affected by colour vision particularities. Scale interpretation seeing yellow as higher is also very stable.
 
@@ -888,6 +956,7 @@ par(oldpar)
 @
 %
 %\clearpage
+
 \vspace{\stretch{1}}
 
 %\pagebreak
@@ -899,6 +968,7 @@ colramp(bertin:::blueyellow2.colors(100),horizontal=TRUE)
 colramp(bertin:::blueyellow2.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
+
 \vspace{\stretch{1}}
 
 %\pagebreak
@@ -908,7 +978,9 @@ colramp(bertin:::blueyellow4.colors(100),horizontal=TRUE)
 colramp(bertin:::blueyellow4.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
+
 \vspace{\stretch{1}}
+
 \clearpage
 
 <<fig=TRUE, echo=FALSE,  width=4, height=2,  label= palbluered2colors>>=
@@ -917,6 +989,7 @@ colramp(bertin:::bluered2.colors(100),horizontal=TRUE)
 colramp(bertin:::bluered2.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
+
 \vspace{\stretch{1}}
 
 %\pagebreak
@@ -926,6 +999,7 @@ colramp(bertin:::bluered4.colors(100),horizontal=TRUE)
 colramp(bertin:::bluered4.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
+
 \vspace{\stretch{1}}
 
 \clearpage
@@ -935,6 +1009,7 @@ colramp(bertin:::greenred2.colors(100),horizontal=TRUE)
 colramp(bertin:::greenred2.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
+
 \vspace{\stretch{1}}
 
 %\pagebreak
@@ -944,7 +1019,9 @@ colramp(bertin:::greenred4.colors(100),horizontal=TRUE)
 colramp(bertin:::greenred4.colors(100,rev=TRUE),horizontal=TRUE)
 par(oldpar)
 @
+
 \vspace{\stretch{1}}
+
 \clearpage
 
 \subsubsection{Tail Colours}\ 
@@ -962,6 +1039,17 @@ par(oldpar)
 @
 
 \clearpage
+\subsubsection{Brewer Colours}\ 
+For categorical data, a challenge is to find colours that are visually clearly separated. Other requirements may apply, as to have ``balanced'' palettes: no colours should have an excessive visual impact in comparison to others. 
+
+Cynthia Brewer et al. suggested a small collection of palettes with hand seleccted colors for this task, and additional tools for selecting a palette for a specific purpuse are available at \url{http://www.colorbrewer.org}.
+
+\begin{center}
+<<fig=TRUE,  width=6, height=8, label= brewercolors>>=
+library("RColorBrewer")
+display.brewer.all(n=10, exact.n=FALSE)
+@
+\end{center}
 
 \subsection{Using Inverted Palettes}
 
