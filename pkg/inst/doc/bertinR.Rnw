@@ -853,15 +853,15 @@ par(oldpar)
 
 \clearpage
 
-In RGB space, each palette has natural variants corresponding to gamma corrections. Standardised on $[0, 1]$, gamma correction replaces an intensity $i$ by $i^\gamma$.
+In RGB space, each palette has natural variants corresponding to gamma corrections. Standardised on $[0, 1]$, gamma correction replaces an intensity $i$ by $i^\gamma$. This is in analogy to the channel gamma correction used technically.
 
 Note: it is up to discussione, whether $\gamma$ should modify the input intensity, or the channel response. This may change.
 
 <<fig=TRUE, echo=TRUE,  width=4, height=1.9,  label= palgredgammacolors>>=
 oldpar <- par(mfrow=c(3,1), mar=c(2, 1, 2, 1) + 0.1)
-colramp(bertin:::red.colors(100, gamma=0.5))
+colramp(bertin:::red.colors(100, igamma=0.5))
 colramp(bertin:::red.colors(100))
-colramp(bertin:::red.colors(100, gamma=1.5))
+colramp(bertin:::red.colors(100, igamma=1.5))
 par(oldpar)
 @
 
@@ -869,9 +869,9 @@ par(oldpar)
 
 <<fig=TRUE, echo=TRUE,  width=4, height=1.9,  label= palgwredgammacolors>>=
 oldpar <- par(mfrow=c(3,1), mar=c(2, 1, 2, 1) + 0.1)
-colramp(bertin:::wred.colors(100, gamma=0.5))
+colramp(bertin:::wred.colors(100, igamma=0.5))
 colramp(bertin:::wred.colors(100))
-colramp(bertin:::wred.colors(100, gamma=1.5))
+colramp(bertin:::wred.colors(100, igamma=1.5))
 par(oldpar)
 @
 

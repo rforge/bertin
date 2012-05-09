@@ -14,7 +14,9 @@ export(
     bertin.order,
     parasp,
     whatis,
-    colramp
+    colramp,
+    RGBinterpolate,
+    imageBG
     )
 
 S3method(plot, bertin)
