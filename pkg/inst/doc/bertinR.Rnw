@@ -822,6 +822,7 @@ Do trivial tests. If you have a smart colour scale: give a sample to some friend
 Colour displays are a means to convey some information. Check that your choices serve this purpose. In particular: if it is of importance to recognise high or low values, chose a colour scale that does not focus on differences in neutral values.
 
 \vspace{\stretch{1}}
+
 \pagebreak
 \subsection{Colour Palettes}
 \setkeys{Gin}{width=0.8\textwidth}
@@ -851,6 +852,31 @@ par(oldpar)
 \vspace{\stretch{1}}
 
 \clearpage
+
+In RGB space, each palette has natural variants corresponding to gamma corrections. Standardised on $[0, 1]$, gamma correction replaces an intensity $i$ by $i^\gamma$.
+
+Note: it is up to discussione, whether $\gamma$ should modify the input intensity, or the channel response. This may change.
+
+<<fig=TRUE, echo=TRUE,  width=4, height=1.9,  label= palgredgammacolors>>=
+oldpar <- par(mfrow=c(3,1), mar=c(2, 1, 2, 1) + 0.1)
+colramp(bertin:::red.colors(100, gamma=0.5))
+colramp(bertin:::red.colors(100))
+colramp(bertin:::red.colors(100, gamma=1.5))
+par(oldpar)
+@
+
+\vspace{\stretch{1}}
+
+<<fig=TRUE, echo=TRUE,  width=4, height=1.9,  label= palgwredgammacolors>>=
+oldpar <- par(mfrow=c(3,1), mar=c(2, 1, 2, 1) + 0.1)
+colramp(bertin:::wred.colors(100, gamma=0.5))
+colramp(bertin:::wred.colors(100))
+colramp(bertin:::wred.colors(100, gamma=1.5))
+par(oldpar)
+@
+
+\clearpage
+
 \subsubsection{Basic Colour Palettes}\ 
 
 <<fig=TRUE, echo=FALSE,  width=4, height=1.9,  label= palgredcolors>>=
@@ -943,10 +969,10 @@ par(oldpar)
 \vspace{\stretch{1}}
 
 \clearpage
-\subsubsection{Contrast Colour Palettes} If high and low values should be considered of different qualities, a contrast palette may be appropriate instead of a sequential palette. These palettes are also colled ``divergent'' paletes.
+\subsubsection{Contrast Colour Palettes} If high and low values should be considered of different qualities, a contrast palette may be appropriate instead of a sequential palette. These palettes are also called ``divergent'' palettes.
 
 
-Blue-yellow: This is a rather stable palette, with less than 0.1\%readers being affected by colour vision particularities. Scale interpretation seeing yellow as higher is also very stable.
+Blue-yellow: This is a rather stable palette, with less than 0.1\%readers being affected by colour vision peculiarities. Scale interpretation seeing yellow as higher is also very stable.
 
 <<fig=TRUE, echo=FALSE,  width=4, height=1.9,  label= palblueyellowcolors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
@@ -982,6 +1008,16 @@ par(oldpar)
 \vspace{\stretch{1}}
 
 \clearpage
+
+<<fig=TRUE, echo=FALSE,  width=4, height=2,  label= palblueredcolors>>=
+oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
+colramp(bertin:::bluered.colors(100),horizontal=TRUE)
+colramp(bertin:::bluered.colors(100,rev=TRUE),horizontal=TRUE)
+par(oldpar)
+@
+
+\vspace{\stretch{1}}
+
 
 <<fig=TRUE, echo=FALSE,  width=4, height=2,  label= palbluered2colors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)

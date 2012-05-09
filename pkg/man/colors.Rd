@@ -22,19 +22,19 @@ These functions create a vector of \code{n} ``contiguous'' colors.
 }
 
 \usage{
-green.colors(n=100, rev=FALSE)
-red.colors(n=100, rev=FALSE)
-blue.colors(n=100, rev=FALSE)
+green.colors(n=100, rev=FALSE, gamma=1.0)
+red.colors(n=100, rev=FALSE, gamma=1.0)
+blue.colors(n=100, rev=FALSE, gamma=1.0)
 
-blueyellow.colors(n=100, rev=FALSE)
-blueyellow2.colors(n=100, rev=FALSE)
-blueyellow4.colors(n=100, rev=FALSE)
+blueyellow.colors(n=100, rev=FALSE, gamma=1.0)
+blueyellow2.colors(n=100, rev=FALSE, gamma=1.0)
+blueyellow4.colors(n=100, rev=FALSE, gamma=1.0)
 
-greenred.colors(n=100, rev=FALSE)
-greenred2.colors(n=100, rev=FALSE)
-greenred4.colors(n=100, rev=FALSE)
+greenred.colors(n=100, rev=FALSE, gamma=1.0)
+greenred2.colors(n=100, rev=FALSE, gamma=1.0)
+greenred4.colors(n=100, rev=FALSE, gamma=1.0)
 
-loggray.colors(n,p=2, rev=FALSE)
+loggray.colors(n,p=2, rev=FALSE, gamma=1.0)
 
 tail.colors(n=100, q1=0.125, q2=0.25, q3=1-q2,q4=1-q1, rev=FALSE)
 
@@ -43,6 +43,7 @@ tail.colors(n=100, q1=0.125, q2=0.25, q3=1-q2,q4=1-q1, rev=FALSE)
 \arguments{
 \item{n}{the number of colors (\eqn{\ge 1}{>= 1}) to be in the palette.}
 \item{rev}{flag to revert color sequence.}
+\item{gamma}{gamma correction using power of gamma.}
 \item{p}{power}
 \item{q1, q2, q3, q4}{cut points}
 }
@@ -80,6 +81,11 @@ par(mfrow=c(2,1), mar=c(2, 4, 4, 2) + 0.1)
 colramp(bertin:::red.colors(100)); colramp(bertin:::red.colors(100, rev=TRUE))
 par(mfrow=c(2,1), mar=c(2, 4, 4, 2) + 0.1)
 colramp(bertin:::blue.colors(100)); colramp(bertin:::blue.colors(100, rev=TRUE))
+
+par(mfrow=c(3,1), mar=c(2, 4, 4, 2) + 0.1)
+colramp(bertin:::green.colors(100), gamma=0.5)
+colramp(bertin:::green.colors(100))
+colramp(bertin:::green.colors(100), gamma=1.5)
 
 par(mfrow=c(2,1), mar=c(2, 4, 4, 2) + 0.1)
 colramp(bertin:::blueyellow.colors(100)); colramp(bertin:::blueyellow.colors(100, rev=TRUE))
