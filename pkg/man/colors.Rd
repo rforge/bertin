@@ -22,19 +22,19 @@ These functions create a vector of \code{n} ``contiguous'' colors.
 }
 
 \usage{
-green.colors(n=100, rev=FALSE, igamma=1.0)
-red.colors(n=100, rev=FALSE, igamma=1.0)
-blue.colors(n=100, rev=FALSE, igamma=1.0)
+green.colors(n=100, rev=FALSE, bias=1.0)
+red.colors(n=100, rev=FALSE, bias=1.0)
+blue.colors(n=100, rev=FALSE, bias=1.0)
 
-blueyellow.colors(n=100, rev=FALSE, igamma=1.0)
-blueyellow2.colors(n=100, rev=FALSE, igamma=1.0)
-blueyellow4.colors(n=100, rev=FALSE, igamma=1.0)
+blueyellow.colors(n=100, rev=FALSE, bias=1.0)
+blueyellow2.colors(n=100, rev=FALSE, bias=1.0)
+blueyellow4.colors(n=100, rev=FALSE, bias=1.0)
 
-greenred.colors(n=100, rev=FALSE, igamma=1.0)
-greenred2.colors(n=100, rev=FALSE, igamma=1.0)
-greenred4.colors(n=100, rev=FALSE, igamma=1.0)
+greenred.colors(n=100, rev=FALSE, bias=1.0)
+greenred2.colors(n=100, rev=FALSE, bias=1.0)
+greenred4.colors(n=100, rev=FALSE, bias=1.0)
 
-loggray.colors(n,p=2, rev=FALSE, igamma=1.0)
+loggray.colors(n,p=2, rev=FALSE, bias=1.0)
 
 tail.colors(n=100, q1=0.125, q2=0.25, q3=1-q2,q4=1-q1, rev=FALSE)
 
@@ -43,7 +43,7 @@ tail.colors(n=100, q1=0.125, q2=0.25, q3=1-q2,q4=1-q1, rev=FALSE)
 \arguments{
 \item{n}{the number of colors (\eqn{\ge 1}{>= 1}) to be in the palette.}
 \item{rev}{flag to revert color sequence.}
-\item{igamma}{igamma correction using power of igamma.}
+\item{bias}{gamma correction using power of \code{gamma}.}
 \item{p}{power}
 \item{q1, q2, q3, q4}{cut points}
 }
@@ -73,6 +73,10 @@ tail.colors(n=100, q1=0.125, q2=0.25, q3=1-q2,q4=1-q1, rev=FALSE)
   
 }
 
+\section{History}{
+svn 0064 renamed \code{igamma} to \code{bias}, as used in \code{colorRamp}.
+}
+
 \examples{
 par(mfrow=c(2,1), mar=c(2, 4, 4, 2) + 0.1)
 colramp(bertin:::green.colors(100))
@@ -83,9 +87,9 @@ par(mfrow=c(2,1), mar=c(2, 4, 4, 2) + 0.1)
 colramp(bertin:::blue.colors(100)); colramp(bertin:::blue.colors(100, rev=TRUE))
 
 par(mfrow=c(3,1), mar=c(2, 4, 4, 2) + 0.1)
-colramp(bertin:::green.colors(100), igamma=0.5)
+colramp(bertin:::green.colors(100), bias=0.5)
 colramp(bertin:::green.colors(100))
-colramp(bertin:::green.colors(100), igamma=1.5)
+colramp(bertin:::green.colors(100), bias=1.5)
 
 par(mfrow=c(2,1), mar=c(2, 4, 4, 2) + 0.1)
 colramp(bertin:::blueyellow.colors(100)); colramp(bertin:::blueyellow.colors(100, rev=TRUE))

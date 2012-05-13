@@ -2,7 +2,7 @@
 \alias{imageBG}
 \title{Neutral background for NA elements in an image}
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Sets NA grid values of z to slelcted replacement colour.. 
 }
 \usage{
 imageBG(x = seq(0, 1, length.out = nrow(z)), y = seq(0, 1, length.out = ncol(z)), 
@@ -39,10 +39,10 @@ col = "#80808080", add = TRUE, ...)
 %}
 %\author{
 %%  ~~who you are~~
+%%}
+%\note{
+%%%  ~~further notes~~
 %}
-\note{
-%%  ~~further notes~~
-}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 

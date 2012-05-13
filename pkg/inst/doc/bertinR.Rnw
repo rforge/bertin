@@ -7,11 +7,15 @@
 %\VignetteIndexEntry{Bertin implementation}
 %$HeadURL$
 
-% svn propset svn:keywords "Date Author Id Revision HeadURL" bertinR.Rnw
+% svn propset svn:keywords "Date Author Id Revision HeadURL URL" bertinR.Rnw
+
 % setwd("/Users/gs/projects/rforge/bertin/pkg/inst/doc/")
 %
 % enc <- options(width = 56);  Sweave("bertinR.Rnw",output="bertinR.tex", keep.source=TRUE, debug = TRUE, eps = FALSE); options(enc)
-%
+%	%
+%	The help pages for RweaveLatex and Rtangle list the options supported by the default
+%	Sweave and Stangle drivers.
+%	%
 %%  #enc <- options(encoding = "MacRoman", width = 56)
 %   install.packages(pkgs="/Users/gs/projects/rforge/bertin/bertin_0.1-52.tar.gz", type="source", repos=NULL)
 % \usepackage{Sweave}
@@ -824,12 +828,152 @@ Colour displays are a means to convey some information. Check that your choices 
 \vspace{\stretch{1}}
 
 \pagebreak
+
+\subsection{Colours}
+
+The basic colour specifications in R refer to the standard sRGB colorspace (IEC standard 61966). (R 2.15. This may change in future versions.) Several colours have predefined names. 
+These color names can be used with a \ircode{col=} specification in graphics functions.
+An even wider variety of colors can be created with primitives \ircode{rgb}, \ircode{hsv}, or \ircode{hcl}.
+
+\emph{Note:} not all colours may be printable, or have a faithful representation on the screen. The range of visible colours may vary with the graphics systeem used.
+
+\setkeys{Gin}{width=1.0\textwidth}
+
+<<eval=FALSE>>=
+example(colors, package="grDevices")
+@
+<<fig=TRUE, echo=FALSE, width=6, height=7, label=showCols>>=
+showCols1 <- function(bg = "gray", cex = 0.75, srt = 30) {
+    m <- ceiling(sqrt(n <- length(cl <- colors())))
+    length(cl) <- m*m; cm <- matrix(cl, m)
+    ##
+    require("graphics")
+    op <- par(mar=rep(0,4), ann=FALSE, bg = bg); on.exit(par(op))
+    plot(1:m,1:m, type="n", axes=FALSE)
+    text(col(cm), rev(row(cm)), cm,  col = cl, cex=cex, srt=srt)
+}
+showCols1()
+rm(showCols1)
+@
+
 \subsection{Colour Palettes}
-\setkeys{Gin}{width=0.8\textwidth}
+\setkeys{Gin}{width=1.0\textwidth}
 %:Basic colour palettes. 
+\R{} provides six basic colour palettes.
+<<eval=FALSE>>=
+example(rainbow, package="grDevices")
+@
+<<fig=TRUE, echo=FALSE, width=6, height=7, label=showPals>>=
+##------ Some palettes ------------
+demo.pal <-
+  function(n, border = if (n<32) "light gray" else NA,
+           main = paste("color palettes;  n=",n),
+           ch.col = c("rainbow(n)", 
+           	"topo.colors(n)",
+                     "cm.colors(n)",
+                       "terrain.colors(n)", 
+                      "heat.colors(n)", 
+                      "grey(seq.int(from=0, to=1, length.out=n))"))
+{
+    nt <- length(ch.col)
+    i <- 1:n; j <- n / nt; d <- j/6; dy <- 2*d
+    plot(i,i+d, type="n", yaxt="n", ylab="", main=main)
+    for (k in 1:nt) {
+        rect(i-.5, (k-1)*j+ dy, i+.4, k*j,
+             col = eval(parse(text=ch.col[k])), border = border)
+        text(2*j,  k * j +dy/4, ch.col[k])
+    }
+}
+n <- if(.Device == "postscript") 64 else 16
+     # Since for screen, larger n may give color allocation problem
+demo.pal(n)
+rm(demo.pal)
+@
 
+\ircode{grey} and \ircode{heat.colors} palettes can be used to represent sequential quantitative data,ormore general ordinal data. Note the different calling conventions. \ircode{grey}  allows to specify breakpoints on $[0, 1]$.  \ircode{heat.colors} only allows to specify the number of colours.
 
-The calling structure for all examples in this section is the same.
+\ircode{cm.colors}, \ircode{terrain.colors}, and \ircode{topo.colors} allow to represent data between two poles. Sometimes, tese are called divergent scales.
+
+\ircode{rainbow} is not useful for encoding quantitative data, or to give any reliable representation of qualitative data. They should be rather be considered as an example of what can be done, and as a starting point for the selection of colours for more reasonable scales.
+
+\clearpage
+\subsubsection{Brewer Palettes}
+For categorical data, a challenge is to find colours that are visually clearly separated. Other requirements may apply, as to have ``balanced'' palettes: no colours should have an excessive visual impact in comparison to others. 
+
+Cynthia Brewer et al. suggested a small collection of palettes with hand seleccted colors for this task, and additional tools for selecting a palette for a specific purpuse are available at \url{http://www.colorbrewer.org}.
+
+\begin{center}
+<<fig=TRUE,  width=6, height=8, label= brewercolors>>=
+library("RColorBrewer")
+display.brewer.all(n=10, exact.n=FALSE)
+@
+\end{center}
+\clearpage
+\subsubsection{Home Made Palettes}
+Colour palettes can be constructed on the fly, or adapted tocertain purposes. If you do not need to doit: don't. 
+Try to get familiar with the perceptual aspects of some well-established colour palettes, and try to adhere to these.
+
+If you need to create your own palette, test it. What is  the effect of this palette under your "null model"? What is the discriminative power?
+
+If your have to create your own palette, the basic tool is interpolation. It depends on yourview of the colour space. Here is linear interpolation in RGB space, with some variants.
+
+<<fig=TRUE, label=RGBinter>>=
+oldpar <- par(mfrow=c(3,1)) 
+	colramp(RGBinterpolate(n=100,"green","red"))
+	colramp(RGBinterpolate(n=100,"green","red", bias=0.5))
+	colramp(RGBinterpolate(n=100,"green","red", bias=2.0))
+par(oldpar)
+@
+
+You can subselect palettes to focus on parts which have sufficien discriminative power, and combine palettes by concatinating them.
+<<fig=TRUE, label=RGBinterc>>=
+	colramp(c(RGBinterpolate(n=20,"green","red"),RGBinterpolate(n=30,"red","blue")))
+@
+
+For interpolation, piecewise linear interpolation and spline iinterpolation are obvious choices, and both can be applied to more than two nodes to interpolate. \R{} provides \ircode{colorRamp} to generate and interpolating function
+
+<<fig=TRUE, lable=colorRamp>>=
+mycolors <- c("red", "magenta", "blue")
+cr <- colorRamp(mycolors)
+colramp(cr( seq.int(from=0, to=1, length.out=15)))
+@
+
+<<fig=TRUE, lable=colorRampP>>=
+mycolors <- c("red", "magenta", "blue")
+crp <- colorRampPalette(mycolors)
+colramp(crp(100))
+@
+
+<<fig=TRUE, lable=colorRampPvar05>>=
+oldpar <- par(mfrow=c(4,1), mar=c(2, 1, 2, 1) + 0.1)
+mycolors <- c("red", "magenta", "blue")
+colramp(colorRampPalette(mycolors, space="rgb", interpolate="linear", bias=0.5)(100))
+colramp(colorRampPalette(mycolors, space="Lab", interpolate="linear", bias=0.5)(100))
+colramp(colorRampPalette(mycolors, space="rgb", interpolate="spline", bias=0.5)(100))
+colramp(colorRampPalette(mycolors, space="Lab", interpolate="spline", bias=0.5)(100))
+par(oldpar)
+@
+<<fig=TRUE, lable=colorRampPvar>>=
+oldpar <- par(mfrow=c(4,1), mar=c(2, 1, 2, 1) + 0.1)
+mycolors <- c("red", "magenta", "blue")
+colramp(colorRampPalette(mycolors, space="rgb", interpolate="linear")(100))
+colramp(colorRampPalette(mycolors, space="Lab", interpolate="linear")(100))
+colramp(colorRampPalette(mycolors, space="rgb", interpolate="spline")(100))
+colramp(colorRampPalette(mycolors, space="Lab", interpolate="spline")(100))
+par(oldpar)
+@
+<<fig=TRUE, lable=colorRampPvar20>>=
+oldpar <- par(mfrow=c(4,1), mar=c(2, 1, 2, 1) + 0.1)
+mycolors <- c("red", "magenta", "blue")
+colramp(colorRampPalette(mycolors, space="rgb", interpolate="linear", bias=2)(100))
+colramp(colorRampPalette(mycolors, space="Lab", interpolate="linear", bias=2)(100))
+colramp(colorRampPalette(mycolors, space="rgb", interpolate="spline", bias=2)(100))
+colramp(colorRampPalette(mycolors, space="Lab", interpolate="spline", bias=2)(100))
+par(oldpar)
+@
+\clearpage
+\subsubsection{Betin Colour Palettes}
+The calling structure for all Bertin colour palettes in this section is the same.
 Here are just two examples.
 
 %\pagebreak
@@ -853,15 +997,15 @@ par(oldpar)
 
 \clearpage
 
-In RGB space, each palette has natural variants corresponding to gamma corrections. Standardised on $[0, 1]$, gamma correction replaces an intensity $i$ by $i^\gamma$. This is in analogy to the channel gamma correction used technically.
+In RGB space, each palette has natural variants corresponding to gamma corrections. Standardised on $[0, 1]$, gamma correction replaces an intensity $i$ by $i^\gamma$. This is in analogy to the channel gamma correction used technically. Fallowing hte terminology used in \R{}, the transformation parameter is called \ircode{bias}.
 
-Note: it is up to discussione, whether $\gamma$ should modify the input intensity, or the channel response. This may change.
+Note: it is up to discussion, whether $\gamma$ should modify the input intensity, or the channel response. This may change.
 
 <<fig=TRUE, echo=TRUE,  width=4, height=1.9,  label= palgredgammacolors>>=
 oldpar <- par(mfrow=c(3,1), mar=c(2, 1, 2, 1) + 0.1)
-colramp(bertin:::red.colors(100, igamma=0.5))
+colramp(bertin:::red.colors(100, bias=0.5))
 colramp(bertin:::red.colors(100))
-colramp(bertin:::red.colors(100, igamma=1.5))
+colramp(bertin:::red.colors(100, bias=1.5))
 par(oldpar)
 @
 
@@ -869,9 +1013,9 @@ par(oldpar)
 
 <<fig=TRUE, echo=TRUE,  width=4, height=1.9,  label= palgwredgammacolors>>=
 oldpar <- par(mfrow=c(3,1), mar=c(2, 1, 2, 1) + 0.1)
-colramp(bertin:::wred.colors(100, igamma=0.5))
+colramp(bertin:::wred.colors(100, bias=0.5))
 colramp(bertin:::wred.colors(100))
-colramp(bertin:::wred.colors(100, igamma=1.5))
+colramp(bertin:::wred.colors(100, bias=1.5))
 par(oldpar)
 @
 
@@ -1075,17 +1219,7 @@ par(oldpar)
 @
 
 \clearpage
-\subsubsection{Brewer Colours}\ 
-For categorical data, a challenge is to find colours that are visually clearly separated. Other requirements may apply, as to have ``balanced'' palettes: no colours should have an excessive visual impact in comparison to others. 
 
-Cynthia Brewer et al. suggested a small collection of palettes with hand seleccted colors for this task, and additional tools for selecting a palette for a specific purpuse are available at \url{http://www.colorbrewer.org}.
-
-\begin{center}
-<<fig=TRUE,  width=6, height=8, label= brewercolors>>=
-library("RColorBrewer")
-display.brewer.all(n=10, exact.n=FALSE)
-@
-\end{center}
 
 \subsection{Using Inverted Palettes}
 
@@ -1162,6 +1296,7 @@ See  \reffig{fig:sampleimageminv} right.
 
 \section{Coordinate System and Conventions}
 \label{sec:coords}
+\setkeys{Gin}{width=1.0\textwidth}
 
 We provide prototypes for the display of Bertin matrices. To simplify the implementation of extensions, we choose a coordinate system that allots a unit square to each matrix cell. If we want to add separator lines to structure our data, we have to reserve some space \ircode{sepwd}, measured in user space. 
 
@@ -1616,6 +1751,7 @@ testplot(BrRndmatrixx)
 \verb#$Date$#\\
 \verb#$Author$#\\
 \currentpage textwidth: \printinunitsof{in}\prntlen{\textwidth} \qquad linewidth:\printinunitsof{in}\prntlen{\linewidth}\\
+ textheight: \printinunitsof{in}\prntlen{\textheight}\\
 %\pagevalues
 }
 \fi

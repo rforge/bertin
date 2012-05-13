@@ -1,8 +1,8 @@
-% RGBinterpolate <- function (n=100, fromRGB, toRGB, igamma=1.0){
+% RGBinterpolate <- function (n=100, fromRGB, toRGB, bias=1.0){
 	% if ((n <- as.integer(n[1])) > 0) {
 		% from <-col2rgb(fromRGB)/255
 		% to <-col2rgb(toRGB)/255
-		% ifrom <- ((n:0)/n)^igamma; ito <- ((0:n)/n)^igamma
+		% ifrom <- ((n:0)/n)^bias; ito <- ((0:n)/n)^bias
 		% rgb(ifrom*from[1]+ito*to[1],ifrom*from[2]+ito*to[2],ifrom*from[3]+ito*to[3])
 		% }
     % else character(0)
@@ -14,13 +14,13 @@
 \description{
 Create a colour palette by linear interpolation in RGB space}
 \usage{
-RGBinterpolate(n=100, fromRGB, toRGB, igamma=1.0)}
+RGBinterpolate(n=100, fromRGB, toRGB, bias=1.0)}
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{Length-1}
   \item{fromRGB}{Name are hex reprenstation of initial colour}
   \item{toRGB}{Name are hex reprenstation of final colour}
-  \item{igamma}{Powweer for transformation of index}
+  \item{bias}{Powweer for transformation of index}
 }
 % \details{
 % %  ~~ If necessary, more details than the description above ~~
@@ -44,7 +44,7 @@ a colour palette of length n+1}
 }
 \examples{
 	colramp(RGBinterpolate(n=100,"green","red"))
-	colramp(RGBinterpolate(n=100,"green","red", igamma=0.5))
+	colramp(RGBinterpolate(n=100,"green","red", bias=0.5))
 	colramp(c(RGBinterpolate(n=20,"green","red"),RGBinterpolate(n=30,"red","blue")))
 }
 

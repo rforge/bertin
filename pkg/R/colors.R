@@ -1,11 +1,11 @@
 ################### gs colors
 
 
-RGBinterpolate <- function (n=100, fromRGB, toRGB, igamma=1.0){
+RGBinterpolate <- function (n=100, fromRGB, toRGB, bias=1.0){
 	if ((n <- as.integer(n[1])) > 0) {
 		from <-col2rgb(fromRGB)/255
 		to <-col2rgb(toRGB)/255
-		ifrom <- ((n:0)/n)^igamma; ito <- ((0:n)/n)^igamma
+		ifrom <- ((n:0)/n)^bias; ito <- ((0:n)/n)^bias
 		rgb(ifrom*from[1]+ito*to[1],ifrom*from[2]+ito*to[2],ifrom*from[3]+ito*to[3])
 		}
     else character(0)
@@ -15,63 +15,63 @@ RGBinterpolate <- function (n=100, fromRGB, toRGB, igamma=1.0){
 ## green.colors
 ###################
 green.colors <-
-function (n=100, rev=FALSE, igamma=1.0)
+function (n=100, rev=FALSE, bias=1.0)
 {
 	if ((n <- as.integer(n[1])) > 0) {
 		n<-n-1
 		if (rev)
-			rgb(0,((n:0)/n)^igamma, 0)
+			rgb(0,((n:0)/n)^bias, 0)
 		else
-			rgb(0,((0:n)/n)^igamma, 0)
+			rgb(0,((0:n)/n)^bias, 0)
     	}
     else character(0)
 }
 #
 # par(mfrow=c(2,1)); colramp(green.colors(100)); colramp(green.colors(100, rev=TRUE))
-# par(mfrow=c(3,1)); colramp(green.colors(100, igamma=0.5)); colramp(green.colors(100));colramp(green.colors(100, igamma=1.5))
+# par(mfrow=c(3,1)); colramp(green.colors(100, bias=0.5)); colramp(green.colors(100));colramp(green.colors(100, bias=1.5))
 
 wgreen.colors <-
-function (n=100, rev=FALSE, igamma=1.0)
+function (n=100, rev=FALSE, bias=1.0)
 {
 	if ((n <- as.integer(n[1])) > 0) {
 		n<-n-1
 		if (rev)
-			rgb(1-((0:n)/n)^igamma,1, 1-((0:n)/n)^igamma)
+			rgb(1-((0:n)/n)^bias,1, 1-((0:n)/n)^bias)
 		else
-			rgb(1-((n:0)/n)^igamma,1, 1-((n:0)/n)^igamma)
+			rgb(1-((n:0)/n)^bias,1, 1-((n:0)/n)^bias)
     	}
     else character(0)
 }
 #
 # par(mfrow=c(2,1)); colramp(wgreen.colors(100)); colramp(wgreen.colors(100, rev=TRUE))
-# par(mfrow=c(3,1)); colramp(wgreen.colors(100, igamma=0.5)); colramp(wgreen.colors(100)) colramp(wgreen.colors(100, igamma=1.5))
+# par(mfrow=c(3,1)); colramp(wgreen.colors(100, bias=0.5)); colramp(wgreen.colors(100)) colramp(wgreen.colors(100, bias=1.5))
 
-#?? should igamma effect the parameter or the channel? This is the channel variant.
+#?? should bias effect the parameter or the channel? This is the channel variant.
 wgreen1.colors <-
-function (n=100, rev=FALSE, igamma=1.0)
+function (n=100, rev=FALSE, bias=1.0)
 {
 	if ((n <- as.integer(n[1])) > 0) {
 		n<-n-1
 		if (rev)
-			rgb((1-(0:n)/n)^igamma,1, (1-(0:n)/n)^igamma)
+			rgb((1-(0:n)/n)^bias,1, (1-(0:n)/n)^bias)
 		else
-			rgb((1-(n:0)/n)^igamma,1, (1-(n:0)/n)^igamma)
+			rgb((1-(n:0)/n)^bias,1, (1-(n:0)/n)^bias)
     	}
     else character(0)
 }
 #
 # par(mfrow=c(2,1)); colramp(wgreen.colors(100)); colramp(wgreen.colors(100, rev=TRUE))
-# par(mfrow=c(3,1)); colramp(wgreen1.colors(100, igamma=0.5)); colramp(wgreen1.colors(100, rev=TRUE)); colramp(wgreen1.colors(100, igamma=1.5));
+# par(mfrow=c(3,1)); colramp(wgreen1.colors(100, bias=0.5)); colramp(wgreen1.colors(100, rev=TRUE)); colramp(wgreen1.colors(100, bias=1.5));
 
 wmagenta.colors <-
-function (n=100, rev=FALSE, igamma=1.0)
+function (n=100, rev=FALSE, bias=1.0)
 {
 	if ((n <- as.integer(n[1])) > 0) {
 		n<-n-1
 		if (rev)
-			rgb(1,1-((n:0)/n)^igamma, 1)
+			rgb(1,1-((n:0)/n)^bias, 1)
 		else
-			rgb(1,1-((0:n)/n)^igamma, 1)
+			rgb(1,1-((0:n)/n)^bias, 1)
     	}
     else character(0)
 }
@@ -82,14 +82,14 @@ function (n=100, rev=FALSE, igamma=1.0)
 ## red.colors
 ###################
 red.colors <-
-function (n=100, rev=FALSE, igamma=1.0)
+function (n=100, rev=FALSE, bias=1.0)
 {
 	if ((n <- as.integer(n[1])) > 0) {
 		n<-n-1
 		if (rev)
-			rgb(((n:0)/n)^igamma,0, 0)
+			rgb(((n:0)/n)^bias,0, 0)
 		else
-			rgb(((0:n)/n)^igamma,0, 0)
+			rgb(((0:n)/n)^bias,0, 0)
     	}
     else character(0)
 }
@@ -97,14 +97,14 @@ function (n=100, rev=FALSE, igamma=1.0)
 # par(mfrow=c(2,1)); colramp(red.colors(100)); colramp(red.colors(100, rev=TRUE))
 
 wred.colors <-
-function (n=100, rev=FALSE, igamma=1.0)
+function (n=100, rev=FALSE, bias=1.0)
 {
 	if ((n <- as.integer(n[1])) > 0) {
 		n<-n-1
 		if (rev)
-			rgb(1,1-((0:n)/n)^igamma, 1-((0:n)/n)^igamma)
+			rgb(1,1-((0:n)/n)^bias, 1-((0:n)/n)^bias)
 		else
-			rgb(1,1-((n:0)/n)^igamma, 1-((n:0)/n)^igamma)
+			rgb(1,1-((n:0)/n)^bias, 1-((n:0)/n)^bias)
     	}
     else character(0)
 }
@@ -112,14 +112,14 @@ function (n=100, rev=FALSE, igamma=1.0)
 # par(mfrow=c(2,1)); colramp(wred.colors(100)); colramp(wred.colors(100, rev=TRUE))
 
 wcyan.colors <-
-function (n=100, rev=FALSE, igamma=1.0)
+function (n=100, rev=FALSE, bias=1.0)
 {
 	if ((n <- as.integer(n[1])) > 0) {
 		n<-n-1
 		if (rev)
-			rgb(1-((n:0)/n)^igamma, 1, 1)
+			rgb(1-((n:0)/n)^bias, 1, 1)
 		else
-			rgb(1-((0:n)/n)^igamma, 1, 1)
+			rgb(1-((0:n)/n)^bias, 1, 1)
     	}
     else character(0)
 }
@@ -129,14 +129,14 @@ function (n=100, rev=FALSE, igamma=1.0)
 ## blue.colors
 ###################
 blue.colors <-
-function (n=100, rev=FALSE, igamma=1.0)
+function (n=100, rev=FALSE, bias=1.0)
 {
 	if ((n <- as.integer(n[1])) > 0) {
 		n<-n-1
 		if (rev)
-			rgb(0,0,((n:0)/n)^igamma)
+			rgb(0,0,((n:0)/n)^bias)
 		else
-			rgb(0,0,((0:n)/n)^igamma)
+			rgb(0,0,((0:n)/n)^bias)
     	}
     else character(0)
 }
@@ -144,14 +144,14 @@ function (n=100, rev=FALSE, igamma=1.0)
 # par(mfrow=c(2,1)); colramp(blue.colors(100)); colramp(blue.colors(100, rev=TRUE))
 
 wblue.colors <-
-function (n=100, rev=FALSE, igamma=1.0)
+function (n=100, rev=FALSE, bias=1.0)
 {
 	if ((n <- as.integer(n[1])) > 0) {
 		n<-n-1
 		if (rev)
-			rgb(1-((0:n)/n)^igamma, 1-((0:n)/n)^igamma, 1)
+			rgb(1-((0:n)/n)^bias, 1-((0:n)/n)^bias, 1)
 		else
-			rgb(1-((n:0)/n)^igamma, 1-((n:0)/n)^igamma,1)
+			rgb(1-((n:0)/n)^bias, 1-((n:0)/n)^bias,1)
     	}
     else character(0)
 }
@@ -159,14 +159,14 @@ function (n=100, rev=FALSE, igamma=1.0)
 # par(mfrow=c(2,1)); colramp(wblue.colors(100)); colramp(wblue.colors(100, rev=TRUE))
 
 wyellow.colors <-
-function (n=100, rev=FALSE, igamma=1.0)
+function (n=100, rev=FALSE, bias=1.0)
 {
 	if ((n <- as.integer(n[1])) > 0) {
 		n<-n-1
 		if (rev)
-			rgb( 1, 1 ,1-((n:0)/n)^igamma)
+			rgb( 1, 1 ,1-((n:0)/n)^bias)
 		else
-			rgb( 1, 1,1-((0:n)/n)^igamma)
+			rgb( 1, 1,1-((0:n)/n)^bias)
     	}
     else character(0)
 }
@@ -177,13 +177,13 @@ function (n=100, rev=FALSE, igamma=1.0)
 ###################
 
 blueyellow.colors <-
-function (n=100, rev=FALSE, igamma=1.0){
+function (n=100, rev=FALSE, bias=1.0){
 	if ((n <- as.integer(n[1])) > 0) {
 		n<-n-1
 		if (rev)
-			rgb(((n:0)/n)^igamma,((n:0)/n)^igamma, ((0:n)/n)^igamma)
+			rgb(((n:0)/n)^bias,((n:0)/n)^bias, ((0:n)/n)^bias)
 		else
-			rgb(((0:n)/n)^igamma,((0:n)/n)^igamma, ((n:0)/n)^igamma)
+			rgb(((0:n)/n)^bias,((0:n)/n)^bias, ((n:0)/n)^bias)
     	}
     else character(0)
 }
@@ -195,15 +195,15 @@ function (n=100, rev=FALSE, igamma=1.0){
 ###################
 
 blueyellow2.colors <-
-function (n=100, rev=FALSE, igamma=1.0)
+function (n=100, rev=FALSE, bias=1.0)
 {
 	if ((n <- as.integer(n[1])) > 0) {
 		n<-n-1
 		if (rev) {
-		q<-(((n:0)/n)^igamma  -0.5) *2
+		q<-(((n:0)/n)^bias  -0.5) *2
 		}
 		else {
-		q<-(((0:n)/n)^igamma  -0.5) *2
+		q<-(((0:n)/n)^bias  -0.5) *2
 		}
 		qq <- ((q*q*sign(q)+1)/2)
 		q1<- 1- ((q*q+1)/2)
@@ -219,14 +219,14 @@ function (n=100, rev=FALSE, igamma=1.0)
 ###################
 
 blueyellow4.colors <-
-function (n=100, rev=FALSE, igamma=1.0){
+function (n=100, rev=FALSE, bias=1.0){
 	if ((n <- as.integer(n[1])) > 0) {
 		n<-n-1
 		if (rev) {
-		q<-(((n:0)/n)^igamma  -0.5) *2
+		q<-(((n:0)/n)^bias  -0.5) *2
 		}
 		else {
-		q<-(((0:n)/n)^igamma  -0.5) *2
+		q<-(((0:n)/n)^bias  -0.5) *2
 		}
 		qq <- ((q*q*q*q*sign(q)+1)/2)
 		q1<- 1- ((q*q*q*q+1)/2)
@@ -242,14 +242,14 @@ function (n=100, rev=FALSE, igamma=1.0){
 ## bluered
 ###################
 bluered.colors <-
-function (n=100, rev=FALSE, igamma=1.0)
+function (n=100, rev=FALSE, bias=1.0)
 {
 	if ((n <- as.integer(n[1])) > 0) {
 		n<-n-1
 		if (rev)
-			rgb(((n:0)/n)^igamma,0,((0:n)/n)^igamma)
+			rgb(((n:0)/n)^bias,0,((0:n)/n)^bias)
 		else
- 			rgb(((0:n)/n)^igamma,0,((n:0)/n)^igamma)
+ 			rgb(((0:n)/n)^bias,0,((n:0)/n)^bias)
    	}
     else character(0)
 }
@@ -260,14 +260,14 @@ function (n=100, rev=FALSE, igamma=1.0)
 ###################
 
 bluered2.colors <-
-function (n=100, rev=FALSE, igamma=1.0)
+function (n=100, rev=FALSE, bias=1.0)
 {
 	if ((n <- as.integer(n[1])) > 0) {
 		n<-n-1
 		if (rev) {
-		q<-(((n:0)/n)^igamma  -0.5) *2 }
+		q<-(((n:0)/n)^bias  -0.5) *2 }
 		else{
-		q<-(((0:n)/n)^igamma  -0.5) *2
+		q<-(((0:n)/n)^bias  -0.5) *2
 		}
 		qq <- ((q*q*sign(q)+1)/2)
 		q1<- 1- ((q*q+1)/2)
@@ -282,14 +282,14 @@ function (n=100, rev=FALSE, igamma=1.0)
 ###################
 
 bluered4.colors <-
-function (n=100, rev=FALSE, igamma=1.0)
+function (n=100, rev=FALSE, bias=1.0)
 {
 	if ((n <- as.integer(n[1])) > 0) {
 		n<-n-1
 		if (rev) {
-		q<-(((n:0)/n)^igamma  -0.5) *2 }
+		q<-(((n:0)/n)^bias  -0.5) *2 }
 		else{
-		q<-(((0:n)/n)^igamma  -0.5) *2
+		q<-(((0:n)/n)^bias  -0.5) *2
 		}
 		qq <- ((q*q*q*q*sign(q)+1)/2)
 		q1<- 1- ((q*q*q*q+1)/2)
@@ -305,14 +305,14 @@ function (n=100, rev=FALSE, igamma=1.0)
 ###################
 
 greenred.colors <-
-function (n=100, rev=FALSE, igamma=1.0)
+function (n=100, rev=FALSE, bias=1.0)
 {
 	if ((n <- as.integer(n[1])) > 0) {
 		n<-n-1
 		if (rev)
-			rgb(((0:n)/n)^igamma,((n:0)/n)^igamma, 0)
+			rgb(((0:n)/n)^bias,((n:0)/n)^bias, 0)
 		else
-			rgb(((n:0)/n)^igamma,((0:n)/n)^igamma, 0)
+			rgb(((n:0)/n)^bias,((0:n)/n)^bias, 0)
     	}
     else character(0)
 }
@@ -320,14 +320,14 @@ function (n=100, rev=FALSE, igamma=1.0)
 ###################
 ###################
 greenred2.colors <-
-function (n=100, rev=FALSE, igamma=1.0)
+function (n=100, rev=FALSE, bias=1.0)
 {
 	if ((n <- as.integer(n[1])) > 0) {
 		n<-n-1
 		if (rev) {
-		q<-(((n:0)/n)^igamma  -0.5) *2 }
+		q<-(((n:0)/n)^bias  -0.5) *2 }
 		else {
-		q<-(((0:n)/n)^igamma  -0.5) *2
+		q<-(((0:n)/n)^bias  -0.5) *2
 		}
 		qq <- ((q*q*sign(q)+1)/2)
 		q1<- 1- ((q*q+1)/2)
@@ -340,14 +340,14 @@ function (n=100, rev=FALSE, igamma=1.0)
 ###################
 ###################
 greenred4.colors <-
-function (n=100, rev=FALSE, igamma=1.0)
+function (n=100, rev=FALSE, bias=1.0)
 {
 	if ((n <- as.integer(n[1])) > 0) {
 		n<-n-1
 		if (rev) {
-		q<-(((n:0)/n)^igamma  -0.5) *2 }
+		q<-(((n:0)/n)^bias  -0.5) *2 }
 		else {
-		q<-(((0:n)/n)^igamma  -0.5) *2
+		q<-(((0:n)/n)^bias  -0.5) *2
 		}
 		qq <- ((q*q*q*q*sign(q)+1)/2)
 		q1<- 1- ((q*q*q*q+1)/2)
@@ -359,14 +359,14 @@ function (n=100, rev=FALSE, igamma=1.0)
 
 ###################
 ###################
-loggray.colors <- function (n,p=2, rev=FALSE, igamma=1.0)
+loggray.colors <- function (n,p=2, rev=FALSE, bias=1.0)
 { 	
 	if (rev) {
 	x <- log(n:1)^p
 	} else {x <- log(1:n)^p
 	}
 	x <- (x-min(x))/(max(x)-min(x))
-	gray(x^igamma)
+	gray(x^bias)
 }
 
 
