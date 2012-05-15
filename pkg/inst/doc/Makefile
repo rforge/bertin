@@ -25,7 +25,7 @@ pdf:
 	grep  arning bertinR.log
 	wc *.ilg
 	echo "### vignette Makefile done"
-	-rm -f *.aux *.dvi *.log *.bbl *.blg bertinR-*.pdf *.idx
+	-rm -f *.aux *.dvi *.log *.bbl *.blg bertinR-*.pdf *.idx *.ilg *.ind *.toc *.tpt
 	exit 0
 
 clean:

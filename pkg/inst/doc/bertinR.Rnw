@@ -838,10 +838,10 @@ Colour displays are a means to convey some information. Check that your choices 
 \subsection{Colours}
 
 The basic colour specifications in R refer to the standard sRGB colorspace (IEC standard 61966). (R 2.15. This may change in future versions.) Several colours have predefined names. 
-These color names can be used with a \ircode{col=} specification in graphics functions.
-An even wider variety of colors can be created with primitives \ircode{rgb}, \ircode{hsv}, or \ircode{hcl}.
+These colour names can be used with a \ircode{col=} specification in graphics functions.
+An even wider variety of colours can be created with primitives \ircode{rgb}, \ircode{hsv}, or \ircode{hcl}.
 
-\emph{Note:} not all colours may be printable, or have a faithful representation on the screen. The range of visible colours may vary with the graphics systeem used.
+\emph{Note:} not all colours may be printable, or have a faithful representation on the screen. The range of visible colours may vary with the graphics system used.
 
 \setkeys{Gin}{width=1.0\textwidth}
 
@@ -902,9 +902,10 @@ rm(demo.pal)
 \includegraphics[width=0.9\linewidth]{bertinR-showPals}
 \end{center}
 
-\ircode{grey} and \ircode{heat.colors} palettes can be used to represent sequential quantitative data,ormore general ordinal data. Note the different calling conventions. \ircode{grey}  allows to specify breakpoints on $[0, 1]$.  \ircode{heat.colors} only allows to specify the number of colours.
+\ircode{grey} and \ircode{heat.colors} palettes can be used to represent sequential quantitative data, or 
+more general ordinal data. Note the different calling conventions. \ircode{grey}  allows to specify breakpoints on $[0, 1]$.  \ircode{heat.colors} only allows to specify the number of colours.
 
-\ircode{cm.colors}, \ircode{terrain.colors}, and \ircode{topo.colors} allow to represent data between two poles. Sometimes, tese are called divergent scales.
+\ircode{cm.colors}, \ircode{terrain.colors}, and \ircode{topo.colors} allow to represent data between two poles. Sometimes, these are called divergent scales.
 
 \ircode{rainbow} is not useful for encoding quantitative data, or to give any reliable representation of qualitative data. They should be rather be considered as an example of what can be done, and as a starting point for the selection of colours for more reasonable scales.
 
@@ -914,7 +915,7 @@ rm(demo.pal)
 
 For categorical data, a challenge is to find colours that are visually clearly separated. Other requirements may apply, as to have ``balanced'' palettes: no colours should have an excessive visual impact in comparison to others. 
 
-Cynthia Brewer et al. suggested a small collection of palettes with hand seleccted colors for this task, and additional tools for selecting a palette for a specific purpuse are available at \url{http://www.colorbrewer.org}.
+Cynthia Brewer et al. suggested a small collection of palettes with hand selected colours for this task, and additional tools for selecting a palette for a specific purpose are available at \url{http://www.colorbrewer.org}.
 
 \vspace{\stretch{1}}
 
@@ -928,7 +929,8 @@ display.brewer.all(n=10, exact.n=FALSE)
 
 \clearpage
 \subsubsection{Home Made Palettes}
-Colour palettes can be constructed on the fly, or adapted tocertain purposes. If you do not need to doit: don't. 
+Colour palettes can be constructed on the fly, or adapted to certain purposes. 
+If you do not need to doit: don't. 
 Try to get familiar with the perceptual aspects of some well-established colour palettes, and try to adhere to these.
 
 If you need to create your own palette, test it. What is  the effect of this palette under your "null model"? What is the discriminative power?
@@ -946,14 +948,14 @@ par(oldpar)
 \vspace{\stretch{1}}
 \clearpage
 
-You can subselect palettes to focus on parts which have sufficien discriminative power, and combine palettes by concatinating them.
+You can sub-select palettes to focus on parts which have sufficient discriminative power, and combine palettes by concatenating them.
 <<fig=TRUE, width=6, height=1.9,  label=RGBinterc>>=
 	colramp( c(RGBinterpolate(n=20,"green","red"), RGBinterpolate(n=30,"red","blue")) )
 @
 
 \vspace{\stretch{1}}
 
-For interpolation, piecewise linear interpolation and spline iinterpolation are obvious choices, and both can be applied to more than two nodes to interpolate. \R{} provides \ircode{colorRamp} to generate and interpolating function
+For interpolation, piecewise linear interpolation and spline interpolation are obvious choices, and both can be applied to more than two nodes to interpolate. \R{} provides \ircode{colorRamp} to generate and interpolating function
 
 <<fig=TRUE, width=6, height=2, label=colorRamp>>=
 mycolors <- c("red", "magenta", "blue")
@@ -1044,7 +1046,7 @@ par(oldpar)
 
 \clearpage
 
-In RGB space, each palette has natural variants corresponding to gamma corrections. Standardised on $[0, 1]$, gamma correction replaces an intensity $i$ by $i^\gamma$. This is in analogy to the channel gamma correction used technically. Fallowing hte terminology used in \R{}, the transformation parameter is called \ircode{bias}.
+In RGB space, each palette has natural variants corresponding to gamma corrections. Standardised on $[0, 1]$, gamma correction replaces an intensity $i$ by $i^\gamma$. This is in analogy to the channel gamma correction used technically. Following the terminology used in \R{}, the transformation parameter is called \ircode{bias}.
 
 Note: it is up to discussion, whether $\gamma$ should modify the input intensity, or the channel response. This may change.
 
@@ -1177,7 +1179,7 @@ par(oldpar)
 \vspace{\stretch{1}}
 
 %\pagebreak
-Variant of the above, highlighting the tails and  attenuating the center. For an application, see \refsec[Case Studies: cDNA Data]{sec:caseDNA}. This is a rather stable palette, with less than 0.1\% readers being affected by colour vision particularities. Scale interpretation seeing yellow as higher is also very stable.
+Variant of the above, highlighting the tails and  attenuating the centre. For an application, see \refsec[Case Studies: cDNA Data]{sec:caseDNA}. This is a rather stable palette, with less than 0.1\% readers being affected by colour vision particularities. Scale interpretation seeing yellow as higher is also very stable.
 
 <<fig=TRUE, echo=FALSE,  width=4, height=1.9,  label= palblueyellow2colors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
@@ -1524,7 +1526,7 @@ Coordinates follow matrix conventions,  that is the $y$ axis is pointing downwar
 
 Additional graphical elements can be used immediately, using this coordinate system.
 
-\ircode{image} uses the center of a cell as an anchor point, and shows a transposed view. To use \ircode{image} to generate an overlay, change the user coordinate system temporarily to \ircode{par("usr")-0.5} and use \ircode{t()}.
+\ircode{image} uses the centre of a cell as an anchor point, and shows a transposed view. To use \ircode{image} to generate an overlay, change the user coordinate system temporarily to \ircode{par("usr")-0.5} and use \ircode{t()}.
 
 Space for row names and column names is allocated in the inner margins of the figure area. By convention, if a parameter \ircode{mar} is provided, this will be added. If a parameter \ircode{pars} is provided, it is assumed to contain the user's choice of graphic parameters and will be taken ``as is'', without further adjustment.
 
