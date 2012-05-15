@@ -11,8 +11,10 @@
 
 % setwd("/Users/gs/projects/rforge/bertin/pkg/inst/doc/")
 %
+% enc <- options(width = 56);  Sweave("bertinR.Rnw",output="bertinR.tex", keep.source=TRUE, eps = FALSE); options(enc)
 % enc <- options(width = 56);  Sweave("bertinR.Rnw",output="bertinR.tex", keep.source=TRUE, debug = TRUE, eps = FALSE); options(enc)
-%	%
+
+
 %	The help pages for RweaveLatex and Rtangle list the options supported by the default
 %	Sweave and Stangle drivers.
 %	%
@@ -126,6 +128,8 @@ library(bertin)
 data(Hotel)
 @
 \section{Bertin Plots}
+\setkeys{Gin}{width=1.0\textwidth}
+
 Among the rich material on graphical presentation of information, in \cite{brtn77gtg}, engl. \cite{seriation:Bertin:1999}, J. Bertin discusses the presentation of data matrices, with a particular view to seriation. \cite{seriation:Falguerolles:1997} gives an appraisal of this aspect of Bertin's work. The methods discussed in \cite{seriation:Falguerolles:1997} have been implemented in the Voyager system \cite{Sawitzki1996Extensible-Stat}. They have been partially re-implemented in \R{}, and this paper gives an introduction to the \R{} implementation.
 
 The \R{}-implementation can be downloaded as a package \ircode{bertin} from \url{http://bertin.r-forge.r-project.org/}.  The paper \cite{seriation:Falguerolles:1997} is included as bertin.pdf in the documentation section of the package.
@@ -222,7 +226,7 @@ plot.bertin(Hotel2, roworder=rowperm,
 	zcol=ifelse(Hotel2[,]>rowmeans, 2,1),
 	palette=c("white","black"), main="Hotel",
 	showpalette=FALSE)
-title(sub="Variables rearranged", line=1,cex.sub=1.8)
+title(sub="Variables rearranged", line=1)
 abline(h=6, col= "green", lwd=3)
 abline(h=12, col= "green", lwd=3)
 abline(h=16, col= "green", lwd=3)
@@ -284,7 +288,7 @@ lines( c(22,22), c(20,5), col="green", lwd=3)
 \end{center}
 \end{figure}
 
-\cleardoublepage
+\clearpage
 As a second example, we use the  the \ircode{USJudgeRatings} data set (\reffig{fig:judgeorig}). 
 The data  is listed in  \reftab{tab:judge}.
 %<<results=tex, echo=FALSE, include=FALSE>>=
@@ -543,11 +547,12 @@ Two judges are on the boundary and may well be exchanged - this is where random 
 \end{center}
 \end{figure}
 
-\cleardoublepage
+\clearpage
 At this early point, let us put Bertin's work in place. Visualising information is but one aspect. In statistics, as we see it today, visualisation may be one part of an analysis. The outcome will be a decision leading to an action. Then there is a loss (or gain) depending on the action taken on the one hand, and the ``true'' state of the world on the other. This is the common decision theoretical setting. Statistics has formulated a few standard problems, and given suggestions how to handle these. In our Hotel example, the problem can be seen as a prediction problem: find a prediction model to predict occupation and duration, based on the other variables. More specifically this is a control problem, and the statistical contribution is to find a regression model for occupation and duration, based on the other variables. The visualisation can be seen as one way to hint at a regression model. There are very few classical problems. Regression is one of them, and prediction is closely related. Classification and clustering is another, closely related pair of problems, and their relation to Bertin matrices should be obvious. The USJudgeRatings can be looked at as a classification problem.
 
 
 \section{Work flow}
+\setkeys{Gin}{width=1.0\textwidth}
 
 Bertin matrices usually are part of a work flow.
 
@@ -570,6 +575,7 @@ A third step controls the actual placement of the graphical elements. With a mat
 The final step is to merge these informations and render a display. 
 
 \section{Scores}
+\setkeys{Gin}{width=1.0\textwidth}
 
 In principle, scores can be generated using an appropriate score function and \ircode{apply} or any of its variants. 
 As  examples, and for convenience, we provide a small collection of score functions. 
@@ -842,7 +848,7 @@ An even wider variety of colors can be created with primitives \ircode{rgb}, \ir
 <<eval=FALSE>>=
 example(colors, package="grDevices")
 @
-<<fig=TRUE, echo=FALSE, width=6, height=7, label=showCols>>=
+<<fig=TRUE, echo=FALSE, width=6, height=6, label=showCols>>=
 showCols1 <- function(bg = "gray", cex = 0.75, srt = 30) {
     m <- ceiling(sqrt(n <- length(cl <- colors())))
     length(cl) <- m*m; cm <- matrix(cl, m)
@@ -856,6 +862,7 @@ showCols1()
 rm(showCols1)
 @
 
+\clearpage
 \subsection{Colour Palettes}
 \setkeys{Gin}{width=1.0\textwidth}
 %:Basic colour palettes. 
@@ -863,7 +870,7 @@ rm(showCols1)
 <<eval=FALSE>>=
 example(rainbow, package="grDevices")
 @
-<<fig=TRUE, echo=FALSE, width=6, height=7, label=showPals>>=
+<<fig=TRUE, echo=FALSE, width=12, height=12, include=false, label=showPals>>=
 ##------ Some palettes ------------
 demo.pal <-
   function(n, border = if (n<32) "light gray" else NA,
@@ -877,18 +884,23 @@ demo.pal <-
 {
     nt <- length(ch.col)
     i <- 1:n; j <- n / nt; d <- j/6; dy <- 2*d
-    plot(i,i+d, type="n", yaxt="n", ylab="", main=main)
+    plot(i,i+d, type="n", yaxt="n", ylab="", xlab="", main=main)
     for (k in 1:nt) {
         rect(i-.5, (k-1)*j+ dy, i+.4, k*j,
              col = eval(parse(text=ch.col[k])), border = border)
         text(2*j,  k * j +dy/4, ch.col[k])
     }
 }
-n <- if(.Device == "postscript") 64 else 16
+#n <- if(.Device == "postscript") 64 else 16
      # Since for screen, larger n may give color allocation problem
+n <- 100
 demo.pal(n)
 rm(demo.pal)
 @
+
+\begin{center}
+\includegraphics[width=0.9\linewidth]{bertinR-showPals}
+\end{center}
 
 \ircode{grey} and \ircode{heat.colors} palettes can be used to represent sequential quantitative data,ormore general ordinal data. Note the different calling conventions. \ircode{grey}  allows to specify breakpoints on $[0, 1]$.  \ircode{heat.colors} only allows to specify the number of colours.
 
@@ -898,16 +910,22 @@ rm(demo.pal)
 
 \clearpage
 \subsubsection{Brewer Palettes}
+\setkeys{Gin}{width=1.0\textwidth}
+
 For categorical data, a challenge is to find colours that are visually clearly separated. Other requirements may apply, as to have ``balanced'' palettes: no colours should have an excessive visual impact in comparison to others. 
 
 Cynthia Brewer et al. suggested a small collection of palettes with hand seleccted colors for this task, and additional tools for selecting a palette for a specific purpuse are available at \url{http://www.colorbrewer.org}.
 
+\vspace{\stretch{1}}
+
+
 \begin{center}
-<<fig=TRUE,  width=6, height=8, label= brewercolors>>=
+<<fig=TRUE,  width=6, height=7, label= brewercolors>>=
 library("RColorBrewer")
 display.brewer.all(n=10, exact.n=FALSE)
 @
 \end{center}
+
 \clearpage
 \subsubsection{Home Made Palettes}
 Colour palettes can be constructed on the fly, or adapted tocertain purposes. If you do not need to doit: don't. 
@@ -915,9 +933,9 @@ Try to get familiar with the perceptual aspects of some well-established colour 
 
 If you need to create your own palette, test it. What is  the effect of this palette under your "null model"? What is the discriminative power?
 
-If your have to create your own palette, the basic tool is interpolation. It depends on yourview of the colour space. Here is linear interpolation in RGB space, with some variants.
+If your have to create your own palette, the basic tool is interpolation. It depends on your view of the colour space. Here is linear interpolation in RGB space, with some variants.
 
-<<fig=TRUE, label=RGBinter>>=
+<<fig=TRUE, width=6, height=4, label=RGBinter>>=
 oldpar <- par(mfrow=c(3,1)) 
 	colramp(RGBinterpolate(n=100,"green","red"))
 	colramp(RGBinterpolate(n=100,"green","red", bias=0.5))
@@ -925,26 +943,41 @@ oldpar <- par(mfrow=c(3,1))
 par(oldpar)
 @
 
+\vspace{\stretch{1}}
+\clearpage
+
 You can subselect palettes to focus on parts which have sufficien discriminative power, and combine palettes by concatinating them.
-<<fig=TRUE, label=RGBinterc>>=
-	colramp(c(RGBinterpolate(n=20,"green","red"),RGBinterpolate(n=30,"red","blue")))
+<<fig=TRUE, width=6, height=1.9,  label=RGBinterc>>=
+	colramp( c(RGBinterpolate(n=20,"green","red"), RGBinterpolate(n=30,"red","blue")) )
 @
+
+\vspace{\stretch{1}}
 
 For interpolation, piecewise linear interpolation and spline iinterpolation are obvious choices, and both can be applied to more than two nodes to interpolate. \R{} provides \ircode{colorRamp} to generate and interpolating function
 
-<<fig=TRUE, lable=colorRamp>>=
+<<fig=TRUE, width=6, height=2, label=colorRamp>>=
 mycolors <- c("red", "magenta", "blue")
 cr <- colorRamp(mycolors)
 colramp(cr( seq.int(from=0, to=1, length.out=15)))
 @
 
-<<fig=TRUE, lable=colorRampP>>=
+\vspace{\stretch{1}}
+
+
+<<fig=TRUE, width=6, height=2, label=colorRampP>>=
 mycolors <- c("red", "magenta", "blue")
 crp <- colorRampPalette(mycolors)
 colramp(crp(100))
 @
 
-<<fig=TRUE, lable=colorRampPvar05>>=
+\vspace{\stretch{1}}
+
+\clearpage
+
+Bias 0.5, linear and spline interpolation, rgb space and Lab space.
+\bigskip
+
+<<fig=TRUE, width=6, height=4, label=colorRampPvar05>>=
 oldpar <- par(mfrow=c(4,1), mar=c(2, 1, 2, 1) + 0.1)
 mycolors <- c("red", "magenta", "blue")
 colramp(colorRampPalette(mycolors, space="rgb", interpolate="linear", bias=0.5)(100))
@@ -953,7 +986,13 @@ colramp(colorRampPalette(mycolors, space="rgb", interpolate="spline", bias=0.5)(
 colramp(colorRampPalette(mycolors, space="Lab", interpolate="spline", bias=0.5)(100))
 par(oldpar)
 @
-<<fig=TRUE, lable=colorRampPvar>>=
+\vspace{\stretch{1}}
+
+\clearpage
+Bias 1.0, linear and spline interpolation, rgb space and Lab space.
+\bigskip
+
+<<fig=TRUE, width=6, height=4,  label=colorRampPvar>>=
 oldpar <- par(mfrow=c(4,1), mar=c(2, 1, 2, 1) + 0.1)
 mycolors <- c("red", "magenta", "blue")
 colramp(colorRampPalette(mycolors, space="rgb", interpolate="linear")(100))
@@ -962,7 +1001,13 @@ colramp(colorRampPalette(mycolors, space="rgb", interpolate="spline")(100))
 colramp(colorRampPalette(mycolors, space="Lab", interpolate="spline")(100))
 par(oldpar)
 @
-<<fig=TRUE, lable=colorRampPvar20>>=
+\vspace{\stretch{1}}
+
+\clearpage
+Bias 2, linear and spline interpolation, rgb space and Lab space.
+\bigskip
+
+<<fig=TRUE, width=6, height=4,  label=colorRampPvar20>>=
 oldpar <- par(mfrow=c(4,1), mar=c(2, 1, 2, 1) + 0.1)
 mycolors <- c("red", "magenta", "blue")
 colramp(colorRampPalette(mycolors, space="rgb", interpolate="linear", bias=2)(100))
@@ -971,8 +1016,10 @@ colramp(colorRampPalette(mycolors, space="rgb", interpolate="spline", bias=2)(10
 colramp(colorRampPalette(mycolors, space="Lab", interpolate="spline", bias=2)(100))
 par(oldpar)
 @
+\vspace{\stretch{1}}
+
 \clearpage
-\subsubsection{Betin Colour Palettes}
+\subsubsection{Bertin Colour Palettes}
 The calling structure for all Bertin colour palettes in this section is the same.
 Here are just two examples.
 
@@ -1153,7 +1200,7 @@ par(oldpar)
 
 \clearpage
 
-<<fig=TRUE, echo=FALSE,  width=4, height=2,  label= palblueredcolors>>=
+<<fig=TRUE, echo=FALSE,  width=4, height=1.9,  label= palblueredcolors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::bluered.colors(100),horizontal=TRUE)
 colramp(bertin:::bluered.colors(100,rev=TRUE),horizontal=TRUE)
@@ -1163,7 +1210,7 @@ par(oldpar)
 \vspace{\stretch{1}}
 
 
-<<fig=TRUE, echo=FALSE,  width=4, height=2,  label= palbluered2colors>>=
+<<fig=TRUE, echo=FALSE,  width=4, height=1.9,  label= palbluered2colors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::bluered2.colors(100),horizontal=TRUE)
 colramp(bertin:::bluered2.colors(100,rev=TRUE),horizontal=TRUE)
@@ -1173,7 +1220,7 @@ par(oldpar)
 \vspace{\stretch{1}}
 
 %\pagebreak
-<<fig=TRUE, echo=FALSE,  width=4, height=2,  label= palbluered4colors>>=
+<<fig=TRUE, echo=FALSE,  width=4, height=1.9,  label= palbluered4colors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::bluered4.colors(100),horizontal=TRUE)
 colramp(bertin:::bluered4.colors(100,rev=TRUE),horizontal=TRUE)
@@ -1183,7 +1230,7 @@ par(oldpar)
 \vspace{\stretch{1}}
 
 \clearpage
-<<fig=TRUE, echo=FALSE, width=4, height=2, label= palgreenred2colors>>=
+<<fig=TRUE, echo=FALSE, width=4, height=1.9, label= palgreenred2colors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::greenred2.colors(100),horizontal=TRUE)
 colramp(bertin:::greenred2.colors(100,rev=TRUE),horizontal=TRUE)
@@ -1193,7 +1240,7 @@ par(oldpar)
 \vspace{\stretch{1}}
 
 %\pagebreak
-<<fig=TRUE, echo=FALSE, width=4, height=2, label= palgreenred4colors>>=
+<<fig=TRUE, echo=FALSE, width=4, height=1.9, label= palgreenred4colors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::greenred4.colors(100),horizontal=TRUE)
 colramp(bertin:::greenred4.colors(100,rev=TRUE),horizontal=TRUE)
@@ -1211,7 +1258,7 @@ In \cite{tukey1991manycovar}, J. Tukey suggested to use a drastic reduction of i
 {\em{Note: This variant is poor for dichromers.}}
 
 
-<<fig=TRUE, echo=FALSE, width=4, height=2, label= paltailcolors>>=
+<<fig=TRUE, echo=FALSE, width=4, height=1.9, label= paltailcolors>>=
 oldpar <- par(mfrow=c(2,1), mar=c(2, 1, 2, 1) + 0.1)
 colramp(bertin:::tail.colors(100),horizontal=TRUE)
 colramp(bertin:::tail.colors(100,rev=TRUE),horizontal=TRUE)
