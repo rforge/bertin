@@ -1,26 +1,36 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html>
-<head>
-  <title>Bertin: Bertin plot representation for matrices</title>
-  
-    <link rel="stylesheet" type="text/css" href="https://r-forge.r-project.org/themes/css/gforge.css" />
-    <link rel="stylesheet" type="text/css" href="https://r-forge.r-project.org/themes/rforge/css/theme.css" />
+<head> 
 
 <meta name="keywords" content="bertin matrices, data analysis, computational statistics, statistics, R programming, StatLab Heidelberg">
-<meta "author" content="G. Sawitzki">
+<meta name="description" content="Bertin matrix representation for multivariata data" />
+<meta name="language" content="English, en" />
+<meta http-equiv="Content-Language" content="en" />
 <meta name="city" content="Heidelberg">
 <meta name="country" content="Germany - Deutschland">
 <meta name="DC.publisher" content="StatLab Heidelberg">
 
 <meta name="robots" content="index, follow" >
 <meta name="revisit-after" content="3 days">
+<meta http-equiv="expires" content="259200" /><!-- 43200=12h, 3600=1h -->
 
+   
+<meta name="DC.Creator" content="G. Sawitzki" />
+<meta name="author" content="G. Sawitzki" />
+<title>Bertin: Bertin plot representation for matrices</title>
+	
 
-  </head>
+<link rel="icon" type="image/png" href="https://r-forge.r-project.org/favicon.ico" />
+<link rel="shortcut icon" type="image/png" href="https://r-forge.r-project.org/favicon.ico" />
+
+<link rel="stylesheet" type="text/css" href="https://r-forge.r-project.org/themes/css/gforge.css" />
+<link rel="stylesheet" type="text/css" href="https://r-forge.r-project.org/themes/rforge/css/theme.css" />
+
+</head>
 
 <body leftmargin="0" topmargin="0" link="#0076d5" marginheight="0" marginwidth="0" text="#000000" vlink="#6a76d5">
-    <!--Top fragment-->
-      <div class="header">
+<!--Top fragment-->
+<div class="header">
   <table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
 		  <td class="topLeft"><a href="https://r-forge.r-project.org/"><img src="https://r-forge.r-project.org/themes/rforge/imagesrf/logo.png" border="0" alt="" width="205" height="54" /></a></td>
@@ -86,40 +96,53 @@
   </table>
 </div>
 
-    <!-- end header -->
-    <!-- outer tabs -->
+<!-- end header -->
+<!-- outer tabs -->
 <table border="0" width="100%" cellspacing="0" cellpadding="0"><!-- begin table 1 -->
-    <tr>
+	<tr>
         <td>
 
         <!-- start tabs -->
 
-        <table style="height:35px;border-collapse:collapse;border:0px;padding:0px;margin:0px;" border="0" cellpadding="0" cellspacing="0" width="100%"><!-- begin table 2 -->
+        <table style="height:35px;border-collapse:collapse;border:0px;padding:0px;margin:0px;" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <!-- begin table 2 -->
         <tr><td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/left.jpg); background-repeat: no-repeat;">
-                	</td><td style="text-align:center; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/middle.jpg); background-repeat: repeat-x; padding-bottom:5px;" width="25%">
+                	</td>
+            <td style="text-align:center; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/middle.jpg); background-repeat: repeat-x; padding-bottom:5px;" width="25%">
             		<a class="topTab" href="https://r-forge.r-project.org/">Home</a>
-    		</td><td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/right.jpg); background-repeat: no-repeat;">
-        			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="35" width="13" alt="" />
-                  	  </td><td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/left.jpg); background-repeat: no-repeat;">
-      			</td><td style="text-align:center; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/middle.jpg); background-repeat: repeat-x; padding-bottom:5px;" width="25%">
+    		</td>
+    		<td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/right.jpg); background-repeat: no-repeat;">
+				<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="35" width="13" alt="" />
+            </td>
+			<td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/left.jpg); background-repeat: no-repeat;">
+      		</td>
+      		<td style="text-align:center; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/middle.jpg); background-repeat: repeat-x; padding-bottom:5px;" width="25%">
             		<a class="topTab" href="https://r-forge.r-project.org/my/">My&nbsp;Page</a>
-    		</td><td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/right.jpg); background-repeat: no-repeat;">
-        			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="35" width="13" alt="" />
-                  	  </td><td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/left.jpg); background-repeat: no-repeat;">
-      			</td><td style="text-align:center; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/middle.jpg); background-repeat: repeat-x; padding-bottom:5px;" width="25%">
+    		</td>
+    		<td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/right.jpg); background-repeat: no-repeat;">
+				<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="35" width="13" alt="" />
+            </td>
+            <td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/left.jpg); background-repeat: no-repeat;">
+      		</td>
+      		<td style="text-align:center; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/middle.jpg); background-repeat: repeat-x; padding-bottom:5px;" width="25%">
             		<a class="topTab" href="https://r-forge.r-project.org/softwaremap/">Project&nbsp;Tree</a>
-    		</td><td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/right.jpg); background-repeat: no-repeat;">
+    		</td>
+    		<td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/right.jpg); background-repeat: no-repeat;">
         			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="35" width="13" alt="" />
-            </td><td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/selected-left.jpg); background-repeat: no-repeat;">
-      			</td><td style="text-align:center; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/selected-middle.jpg); background-repeat: repeat-x; padding-bottom:5px;" width="25%">
+            </td>
+            <td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/selected-left.jpg); background-repeat: no-repeat;">
+      		</td>
+      		<td style="text-align:center; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/selected-middle.jpg); background-repeat: repeat-x; padding-bottom:5px;" width="25%">
             		<a class="topTabSelected" href="https://r-forge.r-project.org/projects/bertin/">Bertin matrices</a>
-    		</td><td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/selected-right.jpg); background-repeat: no-repeat;">
-        			<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="35" width="13" alt="" />
-                  	  </td></tr>
-        </table><!-- CLOSE table 2 --> 
+    		</td>
+    		<td valign="top" width="13" style="width:13px; background-image: url(https://r-forge.r-project.org/themes/rforge/imagesrf/toptab-new/selected-right.jpg); background-repeat: no-repeat;">
+        		<img src="https://r-forge.r-project.org/themes/rforge/imagesrf/clear.png" height="35" width="13" alt="" />
+            </td>
+		</tr>
+    </table><!-- CLOSE table 2 --> 
 
-        <!-- end tabs -->
-</td>
+	<!-- end tabs -->
+	</td>
     </tr>
 </table><!-- CLOSE table 1 -->
 
