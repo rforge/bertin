@@ -12,13 +12,16 @@ export(
     bertinzscore,
     bertinrangescore,
     bertin.order,
+    ordergrouped,
     parasp,
     whatis,
     colramp,
     RGBinterpolate,
+    str.bertin,
     imageBG
     )
 
+S3method(str, bertin)
 S3method(plot, bertin)
 S3method(image, bertin)
 

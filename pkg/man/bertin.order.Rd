@@ -11,8 +11,8 @@ bertin.order(z, MARGIN = 1, pivot = 1, FUN = cor)
 	\item{z}{a data matrix.}
 	\item{MARGIN}{a vector giving the subscripts which the function will be
           applied over. `1' indicates rows, `2' indicates columns.}
-	\item{pivot}{Main plot title.}
-	\item{FUN}{the function to be applied.}
+	\item{pivot}{the reference point.}
+	\item{FUN}{the function to be applied, typically a distance function or a similarity measure.}
 }
 % \details{ If necessary, more details than the description above }
 \value{a vector of order statitics}
