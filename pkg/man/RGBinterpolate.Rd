@@ -18,9 +18,9 @@ RGBinterpolate(n=100, fromRGB, toRGB, bias=1.0)}
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{Length-1}
-  \item{fromRGB}{Name are hex reprenstation of initial colour}
-  \item{toRGB}{Name are hex reprenstation of final colour}
-  \item{bias}{Powweer for transformation of index}
+  \item{fromRGB}{Name are hex representation of initial colour}
+  \item{toRGB}{Name are hex representation of final colour}
+  \item{bias}{Power for transformation of index}
 }
 % \details{
 % %  ~~ If necessary, more details than the description above ~~

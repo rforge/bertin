@@ -17,8 +17,8 @@ col = "#80808080", add = TRUE, ...)
   \item{zlim}{same as image}
   \item{xlim}{same as image}
   \item{ylim}{same as image}
-  \item{col}{A colour to be used for NA entries. Preferablya grey tone with intensity 
-  mathing the average signsalhere~~
+  \item{col}{A colour to be used for NA entries. Preferably a grey tone with intensity 
+  matching the average signsal here~~
 }
   \item{add}{same as image}
    \item{\dots}{Passed to image

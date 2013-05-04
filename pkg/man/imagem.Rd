@@ -4,7 +4,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{imagem}
 \description{A variant of image, adapted to matrices. \code{imagem} keeps the aspect ratio and orientation of the matrix.
-Row names and column names are shown if available. Arguments correspond tp those of \code{image} as far as possible.}
+Row names and column names are shown if available. Arguments correspond to those of \code{image} as far as possible.}
 \usage{
 imagem(z, 
 	zlim, 
@@ -67,14 +67,14 @@ imagem(z,
 }
 \details{
 
-If \code{pars} is undefined, default parameters are selected, based on the data valuues and lables. The picture aspect ratio is chosen to allocate unit squares to each data cell.
+If \code{pars} is undefined, default parameters are selected, based on the data values and labels. The picture aspect ratio is chosen to allocate unit squares to each data cell.
 If \code{pars}  is \code{NULL}, no graphical parameters are changed, else \code{pars} is passed to \code{\link{par}}
 
 
-Row and column names are displayd in the margins. Adjust \code{mar}  or adjust the font size if necessary.}
+Row and column names are displayed in the margins. Adjust \code{mar}  or adjust the font size if necessary.}
 
 \value{
-A list of graphical parameters, used to set \code{par} is returened as invisible result.
+A list of graphical parameters, used to set \code{par} is returned as invisible result.
 Use this to generate series of plots with comparable geometry-
 
 This is subject to change.

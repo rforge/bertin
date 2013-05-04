@@ -18,7 +18,7 @@ parmfrow(dims, aspr = dims[1]/dims[2], minin = 0.25)
 \value{returned from \code{par()}.
   }
 %\references{ put references to the literature/web site here  }
-\author{ G. SAwitzki }
+\author{ G. Sawitzki }
 %\note{ further notes 
 %
 % Make other sections like Warning with \section{Warning }{....} 

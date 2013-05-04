@@ -3,7 +3,7 @@
 \title{Set up aspect ratio}
 \description{Set aspect ratio match data matrix or given aspect ratio
  The \code{par("pin")} graphics parameter is adjusted to meet the requested aspect ratio
- wihin a chosen tolerance.
+ within a chosen tolerance.
 }
 
 %\synopsis{	parasp(dat, aspr=dim(dat)[1]/dim(dat)[2], tol=0.01)}

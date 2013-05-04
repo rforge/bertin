@@ -6,7 +6,7 @@
 \concept{sort data frame}
 \description{
   \code{order} returns a permutation which rearranges its first
-  argument by value, and optioanlly by an additiona grouping variable.
+  argument by value, and optionally by an additional grouping variable.
   It is an extension of \code{order}.
 }
 \usage{

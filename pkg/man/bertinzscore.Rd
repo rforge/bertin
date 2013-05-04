@@ -9,7 +9,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Standardised (studentised) matrix}
 \description{
-Calculate standardized matrix  for Bertin analysis.
+Calculate standardised matrix  for Bertin analysis.
 	Marginal means and marginal permutation, sorting by score, are cached.
 }
 \usage{
@@ -18,7 +18,7 @@ bertinzscore(z, var.orientation = c("byrow", "bycolumn", "global"), trim = 0, na
 %- maybe also 'usage' for other objects documented here.
 \arguments{
 	\item{z}{A data matrix}
-	\item{var.orientation}{"byrow", "bycolumn", "global"). By defaults, following Bertin's conventions variables are in rows. Use
+	\item{var.orientation}{"byrow", "bycolumn", "global"). By default, following Bertin's conventions variables are in rows. Use
 	\code{var.orientation="bycolumn"} for \R{} conventions.}
   \item{trim}{the fraction (0 to 0.5) of observations to be
     trimmed from each end of \code{x} before the mean is computed.

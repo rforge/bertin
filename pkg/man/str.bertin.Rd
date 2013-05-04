@@ -4,7 +4,7 @@
 % Distributed under GPL 2 or later
 
 \name{str.bertin}
-\title{Compactly Display the Structure of an Arbitrary R Object}
+\title{Compactly Display the Structure of an R Object of Class Bertin}
 \alias{str}
 \alias{str.bertin}
 \usage{

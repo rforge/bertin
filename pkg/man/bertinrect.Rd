@@ -29,15 +29,15 @@ bertinrect(z, main = deparse(substitute(z)), sepwd = 0.05,
 \details{
 All facilities of \code{rect} are accessible, to supply colour, shading, rearrangement.
 
-If \code{pars} is undefined, default parameters are selected, based on the data valuues and lables. The picture aspect ratio is chosen to allocate unit squares to each data cell.
+If \code{pars} is undefined, default parameters are selected, based on the data values and labels. The picture aspect ratio is chosen to allocate unit squares to each data cell.
 If \code{pars}  is \code{NULL}, no graphical parameters are changed, else \code{pars} is passed to \code{\link{par}}
 
 
-Row and column names are displayd in the margins. Adjust \code{mar}  or adjust the font size if necessary.
+Row and column names are displayed in the margins. Adjust \code{mar}  or adjust the font size if necessary.
 }
 
 \value{
-A list of graphical parameters, used to set \code{par} is returened as invisible result.
+A list of graphical parameters, used to set \code{par} is returned as invisible result.
 Use this to generate series of plots with comparable geometry-
 
 This is subject to change.

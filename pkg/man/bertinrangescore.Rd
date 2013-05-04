@@ -5,7 +5,7 @@
 Range standardisation of a matrix
 }
 \description{
-Calculate range standardized matrix  for Bertin analysis.
+Calculate range standardised matrix  for Bertin analysis.
 }
 \usage{
 bertinrangescore(z, var.orientation = c("byrow", "bycolumn", "global"), na.rm = TRUE, finite = FALSE)
