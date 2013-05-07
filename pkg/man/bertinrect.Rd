@@ -11,6 +11,7 @@ Display a data matrix using parallel coordinates as suggested by J. Bertin. Coor
 \usage{
 bertinrect(z, main = deparse(substitute(z)), sepwd = 0.05,  
 	pars,
+	aspz = nrow(z)/ncol(z),
 	mar = c(1, 1, 2, 1) + 0.1,  
 	names = TRUE, ...)
 }
@@ -22,6 +23,8 @@ bertinrect(z, main = deparse(substitute(z)), sepwd = 0.05,
   \item{sepwd}{ padding width for cells. The display of an element should be based at \code{(i + sepwd, j + sepwd)}.}
   \item{mar}{margin. Margin space for row and column labels will be added.}
   \item{pars}{Graphical parameters, see   \code{par}. See details}
+  \item{aspz}{Aspect ratio of the data matrix. Defaults to \code{nrow(z)/ncol(z)}.
+  The aspect ratio of the display will be adjusted to a near match, taking into accout margin space as required.}
   \item{names}{logical. If true, show row and column names.}
   \item{\dots}{additional parameters, passed to \code{\link{rect}}.}
 }
@@ -76,8 +79,10 @@ bertinrect(Hotel)
 nrow <- 3; ncol <- 5
 zunif <- matrix(runif(nrow*ncol), nrow, ncol)
 colnames(zunif) <- colnames(zunif, do.NULL=FALSE)
- rownames(zunif) <- rownames(zunif, do.NULL=FALSE)
+rownames(zunif) <- rownames(zunif, do.NULL=FALSE)
 bertinrect(zunif, yaxt="n")
+
+bertinrect(zunif, yaxt="n", aspz=0.5*(nrow(zunif)/ncol(zunif)))
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

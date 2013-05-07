@@ -15,7 +15,10 @@
 ############
 # default mar= c(1,1,6,4)+0.1,
 bertinrect <- function(z, main = deparse(substitute(z)), 
-	sepwd = 0.05, pars, mar = c(1, 1, 
+	sepwd = 0.05, 
+	pars, 
+	aspz = nrow(z)/ncol(z),
+	mar = c(1, 1, 
 		2, 1) + 0.1, names = TRUE, asp=1,...) {
 
 	#$Revision$
@@ -27,7 +30,7 @@ bertinrect <- function(z, main = deparse(substitute(z)),
 	if (missing(main)) {
 		main <- deparse(substitute(z))
 	}
-	z <- as.matrix(z) #! support lists and data frames as well
+	#z <- as.matrix(z) #! support lists and data frames as well
 
 	nrow <- nrow(z)
 	ncol <- ncol(z)
@@ -56,11 +59,11 @@ bertinrect <- function(z, main = deparse(substitute(z)),
 		#adjust plot region
 		pin <- par("pin")
 		aspp <- pin[2]/pin[1]
-		aspx <- nrow/ncol
-		if (aspp > aspx) {
-			pin[2] <- pin[2]/aspp * aspx
+		#aspz <- nrow/ncol
+		if (aspp > aspz) {
+			pin[2] <- pin[2]/aspp * aspz
 		} else {
-			pin[1] <- pin[1]/aspx * aspp
+			pin[1] <- pin[1]/aspz * aspp
 		}
 		par(pin = pin)
 	} else {
