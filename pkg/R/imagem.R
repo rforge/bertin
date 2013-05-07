@@ -18,6 +18,7 @@ function (z,
 	xlab, ylab,
 	main = deparse(substitute(z)),
 	pars,
+	aspz = nrow(z)/ncol(z),
 	mar= c(1,1,2,1)+0.1, # default mar= c(1,1,6,4)+0.1, # mar= c(2,2,6,6)+0.1,
 	breaks, oldstyle = FALSE,
 	names = TRUE, 
@@ -32,12 +33,12 @@ function (z,
 	
 	if (missing(main)) {main <- deparse(substitute(z))}	
 
-	z <- as.matrix(z) #! support lists and data frames as well
+	# z <- as.matrix(z) #! support lists and data frames as well
 	if (missing(zlim)) zlim <- range(z[is.finite(z)])
 	nrow <- nrow(z)
 	ncol <- ncol(z)
 
- titleline<- 1 
+	titleline<- 1 
 	if (missing(pars)){
     strwrow <- max(strwidth(rownames(z),"inch"))
     strcol <- max(strwidth(colnames(z),"inch"))
@@ -54,8 +55,8 @@ function (z,
 	#adjust plot region
 	pin <- par("pin")
 	aspp <- pin[2]/pin[1]
-	aspx <- nrow/ncol
-	if (aspp > aspx) {pin[2]<-pin[2]/aspp*aspx} else {pin[1] <- pin[1]/aspx*aspp}
+	#aspz <- nrow/ncol
+	if (aspp > aspz) {pin[2]<-pin[2]/aspp*aspz} else {pin[1] <- pin[1]/aspz*aspp}
 	par(pin=pin)
 	} else {
 		#plot.new()
