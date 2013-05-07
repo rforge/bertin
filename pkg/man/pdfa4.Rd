@@ -8,7 +8,7 @@ pdfa4(...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{\dots}{ Describe \code{\dots} here }
+  \item{\dots}{ Passed to \code{\link{pdf}}. }
 }
 % \details{ If necessary, more details than the description above }
 
@@ -18,7 +18,7 @@ pdfa4(...)
 ##---- Should be DIRECTLY executable !! ----
 ##-- ==>  Define data, use random,
 ##--	or do  help(data=index)  for the standard data sets.
-
+# bertin:::pdfa4(file="Rplot.pdf"); ... ; dev.off()
 ## The function is currently defined as
 function(...) pdf(height=11.192913, width=7.767717, ...)
 }

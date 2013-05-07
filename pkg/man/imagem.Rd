@@ -16,6 +16,7 @@ imagem(z,
 	xlab, ylab, 
 	main= deparse(substitute(z)), 
 	pars,
+	aspz = nrow(z)/ncol(z),
 	mar = c(1, 1, 2, 1) + 0.1, 
 	breaks, 
 	oldstyle = FALSE, 
@@ -51,6 +52,8 @@ imagem(z,
     \code{""} if these were unspecified.}
   \item{main}{main title. }
   \item{pars}{graphical parameters, see   \code{par}. See details}
+  \item{aspz}{Aspect ratio of the data matrix. Defaults to \code{nrow(z)/ncol(z)}.
+  The aspect ratio of the display will be adjusted to a near match, taking into accout margin space as required.}
   \item{mar}{margin. Margin space for row and column labels will be added.}
   \item{breaks}{a set of breakpoints for the colours: must give one more
     breakpoint than colour.}
@@ -100,6 +103,9 @@ zunif <- matrix(runif(nrow*ncol), nrow, ncol)
 colnames(zunif) <- colnames(zunif, do.NULL=FALSE)
  rownames(zunif) <- rownames(zunif, do.NULL=FALSE)
 imagem(zunif, yaxt="n")
+
+imagem(zunif, yaxt="n", aspz=0.5*(nrow(zunif)/ncol(zunif)))
+
 
 }
 
