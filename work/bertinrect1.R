@@ -1,7 +1,7 @@
-#$Id: bertinrect.R 27 2011-09-07 19:34:16Z gsawitzki $
-#$Revision: 27 $
-#$Date: 2011-09-07 21:34:16 +0200 (Wed, 07 Sep 2011) $
-#$Author: gsawitzki $
+#$Id$
+#$Revision$
+#$Date$
+#$Author$
 
 
 #!if plot are is too small, part of the plot is not show, without warning
@@ -127,7 +127,7 @@ if (any(ranges[2,]==0)){
 } 
 }
 
-# $Id: bertinrect.R 27 2011-09-07 19:34:16Z gsawitzki $
+# $Id$
 #! sepwd is used to allocate space for separator lines. 
 # So it should be in terms of linewidth, not in user coordinates
 bertinrect3 <- function(x,main = deparse(substitute(x)),
@@ -197,7 +197,7 @@ bertinrect <- function(x,main,
 	sepwd=0.05,
 	mar= c(1,1,6,4)+0.1,
 	...){
-#$Revision: 27 $
+#$Revision$
 	# [i,j] bottom left is at user coordinates (i,j)
 	# sepwd is internal margin
 	if (missing(main)) {main <- deparse(substitute(x))}	

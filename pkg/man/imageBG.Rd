@@ -2,7 +2,7 @@
 \alias{imageBG}
 \title{Neutral background for NA elements in an image}
 \description{
-Sets NA grid values of z to slelcted replacement colour.. 
+Sets NA grid values of z to selected replacement colour.. 
 }
 \usage{
 imageBG(x = seq(0, 1, length.out = nrow(z)), y = seq(0, 1, length.out = ncol(z)), 

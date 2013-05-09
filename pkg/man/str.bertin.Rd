@@ -103,9 +103,7 @@ strOptions(strict.width = "no", digits.d = 3, vec.len = 4,
   \code{\link{ls.str}} for \emph{listing} objects with their structure;
   \code{\link{summary}}, \code{\link{args}}.
 }
-\examples{
-
-}
+%\examples{}
 \keyword{print}
 \keyword{documentation}
 \keyword{utilities}

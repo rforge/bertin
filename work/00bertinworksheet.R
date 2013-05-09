@@ -1,17 +1,34 @@
-#$HeadURL: svn+ssh://gsawitzki@svn.r-forge.r-project.org/svnroot/bertin/pkg/vignettes/bertinR.Rnw $
-#$Id: bertinR.Rnw 10 2011-08-31 18:49:48Z gsawitzki $
-#$Revision: 10 $
-#$Date: 2011-08-31 20:49:48 +0200 (Wed, 31 Aug 2011) $
-#$Author: gsawitzki $
+#$HeadURL$
+#$Id$
+#$Revision$
+#$Date$
+#$Author$
 
+# a commom worksheet for bertin
 #!/bin/sh
-svn propset svn:keywords "Date Author Id Revision HeadURL" pkg/R/*.R
-svn propset svn:keywords "Date Author Id Revision HeadURL" pkg/man/*.Rd
 cd /Users/gs/projects/rforge/bertin
+
+svn propset svn:keywords "Date Author Id Revision HeadURL" pkg/R/*.R
+svn propset svn:keywords "Date Author Id Revision HeadURL" work/*.R
+svn propset svn:keywords "Date Author Id Revision HeadURL" pkg/man/*.Rd
 R CMD CHECK pkg  --no-multiarch  
 rm bertin.pdf; R CMD Rd2dvi -o bertin.pdf --pdf --title="Bertin" pkg
-#### end of shell commands
+% rm tmp.pdf;  R CMD Rd2pdf --no-clean --output=tmp.pdf "/Users/gs/projects/rforge/bertin/pkg/man/00bertin-package.Rd" ; open tmp.pdf
 
+R CMD BUILD pkg
+
+# install package
+R CMD INSTALL bertin
+# generate a pdf help file
+rm bertin.pdf; R CMD Rd2dvi -o bertin.pdf --pdf --title="Bertin" pkg
+
+#### end of shell commands
+# R cmds for ad hoc construction
+# setwd("/Users/gs/projects/rforge/bertin/")
+# install.packages("/Users/gs/projects/rforge/bertin/bertin_0.1-76.tar.gz", repos=NULL, type="source")
+
+
+################################
 # To do list
 # To do list: Current
 clean up work/*
@@ -23,6 +40,7 @@ Example:
 library(bertin)
 data(Hotel)
 bertinrect(Hotel)
+#################################
 
 #
  h2 <- h1[2:7,]
@@ -417,25 +435,7 @@ BrRndmatrixx <- Brmatrixx+rnorm(nrow(Brmatrixx)*ncol(Brmatrixx))
  image.bertin(Bcmatrixx, roworder=7:1, colorder =c(7:10,1:6))
  
  ###
- # a commom worksheet for bertin
-cd ~/projects/rforge/ # bertin ## a directory containing bertin
-cd "/Users/gs/projects/rforge/bertin/"
-
-# R cmds for ad hoc construction
-# setwd("/Users/gs/projects/rforge/bertin/")
-# install.packages("/Users/gs/projects/rforge/bertin/bertin_0.1-1.tar.gz", repos=NULL, type="source")
-
-# install package
-
-cd /Users/gs/projects/rforge/bertin
-R CMD CHECK pkg
-R CMD BUILD pkg
-
-# install package
-R CMD INSTALL bertin
-# generate a pdf help file
-rm bertin.pdf; R CMD Rd2dvi -o bertin.pdf --pdf --title="Bertin" pkg
-
+ 
 ##
 setwd("/Volumes/Untitled/bertin1")cd 
 

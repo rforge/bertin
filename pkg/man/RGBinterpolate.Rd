@@ -40,7 +40,7 @@ a colour palette of length n+1}
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-  \code{library(\link{colorspace})}, ~~~
+  \code{library(colorspace)}, ~~~
 }
 \examples{
 	colramp(RGBinterpolate(n=100,"green","red"))

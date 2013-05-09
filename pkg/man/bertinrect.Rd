@@ -58,11 +58,10 @@ In: Proceedings of the SoftStat '97 (Advances in Statistical Software 6),
 
 This paper is included in the documentation.
 
-\url{http://bertin.r-forge.r-project.org}
+\url{http://bertin.r-forge.r-project.org/}
 }
-\author{
-G. Sawitzki
-}
+\author{G. Sawitzki}
+
 %\note{
 %%%  ~~further notes~~
 %}
@@ -73,6 +72,7 @@ G. Sawitzki
  \code{\link{image.bertin}}, for a quick solution which uses display space to a maximum.
 }
 \examples{
+library(bertin)
 data(Hotel)
 bertinrect(Hotel)
 
@@ -83,6 +83,7 @@ rownames(zunif) <- rownames(zunif, do.NULL=FALSE)
 bertinrect(zunif, yaxt="n")
 
 bertinrect(zunif, yaxt="n", aspz=0.5*(nrow(zunif)/ncol(zunif)))
+bertinrect(zunif, yaxt="n", asp=0.5*(nrow(zunif)/ncol(zunif)))
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

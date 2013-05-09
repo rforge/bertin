@@ -18,8 +18,8 @@ bertinrect <- function(z, main = deparse(substitute(z)),
 	sepwd = 0.05, 
 	pars, 
 	aspz = nrow(z)/ncol(z),
-	mar = c(1, 1, 
-		2, 1) + 0.1, names = TRUE, asp=1,...) {
+	mar = c(1, 1, 2, 1) + 0.1, 
+	names = TRUE, asp=1,...) {
 
 	#$Revision$
 	#! adjust calling structure with rect()

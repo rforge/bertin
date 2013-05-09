@@ -15,7 +15,7 @@ See the implementation references BertinR.pdf (included in the documentation) fo
 If \code{showpalette} is TRUE, the palette is shown in the plot margin area.
 }
 
-\synopsis{
+\usage{
 	image.bertin(z, 
 	roworder,colorder,
 	main, sub,

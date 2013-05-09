@@ -1,7 +1,7 @@
-#$Id: bertinrect.R 23 2011-09-05 18:10:03Z gsawitzki $
-#$Revision: 23 $
-#$Date: 2011-09-05 20:10:03 +0200 (Mon, 05 Sep 2011) $
-#$Author: gsawitzki $
+#$Id$
+#$Revision$
+#$Date$
+#$Author$
 
 # aspect ratio ok
 # single row: not ok, eg. bertinrect(Hotel[19,]) bertinrect(Hotel[,12])
@@ -9,7 +9,7 @@ bertinrect <- function(x,main,
 	sepwd=0.05,
 	mar= c(1,1,6,4)+0.1,
 	...){
-#$Revision: 23 $
+#$Revision$
 	# [i,j] bottom left is at user coordinates (i,j)
 	# sepwd is internal margin
 	if (missing(main)) {main <- deparse(substitute(x))}	
