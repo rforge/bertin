@@ -1,0 +1,1255 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf100
+{\fonttbl\f0\froman\fcharset0 Times-Roman;\f1\fmodern\fcharset0 Courier-Bold;\f2\fmodern\fcharset0 Courier;
+\f3\fmodern\fcharset0 CourierNewPS-BoldMT;\f4\fmodern\fcharset0 CourierNewPS-BoldItalicMT;\f5\fmodern\fcharset0 Courier-Oblique;
+}
+{\colortbl;\red255\green255\blue255;\red83\green83\blue83;\red0\green40\blue249;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trwWidth13400\trftsWidth3 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5980\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7220\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720
+
+\f0\fs32 \cf0 par \{graphics\}\cell 
+\pard\intbl\itap1\pardeftab720\qr
+\cf0 R Documentation\cell \lastrow\row
+\pard\pardeftab720\sa260\qc
+
+\f1\b \cf2 Set or Query Graphical Parameters\
+\pard\pardeftab720\sa320
+\cf2 Description\
+\pard\pardeftab720\sa320
+
+\f2\b0\fs26 \cf0 par
+\f0\fs32  can be used to set or query graphical parameters. Parameters can be set by specifying them as arguments to 
+\f2\fs26 par
+\f0\fs32  in 
+\f2\fs26 tag = value
+\f0\fs32  form, or by passing them as a list of tagged values.\
+\pard\pardeftab720\sa320
+
+\f1\b \cf2 Usage\
+\pard\pardeftab720
+
+\f2\b0\fs26 \cf0 par(..., no.readonly = FALSE)\
+\
+<highlevel plot> (\\dots, <tag> = <value>)\
+\pard\pardeftab720\sa320
+
+\f1\b\fs32 \cf2 Arguments\
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth1760\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth11440\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720
+
+\f2\b0\fs26 \cf0 ...
+\f0\fs32 \cell 
+\pard\intbl\itap1\pardeftab720
+\cf0 arguments in 
+\f2\fs26 tag = value
+\f0\fs32  form, or a list of tagged values. The tags must come from the names of graphical parameters described in the \'91Graphical Parameters\'92 section.\cell \row
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth1760\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth11440\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720
+
+\f2\fs26 \cf0 no.readonly
+\f0\fs32 \cell 
+\pard\intbl\itap1\pardeftab720
+\cf0 logical; if 
+\f2\fs26 TRUE
+\f0\fs32  and there are no other arguments, only parameters are returned which can be set by a subsequent 
+\f2\fs26 par()
+\f0\fs32  call 
+\i on the same device
+\i0 .\cell \lastrow\row
+\pard\pardeftab720\sa320
+
+\f1\b \cf2 Details\
+\pard\pardeftab720\sa320
+
+\f0\b0 \cf0 Each device has its own set of graphical parameters. If the current device is the null device, 
+\f2\fs26 par
+\f0\fs32  will open a new device before querying/setting parameters. (What device is controlled by {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/options"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 options}}
+\f2\fs26 ("device")
+\f0\fs32 .)\
+Parameters are queried by giving one or more character vectors of parameter names to 
+\f2\fs26 par
+\f0\fs32 .\
+
+\f2\fs26 par()
+\f0\fs32  (no arguments) or 
+\f2\fs26 par(no.readonly=TRUE)
+\f0\fs32  is used to get 
+\i all
+\i0  the graphical parameters (as a named list). Their names are currently taken from the unexported variable 
+\f2\fs26 graphics:::.Pars
+\f0\fs32 .\
+\pard\pardeftab720\sa320
+
+\i\b \cf0 R.O.
+\i0\b0  indicates 
+\i\b read-only arguments
+\i0\b0 : These may only be used in queries and cannot be set. (
+\f2\fs26 "cin"
+\f0\fs32 , 
+\f2\fs26 "cra"
+\f0\fs32 , 
+\f2\fs26 "csi"
+\f0\fs32 , 
+\f2\fs26 "cxy"
+\f0\fs32  and 
+\f2\fs26 "din"
+\f0\fs32  are always read-only.)\
+There are several parameters can only be set by a call to 
+\f2\fs26 par()
+\f0\fs32 :\
+\pard\tx220\tx720\pardeftab720\li720\fi-720
+\ls1\ilvl0
+\f2\fs26 \cf0 {\listtext	\'95	}"ask"
+\f0\fs32 ,\
+\ls1\ilvl0
+\f2\fs26 {\listtext	\'95	}"fig"
+\f0\fs32 , 
+\f2\fs26 "fin"
+\f0\fs32 ,\
+\ls1\ilvl0
+\f2\fs26 {\listtext	\'95	}"lheight"
+\f0\fs32 ,\
+\ls1\ilvl0
+\f2\fs26 {\listtext	\'95	}"mai"
+\f0\fs32 , 
+\f2\fs26 "mar"
+\f0\fs32 , 
+\f2\fs26 "mex"
+\f0\fs32 , 
+\f2\fs26 "mfcol"
+\f0\fs32 , 
+\f2\fs26 "mfrow"
+\f0\fs32 , 
+\f2\fs26 "mfg"
+\f0\fs32 ,\
+\ls1\ilvl0
+\f2\fs26 {\listtext	\'95	}"new"
+\f0\fs32 ,\
+\ls1\ilvl0
+\f2\fs26 {\listtext	\'95	}"oma"
+\f0\fs32 , 
+\f2\fs26 "omd"
+\f0\fs32 , 
+\f2\fs26 "omi"
+\f0\fs32 ,\
+\ls1\ilvl0
+\f2\fs26 {\listtext	\'95	}"pin"
+\f0\fs32 , 
+\f2\fs26 "plt"
+\f0\fs32 , 
+\f2\fs26 "ps"
+\f0\fs32 , 
+\f2\fs26 "pty"
+\f0\fs32 ,\
+\ls1\ilvl0
+\f2\fs26 {\listtext	\'95	}"usr"
+\f0\fs32 ,\
+\ls1\ilvl0
+\f2\fs26 {\listtext	\'95	}"xlog"
+\f0\fs32 , 
+\f2\fs26 "ylog"
+\f0\fs32 \
+\pard\pardeftab720
+\cf0 The remaining parameters can also be set as arguments (often via 
+\f2\fs26 ...
+\f0\fs32 ) to high-level plot functions such as {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/plot.default"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 plot.default}}, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/plot.window"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 plot.window}}, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/points"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 points}}, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/lines"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 lines}}, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/abline"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 abline}}, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/axis"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 axis}}, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/title"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 title}}, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/text"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 text}}, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/mtext"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 mtext}}, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/segments"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 segments}}, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/symbols"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 symbols}}, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/arrows"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 arrows}}, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/polygon"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 polygon}}, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/rect"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 rect}}, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/box"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 box}}, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/contour"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 contour}}, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/filled.contour"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 filled.contour}} and {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/image"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 image}}. Such settings will be active during the execution of the function, only. However, see the comments on 
+\f2\fs26 bg
+\f0\fs32  and 
+\f2\fs26 cex
+\f0\fs32 , which may be taken as 
+\i arguments
+\i0  to certain plot functions rather than as graphical parameters.\
+\
+The meaning of \'91character size\'92 is not well-defined: this is set up for the device taking 
+\f2\fs26 pointsize
+\f0\fs32  into account but often not the actual font family in use. Internally the corresponding pars (
+\f2\fs26 cra
+\f0\fs32 , 
+\f2\fs26 cin
+\f0\fs32 , 
+\f2\fs26 cxy
+\f0\fs32  and 
+\f2\fs26 csi
+\f0\fs32 ) are used only to set the inter-line spacing used to convert 
+\f2\fs26 mar
+\f0\fs32  and 
+\f2\fs26 oma
+\f0\fs32  to physical margins. (The same inter-line spacing multiplied by 
+\f2\fs26 lheight
+\f0\fs32  is used for multi-line strings in 
+\f2\fs26 text
+\f0\fs32  and 
+\f2\fs26 strheight
+\f0\fs32 .)\
+\pard\pardeftab720\sa320
+
+\f1\b \cf2 Value\
+\pard\pardeftab720\sa320
+
+\f0\b0 \cf0 When parameters are set, their previous values are returned in an invisible named list. Such a list can be passed as an argument to 
+\f2\fs26 par
+\f0\fs32  to restore the parameter values. Use 
+\f2\fs26 par(no.readonly = TRUE)
+\f0\fs32  for the full list of parameters that can be restored. However, restoring all of these is not wise: see the \'91Note\'92 section.\
+When just one parameter is queried, the value of that parameter is returned as (atomic) vector. When two or more parameters are queried, their values are returned in a list, with the list names giving the parameters.\
+Note the inconsistency: setting one parameter returns a list, but querying one parameter returns a vector.\
+\pard\pardeftab720\sa320
+
+\f1\b \cf2 Graphical Parameters\
+\pard\pardeftab720\sa320
+
+\f0\b0 \cf0 \
+\pard\pardeftab720
+
+\f2\fs26 \cf0 adj
+\f0\fs32 \
+The value of 
+\f2\fs26 adj
+\f0\fs32  determines the way in which text strings are justified in {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/text"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 text}}, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/mtext"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 mtext}} and {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/title"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 title}}. A value of 
+\f2\fs26 0
+\f0\fs32  produces left-justified text, 
+\f2\fs26 0.5
+\f0\fs32  (the default) centered text and 
+\f2\fs26 1
+\f0\fs32  right-justified text. (Any value in 
+\i [0, 1]
+\i0  is allowed, and on most devices values outside that interval will also work.)\
+\
+Note that the 
+\f2\fs26 adj
+\f0\fs32  
+\i argument
+\i0  of {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/text"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 text}} also allows 
+\f2\fs26 adj = c(x, y)
+\f0\fs32  for different adjustment in x- and y- directions. Note that whereas for 
+\f2\fs26 text
+\f0\fs32  it refers to positioning of text about a point, for 
+\f2\fs26 mtext
+\f0\fs32  and 
+\f2\fs26 title
+\f0\fs32  it controls placement within the plot or device region.\
+
+\f2\fs26 ann
+\f0\fs32 \
+If set to 
+\f2\fs26 FALSE
+\f0\fs32 , high-level plotting functions calling {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/plot.default"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 plot.default}} do not annotate the plots they produce with axis titles and overall titles. The default is to do annotation.\
+
+\f2\fs26 ask
+\f0\fs32 \
+logical. If 
+\f2\fs26 TRUE
+\f0\fs32  (and the 
+\f3\b \cf2 R
+\f0\b0 \cf0  session is interactive) the user is asked for input, before a new figure is drawn. As this applies to the device, it also affects output by packages 
+\b grid
+\b0  and 
+\b lattice
+\b0 . It can be set even on non-screen devices but may have no effect there.\
+\
+This not really a graphics parameter, and its use is deprecated in favour of {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/devAskNewPage"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 devAskNewPage}}.\
+
+\f2\fs26 bg
+\f0\fs32 \
+The color to be used for the background of the device region. When called from 
+\f2\fs26 par()
+\f0\fs32  it also sets 
+\f2\fs26 new=FALSE
+\f0\fs32 . See section \'91Color Specification\'92 for suitable values. For many devices the initial value is set from the 
+\f2\fs26 bg
+\f0\fs32  argument of the device, and for the rest it is normally 
+\f2\fs26 "white"
+\f0\fs32 .\
+\
+Note that some graphics functions such as {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/plot.default"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 plot.default}} and {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/points"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 points}} have an 
+\i argument
+\i0  of this name with a different meaning.\
+
+\f2\fs26 bty
+\f0\fs32 \
+A character string which determined the type of {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/box"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 box}} which is drawn about plots. If 
+\f2\fs26 bty
+\f0\fs32  is one of 
+\f2\fs26 "o"
+\f0\fs32  (the default), 
+\f2\fs26 "l"
+\f0\fs32 , 
+\f2\fs26 "7"
+\f0\fs32 , 
+\f2\fs26 "c"
+\f0\fs32 , 
+\f2\fs26 "u"
+\f0\fs32 , or 
+\f2\fs26 "]"
+\f0\fs32  the resulting box resembles the corresponding upper case letter. A value of 
+\f2\fs26 "n"
+\f0\fs32  suppresses the box.\
+
+\f2\fs26 cex
+\f0\fs32 \
+A numerical value giving the amount by which plotting text and symbols should be magnified relative to the default. This starts as 
+\f2\fs26 1
+\f0\fs32  when a device is opened, and is reset when the layout is changed, e.g. by setting 
+\f2\fs26 mfrow
+\f0\fs32 .\
+\
+Note that some graphics functions such as {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/plot.default"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 plot.default}} have an 
+\i argument
+\i0  of this name which 
+\i multiplies
+\i0  this graphical parameter, and some functions such as {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/points"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 points}} accept a vector of values which are recycled. Other uses will take just the first value if a vector of length greater than one is supplied.\
+
+\f2\fs26 cex.axis
+\f0\fs32 \
+The magnification to be used for axis annotation relative to the current setting of 
+\f2\fs26 cex
+\f0\fs32 .\
+
+\f2\fs26 cex.lab
+\f0\fs32 \
+The magnification to be used for x and y labels relative to the current setting of 
+\f2\fs26 cex
+\f0\fs32 .\
+
+\f2\fs26 cex.main
+\f0\fs32 \
+The magnification to be used for main titles relative to the current setting of 
+\f2\fs26 cex
+\f0\fs32 .\
+
+\f2\fs26 cex.sub
+\f0\fs32 \
+The magnification to be used for sub-titles relative to the current setting of 
+\f2\fs26 cex
+\f0\fs32 .\
+
+\f2\fs26 cin
+\f0\fs32 \
+\pard\pardeftab720
+
+\i\b \cf0 R.O.
+\i0\b0 ; character size 
+\f2\fs26 (width, height)
+\f0\fs32  in inches. These are the same measurements as 
+\f2\fs26 cra
+\f0\fs32 , expressed in different units.\
+\pard\pardeftab720
+
+\f2\fs26 \cf0 col
+\f0\fs32 \
+A specification for the default plotting color. See section \'91Color Specification\'92. (Some functions such as {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/lines"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 lines}} accept a vector of values which are recycled. Other uses will take just the first value if a vector of length greater than one is supplied.)\
+
+\f2\fs26 col.axis
+\f0\fs32 \
+The color to be used for axis annotation. Defaults to 
+\f2\fs26 "black"
+\f0\fs32 .\
+
+\f2\fs26 col.lab
+\f0\fs32 \
+The color to be used for x and y labels. Defaults to 
+\f2\fs26 "black"
+\f0\fs32 .\
+
+\f2\fs26 col.main
+\f0\fs32 \
+The color to be used for plot main titles. Defaults to 
+\f2\fs26 "black"
+\f0\fs32 .\
+
+\f2\fs26 col.sub
+\f0\fs32 \
+The color to be used for plot sub-titles. Defaults to 
+\f2\fs26 "black"
+\f0\fs32 .\
+
+\f2\fs26 cra
+\f0\fs32 \
+\pard\pardeftab720
+
+\i\b \cf0 R.O.
+\i0\b0 ; size of default character 
+\f2\fs26 (width, height)
+\f0\fs32  in \'91rasters\'92 (pixels). Some devices have no concept of pixels and so assume an arbitrary pixel size, usually 1/72 inch. These are the same measurements as 
+\f2\fs26 cin
+\f0\fs32 , expressed in different units.\
+\pard\pardeftab720
+
+\f2\fs26 \cf0 crt
+\f0\fs32 \
+A numerical value specifying (in degrees) how single characters should be rotated. It is unwise to expect values other than multiples of 90 to work. Compare with 
+\f2\fs26 srt
+\f0\fs32  which does string rotation.\
+
+\f2\fs26 csi
+\f0\fs32 \
+\pard\pardeftab720
+
+\i\b \cf0 R.O.
+\i0\b0 ; height of (default-sized) characters in inches. The same as 
+\f2\fs26 par("cin")[2]
+\f0\fs32 .\
+\pard\pardeftab720
+
+\f2\fs26 \cf0 cxy
+\f0\fs32 \
+\pard\pardeftab720
+
+\i\b \cf0 R.O.
+\i0\b0 ; size of default character 
+\f2\fs26 (width, height)
+\f0\fs32  in user coordinate units. 
+\f2\fs26 par("cxy")
+\f0\fs32  is 
+\f2\fs26 par("cin")/par("pin")
+\f0\fs32  scaled to user coordinates. Note that 
+\f2\fs26 c({\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/strwidth"}}{\fldrslt \cf3 \ul \ulc3 strwidth}}(ch), {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/strheight"}}{\fldrslt \cf3 \ul \ulc3 strheight}}(ch))
+\f0\fs32  for a given string 
+\f2\fs26 ch
+\f0\fs32  is usually much more precise.\
+\pard\pardeftab720
+
+\f2\fs26 \cf0 din
+\f0\fs32 \
+\pard\pardeftab720
+
+\i\b \cf0 R.O.
+\i0\b0 ; the device dimensions, 
+\f2\fs26 (width,height)
+\f0\fs32 , in inches.\
+\pard\pardeftab720
+
+\f2\fs26 \cf0 err
+\f0\fs32 \
+(
+\i Unimplemented
+\i0 ; 
+\f3\b \cf2 R
+\f0\b0 \cf0  is silent when points outside the plot region are 
+\i not
+\i0  plotted.) The degree of error reporting desired.\
+
+\f2\fs26 family
+\f0\fs32 \
+The name of a font family for drawing text. The maximum allowed length is 200 bytes. This name gets mapped by each graphics device to a device-specific font description. The default value is 
+\f2\fs26 ""
+\f0\fs32  which means that the default device fonts will be used (and what those are should be listed on the help page for the device). Standard values are 
+\f2\fs26 "serif"
+\f0\fs32 , 
+\f2\fs26 "sans"
+\f0\fs32  and 
+\f2\fs26 "mono"
+\f0\fs32 , and the {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/Hershey"}}{\fldrslt \cf3 \ul \ulc3 Hershey}} font families are also available. (Different devices may define others, and some devices will ignore this setting completely.) This can be specified inline for {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/text"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 text}}.\
+
+\f2\fs26 fg
+\f0\fs32 \
+The color to be used for the foreground of plots. This is the default color used for things like axes and boxes around plots. When called from 
+\f2\fs26 par()
+\f0\fs32  this also sets parameter 
+\f2\fs26 col
+\f0\fs32  to the same value. See section \'91Color Specification\'92. A few devices have an argument to set the initial value, which is otherwise 
+\f2\fs26 "black"
+\f0\fs32 .\
+
+\f2\fs26 fig
+\f0\fs32 \
+A numerical vector of the form 
+\f2\fs26 c(x1, x2, y1, y2)
+\f0\fs32  which gives the (NDC) coordinates of the figure region in the display region of the device. If you set this, unlike S, you start a new plot, so to add to an existing plot use 
+\f2\fs26 new=TRUE
+\f0\fs32  as well.\
+
+\f2\fs26 fin
+\f0\fs32 \
+The figure region dimensions, 
+\f2\fs26 (width,height)
+\f0\fs32 , in inches. If you set this, unlike S, you start a new plot.\
+
+\f2\fs26 font
+\f0\fs32 \
+An integer which specifies which font to use for text. If possible, device drivers arrange so that 1 corresponds to plain text (the default), 2 to bold face, 3 to italic and 4 to bold italic. Also, font 5 is expected to be the symbol font, in Adobe symbol encoding. On some devices font families can be selected by 
+\f2\fs26 family
+\f0\fs32  to choose different sets of 5 fonts.\
+
+\f2\fs26 font.axis
+\f0\fs32 \
+The font to be used for axis annotation.\
+
+\f2\fs26 font.lab
+\f0\fs32 \
+The font to be used for x and y labels.\
+
+\f2\fs26 font.main
+\f0\fs32 \
+The font to be used for plot main titles.\
+
+\f2\fs26 font.sub
+\f0\fs32 \
+The font to be used for plot sub-titles.\
+
+\f2\fs26 lab
+\f0\fs32 \
+A numerical vector of the form 
+\f2\fs26 c(x, y, len)
+\f0\fs32  which modifies the default way that axes are annotated. The values of 
+\f2\fs26 x
+\f0\fs32  and 
+\f2\fs26 y
+\f0\fs32  give the (approximate) number of tickmarks on the x and y axes and 
+\f2\fs26 len
+\f0\fs32  specifies the label length. The default is 
+\f2\fs26 c(5, 5, 7)
+\f0\fs32 . Note that this only affects the way the parameters 
+\f2\fs26 xaxp
+\f0\fs32  and 
+\f2\fs26 yaxp
+\f0\fs32  are set when the user coordinate system is set up, and is not consulted when axes are drawn. 
+\f2\fs26 len
+\f0\fs32  
+\i is unimplemented
+\i0  in 
+\f3\b \cf2 R
+\f0\b0 \cf0 .\
+
+\f2\fs26 las
+\f0\fs32 \
+numeric in \{0,1,2,3\}; the style of axis labels.\
+0:\
+always parallel to the axis [
+\i default
+\i0 ],\
+1:\
+always horizontal,\
+2:\
+always perpendicular to the axis,\
+3:\
+always vertical.\
+Also supported by {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/mtext"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 mtext}}. Note that string/character rotation 
+\i via
+\i0  argument 
+\f2\fs26 srt
+\f0\fs32  to 
+\f2\fs26 par
+\f0\fs32  does 
+\i not
+\i0  affect the axis labels.\
+
+\f2\fs26 lend
+\f0\fs32 \
+The line end style. This can be specified as an integer or string:\
+
+\f2\fs26 0
+\f0\fs32 \
+and 
+\f2\fs26 "round"
+\f0\fs32  mean rounded line caps [
+\i default
+\i0 ];\
+
+\f2\fs26 1
+\f0\fs32 \
+and 
+\f2\fs26 "butt"
+\f0\fs32  mean butt line caps;\
+
+\f2\fs26 2
+\f0\fs32 \
+and 
+\f2\fs26 "square"
+\f0\fs32  mean square line caps.\
+
+\f2\fs26 lheight
+\f0\fs32 \
+The line height multiplier. The height of a line of text (used to vertically space multi-line text) is found by multiplying the character height both by the current character expansion and by the line height multiplier. Default value is 1. Used in {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/text"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 text}} and {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/strheight"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 strheight}}.\
+
+\f2\fs26 ljoin
+\f0\fs32 \
+The line join style. This can be specified as an integer or string:\
+
+\f2\fs26 0
+\f0\fs32 \
+and 
+\f2\fs26 "round"
+\f0\fs32  mean rounded line joins [
+\i default
+\i0 ];\
+
+\f2\fs26 1
+\f0\fs32 \
+and 
+\f2\fs26 "mitre"
+\f0\fs32  mean mitred line joins;\
+
+\f2\fs26 2
+\f0\fs32 \
+and 
+\f2\fs26 "bevel"
+\f0\fs32  mean bevelled line joins.\
+
+\f2\fs26 lmitre
+\f0\fs32 \
+The line mitre limit. This controls when mitred line joins are automatically converted into bevelled line joins. The value must be larger than 1 and the default is 10. Not all devices will honour this setting.\
+
+\f2\fs26 lty
+\f0\fs32 \
+The line type. Line types can either be specified as an integer (0=blank, 1=solid (default), 2=dashed, 3=dotted, 4=dotdash, 5=longdash, 6=twodash) or as one of the character strings 
+\f2\fs26 "blank"
+\f0\fs32 , 
+\f2\fs26 "solid"
+\f0\fs32 , 
+\f2\fs26 "dashed"
+\f0\fs32 , 
+\f2\fs26 "dotted"
+\f0\fs32 , 
+\f2\fs26 "dotdash"
+\f0\fs32 , 
+\f2\fs26 "longdash"
+\f0\fs32 , or 
+\f2\fs26 "twodash"
+\f0\fs32 , where 
+\f2\fs26 "blank"
+\f0\fs32  uses \'91invisible lines\'92 (i.e., does not draw them).\
+\
+Alternatively, a string of up to 8 characters (from 
+\f2\fs26 c(1:9, "A":"F")
+\f0\fs32 ) may be given, giving the length of line segments which are alternatively drawn and skipped. See section \'91Line Type Specification\'92.\
+Some functions such as {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/lines"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 lines}} accept a vector of values which are recycled. Other uses will take just the first value if a vector of length greater than one is supplied.\
+
+\f2\fs26 lwd
+\f0\fs32 \
+The line width, a 
+\i positive
+\i0  number, defaulting to 
+\f2\fs26 1
+\f0\fs32 . The interpretation is device-specific, and some devices do not implement line widths less than one. (See the help on the device for details of the interpretation.)\
+\
+Some functions such as {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/lines"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 lines}} accept a vector of values which are recycled. Other uses will take just the first value if a vector of length greater than one is supplied.\
+
+\f2\fs26 mai
+\f0\fs32 \
+A numerical vector of the form 
+\f2\fs26 c(bottom, left, top, right)
+\f0\fs32  which gives the margin size specified in inches.\
+
+\f2\fs26 mar
+\f0\fs32 \
+A numerical vector of the form 
+\f2\fs26 c(bottom, left, top, right)
+\f0\fs32  which gives the number of lines of margin to be specified on the four sides of the plot. The default is 
+\f2\fs26 c(5, 4, 4, 2) + 0.1
+\f0\fs32 .\
+
+\f2\fs26 mex
+\f0\fs32 \
+
+\f2\fs26 mex
+\f0\fs32  is a character size expansion factor which is used to describe coordinates in the margins of plots. Note that this does not change the font size, rather specifies the size of font (as a multiple of 
+\f2\fs26 csi
+\f0\fs32 ) used to convert between 
+\f2\fs26 mar
+\f0\fs32  and 
+\f2\fs26 mai
+\f0\fs32 , and between 
+\f2\fs26 oma
+\f0\fs32  and 
+\f2\fs26 omi
+\f0\fs32 .\
+\
+This starts as 
+\f2\fs26 1
+\f0\fs32  when the device is opened, and is reset when the layout is changed (alongside resetting 
+\f2\fs26 cex
+\f0\fs32 ).\
+
+\f2\fs26 mfcol, mfrow
+\f0\fs32 \
+A vector of the form 
+\f2\fs26 c(nr, nc)
+\f0\fs32 . Subsequent figures will be drawn in an 
+\f2\fs26 nr
+\f0\fs32 -by-
+\f2\fs26 nc
+\f0\fs32  array on the device by 
+\i columns
+\i0  (
+\f2\fs26 mfcol
+\f0\fs32 ), or 
+\i rows
+\i0  (
+\f2\fs26 mfrow
+\f0\fs32 ), respectively.\
+\
+In a layout with exactly two rows and columns the base value of 
+\f2\fs26 "cex"
+\f0\fs32  is reduced by a factor of 0.83: if there are three or more of either rows or columns, the reduction factor is 0.66.\
+Setting a layout resets the base value of 
+\f2\fs26 cex
+\f0\fs32  and that of 
+\f2\fs26 mex
+\f0\fs32  to 
+\f2\fs26 1
+\f0\fs32 .\
+If either of these is queried it will give the current layout, so querying cannot tell you the order in which the array will be filled.\
+Consider the alternatives, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/layout"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 layout}} and {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/split.screen"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 split.screen}}.\
+
+\f2\fs26 mfg
+\f0\fs32 \
+A numerical vector of the form 
+\f2\fs26 c(i, j)
+\f0\fs32  where 
+\f2\fs26 i
+\f0\fs32  and 
+\f2\fs26 j
+\f0\fs32  indicate which figure in an array of figures is to be drawn next (if setting) or is being drawn (if enquiring). The array must already have been set by 
+\f2\fs26 mfcol
+\f0\fs32  or 
+\f2\fs26 mfrow
+\f0\fs32 .\
+\
+For compatibility with S, the form 
+\f2\fs26 c(i, j, nr, nc)
+\f0\fs32  is also accepted, when 
+\f2\fs26 nr
+\f0\fs32  and 
+\f2\fs26 nc
+\f0\fs32  should be the current number of rows and number of columns. Mismatches will be ignored, with a warning.\
+
+\f2\fs26 mgp
+\f0\fs32 \
+The margin line (in 
+\f2\fs26 mex
+\f0\fs32  units) for the axis title, axis labels and axis line. Note that 
+\f2\fs26 mgp[1]
+\f0\fs32  affects {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/title"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 title}} whereas 
+\f2\fs26 mgp[2:3]
+\f0\fs32  affect {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/axis"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 axis}}. The default is 
+\f2\fs26 c(3, 1, 0)
+\f0\fs32 .\
+
+\f2\fs26 mkh
+\f0\fs32 \
+The height in inches of symbols to be drawn when the value of 
+\f2\fs26 pch
+\f0\fs32  is an integer. 
+\i Completely ignored in 
+\f4\b \cf2 R
+\f0\i0\b0 \cf0 .\
+
+\f2\fs26 new
+\f0\fs32 \
+logical, defaulting to 
+\f2\fs26 FALSE
+\f0\fs32 . If set to 
+\f2\fs26 TRUE
+\f0\fs32 , the next high-level plotting command (actually {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/plot.new"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 plot.new}}) should 
+\i not clean
+\i0  the frame before drawing 
+\i as if it were on a 
+\b new
+\b0  device
+\i0 . It is an error (ignored with a warning) to try to use 
+\f2\fs26 new = TRUE
+\f0\fs32  on a device that does not currently contain a high-level plot.\
+
+\f2\fs26 oma
+\f0\fs32 \
+A vector of the form 
+\f2\fs26 c(bottom, left, top, right)
+\f0\fs32  giving the size of the outer margins in lines of text.\
+
+\f2\fs26 omd
+\f0\fs32 \
+A vector of the form 
+\f2\fs26 c(x1, x2, y1, y2)
+\f0\fs32  giving the region 
+\i inside
+\i0  outer margins in NDC (= normalized device coordinates), i.e., as a fraction (in 
+\i [0, 1]
+\i0 ) of the device region.\
+
+\f2\fs26 omi
+\f0\fs32 \
+A vector of the form 
+\f2\fs26 c(bottom, left, top, right)
+\f0\fs32  giving the size of the outer margins in inches.\
+
+\f2\fs26 pch
+\f0\fs32 \
+Either an integer specifying a symbol or a single character to be used as the default in plotting points. See {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/points"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 points}} for possible values and their interpretation. Note that only integers and single-character strings can be set as a graphics parameter (and not 
+\f2\fs26 NA
+\f0\fs32  nor 
+\f2\fs26 NULL
+\f0\fs32 ).\
+
+\f2\fs26 pin
+\f0\fs32 \
+The current plot dimensions, 
+\f2\fs26 (width,height)
+\f0\fs32 , in inches.\
+
+\f2\fs26 plt
+\f0\fs32 \
+A vector of the form 
+\f2\fs26 c(x1, x2, y1, y2)
+\f0\fs32  giving the coordinates of the plot region as fractions of the current figure region.\
+
+\f2\fs26 ps
+\f0\fs32 \
+integer; the point size of text (but not symbols). Unlike the 
+\f2\fs26 pointsize
+\f0\fs32  argument of most devices, this does not change the relationship between 
+\f2\fs26 mar
+\f0\fs32  and 
+\f2\fs26 mai
+\f0\fs32  (nor 
+\f2\fs26 oma
+\f0\fs32  and 
+\f2\fs26 omi
+\f0\fs32 ).\
+\
+What is meant by \'91point size\'92 is device-specific, but most devices mean a multiple of 1bp, that is 1/72 of an inch.\
+
+\f2\fs26 pty
+\f0\fs32 \
+A character specifying the type of plot region to be used; 
+\f2\fs26 "s"
+\f0\fs32  generates a square plotting region and 
+\f2\fs26 "m"
+\f0\fs32  generates the maximal plotting region.\
+
+\f2\fs26 smo
+\f0\fs32 \
+(
+\i Unimplemented
+\i0 ) a value which indicates how smooth circles and circular arcs should be.\
+
+\f2\fs26 srt
+\f0\fs32 \
+The string rotation in degrees. See the comment about 
+\f2\fs26 crt
+\f0\fs32 . Only supported by {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/text"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 text}}.\
+
+\f2\fs26 tck
+\f0\fs32 \
+The length of tick marks as a fraction of the smaller of the width or height of the plotting region. If 
+\f2\fs26 tck >= 0.5
+\f0\fs32  it is interpreted as a fraction of the relevant side, so if 
+\f2\fs26 tck = 1
+\f0\fs32  grid lines are drawn. The default setting (
+\f2\fs26 tck = NA
+\f0\fs32 ) is to use 
+\f2\fs26 tcl = -0.5
+\f0\fs32 .\
+
+\f2\fs26 tcl
+\f0\fs32 \
+The length of tick marks as a fraction of the height of a line of text. The default value is 
+\f2\fs26 -0.5
+\f0\fs32 ; setting 
+\f2\fs26 tcl = NA
+\f0\fs32  sets 
+\f2\fs26 tck = -0.01
+\f0\fs32  which is S' default.\
+
+\f2\fs26 usr
+\f0\fs32 \
+A vector of the form 
+\f2\fs26 c(x1, x2, y1, y2)
+\f0\fs32  giving the extremes of the user coordinates of the plotting region. When a logarithmic scale is in use (i.e., 
+\f2\fs26 par("xlog")
+\f0\fs32  is true, see below), then the x-limits will be 
+\f2\fs26 10 ^ par("usr")[1:2]
+\f0\fs32 . Similarly for the y-axis.\
+
+\f2\fs26 xaxp
+\f0\fs32 \
+A vector of the form 
+\f2\fs26 c(x1, x2, n)
+\f0\fs32  giving the coordinates of the extreme tick marks and the number of intervals between tick-marks when 
+\f2\fs26 par("xlog")
+\f0\fs32  is false. Otherwise, when 
+\i log
+\i0  coordinates are active, the three values have a different meaning: For a small range, 
+\f2\fs26 n
+\f0\fs32  is 
+\i negative
+\i0 , and the ticks are as in the linear case, otherwise, 
+\f2\fs26 n
+\f0\fs32  is in 
+\f2\fs26 1:3
+\f0\fs32 , specifying a case number, and 
+\f2\fs26 x1
+\f0\fs32  and 
+\f2\fs26 x2
+\f0\fs32  are the lowest and highest power of 10 inside the user coordinates, 
+\f2\fs26 10 ^ par("usr")[1:2]
+\f0\fs32 . (The 
+\f2\fs26 "usr"
+\f0\fs32  coordinates are log10-transformed here!)\
+\
+\
+n=1\
+will produce tick marks at 
+\i 10^j
+\i0  for integer 
+\i j
+\i0 ,\
+n=2\
+gives marks 
+\i k 10^j
+\i0  with 
+\i k in \{1,5\}
+\i0 ,\
+n=3\
+gives marks 
+\i k 10^j
+\i0  with 
+\i k in \{1,2,5\}
+\i0 .\
+See {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/axTicks"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 axTicks}}
+\f2\fs26 ()
+\f0\fs32  for a pure 
+\f3\b \cf2 R
+\f0\b0 \cf0  implementation of this.\
+\
+This parameter is reset when a user coordinate system is set up, for example by starting a new page or by calling {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/plot.window"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 plot.window}} or setting 
+\f2\fs26 par("usr")
+\f0\fs32 : 
+\f2\fs26 n
+\f0\fs32  is taken from 
+\f2\fs26 par("lab")
+\f0\fs32 . It affects the default behaviour of subsequent calls to {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/axis"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 axis}} for sides 1 or 3.\
+
+\f2\fs26 xaxs
+\f0\fs32 \
+The style of axis interval calculation to be used for the x-axis. Possible values are 
+\f2\fs26 "r"
+\f0\fs32 , 
+\f2\fs26 "i"
+\f0\fs32 , 
+\f2\fs26 "e"
+\f0\fs32 , 
+\f2\fs26 "s"
+\f0\fs32 , 
+\f2\fs26 "d"
+\f0\fs32 . The styles are generally controlled by the range of data or 
+\f2\fs26 xlim
+\f0\fs32 , if given.\
+Style 
+\f2\fs26 "r"
+\f0\fs32  (regular) first extends the data range by 4 percent at each end and then finds an axis with pretty labels that fits within the extended range.\
+Style 
+\f2\fs26 "i"
+\f0\fs32  (internal) just finds an axis with pretty labels that fits within the original data range.\
+Style 
+\f2\fs26 "s"
+\f0\fs32  (standard) finds an axis with pretty labels within which the original data range fits.\
+Style 
+\f2\fs26 "e"
+\f0\fs32  (extended) is like style 
+\f2\fs26 "s"
+\f0\fs32 , except that it is also ensures that there is room for plotting symbols within the bounding box.\
+Style 
+\f2\fs26 "d"
+\f0\fs32  (direct) specifies that the current axis should be used on subsequent plots.\
+(
+\i Only 
+\f5\fs26 "r"
+\f0\fs32  and 
+\f5\fs26 "i"
+\f0\fs32  styles have been implemented in 
+\f4\b \cf2 R
+\f0\b0 \cf0 .
+\i0 )\
+
+\f2\fs26 xaxt
+\f0\fs32 \
+A character which specifies the x axis type. Specifying 
+\f2\fs26 "n"
+\f0\fs32  suppresses plotting of the axis. The standard value is 
+\f2\fs26 "s"
+\f0\fs32 : for compatibility with S values 
+\f2\fs26 "l"
+\f0\fs32  and 
+\f2\fs26 "t"
+\f0\fs32  are accepted but are equivalent to 
+\f2\fs26 "s"
+\f0\fs32 : any value other than 
+\f2\fs26 "n"
+\f0\fs32  implies plotting.\
+
+\f2\fs26 xlog
+\f0\fs32 \
+A logical value (see 
+\f2\fs26 log
+\f0\fs32  in {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/plot.default"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 plot.default}}). If 
+\f2\fs26 TRUE
+\f0\fs32 , a logarithmic scale is in use (e.g., after 
+\f2\fs26 plot(*, log = "x")
+\f0\fs32 ). For a new device, it defaults to 
+\f2\fs26 FALSE
+\f0\fs32 , i.e., linear scale.\
+
+\f2\fs26 xpd
+\f0\fs32 \
+A logical value or 
+\f2\fs26 NA
+\f0\fs32 . If 
+\f2\fs26 FALSE
+\f0\fs32 , all plotting is clipped to the plot region, if 
+\f2\fs26 TRUE
+\f0\fs32 , all plotting is clipped to the figure region, and if 
+\f2\fs26 NA
+\f0\fs32 , all plotting is clipped to the device region. See also {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/clip"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 clip}}.\
+
+\f2\fs26 yaxp
+\f0\fs32 \
+A vector of the form 
+\f2\fs26 c(y1, y2, n)
+\f0\fs32  giving the coordinates of the extreme tick marks and the number of intervals between tick-marks unless for log coordinates, see 
+\f2\fs26 xaxp
+\f0\fs32  above.\
+
+\f2\fs26 yaxs
+\f0\fs32 \
+The style of axis interval calculation to be used for the y-axis. See 
+\f2\fs26 xaxs
+\f0\fs32  above.\
+
+\f2\fs26 yaxt
+\f0\fs32 \
+A character which specifies the y axis type. Specifying 
+\f2\fs26 "n"
+\f0\fs32  suppresses plotting.\
+
+\f2\fs26 ylog
+\f0\fs32 \
+A logical value; see 
+\f2\fs26 xlog
+\f0\fs32  above.\
+\pard\pardeftab720\sa320
+\cf0 \
+\pard\pardeftab720\sa320
+
+\f1\b \cf2 Color Specification\
+\pard\pardeftab720\sa320
+
+\f0\b0 \cf0 Colors can be specified in several different ways. The simplest way is with a character string giving the color name (e.g., 
+\f2\fs26 "red"
+\f0\fs32 ). A list of the possible colors can be obtained with the function {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/colors"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 colors}}. Alternatively, colors can be specified directly in terms of their RGB components with a string of the form 
+\f2\fs26 "#RRGGBB"
+\f0\fs32  where each of the pairs 
+\f2\fs26 RR
+\f0\fs32 , 
+\f2\fs26 GG
+\f0\fs32 , 
+\f2\fs26 BB
+\f0\fs32  consist of two hexadecimal digits giving a value in the range 
+\f2\fs26 00
+\f0\fs32  to 
+\f2\fs26 FF
+\f0\fs32 . Colors can also be specified by giving an index into a small table of colors, the {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/palette"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 palette}}. This provides compatibility with S. Index 
+\f2\fs26 0
+\f0\fs32  corresponds to the background color. (Because apparently some people have been assuming it, it is also possible to specify integers as character strings, e.g. 
+\f2\fs26 "3"
+\f0\fs32 .)\
+Additionally, 
+\f2\fs26 "transparent"
+\f0\fs32  or (integer) 
+\f2\fs26 NA
+\f0\fs32  is 
+\i transparent
+\i0 , useful for filled areas (such as the background!), and just invisible for things like lines or text. Semi-transparent colors are available for use on devices that support them.\
+The functions {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/rgb"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 rgb}}, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/hsv"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 hsv}}, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/hcl"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 hcl}}, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/gray"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 gray}} and {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/rainbow"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 rainbow}} provide additional ways of generating colors.\
+\pard\pardeftab720\sa320
+
+\f1\b \cf2 Line Type Specification\
+\pard\pardeftab720\sa320
+
+\f0\b0 \cf0 Line types can either be specified by giving an index into a small built-in table of line types (1 = solid, 2 = dashed, etc, see 
+\f2\fs26 lty
+\f0\fs32  above) or directly as the lengths of on/off stretches of line. This is done with a string of an even number (up to eight) of characters, namely 
+\i non-zero
+\i0  (hexadecimal) digits which give the lengths in consecutive positions in the string. For example, the string 
+\f2\fs26 "33"
+\f0\fs32  specifies three units on followed by three off and 
+\f2\fs26 "3313"
+\f0\fs32  specifies three units on followed by three off followed by one on and finally three off. The \'91units\'92 here are (on most devices) proportional to 
+\f2\fs26 lwd
+\f0\fs32 , and with 
+\f2\fs26 lwd = 1
+\f0\fs32  are in pixels or points or 1/96 inch.\
+The five standard dash-dot line types (
+\f2\fs26 lty = 2:6
+\f0\fs32 ) correspond to 
+\f2\fs26 c("44", "13", "1343", "73", "2262")
+\f0\fs32 .\
+Note that 
+\f2\fs26 NA
+\f0\fs32  is not a valid value for 
+\f2\fs26 lty
+\f0\fs32 .\
+\pard\pardeftab720\sa320
+
+\f1\b \cf2 Note\
+\pard\pardeftab720\sa320
+
+\f0\b0 \cf0 The effect of restoring all the (settable) graphics parameters as in the examples is hard to predict if the device has been resized. Several of them are attempting to set the same things in different ways, and those last in the alphabet will win. In particular, the settings of 
+\f2\fs26 mai
+\f0\fs32 , 
+\f2\fs26 mar
+\f0\fs32 , 
+\f2\fs26 pin
+\f0\fs32 , 
+\f2\fs26 plt
+\f0\fs32  and 
+\f2\fs26 pty
+\f0\fs32  interact, as do the outer margin settings, the figure layout and figure region size.\
+\pard\pardeftab720\sa320
+
+\f1\b \cf2 References\
+\pard\pardeftab720\sa320
+
+\f0\b0 \cf0 Becker, R. A., Chambers, J. M. and Wilks, A. R. (1988) 
+\i The New S Language
+\i0 . Wadsworth & Brooks/Cole.\
+Murrell, P. (2005) 
+\i R Graphics
+\i0 . Chapman & Hall/CRC Press.\
+\pard\pardeftab720\sa320
+
+\f1\b \cf2 See Also\
+\pard\pardeftab720\sa320
+{\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/plot.default"}}{\fldrslt 
+\f2\b0\fs26 \cf3 \ul \ulc3 plot.default}}
+\f0\b0 \cf0  for some high-level plotting parameters; {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/colors"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 colors}}; {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/clip"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 clip}}; {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/options"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 options}} for other setup parameters; graphic devices {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/x11"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 x11}}, {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/postscript"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 postscript}} and setting up device regions by {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/layout"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 layout}} and {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/help/split.screen"}}{\fldrslt 
+\f2\fs26 \cf3 \ul \ulc3 split.screen}}.\
+\pard\pardeftab720\sa320
+
+\f1\b \cf2 Examples\
+\pard\pardeftab720
+
+\f2\b0\fs26 \cf0 op <- par(mfrow = c(2, 2), # 2 x 2 pictures on one plot\
+          pty = "s")       # square plotting region,\
+                           # independent of device size\
+\
+## At end of plotting, reset to previous settings:\
+par(op)\
+\
+## Alternatively,\
+op <- par(no.readonly = TRUE) # the whole list of settable par's.\
+## do lots of plotting and par(.) calls, then reset:\
+par(op)\
+## Note this is not in general good practice\
+\
+par("ylog") # FALSE\
+plot(1 : 12, log = "y")\
+par("ylog") # TRUE\
+\
+plot(1:2, xaxs = "i") # 'inner axis' w/o extra space\
+par(c("usr", "xaxp"))\
+\
+( nr.prof <-\
+  c(prof.pilots=16,lawyers=11,farmers=10,salesmen=9,physicians=9,\
+    mechanics=6,policemen=6,managers=6,engineers=5,teachers=4,\
+    housewives=3,students=3,armed.forces=1))\
+par(las = 3)\
+barplot(rbind(nr.prof)) # R 0.63.2: shows alignment problem\
+par(las = 0)# reset to default\
+\
+require(grDevices) # for gray\
+## 'fg' use:\
+plot(1:12, type = "b", main="'fg' : axes, ticks and box in gray",\
+     fg = gray(0.7), bty="7" , sub=R.version.string)\
+\
+ex <- function() \{\
+   old.par <- par(no.readonly = TRUE) # all par settings which\
+                                      # could be changed.\
+   on.exit(par(old.par))\
+   ## ...\
+   ## ... do lots of par() settings and plots\
+   ## ...\
+   invisible() #-- now,  par(old.par)  will be executed\
+\}\
+ex()\
+\pard\pardeftab720\sa160
+
+\f0\fs32 \cf0 \
+\pard\pardeftab720\qc
+\cf0 [Package 
+\i graphics
+\i0  version 2.13.1 {\field{\*\fldinst{HYPERLINK "http://127.0.0.1:14787/library/graphics/html/00Index.html"}}{\fldrslt \cf3 \ul \ulc3 Index}}]}
