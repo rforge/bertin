@@ -12,6 +12,7 @@ export(
     bertinzscore,
     bertinrangescore,
     bertin.order,
+    overlaygroup,
     ordergrouped,
     parasp,
     whatis,
