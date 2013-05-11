@@ -22,6 +22,9 @@ pdf:
 	pdflatex bertinR || echo "## presumably a font error"
 	thumbpdf bertinR || echo "## failure in thumbpdf. Maybe cover page needs flattening."
 	pdflatex bertinR || echo "## presumably a font error"
+	mv bertinR.pdf bertinR_bak.pdf
+	qpdf bertinR_bak.pdf bertinR.pdf
+
 	grep  arning bertinR.log
 	wc *.ilg
 	echo "### vignette Makefile done"

@@ -18,12 +18,11 @@ function (z,
 	xlab, ylab,
 	main = deparse(substitute(z)),
 	pars,
-	aspz = nrow(z)/ncol(z),
+	aspz,
 	mar= c(1,1,2,1)+0.1, # default mar= c(1,1,6,4)+0.1, # mar= c(2,2,6,6)+0.1,
 	breaks, oldstyle = FALSE,
 	names = TRUE, 
-	...)
-{
+	...) {
 # a variant of image.default keeping matrix orientation
 # note: image() shows matrix columns as rows, i.e. transposes
 #$Revision$
@@ -38,6 +37,20 @@ function (z,
 	nrow <- nrow(z)
 	ncol <- ncol(z)
 
+	# if (missing(asp) ) {
+		# if (missing(aspz)) {
+		# asp=1
+	# } else {
+		# asp=aspz
+	# }
+	# }
+
+	if (missing(aspz)) {
+		aspz=nrow(z)/ncol(z)
+	} else {
+		aspz=aspz*nrow(z)/ncol(z)
+	}
+	
 	titleline<- 1 
 	if (missing(pars)){
     strwrow <- max(strwidth(rownames(z),"inch"))

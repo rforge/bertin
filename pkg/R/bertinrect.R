@@ -17,9 +17,11 @@
 bertinrect <- function(z, main = deparse(substitute(z)), 
 	sepwd = 0.05, 
 	pars, 
-	aspz = nrow(z)/ncol(z),
+	aspz,
 	mar = c(1, 1, 2, 1) + 0.1, 
-	names = TRUE, asp=1,...) {
+	names = TRUE, 
+	asp,
+	...) {
 
 	#$Revision$
 	#! adjust calling structure with rect()
@@ -30,11 +32,25 @@ bertinrect <- function(z, main = deparse(substitute(z)),
 	if (missing(main)) {
 		main <- deparse(substitute(z))
 	}
-	#z <- as.matrix(z) #! support lists and data frames as well
+	z <- as.matrix(z) #! support lists and data frames as well
 
 	nrow <- nrow(z)
 	ncol <- ncol(z)
 
+	if (missing(asp) ) {
+		if (missing(aspz)) {
+		asp=1
+	} else {
+		asp=aspz
+	}
+	}
+	
+	if (missing(aspz)) {
+		aspz=nrow(z)/ncol(z)
+	} else {
+		aspz=aspz*nrow(z)/ncol(z)
+	}
+	
 	titleline <- 1
 
 	if (missing(pars)) {
@@ -157,3 +173,4 @@ ranges <- apply(z, 1, range, finite = TRUE) # transposed
 
 
 # bertinrect(Hotel)
+# dev.set(3);bertinrect(dtabulated,aspz=0.1,main="aspz=0.1")

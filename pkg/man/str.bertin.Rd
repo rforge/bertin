@@ -1,4 +1,5 @@
-% File src/library/utils/man/str.Rd
+%#$Id: 00bertinworksheet.R 77 2013-05-09 14:02:45Z gsawitzki $
+% Based on: File src/library/utils/man/str.Rd
 % Part of the R package, http://www.R-project.org
 % Copyright 1995-2009 R Core Team
 % Distributed under GPL 2 or later
@@ -7,6 +8,8 @@
 \title{Compactly Display the Structure of an R Object of Class Bertin}
 \alias{str}
 \alias{str.bertin}
+\alias{str.default}
+\alias{strOptions}
 \usage{
 str(object, \dots)
 

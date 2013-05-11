@@ -2,18 +2,20 @@
 \name{bertinrect}
 \alias{bertinrect}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-bertinrect
-}
+\title{bertinrect}
 \description{
 Display a data matrix using parallel coordinates as suggested by J. Bertin. Coordinates are set up such that each element \code{x[i, j]}is represented in a unit square with bottom left at coordinates \code{(i, j)}. By convention, variables are in rows, and cases are in columns.
-}
+
+\code{\link{plot.bertin}} provides a high-level interface to \code{bertinrect}.}
+
 \usage{
 bertinrect(z, main = deparse(substitute(z)), sepwd = 0.05,  
 	pars,
-	aspz = nrow(z)/ncol(z),
+	aspz,
 	mar = c(1, 1, 2, 1) + 0.1,  
-	names = TRUE, ...)
+	names = TRUE,
+	asp,
+	 ...)
 }
 
 %- maybe also 'usage' for other objects documented here.
@@ -23,9 +25,10 @@ bertinrect(z, main = deparse(substitute(z)), sepwd = 0.05,
   \item{sepwd}{ padding width for cells. The display of an element should be based at \code{(i + sepwd, j + sepwd)}.}
   \item{mar}{margin. Margin space for row and column labels will be added.}
   \item{pars}{Graphical parameters, see   \code{par}. See details}
-  \item{aspz}{Aspect ratio of the data matrix. Defaults to \code{nrow(z)/ncol(z)}.
-  The aspect ratio of the display will be adjusted to a near match, taking into accout margin space as required.}
+  \item{aspz}{Applied as a scaling factor to to \code{nrow(z)/ncol(z).}
+  The aspect ratio of the display will be adjusted to a near match, taking into accout margin space as    required.}
   \item{names}{logical. If true, show row and column names.}
+  \item{asp}{Aspect ratio. Kept for consistency with heritage. If present, overrides \code{aspz}.}
   \item{\dots}{additional parameters, passed to \code{\link{rect}}.}
 }
 
@@ -82,8 +85,7 @@ colnames(zunif) <- colnames(zunif, do.NULL=FALSE)
 rownames(zunif) <- rownames(zunif, do.NULL=FALSE)
 bertinrect(zunif, yaxt="n")
 
-bertinrect(zunif, yaxt="n", aspz=0.5*(nrow(zunif)/ncol(zunif)))
-bertinrect(zunif, yaxt="n", asp=0.5*(nrow(zunif)/ncol(zunif)))
+bertinrect(zunif, yaxt="n", aspz=0.5)
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

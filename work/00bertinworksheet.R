@@ -11,9 +11,18 @@ cd /Users/gs/projects/rforge/bertin
 svn propset svn:keywords "Date Author Id Revision HeadURL" pkg/R/*.R
 svn propset svn:keywords "Date Author Id Revision HeadURL" work/*.R
 svn propset svn:keywords "Date Author Id Revision HeadURL" pkg/man/*.Rd
-R CMD CHECK pkg  --no-multiarch  
+R CMD CHECK pkg  --no-multiarch  --timings
+R CMD BUILD --compact-vignettes pkg --no-multiarch
 rm bertin.pdf; R CMD Rd2dvi -o bertin.pdf --pdf --title="Bertin" pkg
 % rm tmp.pdf;  R CMD Rd2pdf --no-clean --output=tmp.pdf "/Users/gs/projects/rforge/bertin/pkg/man/00bertin-package.Rd" ; open tmp.pdf
+rm bertin.pdf; R CMD Rd2pdf -o bertin.pdf  --internals --title="Bertin" pkg
+	cd /Users/gs/projects/rforge/bertin/pkg/inst/doc
+	mv bertinR.pdf bertinR_temp.pdf
+	qpdf bertinR_temp.pdf bertinR.pdf
+	rm bertinR_temp.pdf
+    cd /Users/gs/projects/rforge/bertin
+
+R CMD BUILD --compact-vignettes pkg --no-multiarch
 
 R CMD BUILD pkg
 
@@ -34,6 +43,9 @@ rm bertin.pdf; R CMD Rd2dvi -o bertin.pdf --pdf --title="Bertin" pkg
 clean up work/*
 
 # To do list: Queued
+20130511
+bertinrect: only last colname is shown
+
 20130509
 bertinrect: main is leaking outside
 Example:
@@ -62,13 +74,15 @@ Asie             3  10    6     0   3   13    8    9    5   2   5   2
 > h2 <- h1[10:12,]
 > apply(h2,2,sum)
 
-# /Library/Frameworks/R.framework/Versions/2.13/Resources/bin/qpdf
- detach("package:bertin", unload=TRUE)
-  install.packages("bertin",repos="http://r-forge.r-project.org",type="source")
- remove.packages("bertin")
-install.packages("/Users/gs/projects/rforge/bertin/bertin_0.1-60.tar.gz",repos=NULL,type="source",INSTALL_opts="--no-multiarch ")
-library(bertin)
-
+__insftall<- function(){
+	detach("package:bertin", unload=TRUE)
+	install.packages("bertin", repos="http://r-forge.r-project.org",type="source")
+	
+	detach("package:bertin", unload=TRUE)
+	 remove.packages("bertin")
+	install.packages("/Users/gs/projects/rforge/bertin/bertin_0.1-76.tar.gz", repos=NULL, type="source", INSTALL_opts="--no-multiarch ")
+	library(bertin)
+}
 setwd("/Users/gs/projects/rforge/bertin/pkg/inst/doc")
 enc <- options(width = 56);  Sweave("bertinR.Rnw",output="bertinR.tex", keep.source=TRUE, debug = TRUE, eps = FALSE); options(enc)
 tools::compactPDF("/Users/gs/projects/rforge/bertin/pkg/inst/doc/bertinR.pdf") 

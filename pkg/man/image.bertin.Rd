@@ -2,8 +2,8 @@
 \name{image.bertin}
 \alias{image.bertin}
 \title{Display Bertin image}
-\description{Display a Bertin matrix image.
-}
+\description{Display a Bertin matrix image.}
+
 \details{
 A matrix is displayed, with values color encoded by \code{col}.
 Optional permutations can be applied to rows and/or columns. The layout of the original data matrix is preserved in the display.
@@ -14,16 +14,16 @@ See the implementation references BertinR.pdf (included in the documentation) fo
 
 If \code{showpalette} is TRUE, the palette is shown in the plot margin area.
 }
-
+%	mar= c(6,1,2,1)+0.1,
 \usage{
 	image.bertin(z, 
 	roworder,colorder,
 	main, sub,
-	mar= c(6,1,2,1)+0.1
+	mar= c(3,1,3,1)+0.1,
 	palette = gray((255:0 / 255)^0.5),
 	showpalette=TRUE,
 	useRaster = FALSE,
-	...
+	...)
 }
 	
 \arguments{
@@ -66,6 +66,8 @@ Still experimental. This is a \pkg{bertin} specific wrapper for   \code{\link{im
 data(Hotel)
 hotelrks <- bertinrank(Hotel)
 image.bertin(hotelrks)
+image.bertin(hotelrks, aspz=0.5)
+
 }
 
 \keyword{hplot}

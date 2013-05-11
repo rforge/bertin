@@ -6,6 +6,7 @@
 \title{Bertin plot}
 \description{Display a Bertin plot of a data matrix. 
 This is a high level variant of \code{\link{bertinrect}}.}
+%           aspz = nrow(z)/ncol(z),
 \usage{
 plot.bertin(z, 
             roworder, colorder,
@@ -78,6 +79,8 @@ Break points for colour choice are based on range. We use the mid-range as defau
 library(bertin)
 data(Hotel)
 plot.bertin(Hotel)
+
+plot.bertin(Hotel,aspz=0.5)
 
 plot.bertin(Hotel, palette=c("white","black"))
 

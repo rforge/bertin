@@ -1,3 +1,4 @@
+%$Id: 00bertinworksheet.R 77 2013-05-09 14:02:45Z gsawitzki $
 % RGBinterpolate <- function (n=100, fromRGB, toRGB, bias=1.0){
 	% if ((n <- as.integer(n[1])) > 0) {
 		% from <-col2rgb(fromRGB)/255
@@ -14,10 +15,10 @@
 \description{
 Create a colour palette by linear interpolation in RGB space}
 \usage{
-RGBinterpolate(n=100, fromRGB, toRGB, bias=1.0)}
+RGBinterpolate(n=100, fromRGB, toRGB, bias =1.0)}
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{Length-1}
+  \item{n}{Length-1}
   \item{fromRGB}{Name are hex representation of initial colour}
   \item{toRGB}{Name are hex representation of final colour}
   \item{bias}{Power for transformation of index}
@@ -44,8 +45,8 @@ a colour palette of length n+1}
 }
 \examples{
 	colramp(RGBinterpolate(n=100,"green","red"))
-	colramp(RGBinterpolate(n=100,"green","red", bias=0.5))
+	colramp(RGBinterpolate(n=100,"green","red", bias =0.5))
 	colramp(c(RGBinterpolate(n=20,"green","red"),RGBinterpolate(n=30,"red","blue")))
 }
 
-\keyword{ hplot }% __ONLY ONE__ keyword per line
+\keyword{hplot}% __ONLY ONE__ keyword per line
