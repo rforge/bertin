@@ -47,6 +47,7 @@
 %\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 \usepackage[english]{babel}%hyphenation must be after babel
 \usepackage[applemac]{inputenc}
+\usepackage{svninfo}
 
 %%for debugging:
 %\usepackage{showidx}%show index entries per page
@@ -83,6 +84,10 @@
 \urladdr{http://bertin.r-forge.r-project.org/}
 %\dedicatory{in preparation}
 \date{Aug. 2010.\\
+
+\svnInfoFile \svnInfoRevision
+
+
 %For quotation, please use the general reference \cite{gs94oned}.\\
 \emph{Revised:} August 2011\\
 \emph{Typeset}, with minor revisions: \today\  from SVN $Revision$}  
