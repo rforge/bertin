@@ -119,6 +119,7 @@ data analysis, exploratory statistics, Bertin, R~language)
 
 %:\begin{document}
 \begin{document}
+\svnInfo $Id$ 
 %\setkeys{Gin}{width=1.0\textwidth}
 \maketitle
 
