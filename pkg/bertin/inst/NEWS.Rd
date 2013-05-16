@@ -8,7 +8,11 @@
 \title{Bertin}
 \encoding{UTF-8}
 
-\section{\Rlogo CHANGES IN Bertin NEWS in inst}{
+\section{CHANGES IN VERSION 0.1-76}{
 
-under construction
+\subsection{CHANGES IN Bertin NEWS.Rd in inst}{
+\itemize{
+\item under construction in NEWS.Rd in inst
+}
+}
 }

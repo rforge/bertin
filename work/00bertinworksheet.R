@@ -11,11 +11,16 @@ cd /Users/gs/projects/rforge/bertin
 svn propset svn:keywords "Date Author Id Revision HeadURL" pkg/R/*.R
 svn propset svn:keywords "Date Author Id Revision HeadURL" work/*.R
 svn propset svn:keywords "Date Author Id Revision HeadURL" pkg/man/*.Rd
-R CMD CHECK pkg  --no-multiarch  --timings
+export _R_CHECK_TIMINGS_=0
+export _R_CHECK_ALWAYS_LOG_VIGNETTE_OUTPUT_=TRUE
+R CMD CHECK pkg/bertin  --no-multiarch  --timings
 R CMD BUILD --compact-vignettes pkg --no-multiarch
 rm bertin.pdf; R CMD Rd2dvi -o bertin.pdf --pdf --title="Bertin" pkg
 % rm tmp.pdf;  R CMD Rd2pdf --no-clean --output=tmp.pdf "/Users/gs/projects/rforge/bertin/pkg/man/00bertin-package.Rd" ; open tmp.pdf
 rm bertin.pdf; R CMD Rd2pdf -o bertin.pdf  --internals --title="Bertin" pkg
+
+R CMD Rd2pdf -o bertin.pdf  --internals --no-clean --title="Bertin" pkg
+
 	cd /Users/gs/projects/rforge/bertin/pkg/inst/doc
 	mv bertinR.pdf bertinR_temp.pdf
 	qpdf bertinR_temp.pdf bertinR.pdf
