@@ -6,10 +6,10 @@
 
 \name{str.bertin}
 \title{Compactly Display the Structure of an R Object of Class Bertin}
-\alias{str}
+%\alias{str}
 \alias{str.bertin}
-\alias{str.default}
-\alias{strOptions}
+%\alias{str.default}
+%\alias{strOptions}
 \usage{
 str(object, \dots)
 

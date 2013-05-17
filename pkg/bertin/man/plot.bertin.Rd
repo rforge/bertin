@@ -1,14 +1,12 @@
 %$Id$
 %$Revision$
-\name{plot.bertin}
+\name{bertin}
+\alias{bertin}
 \alias{plot.bertin}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Bertin plot}
-\description{Display a Bertin plot of a data matrix. 
-This is a high level variant of \code{\link{bertinrect}}.}
-%           aspz = nrow(z)/ncol(z),
 \usage{
-plot.bertin(z, 
+\method{plot}{bertin}(z, 
             roworder, colorder,
             var.orientation = c("byrow", "bycolumn", "global"),  
             main, sub,
@@ -18,6 +16,20 @@ plot.bertin(z,
             showpalette = TRUE,
             ...)
 }
+\description{Display a Bertin plot of a data matrix. 
+This is a high level variant of \code{\link{bertinrect}}.}
+%           aspz = nrow(z)/ncol(z),
+%\usage{
+%plot.bertin(z, 
+%            roworder, colorder,
+%            var.orientation = c("byrow", "bycolumn", "global"),  
+%            main, sub,
+%            mar= c(3, 1, 3, 1) + 0.1,
+%            zcol, 
+%            palette = gray((255:0 / 255)^0.5),
+%            showpalette = TRUE,
+%            ...)
+%}
 \arguments{
   \item{z}{a data matrix.}
   \item{roworder}{permutation used for rows.}

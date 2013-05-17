@@ -1,3 +1,4 @@
+%$Id: 00bertinworksheet.R 77 2013-05-09 14:02:45Z gsawitzki $
 \name{overlaygroup}
 \alias{overlaygroup}
 %- Also NEED an '\alias' for EACH other topic documented here.
@@ -6,7 +7,7 @@
 \description{
 Overlays group separators for Bertin plots.}
 \usage{
-overlaygroup(group, pos, byrow = TRUE, col = "green", lwd = 1, ...)
+overlaygroup(group, pos, byrow = TRUE, col = "green", lwd = 2, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
