@@ -1,7 +1,7 @@
 %$Id$
 %$Revision$
-\name{bertin}
-\alias{bertin}
+\name{plot.bertin}
+%\alias{bertin}
 \alias{plot.bertin}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Bertin plot}

@@ -11,11 +11,8 @@
 %\alias{str.default}
 %\alias{strOptions}
 \usage{
-str(object, \dots)
 
-\method{str}{bertin}(object, \dots)
-
-\method{str}{default}(object, max.level = NA,
+\method{str}{bertin}(object, max.level = NA,
     vec.len  = strO$vec.len, digits.d = strO$digits.d,
     nchar.max = 128, give.attr = TRUE,
     give.head = TRUE, give.length = give.head,
@@ -25,10 +22,6 @@ str(object, \dots)
     comp.str="$ ", no.list = FALSE, envir = baseenv(),
     strict.width = strO$strict.width,
     formatNum = strO$formatNum, list.len = 99, \dots)
-
-strOptions(strict.width = "no", digits.d = 3, vec.len = 4,
-           formatNum = function(x, ...)
-                       format(x, trim=TRUE, drop0trailing=TRUE, ...))
 }
 \description{
   Compactly display the internal \bold{str}ucture of an \R object, a

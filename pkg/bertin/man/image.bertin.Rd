@@ -16,7 +16,8 @@ If \code{showpalette} is TRUE, the palette is shown in the plot margin area.
 }
 %	mar= c(6,1,2,1)+0.1,
 \usage{
-	image.bertin(z, 
+
+\method{image}{bertin}(z, 
 	roworder,colorder,
 	main, sub,
 	mar= c(3,1,3,1)+0.1,
