@@ -1,0 +1,11 @@
+.svn
+^\\.svn
+R/.svn
+^R/.svn$
+^R/\\.svn$
+data/.svn
+inst/.svn
+inst/doc/.svn
+man/.svn
+tests/.svn
+vignettes/.svn

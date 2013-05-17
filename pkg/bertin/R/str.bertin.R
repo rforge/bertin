@@ -1,3 +1,4 @@
+#$Id: 00bertinworksheet.R 77 2013-05-09 14:02:45Z gsawitzki $
 str.bertin <- function(object, ...)
 {
 	
