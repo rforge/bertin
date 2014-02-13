@@ -27,7 +27,7 @@
   \code{\link{options}(str = .)}, see the examples.
 }
 \arguments{
-  \item{object}{any \R object of class berin about which you want to have some
+  \item{object}{any \R object of class bertin about which you want to have some
     information.}
 
   \item{\dots}{potential further arguments (required for Method/Generic

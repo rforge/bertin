@@ -8,8 +8,8 @@
 %$HeadURL: svn+ssh://gsawitzki@svn.r-forge.r-project.org/svnroot/bertin/pkg/inst/doc/bertinR.Rnw $
 
 % svn propset svn:keywords "Date Author Id Revision HeadURL URL" bertinR.Rnw
-
-% setwd("/Users/gs/projects/rforge/bertin/pkg/inst/doc/")
+setwd("/Users/gs/projects/rforge/bertin/pkg/bertin/inst/doc/")
+%
 %
 % enc <- options(width = 56);  Sweave("bertinR.Rnw",output="bertinR.tex", keep.source=TRUE, eps = FALSE); options(enc)
 % enc <- options(width = 56);  Sweave("bertinR.Rnw",output="bertinR.tex", keep.source=TRUE, debug = TRUE, eps = FALSE); options(enc)
