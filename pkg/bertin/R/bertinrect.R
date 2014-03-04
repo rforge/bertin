@@ -141,7 +141,7 @@ ranges <- apply(z, 1, range, finite = TRUE) # transposed
 	if (!is.null(colnames(z))) {
 		colwidth <- (pu[2] - pu[1])/ncol
 		rowheight <- (pu[4] - pu[3])/nrow
-		for (col in (1:dim(z)[2])) c = "@_@_@_@pos=3,"
+		for (col in (1:dim(z)[2])) 
 		text(col + 0.5 * colwidth, par("usr")[4] + 
 			0.1 * rowheight, colnames(z)[col], 
 			adj = c(0, 1), xpd = NA, offset = 2, 

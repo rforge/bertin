@@ -4,6 +4,9 @@
 #$Date$
 #$Author$
 
+svn checkout svn+ssh://gsawitzki@svn.r-forge.r-project.org/svnroot/bertin@81
+svn checkout svn+ssh://gsawitzki@svn.r-forge.r-project.org/svnroot/bertin@82 # bad hotel
+%!\SweaveUTF8
 # a commom worksheet for bertin
 #!/bin/sh
 cd /Users/gs/projects/rforge/bertin

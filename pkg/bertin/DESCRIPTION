@@ -1,8 +1,8 @@
 Package: bertin
 Type: Package
 Title: Bertin matrix display
-Version: 0.1-76
-Date: 2013-05-09
+Version: 0.1-94
+Date: 2014-03-04
 Author: G. Sawitzki
 Maintainer: G. Sawitzki <gsl@statlab.uni-heidelberg.de>
 Description: Graphical display for matrices, following the suggestions of J. Bertin.
@@ -10,4 +10,4 @@ URL: http://bertin.r-forge.r-project.org/
 License: LGPL
 Encoding: UTF-8
 Suggests: xtable
-VignetteDepends: xtable, RColorBrewer, colorspace
+VignetteDepends: xtable, RColorBrewer, colorspace, gridBase, grid

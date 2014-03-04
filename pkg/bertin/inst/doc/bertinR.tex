@@ -8,11 +8,11 @@
 %$HeadURL: svn+ssh://gsawitzki@svn.r-forge.r-project.org/svnroot/bertin/pkg/inst/doc/bertinR.Rnw $
 
 % svn propset svn:keywords "Date Author Id Revision HeadURL URL" bertinR.Rnw
-
-% setwd("/Users/gs/projects/rforge/bertin/pkg/inst/doc/")
+% setwd("/Users/gs/projects/rforge/bertin/pkg/bertin/inst/doc/")
+%
 %
 % enc <- options(width = 56);  Sweave("bertinR.Rnw",output="bertinR.tex", keep.source=TRUE, eps = FALSE); options(enc)
-% enc <- options(width = 56);  Sweave("bertinR.Rnw",output="bertinR.tex", keep.source=TRUE, debug = TRUE, eps = FALSE); options(enc)
+% enc <- options(width = 56);  Sweave("bertinR.Rnw",output="bertinR.tex", keep.source=TRUE, debug = TRUE, eps = FALSE, encoding="utf8"); options(enc)
 
 
 %	The help pages for RweaveLatex and Rtangle list the options supported by the default
@@ -46,7 +46,7 @@
 \usepackage{graphicx}
 %\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 \usepackage[english]{babel}%hyphenation must be after babel
-\usepackage[UTF-8]{inputenc}%applemac
+\usepackage[utf8]{inputenc}%applemac
 \usepackage{svninfo}
 
 %%for debugging:
@@ -117,7 +117,11 @@ data analysis, exploratory statistics, Bertin, R~language)
 
 %:\begin{document}
 \begin{document}
+inst/doc
+
 \svnInfo $Id: bertinR.Rnw 82 2013-05-15 16:29:57Z gsawitzki $ 
+
+\svninfo $HeadURL: svn+ssh://gsawitzki@svn.r-forge.r-project.org/svnroot/bertin/pkg/inst/doc/bertinR.Rnw $
 %\setkeys{Gin}{width=1.0\textwidth}
 \maketitle
 
@@ -1374,8 +1378,8 @@ The next round of test cases are numeric, but not on a common scale. We provide 
 See \reftab{tab:Brmatrix}.
 
 \begin{center}
-% latex table generated in R 3.0.0 by xtable 1.7-1 package
-% Fri May 17 23:24:10 2013
+% latex table generated in R 3.0.2 by xtable 1.7-3 package
+% Tue Mar  4 17:41:03 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|r|rrrrrr|}
@@ -1413,8 +1417,8 @@ Check! Use row matrix and column matrix for tests.
 See \reftab{tab:Bcmatrix}.
 
 \begin{center}
-% latex table generated in R 3.0.0 by xtable 1.7-1 package
-% Fri May 17 23:24:10 2013
+% latex table generated in R 3.0.2 by xtable 1.7-3 package
+% Tue Mar  4 17:41:03 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|r|rrrrrrr|}
@@ -1465,8 +1469,8 @@ Test matrix by row with normal random error, using default settings
 See \reftab{tab:Brmatrixx}.
 
 \begin{center}
-% latex table generated in R 3.0.0 by xtable 1.7-1 package
-% Fri May 17 23:24:10 2013
+% latex table generated in R 3.0.2 by xtable 1.7-3 package
+% Tue Mar  4 17:41:03 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|r|rrrrrr|}
